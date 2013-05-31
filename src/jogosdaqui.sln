@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jogosdaqui.Infrastructure.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jogosdaqui.WebApi", "jogosdaqui.WebApi\jogosdaqui.WebApi.csproj", "{A8E02D91-C009-4523-A3CF-1203464AA073}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5FFDDBC2-118C-4F51-8DB4-0C83E10F5682}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jogosdaqui.Domain.UnitTests", "jogosdaqui.Domain.UnitTests\jogosdaqui.Domain.UnitTests.csproj", "{6CCE2A8F-6530-49FD-9760-E44A075D97FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A8551E3B-9875-4AE7-839C-F397C8126FA9}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jogosdaqui.Domain.UnitTests", "jogosdaqui.Domain.UnitTests\jogosdaqui.Domain.UnitTests.csproj", "{6CCE2A8F-6530-49FD-9760-E44A075D97FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,29 +22,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8E02D91-C009-4523-A3CF-1203464AA073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8E02D91-C009-4523-A3CF-1203464AA073}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8E02D91-C009-4523-A3CF-1203464AA073}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8E02D91-C009-4523-A3CF-1203464AA073}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ABAB0F4F-01F6-4B1E-9B6E-D7D1986DAD68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABAB0F4F-01F6-4B1E-9B6E-D7D1986DAD68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABAB0F4F-01F6-4B1E-9B6E-D7D1986DAD68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABAB0F4F-01F6-4B1E-9B6E-D7D1986DAD68}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = jogosdaqui.WebApi\jogosdaqui.WebApi.csproj
+		{A8E02D91-C009-4523-A3CF-1203464AA073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E02D91-C009-4523-A3CF-1203464AA073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E02D91-C009-4523-A3CF-1203464AA073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E02D91-C009-4523-A3CF-1203464AA073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = jogosdaqui.WebApi\jogosdaqui.WebApi.csproj
 	EndGlobalSection
 EndGlobal
