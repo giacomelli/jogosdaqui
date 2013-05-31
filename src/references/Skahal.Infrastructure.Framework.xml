@@ -1,0 +1,1120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skahal.Infrastructure.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs">
+            <summary>
+            Disconnected event arguments.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs.#ctor(Skahal.Infrastructure.Framework.Net.Messaging.DisconnectionReason)">
+            <summary>
+            Initializes a new instance of the
+            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs"/> class.
+            </summary>
+            <param name="reason">Reason.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs.Reason">
+            <summary>
+            Gets the reason.
+            </summary>
+            <value>The reason.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.MessengerState">
+            <summary>
+            Messenger state.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.MessengerState.Connected">
+            <summary>
+            Messenger is connected.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.MessengerState.Disconnected">
+            <summary>
+            Messenger is disconnected
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectionReason">
+            <summary>
+            Disconnection reason.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectionReason.ConnectionLost">
+            <summary>
+            Disconnected  by a connection lost.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectionReason.LocalQuit">
+            <summary>
+            Disconnected by current messenger quit.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectionReason.RemoteQuit">
+            <summary>
+            Disconnected by remote messenger quit.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger">
+            <summary>
+            Defines the interface for a basic messenger.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Connect">
+            <summary>
+            Connect the messenger.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.SendMessage(System.String,System.String)">
+            <summary>
+            Sends the message.
+            </summary>
+            <param name="name">The message name.</param>
+            <param name="value">The message value.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Disconnect">
+            <summary>
+            Disconnect the messenger.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Connected">
+            <summary>
+            Occurs when connected.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.MessageSent">
+            <summary>
+            Occurs when message was sent.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.MessageReceived">
+            <summary>
+            Occurs when message received.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Disconnected">
+            <summary>
+            Occurs when disconnected.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.State">
+            <summary>
+            Gets the state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.CanReceiveMessages">
+            <summary>
+            Gets or sets a value indicating whether this instance can receive messages.
+            </summary>
+            <value><c>true</c> if this instance can receive messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.Message">
+            <summary>
+            Represents a message.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.Message.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.Message"/> class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.Message.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.Message"/> class.
+            </summary>
+            <param name="name">The message name.</param>
+            <param name="value">The message value.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.Message.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.Message.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageConverter">
+            <summary>
+            A message converter helper.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.MessageConverter.FieldsSeparator">
+            <summary>
+            The fields separator in a message value.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessageConverter.ToString(System.String,System.String)">
+            <summary>
+            Converts the message to a string.
+            </summary>
+            <returns>The string.</returns>
+            <param name="name">Name.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessageConverter.ToMessage(System.String)">
+            <summary>
+            Converts the string to a Message.
+            </summary>
+            <returns>The message.</returns>
+            <param name="messageAsString">Message as string.</param>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase">
+            <summary>
+            The base class for IMessenger's
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.DisconnectMessageName">
+            <summary>
+            The name of the disconnect message.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.DisconnectMessageQuitValue">
+            <summary>
+            The disconnect message quit value.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.m_messagesReceivedBuffer">
+            <summary>
+            The messages received buffer.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase"/> class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Connect">
+            <summary>
+            Connect the messenger.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.SendMessage(System.String,System.String)">
+            <summary>
+            Sends the message.
+            </summary>
+            <param name="name">The message name.</param>
+            <param name="value">The message value.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.PerformSendMessage(System.String,System.String)">
+            <summary>
+            Performs the send message.
+            </summary>
+            <param name="name">Name.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Disconnect">
+            <summary>
+            Disconnect the messenger.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.PerformDisconnect">
+            <summary>
+            Performs the disconnect.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.OnConnected(Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs)">
+            <summary>
+            Raises the connected event.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.OnMessageReceived(Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs)">
+            <summary>
+            Raises the message received event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.OnDisconnected(Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs)">
+            <summary>
+            Raises the disconnected event.
+            </summary>
+            <param name="e">The event argumetns</param>    
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Connected">
+            <summary>
+            Occurs when connected.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.MessageSent">
+            <summary>
+            Occurs when message was sent.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.MessageReceived">
+            <summary>
+            Occurs when message received.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Disconnected">
+            <summary>
+            Occurs when disconnected.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.State">
+            <summary>
+            Gets the state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.CanReceiveMessages">
+            <summary>
+            Gets or sets a value indicating whether this instance can receive messages.
+            </summary>
+            <value><c>true</c> if this instance can receive messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Commons.EventHandlerExtensions">
+            <summary>
+            Extensions methods for EventHandler.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.EventHandlerExtensions.Raise(System.EventHandler,System.Object)">
+            <summary>
+            Raise event.
+            </summary>
+            <param name='handler'>
+            Handler.
+            </param>
+            <param name='sender'>
+            Sender.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.EventHandlerExtensions.Raise``1(System.EventHandler{``0},System.Object,``0)">
+            <summary>
+            Raise the event.
+            </summary>
+            <param name='handler'>
+            Handler.
+            </param>
+            <param name='sender'>
+            Sender.
+            </param>
+            <param name='e'>
+            E.
+            </param>
+            <typeparam name='TEventArgs'>
+            The 1st type parameter.
+            </typeparam>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs">
+            <summary>
+            Message received event arguments.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs.#ctor(Skahal.Infrastructure.Framework.Net.Messaging.Message)">
+            <summary>
+            Initializes a new instance of the
+            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs"/> class.
+            </summary>
+            <param name="message">Message.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the
+            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs"/> class.
+            </summary>
+            <param name="name">Name.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs.Message">
+            <summary>
+            Gets the message.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Commons.DependencyService">
+            <summary>
+            Infrastructure service for dependency injection.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.DependencyService.Register``1(System.Func{System.Object})">
+            <summary>
+            Register the specified type implementation.
+            </summary>
+            <param name="createImplementation">Create implementation.</param>
+            <typeparam name="TType">The 1st type parameter.</typeparam>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.DependencyService.Register``1(System.Object)">
+            <summary>
+            Register the specified type instance.
+            </summary>
+            <param name="implementationInstance">Implementation instance.</param>
+            <typeparam name="TType">The 1st type parameter.</typeparam>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.DependencyService.Create``1">
+            <summary>
+            Create this instance for type specified.
+            </summary>
+            <typeparam name="TType">The 1st type parameter.</typeparam>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.LogStrategyBase">
+            <summary>
+            A base ILogStrategy implementation.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.ILogStrategy">
+            <summary>
+            Defines a interface for log strategies.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteDebug(System.String,System.Object[])">
+            <summary>
+            Writes the debug log level message.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteWarning(System.String,System.Object[])">
+            <summary>
+            Writes the warning log level message.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteError(System.String,System.Object[])">
+            <summary>
+            Writes the error log level message.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.DebugWritten">
+            <summary>
+            Occurs when a debug log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WarningWritten">
+            <summary>
+            Occurs when a warning log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.ErrorWritten">
+            <summary>
+            Occurs when an error log is written.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.WriteDebug(System.String,System.Object[])">
+            <summary>
+            Writes the debug log level message.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.WriteWarning(System.String,System.Object[])">
+            <summary>
+            Writes the warning log level message.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="args">Arguments.</param>
+            <returns>The warning.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.WriteError(System.String,System.Object[])">
+            <summary>
+            Writes the error log level message.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="args">Arguments.</param>
+            <returns>The error.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.OnDebugWritten(Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs)">
+            <summary>
+            Raises the debug written event.
+            </summary>
+            <param name="e">The arguments.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.OnWarningWritten(Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs)">
+            <summary>
+            Raises the warning written event.
+            </summary>
+            <param name="e">The arguments.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.OnErrorWritten(Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs)">
+            <summary>
+            Raises the error written event.
+            </summary>
+            <param name="e">The arguments.</param>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.DebugWritten">
+            <summary>
+            Occurs when a debug log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.WarningWritten">
+            <summary>
+            Occurs when a warning log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.ErrorWritten">
+            <summary>
+            Occurs when an error log is written.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs">
+            <summary>
+            SH log written event arguments.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs"/> class.
+            </summary>
+            <param name="message">Message.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs.Message">
+            <summary>
+            Gets the message.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.LogLevel">
+            <summary>
+            Log level.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Logging.LogLevel.Debug">
+            <summary>
+            The debug log level.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Logging.LogLevel.Warning">
+            <summary>
+            The warning log level.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Logging.LogLevel.Error">
+            <summary>
+            The error log level.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.LogService">
+            <summary>
+            A central point to organize logs.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Logging.LogService.s_logStrategy">
+            <summary>
+            The log strategy.
+            </summary>
+        </member>
+        <member name="F:Skahal.Infrastructure.Framework.Logging.LogService.s_filtrableLogStrategy">
+            <summary>
+            The log strategy used to applied filters.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogService.Initialize(Skahal.Infrastructure.Framework.Logging.ILogStrategy)">
+            <summary>
+            Initialize the service.
+            </summary>
+            <param name="logStrategy">Log strategy.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogService.ApplyFilter(System.Func{Skahal.Infrastructure.Framework.Logging.LogMessage,System.Boolean})">
+            <summary>
+            Applies the filter.
+            </summary>
+            <param name="filter">Filter.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogService.Debug(System.String,System.Object[])">
+            <summary>
+            Write a debug log level.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogService.Warning(System.String,System.Object[])">
+            <summary>
+            Write a warning log level.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogService.Error(System.String,System.Object[])">
+            <summary>
+            Write an error log level.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.DebugWritten">
+            <summary>
+            Occurs when a debug log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.WarningWritten">
+            <summary>
+            Occurs when a warning log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.ErrorWritten">
+            <summary>
+            Occurs when a error log is written.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.BootstrapperBase">
+            <summary>
+            The framework bootstrapper.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.BootstrapperBase.FillSetupProperties">
+            <summary>
+            Fills the setup properties.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.BootstrapperBase.Setup">
+            <summary>
+            Setup this instance.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.BootstrapperBase.LogStrategy">
+            <summary>
+            Gets or sets the log strategy.
+            </summary>
+            <value>The log strategy.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.BootstrapperBase.UserRepository">
+            <summary>
+            Gets or sets the user repository.
+            </summary>
+            <value>The user repository.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Domain.IEntity">
+            <summary>
+            Defines a basic interface for a domain entity.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Domain.IEntity.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Domain.IAggregateRoot">
+            <summary>
+            The markup interface for a aggregate root.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Domain.EntityBase">
+            <summary>
+            Base class for entities.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Domain.EntityBase.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.IRepository`1">
+            <summary>
+            Defines a basic interface for entities repository.
+            </summary>
+            <typeparam name="TEntity">The type of entity that repository work.</typeparam>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Find(System.Func{`0,System.Boolean})">
+            <summary>
+            Find an entity by the filter.
+            </summary>
+            <param name="filter">Filter.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Create(`0)">
+            <summary>
+            Create the specified entity.
+            </summary>
+            <param name="entity">Entity.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Delete(`0)">
+            <summary>
+            Delete the specified entity.
+            </summary>
+            <param name="entity">Entity.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Delete(System.Int32)">
+            <summary>
+            Delete the entity with the specified id.
+            </summary>
+            <param name="id">Identifier.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Modify(`0)">
+            <summary>
+            Modify the specified entity.
+            </summary>
+            <param name="entity">Entity.</param>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Pooling.PoolService">
+            <summary>
+            Pool service.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.GetItem(System.String)">
+            <summary>
+            Gets the item.
+            </summary>
+            <returns>The item.</returns>
+            <param name="poolName">Pool name.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.GetItem``1(System.String)">
+            <summary>
+            Gets the item.
+            </summary>
+            <returns>The item.</returns>
+            <param name="poolName">Pool name.</param>
+            <typeparam name="TItem">The 1st type parameter.</typeparam>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.ReleaseItem(System.String,System.Object)">
+            <summary>
+            Releases the item.
+            </summary>
+            <param name="poolName">Pool name.</param>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.ReleaseAll(System.Func{System.Object,System.Boolean})">
+            <summary>
+            Releases all items in all pools that fit in release filter specified.
+            </summary>
+            <param name='releaseFilter'>
+            Release filter.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.ReleaseAll">
+            <summary>
+            Releases all items in all pools.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.GetAllPools">
+            <summary>
+            Gets all available pools.
+            </summary>
+            <returns>The all pools.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.RegisterPool(Skahal.Infrastructure.Framework.Pooling.IPool)">
+            <summary>
+            Registers the pool.
+            </summary>
+            <param name="pool">Pool.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.UnregisterAllPools">
+            <summary>
+            Unregisters all pools.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.GetPool(System.String)">
+            <summary>
+            Gets the pool.
+            </summary>
+            <returns>The pool.</returns>
+            <param name="poolName">Pool name.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolService.PoolsCount">
+            <summary>
+            Gets the pools count.
+            </summary>
+            <value>The pools count.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Pooling.IPool">
+            <summary>
+            Defines an interface for a pool.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.IPool.CreateItems">
+            <summary>
+            Creates the items.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.IPool.GetItem">
+            <summary>
+            Gets the item.
+            </summary>
+            <returns>The item.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.IPool.ReleaseItem(System.Object)">
+            <summary>
+            Releases the item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.IPool.ReleaseAll(System.Func{System.Object,System.Boolean})">
+            <summary>
+            Releases all items that fit in release filter specified.
+            </summary>
+            <param name='releaseFilter'>
+            Release filter.
+            </param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.Size">
+            <summary>
+            Gets or sets the size.
+            </summary>
+            <value>The size.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.IsFixedSize">
+            <summary>
+            Gets or sets a value indicating whether this instance is fixed size.
+            </summary>
+            <value><c>true</c> if this instance is fixed size; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.AutoDisableTime">
+            <summary>
+            Gets or sets the auto disable time.
+            </summary>
+            <value>The auto disable time.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.ItemsCount">
+            <summary>
+            Gets the items count.
+            </summary>
+            <value>The items count.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Pooling.PoolBase">
+            <summary>
+            A Pool base class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Pooling.PoolBase"/> class.
+            </summary>
+            <param name="name">Name.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.CreateItems">
+            <summary>
+            Creates the items.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.GetItem">
+            <summary>
+            Gets the item.
+            </summary>
+            <returns>The item.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.ReleaseItem(System.Object)">
+            <summary>
+            Releases the item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.ReleaseAll(System.Func{System.Object,System.Boolean})">
+            <summary>
+            Releases all items that fit in release filter specified.
+            </summary>
+            <param name="releaseFilter">Release filter.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolBase.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolBase.Size">
+            <summary>
+            Gets or sets the size.
+            </summary>
+            <value>The size.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolBase.IsFixedSize">
+            <summary>
+            Gets or sets a value indicating whether this instance is fixed size.
+            </summary>
+            <value>true</value>
+            <c>false</c>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolBase.AutoDisableTime">
+            <summary>
+            Gets or sets the auto disable time.
+            </summary>
+            <value>The auto disable time.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolBase.ItemsCount">
+            <summary>
+            Gets the items count.
+            </summary>
+            <value>The items count.</value>
+        </member>
+        <member name="T:GlobalizationService">
+            <summary>
+            Globalization service.
+            </summary>
+        </member>
+        <member name="F:GlobalizationService.PtBrCultureInfo">
+            <summary>
+            Brazilian Portugues culture information.
+            </summary>
+        </member>
+        <member name="F:GlobalizationService.EnUsCultureInfo">
+            <summary>
+            United States English culture information.
+            </summary>
+        </member>
+        <member name="M:GlobalizationService.ChangeCulture(System.String)">
+            <summary>
+            Changes the culture.
+            </summary>
+            <param name="cultureName">Culture name.</param>
+        </member>
+        <member name="M:GlobalizationService.ChangeCulture(System.Globalization.CultureInfo)">
+            <summary>
+            Changes the culture.
+            </summary>
+            <param name="toCulture">To culture.</param>
+        </member>
+        <member name="E:GlobalizationService.CultureChanged">
+            <summary>
+            Occurs when culture changed.
+            </summary>
+        </member>
+        <member name="P:GlobalizationService.CurrentCulture">
+            <summary>
+            Gets the current culture.
+            </summary>
+            <value>The current culture.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.People.UserPreference">
+            <summary>
+            Represents an user preference.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.UserPreference.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.UserPreference.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>The description.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.UserPreference.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.People.User">
+            <summary>
+            Represents a user.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.People.User.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.People.User"/> class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.People.User.GetPreference(System.String)">
+            <summary>
+            Gets a preference by name.
+            </summary>
+            <returns>The preference by name.</returns>
+            <param name="name">Name.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.People.User.HasPreference(System.String)">
+            <summary>
+            Determines whether this instance has preference with the specified name.
+            </summary>
+            <returns><c>true</c> if this instance has preference with the specified name; otherwise, <c>false</c>.</returns>
+            <param name="name">Name.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.People.User.SetPreference(System.String,System.Object)">
+            <summary>
+            Sets the preference.
+            </summary>
+            <returns><c>true</c>, if was set a new preference (there is no preference with the specified name before), <c>false</c> otherwise.</returns>
+            <param name="name">Name.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.User.RemoteId">
+            <summary>
+            Gets or sets the remote id.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.User.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.User.Preferences">
+            <summary>
+            Gets the preferences.
+            </summary>
+            <value>The preferences.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.People.UserService">
+            <summary>
+            Infrastructure framework user service.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.People.UserService.Initialize(Skahal.Infrastructure.Framework.People.IUserRepository)">
+            <summary>
+            Initialize the services.
+            </summary>
+            <param name="userRepository">User repository.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.People.UserService.GetCurrentUser">
+            <summary>
+            Gets the current user.
+            </summary>
+            <returns>The current user.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.People.UserService.SaveCurrentUser(Skahal.Infrastructure.Framework.People.User)">
+            <summary>
+            Sets the current user.
+            </summary>
+            <param name="user">User.</param>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.People.IUserRepository">
+            <summary>
+            Defines a interface for user repository.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.BufferLogStrategy">
+            <summary>
+            A buffer log strategy used for keep the logs until a real log strategy be setted.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.LogMessage">
+            <summary>
+            Represents a log message.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogMessage.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogMessage"/> class.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="arguments">Arguments.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.LogMessage.#ctor(Skahal.Infrastructure.Framework.Logging.LogLevel,System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogMessage"/> class.
+            </summary>
+            <param name="logLevel">Log level.</param>
+            <param name="message">Message.</param>
+            <param name="arguments">Arguments.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Logging.LogMessage.LogLevel">
+            <summary>
+            Gets or sets the log level.
+            </summary>
+            <value>The log level.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Logging.LogMessage.Message">
+            <summary>
+            Gets or sets the message.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Logging.LogMessage.Arguments">
+            <summary>
+            Gets or sets the arguments.
+            </summary>
+            <value>The arguments.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.NetHelper">
+            <summary>
+            Net helper.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.NetHelper.IsValidTcpPortNumber(System.Int32)">
+            <summary>
+            Determines whether is a valid tcp port number the specified portNumber.
+            </summary>
+            <returns><c>true</c> if is a valid tcp port number the specified portNumber; otherwise, <c>false</c>.</returns>
+            <param name="portNumber">Port number.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.NetHelper.ThrowIfInvalidTcpPortNumber(System.Int32)">
+            <summary>
+            Throws a exception if invalid tcp port number.
+            </summary>
+            <param name="portNumber">Port number.</param>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs">
+            <summary>
+            Connected event arguments.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs"/> class.
+            </summary>
+            <param name="connectionOrder">Connection order.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs.ConnectionOrder">
+            <summary>
+            Gets the connection order.
+            </summary>
+            <value>The connection order.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy">
+            <summary>
+            A filtrable log strategy used for filter an underlying log strategy.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.#ctor(Skahal.Infrastructure.Framework.Logging.ILogStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy"/> class.
+            </summary>
+            <param name="underlyingLogStrategy">Underlying log strategy.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.WriteDebug(System.String,System.Object[])">
+            <summary>
+            Writes the debug log level message.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.WriteWarning(System.String,System.Object[])">
+            <summary>
+            Writes the warning log level message.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.WriteError(System.String,System.Object[])">
+            <summary>
+            Writes the error log level message.
+            </summary>
+            <param name="message">Message.</param>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.Filter">
+            <summary>
+            Gets or sets the filter for log messages.
+            </summary>
+            <value>The filter.</value>
+        </member>
+    </members>
+</doc>

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Skahal.Infrastructure.Framework.Domain;
 
 namespace jogosdaqui.Domain
 {
-	public class Game
+	public class Game : EntityBase
 	{
 		#region Properties
 		public string Name { get; set; }
