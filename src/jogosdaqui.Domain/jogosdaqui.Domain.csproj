@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>jogosdaqui.Domain</RootNamespace>
+    <AssemblyName>jogosdaqui.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Games\Game.cs" />
+    <Compile Include="Games\GameService.cs" />
+    <Compile Include="Articles\ArticleService.cs" />
+    <Compile Include="Games\GameCategory.cs" />
+    <Compile Include="Languages\Language.cs" />
+    <Compile Include="Platforms\Platform.cs" />
+    <Compile Include="Articles\ArticleBase.cs" />
+    <Compile Include="Articles\PreviewArticle.cs" />
+    <Compile Include="Articles\ReviewArticle.cs" />
+    <Compile Include="Articles\NewsArticle.cs" />
+    <Compile Include="Articles\EventArticle.cs" />
+    <Compile Include="Articles\InterviewArticle.cs" />
+    <Compile Include="People\Person.cs" />
+    <Compile Include="Companies\Company.cs" />
+    <Compile Include="Games\GameEvaluation.cs" />
+    <Compile Include="Articles\NewsArticleSource.cs" />
+    <Compile Include="Articles\Comment.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Games\" />
+    <Folder Include="Platforms\" />
+    <Folder Include="Languages\" />
+    <Folder Include="Articles\" />
+    <Folder Include="Companies\" />
+    <Folder Include="People\" />
+  </ItemGroup>
+</Project>
