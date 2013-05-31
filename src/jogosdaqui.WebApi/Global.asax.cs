@@ -12,8 +12,15 @@ using Newtonsoft.Json.Converters;
 
 namespace jogosdaqui.WebApi
 {
+	/// <summary>
+	/// Enter point.
+	/// </summary>
 	public class MvcApplication : System.Web.HttpApplication
 	{
+		/// <summary>
+		/// Registers the routes.
+		/// </summary>
+		/// <param name="config">Config.</param>
 		public static void RegisterRoutes (HttpConfiguration config)
 		{
 			var routes = config.Routes;
@@ -31,6 +38,10 @@ namespace jogosdaqui.WebApi
 
 		}
 
+		/// <summary>
+		/// Registers the formatters.
+		/// </summary>
+		/// <param name="config">Config.</param>
 		void RegisterFormatters (HttpConfiguration config)
 		{
 			var json = config.Formatters.JsonFormatter;
@@ -46,17 +57,27 @@ namespace jogosdaqui.WebApi
 			json.SerializerSettings.Converters.Add(new StringEnumConverter());
 		}
 
+		/// <summary>
+		/// Registers the global filters.
+		/// </summary>
+		/// <param name="filters">Filters.</param>
 		public static void RegisterGlobalFilters (GlobalFilterCollection filters)
 		{
 			filters.Add (new HandleErrorAttribute());
 		}
 
+		/// <summary>
+		/// Application_s the start.
+		/// </summary>
 		protected void Application_Start ()
 		{
 			AreaRegistration.RegisterAllAreas ();
 			RegisterGlobalFilters (GlobalFilters.Filters);
-			RegisterRoutes (GlobalConfiguration.Configuration);
-			RegisterFormatters (GlobalConfiguration.Configuration);
+
+			var config = GlobalConfiguration.Configuration;
+			config.EnableQuerySupport ();
+			RegisterRoutes (config);
+			RegisterFormatters (config);
 		}
 	}
 }
