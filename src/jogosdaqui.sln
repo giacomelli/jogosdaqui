@@ -14,12 +14,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5FFDDB
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jogosdaqui.Domain.UnitTests", "jogosdaqui.Domain.UnitTests\jogosdaqui.Domain.UnitTests.csproj", "{6CCE2A8F-6530-49FD-9760-E44A075D97FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CCE2A8F-6530-49FD-9760-E44A075D97FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
