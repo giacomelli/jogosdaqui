@@ -8,8 +8,14 @@ using jogosdaqui.Domain;
 
 namespace jogosdaqui.WebApi.Controllers
 {
+	/// <summary>
+	/// Jogos.
+	/// </summary>
     public class GamesController : ApiController
     {
+		/// <summary>
+		/// Obtém todos os jogos existentes.
+		/// </summary>
         public IEnumerable<Game> Get()
         {
 			return new Game [] {

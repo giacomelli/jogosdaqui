@@ -36,22 +36,6 @@ namespace jogosdaqui.WebApi.Areas.Docs.Controllers
 		}
 
 		/// <summary>
-		/// URL para sample via javascript.
-		/// </summary>
-		public ActionResult JSSample()
-		{
-			return View();
-		}
-
-		/// <summary>
-		/// URL para a Client Library.
-		/// </summary>
-		public ActionResult ClientLibrary()
-		{
-			return View();
-		}
-
-		/// <summary>
 		/// URL para a página de release notes.
 		/// </summary>
 		public ActionResult ReleaseNotes()

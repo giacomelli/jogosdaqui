@@ -104,7 +104,7 @@
       <HintPath>..\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll</HintPath>
     </Reference>
     <Reference Include="Swagger.Net">
-      <HintPath>..\packages\Swagger.Net.0.5.5\lib\net40\Swagger.Net.dll</HintPath>
+      <HintPath>..\references\Swagger.Net.dll</HintPath>
     </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
@@ -117,6 +117,9 @@
     </Reference>
     <Reference Include="AppsInfo.HttpHandlers">
       <HintPath>..\packages\AppsInfo.0.5.1\lib\net40\AppsInfo.HttpHandlers.dll</HintPath>
+    </Reference>
+    <Reference Include="DocsByReflection">
+      <HintPath>..\packages\DocsByReflection.1.0.2\lib\net40\DocsByReflection.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +135,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Test.html" />
     <Content Include="Areas\Docs\Images\pet_store_api.png" />
     <Content Include="Areas\Docs\Images\wordnik_api.png" />
     <Content Include="Areas\Docs\Views\Web.config" />
