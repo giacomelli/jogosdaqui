@@ -1,0 +1,37 @@
+﻿@{
+	ViewBag.Title = "Console";
+	Layout = "~/Areas/Docs/Views/Shared/_Layout.cshtml";
+}
+
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
+@Scripts.Render("~/Scripts/handlebars.js")
+@Scripts.Render("~/Scripts/highlight.7.3.pack.js")
+@Scripts.Render("~/Scripts/underscore-min.js")
+@Scripts.Render("~/Scripts/backbone-min.js")
+@Scripts.Render("~/Scripts/swagger.js")
+@Scripts.Render("~/Scripts/swagger-ui.js")
+
+<script type="text/javascript">
+		
+	var v_url = window.location.protocol + "//" + window.location.host + "@ViewData["AbsolutePath"]/swagger";
+	var v_apiKey = null;
+	var v_dom_id = "swagger-ui-container";
+	var v_supportedSubmitMethods = ['get', 'post', 'put', 'delete'];
+
+	window.swaggerUi = new SwaggerUi({
+
+			discoveryUrl: v_url,
+			apiKey: v_apiKey,
+			dom_id: v_dom_id,
+			supportHeaderParams: true,
+			headers: { },
+			supportedSubmitMethods: v_supportedSubmitMethods
+	});
+	
+	window.swaggerUi.load();	thro
+</script>
+<div id="message-bar" class="swagger-ui-wrap">
+	&nbsp;
+</div>
+<div id="swagger-ui-container" class="swagger-ui-wrap">
+</div>

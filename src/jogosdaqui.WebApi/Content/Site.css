@@ -1,0 +1,191 @@
+﻿body
+{
+    font-family: Helvetica, Arial, sans-serif !important;
+}
+
+.clearfix
+{
+    clear: both;
+}
+
+.left
+{
+    margin: none;
+    width: 49%;
+    float: left;
+    text-align: left;
+    border-right: 1px solid #dddddd;
+}
+
+.right
+{
+    margin: none;
+    width: 49%;
+    float: right;
+    text-align: left;
+}
+
+.ml100
+{
+    margin-left: 100px;
+}
+
+a.orange-button
+{
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+}
+
+a.orange-button div
+{
+    padding: 20px;
+    background-color: #fff;
+    -webkit-border-radius: 5px;
+    width: 150px;
+}
+
+a.orange-button div:hover
+{
+    background-color: white;
+}
+
+body div#header-top
+{
+    background-color: #fff;
+    color: #000;
+    padding: 4px 0px;
+}
+
+div#header-top
+{
+    height: 50px;
+    border-bottom-style: solid;
+    border-bottom-color: Gray;
+    border-bottom-width: 1px;
+}
+
+div#header-top .content-wrap
+{
+    height: 50px;
+    max-width: 960px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.operation-params .signature-container
+{
+    cursor: pointer;
+}
+
+div#header-top .content-wrap a
+{
+    height: 100px;
+    width: 176px;    
+    float: left;
+    text-decoration: none;
+    position: relative;
+}
+
+div#header-top .content-wrap div.title
+{
+    padding-top: 10px;
+    margin-left: -176px;
+    font-size: 26px;
+    font-weight: bold;
+    width: 100%;
+    float: left;
+}
+
+div.subtitle
+{
+    padding-top: 5px;
+    margin-left: -176px;
+    font-size: 12px;
+    width: 100%;
+    float: right;
+}
+
+div#content-body
+{
+    margin-top: 15px;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.borderfield
+{
+    margin-top: -1px;
+    padding: 5px 0;
+}
+
+.nuget-badge code
+{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #202020;
+    border: 4px solid #c0c0c0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px #6e6e6e;
+    color: #e2e2e2;
+    display: block;
+    font: 1.5em 'andale mono' , 'lucida console' , monospace;
+    line-height: 1.5em;
+    overflow: auto;
+    padding: 15px;
+}
+
+ul.releaseNotes
+{
+    list-style-type: disc;
+    padding-left: 2em;
+    margin: 20px;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    font-size: 11pt;
+    line-height:15pt;
+}
+
+li
+{
+    margin: 5px;
+}
+
+p
+{
+    font-size: 11pt;
+}
+
+h3.releaseNotes
+{
+    font-style: italic;
+    margin-top: 10px;
+}
+
+h3.intro
+{
+    font-style: italic;
+    margin-top: 50px;
+}
+
+.apiVersion
+{
+    margin-top: 50px;
+}
+
+.apiRelease
+{
+    margin-left: 50px;
+}
+
+p
+{
+    text-align: justify;
+}
