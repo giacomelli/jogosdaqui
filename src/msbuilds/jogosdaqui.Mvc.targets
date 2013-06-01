@@ -9,9 +9,9 @@
     	
 	</ItemGroup>
 
-    <Copy
+    <!--Copy
         SourceFiles="@(FilesToCopy)"
         DestinationFolder="bin"
-    />
+    /-->
 </Target>
 </Project>
