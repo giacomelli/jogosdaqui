@@ -16,6 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A8551E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msbuilds", "msbuilds", "{0766BFFD-2632-4804-B1DB-ECF4C196942E}"
+	ProjectSection(SolutionItems) = preProject
+		msbuilds\jogosdaqui.Mvc.targets = msbuilds\jogosdaqui.Mvc.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

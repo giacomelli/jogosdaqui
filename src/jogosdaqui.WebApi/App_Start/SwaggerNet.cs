@@ -24,7 +24,7 @@ namespace App_Start
         {
             RouteTable.Routes.MapHttpRoute(
                 name: "SwaggerApi",
-                routeTemplate: "Docs/{controller}",
+                routeTemplate: "api/docs/{controller}",
                 defaults: new { swagger = true }
             );            
         }
