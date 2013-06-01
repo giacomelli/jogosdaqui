@@ -11,17 +11,28 @@ using Swagger.Net;
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.SwaggerNet), "PostStart")]
 namespace App_Start 
 {
+	/// <summary>
+	/// Inicializador do Swagger.NET.
+	/// </summary>
     public static class SwaggerNet 
     {
-        public static void PreStart() 
+        /// <summary>
+        /// Executa antes do start real da app.
+        /// </summary>
+        /// <returns>The start.</returns>
+		public static void PreStart() 
         {
             RouteTable.Routes.MapHttpRoute(
                 name: "SwaggerApi",
-                routeTemplate: "api/docs/{controller}",
+                routeTemplate: "Docs/{controller}",
                 defaults: new { swagger = true }
             );            
         }
         
+		/// <summary>
+		/// Executa após o start real dapp.
+		/// </summary>
+		/// <returns>The start.</returns>
         public static void PostStart() 
         {
             var config = GlobalConfiguration.Configuration;

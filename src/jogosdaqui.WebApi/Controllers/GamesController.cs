@@ -23,5 +23,15 @@ namespace jogosdaqui.WebApi.Controllers
 				new Game() {Name = "2"}
 			}.AsQueryable();
         }
+
+		/// <summary>
+		/// Cria um novo jogo.
+		/// </summary>
+		/// <param name="game">O jogo a ser criado.</param>
+		/// <returns>O criado com o ID informado.</returns>
+		public Game Post(Game game)
+		{
+			return new Game ();
+		}
     }
 }
