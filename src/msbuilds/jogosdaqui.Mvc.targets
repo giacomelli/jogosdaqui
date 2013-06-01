@@ -1,6 +1,6 @@
  <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
  
- <Target Name="AfterBuild">
+ <Target Name="Publish">
    	<ItemGroup>
     	<FilesToCopy Include="..\packages\Microsoft.AspNet.WebPages*\lib\*\System.Web.Helpers.dll" />
     	<FilesToCopy Include="..\packages\Microsoft.AspNet.WebPages*\lib\*\System.Web.WebPages.dll" />
