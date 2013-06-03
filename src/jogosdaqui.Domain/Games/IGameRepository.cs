@@ -1,5 +1,7 @@
 using System;
 using Skahal.Infrastructure.Framework.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace jogosdaqui.Domain.Games
 {
