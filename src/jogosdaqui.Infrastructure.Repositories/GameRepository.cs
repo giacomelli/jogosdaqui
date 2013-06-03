@@ -9,10 +9,12 @@ namespace jogosdaqui.Infrastructure.Repositories
 	{
 		#region Fields
 		private static List<Game> s_games = new List<Game>();
+		private static long s_currentId = 1;
 		#endregion
 
 		public Game Create (Game entity)
 		{
+			entity.Id = s_currentId++;
 			s_games.Add (entity);
 
 			return entity;

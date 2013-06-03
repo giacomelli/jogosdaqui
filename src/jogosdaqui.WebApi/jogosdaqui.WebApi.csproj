@@ -274,6 +274,7 @@
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Controllers\HomeController.cs" />
     <Compile Include="Areas\Docs\Models\LoginModel.cs" />
+    <Compile Include="App_Start\DomainConfig.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -309,6 +310,10 @@
     <ProjectReference Include="..\jogosdaqui.Domain\jogosdaqui.Domain.csproj">
       <Project>{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}</Project>
       <Name>jogosdaqui.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\jogosdaqui.Infrastructure.Repositories\jogosdaqui.Infrastructure.Repositories.csproj">
+      <Project>{ABAB0F4F-01F6-4B1E-9B6E-D7D1986DAD68}</Project>
+      <Name>jogosdaqui.Infrastructure.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
