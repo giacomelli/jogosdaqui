@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Games
 {
 	public class GameEvaluation
 	{

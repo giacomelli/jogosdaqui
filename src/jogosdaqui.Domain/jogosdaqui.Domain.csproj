@@ -54,6 +54,7 @@
     <Compile Include="Games\GameEvaluation.cs" />
     <Compile Include="Articles\NewsArticleSource.cs" />
     <Compile Include="Articles\Comment.cs" />
+    <Compile Include="Games\IGameRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

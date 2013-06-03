@@ -1,6 +1,6 @@
 using System;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Games
 {
 	public class GameCategory
 	{

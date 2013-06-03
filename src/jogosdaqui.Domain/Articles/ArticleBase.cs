@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using jogosdaqui.Domain.Games;
 
 namespace jogosdaqui.Domain
 {

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using jogosdaqui.Domain;
+using jogosdaqui.Domain.Games;
 
 namespace jogosdaqui.WebApi.Controllers
 {
@@ -18,10 +19,7 @@ namespace jogosdaqui.WebApi.Controllers
 		/// </summary>
         public IQueryable<Game> Get()
         {
-			return new Game [] {
-				new Game() {Name = "1"},
-				new Game() {Name = "2"}
-			}.AsQueryable();
+			return GameService.GetAllGames ().AsQueryable ();
         }
 
 		/// <summary>
@@ -31,7 +29,9 @@ namespace jogosdaqui.WebApi.Controllers
 		/// <returns>O criado com o ID informado.</returns>
 		public Game Post(Game game)
 		{
-			return new Game ();
+			GameService.SaveGame (game);
+
+			return game;
 		}
     }
 }
