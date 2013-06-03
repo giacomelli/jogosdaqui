@@ -17,9 +17,9 @@ namespace jogosdaqui.WebApi.Controllers
 		/// <summary>
 		/// Obtém todos os jogos existentes.
 		/// </summary>
-        public IQueryable<Game> Get()
+        public IEnumerable<Game> Get()
         {
-			return GameService.GetAllGames ().AsQueryable ();
+			return GameService.GetAllGames ();
         }
 
 		/// <summary>

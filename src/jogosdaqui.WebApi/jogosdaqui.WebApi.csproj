@@ -278,11 +278,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\GamesController.cs" />
-    <Compile Include="App_Start\SwaggerNet.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Controllers\HomeController.cs" />
     <Compile Include="Areas\Docs\Models\LoginModel.cs" />
     <Compile Include="App_Start\DomainConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

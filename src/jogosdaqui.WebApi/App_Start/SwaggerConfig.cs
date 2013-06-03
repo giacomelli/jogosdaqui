@@ -7,14 +7,14 @@ using System.Web.Http.Dispatcher;
 using System.Web.Routing;
 using Swagger.Net;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.SwaggerNet), "PreStart")]
-[assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.SwaggerNet), "PostStart")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.SwaggerConfig), "PreStart")]
+[assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.SwaggerConfig), "PostStart")]
 namespace App_Start 
 {
 	/// <summary>
 	/// Inicializador do Swagger.NET.
 	/// </summary>
-    public static class SwaggerNet 
+    public static class SwaggerConfig 
     {
         /// <summary>
         /// Executa antes do start real da app.
