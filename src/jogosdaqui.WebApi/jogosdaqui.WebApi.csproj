@@ -140,6 +140,9 @@
     <Reference Include="Skahal.Infrastructure.Framework">
       <HintPath>..\references\Skahal.Infrastructure.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="AspNetWebApi.Apigee">
+      <HintPath>..\packages\AspNetWebApi.ApiGee.1.0.1\lib\net40\AspNetWebApi.Apigee.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

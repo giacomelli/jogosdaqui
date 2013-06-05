@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using AspNetWebApi.ApiGee.Filters;
 using jogosdaqui.Domain;
 using jogosdaqui.Domain.Games;
 
@@ -41,6 +42,7 @@ namespace jogosdaqui.WebApi.Controllers
 		/// <param name="game">O jogo.</param>
 		public Game Put(long id, Game game)
 		{
+            game.Id = id;
 			GameService.SaveGame (game);
 
 			return game;
@@ -50,7 +52,8 @@ namespace jogosdaqui.WebApi.Controllers
 		/// Exclui o jogo com o id informado.
 		/// </summary>
 		/// <param name="id">O id do jogo a ser excluído.</param>
-		public void Delete(long id)
+	    [SuccessHandlingFilter]
+        public void Delete(long id)
 		{
 			GameService.DeleteGame (id);
 		}

@@ -14,6 +14,8 @@ using Skahal.Infrastructure.Framework.Commons;
 using Swagger.Net;
 using jogosdaqui.Domain.Games;
 using jogosdaqui.Infrastructure.Repositories;
+using AspNetWebApi.ApiGee.Filters;
+using System.Web.Http.Filters;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.WebApiConfig), "PreStart")]
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.WebApiConfig), "PostStart")]
@@ -39,9 +41,8 @@ namespace App_Start
 		/// <returns>The start.</returns>
 		public static void PostStart() 
 		{
-			RegisterGlobalFilters (GlobalFilters.Filters);
-
 			var config = GlobalConfiguration.Configuration;
+			RegisterFilters (config.Filters);
 			RegisterRoutes (config);
 			RegisterFormatters (config);
 		}
@@ -84,12 +85,12 @@ namespace App_Start
 		}
 
 		/// <summary>
-		/// Registers the global filters.
+		/// Registers the filters.
 		/// </summary>
 		/// <param name="filters">Filters.</param>
-		public static void RegisterGlobalFilters (GlobalFilterCollection filters)
+		public static void RegisterFilters (HttpFilterCollection filters)
 		{
-			filters.Add (new HandleErrorAttribute());
+			filters.Add(new ErrorHandlingFilterAttribute());
 		}
 	}
 }
