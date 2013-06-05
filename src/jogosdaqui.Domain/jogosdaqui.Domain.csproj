@@ -34,6 +34,12 @@
     <Reference Include="Skahal.Infrastructure.Framework">
       <HintPath>..\references\Skahal.Infrastructure.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="HelperSharp">
+      <HintPath>..\references\HelperSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="KissSpecifications">
+      <HintPath>..\packages\KissSpecifications.1.0.0\lib\net40\KissSpecifications.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +61,7 @@
     <Compile Include="Articles\NewsArticleSource.cs" />
     <Compile Include="Articles\Comment.cs" />
     <Compile Include="Games\IGameRepository.cs" />
+    <Compile Include="Games\Specifications\GameDeletionSpecification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -64,5 +71,9 @@
     <Folder Include="Articles\" />
     <Folder Include="Companies\" />
     <Folder Include="People\" />
+    <Folder Include="Games\Specifications\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

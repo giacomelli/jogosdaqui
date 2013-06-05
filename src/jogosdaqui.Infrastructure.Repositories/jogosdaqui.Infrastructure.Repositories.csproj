@@ -32,10 +32,13 @@
     <Reference Include="Skahal.Infrastructure.Framework">
       <HintPath>..\references\Skahal.Infrastructure.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="HelperSharp">
+      <HintPath>..\references\HelperSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameRepository.cs" />
+    <Compile Include="Testing\TestingGameRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -43,5 +46,9 @@
       <Project>{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}</Project>
       <Name>jogosdaqui.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EntityFramework\" />
+    <Folder Include="Testing\" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@ using System;
 using Skahal.Infrastructure.Framework.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace jogosdaqui.Domain.Games
 {

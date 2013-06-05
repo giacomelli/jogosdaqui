@@ -33,5 +33,26 @@ namespace jogosdaqui.WebApi.Controllers
 
 			return game;
 		}
+
+		/// <summary>
+		/// Atualiza um jogo existente.
+		/// </summary>
+		/// <param name="id">O id do jogo a ser atualizado.</param>
+		/// <param name="game">O jogo.</param>
+		public Game Put(long id, Game game)
+		{
+			GameService.SaveGame (game);
+
+			return game;
+		}
+
+		/// <summary>
+		/// Exclui o jogo com o id informado.
+		/// </summary>
+		/// <param name="id">O id do jogo a ser excluído.</param>
+		public void Delete(long id)
+		{
+			GameService.DeleteGame (id);
+		}
     }
 }
