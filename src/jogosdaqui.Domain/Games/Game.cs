@@ -9,6 +9,23 @@ namespace jogosdaqui.Domain.Games
 	/// </summary>
 	public class Game : EntityBase, IAggregateRoot
 	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.Game"/> class.
+		/// </summary>
+		public Game()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.Game"/> class.
+		/// </summary>
+		/// <param name="key">Key.</param>
+		public Game(long key) : base(key)
+		{
+		}
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets or sets the name.

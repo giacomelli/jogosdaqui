@@ -15,22 +15,36 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public class GamesController : ApiController
     {
+		#region Fields
+		private GameService m_service;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.WebApi.Controllers.GamesController"/> class.
+		/// </summary>
+		public GamesController()
+		{
+			m_service = new GameService ();
+		}
+		#endregion
+
 		/// <summary>
 		/// Obtém todos os jogos existentes.
 		/// </summary>
         public IEnumerable<Game> Get()
         {
-			return GameService.GetAllGames ();
+			return m_service.GetAllGames ();
         }
 
 		/// <summary>
 		/// Cria um novo jogo.
 		/// </summary>
 		/// <param name="game">O jogo a ser criado.</param>
-		/// <returns>O criado com o ID informado.</returns>
+		/// <returns>O criado com o key informado.</returns>
 		public Game Post(Game game)
 		{
-			GameService.SaveGame (game);
+			m_service.SaveGame (game);
 
 			return game;
 		}
@@ -38,24 +52,24 @@ namespace jogosdaqui.WebApi.Controllers
 		/// <summary>
 		/// Atualiza um jogo existente.
 		/// </summary>
-		/// <param name="id">O id do jogo a ser atualizado.</param>
+		/// <param name="key">O key do jogo a ser atualizado.</param>
 		/// <param name="game">O jogo.</param>
-		public Game Put(long id, Game game)
+		public Game Put(long key, Game game)
 		{
-            game.Id = id;
-			GameService.SaveGame (game);
+	        game.Key = key;
+			m_service.SaveGame (game);
 
 			return game;
 		}
 
 		/// <summary>
-		/// Exclui o jogo com o id informado.
+		/// Exclui o jogo com o key informado.
 		/// </summary>
-		/// <param name="id">O id do jogo a ser excluído.</param>
+		/// <param name="key">O key do jogo a ser excluído.</param>
 	    [SuccessHandlingFilter]
-        public void Delete(long id)
+        public void Delete(long key)
 		{
-			GameService.DeleteGame (id);
+			m_service.DeleteGame (key);
 		}
     }
 }

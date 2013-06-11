@@ -17,17 +17,23 @@ namespace jogosdaqui.Domain.UnitTests
 	{
 		#region Fields
 		private IGameRepository m_repository;
+		private IUnitOfWork m_unitOfWork;
+		private GameService m_service;
 		#endregion
 
 		#region Initiliaze / cleanup
 		[SetUp]
 		public void InitializeTest()
 		{
+			m_unitOfWork = new MemoryUnitOfWork ();
 			m_repository = new TestingGameRepository ();
-			m_repository.Create (new Game());
-			m_repository.Create (new Game());
-			m_repository.Create (new Game());
-			DependencyService.Register<IGameRepository> (m_repository);
+			m_repository.SetUnitOfWork(m_unitOfWork);
+			m_repository.Add (new Game(1));
+			m_repository.Add (new Game(2));
+			m_repository.Add (new Game(3));
+			m_unitOfWork.Commit ();
+
+			m_service = new GameService (m_repository, m_unitOfWork);
 		}
 
 		[TearDown]
@@ -40,34 +46,34 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void GetGameById_GetAllGames_AllGames()
 		{
-			var actual = GameService.GetAllGames ();
+			var actual = m_service.GetAllGames ();
 			Assert.AreEqual (3, actual.Count);
-			Assert.AreEqual (1, actual [0].Id);
-			Assert.AreEqual (2, actual [1].Id);
-			Assert.AreEqual (3, actual [2].Id);
+			Assert.AreEqual (1, actual [0].Key);
+			Assert.AreEqual (2, actual [1].Key);
+			Assert.AreEqual (3, actual [2].Key);
 		}
 
 		[Test]
 		public void GetGameById_NonExistId_Null()
 		{
-			Assert.IsNull (GameService.GetGameById(-1));
-			Assert.IsNull (GameService.GetGameById(0));
-			Assert.IsNull (GameService.GetGameById(4));
+			Assert.IsNull (m_service.GetGameByKey(-1));
+			Assert.IsNull (m_service.GetGameByKey(0));
+			Assert.IsNull (m_service.GetGameByKey(4));
 		}
 
 		[Test]
 		public void GetGameById_ExistId_Game()
 		{
-			Assert.AreEqual(1, GameService.GetGameById(1).Id);
-			Assert.AreEqual(2, GameService.GetGameById(2).Id);
-			Assert.AreEqual(3, GameService.GetGameById(3).Id);
+			Assert.AreEqual(1, m_service.GetGameByKey(1).Key);
+			Assert.AreEqual(2, m_service.GetGameByKey(2).Key);
+			Assert.AreEqual(3, m_service.GetGameByKey(3).Key);
 		}
 
 		[Test]
 		public void SaveGame_Null_Exception()
 		{
 			ExceptionAssert.IsThrowing (new ArgumentNullException("game"), () => {
-				GameService.SaveGame(null);
+				m_service.SaveGame(null);
 			});
 		}
 
@@ -77,26 +83,26 @@ namespace jogosdaqui.Domain.UnitTests
 			var game = new Game ();
 			game.Name = "Created";
 
-			GameService.SaveGame (game);
-			Assert.AreNotEqual (0, game.Id);
-			var actual = GameService.GetAllGames ();
+			m_service.SaveGame (game);
+			Assert.AreNotEqual (0, game.Key);
+			var actual = m_service.GetAllGames ();
 			Assert.AreEqual (4, actual.Count);
 
-			Assert.AreEqual ("Created", GameService.GetGameById(game.Id).Name);
+			Assert.AreEqual ("Created", m_service.GetGameByKey(game.Key).Name);
 		}
 
 		[Test]
 		public void SaveGame_ExistingGame_Updated()
 		{
 			var game = new Game ();
-			game.Id = 2;
+			game.Key = 2;
 			game.Name = "Updated";
 
-			GameService.SaveGame (game);
-			var actual = GameService.GetAllGames ();
+			m_service.SaveGame (game);
+			var actual = m_service.GetAllGames ();
 			Assert.AreEqual (3, actual.Count);
 
-			var updated = GameService.GetGameById (2);
+			var updated = m_service.GetGameByKey (2);
 			Assert.AreEqual ("Updated", updated.Name);
 		}
 
@@ -104,24 +110,24 @@ namespace jogosdaqui.Domain.UnitTests
 		public void DeleteGame_NotExistingGame_Exception()
 		{
 			ExceptionAssert.IsThrowing (new SpecificationNotSatisfiedException("The game should exists to be deleted."), () => {
-				GameService.DeleteGame(4);
+				m_service.DeleteGame(4);
 			});
 		}
 
 		[Test]
 		public void DeleteGame_ExistingGame_Deleted()
 		{
-			GameService.DeleteGame (1);
-			Assert.IsNull (GameService.GetGameById(1));
-			Assert.AreEqual (2, GameService.CountAllGames ());
+			m_service.DeleteGame (1);
+			Assert.IsNull (m_service.GetGameByKey(1));
+			Assert.AreEqual (2, m_service.CountAllGames ());
 
-			GameService.DeleteGame (2);
-			Assert.IsNull (GameService.GetGameById(2));
-			Assert.AreEqual (1, GameService.CountAllGames ());
+			m_service.DeleteGame (2);
+			Assert.IsNull (m_service.GetGameByKey(2));
+			Assert.AreEqual (1, m_service.CountAllGames ());
 
-			GameService.DeleteGame (3);
-			Assert.IsNull (GameService.GetGameById(3));
-			Assert.AreEqual (0, GameService.CountAllGames ());
+			m_service.DeleteGame (3);
+			Assert.IsNull (m_service.GetGameByKey(3));
+			Assert.AreEqual (0, m_service.CountAllGames ());
 		}
 		#endregion
 	}

@@ -5,70 +5,94 @@ using HelperSharp;
 using Skahal.Infrastructure.Framework.Commons;
 using KissSpecifications;
 using jogosdaqui.Domain.Games.Specifications;
+using Skahal.Infrastructure.Framework.Repositories;
 
 namespace jogosdaqui.Domain.Games
 {
 	/// <summary>
 	/// Game service.
 	/// </summary>
-	public static class GameService
+	public sealed class GameService
 	{	
+		#region Fields
+		private IGameRepository m_repository;
+		private IUnitOfWork m_unitOfwork;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.GameService"/> class.
+		/// </summary>
+		public GameService() 
+			: this(DependencyService.Create<IGameRepository>(), DependencyService.Create<IUnitOfWork>())
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.GameService"/> class.
+		/// </summary>
+		/// <param name="gameRepository">Game repository.</param>
+		/// <param name="unitOfWork">Unit of work.</param>
+		public GameService(IGameRepository gameRepository, IUnitOfWork unitOfWork)
+		{
+			m_repository = gameRepository;
+			m_unitOfwork = unitOfWork;
+			m_repository.SetUnitOfWork (m_unitOfwork);
+		}
+		#endregion
+
 		#region Methods
 		/// <summary>
-		/// Gets the game by identifier.
+		/// Gets the game by key.
 		/// </summary>
-		/// <returns>The game by identifier.</returns>
-		/// <param name="id">Identifier.</param>
-		public static Game GetGameById(long id)
+		/// <returns>The game by key.</returns>
+		/// <param name="key">The key.</param>
+		public Game GetGameByKey(long key)
 		{
-			return DependencyService.Create<IGameRepository> ().FindAll (g => g.Id == id).FirstOrDefault ();
+			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 
 		/// <summary>
 		/// Gets all games.
 		/// </summary>
 		/// <returns>The all games.</returns>
-		public static IList<Game> GetAllGames()
+		public IList<Game> GetAllGames()
 		{
-			return DependencyService.Create<IGameRepository> ().FindAll(g => true).ToList();
+			return m_repository.FindAll(g => true).ToList();
 		}
 
 		/// <summary>
 		/// Counts all games.
 		/// </summary>
-		public static long CountAllGames()
+		public long CountAllGames()
 		{
-			return DependencyService.Create<IGameRepository> ().CountAll (g => true);
+			return m_repository.CountAll (g => true);
 		}
 
 		/// <summary>
 		/// Saves the game.
 		/// </summary>
 		/// <param name="game">Game.</param>
-		public static void SaveGame(Game game)
+		public void SaveGame(Game game)
 		{
 			ExceptionHelper.ThrowIfNull ("game", game);
 
-			var repository = DependencyService.Create<IGameRepository> ();
-			var oldGame = GetGameById (game.Id);
+			m_repository [game.Key] = game;
 
-			if (oldGame == null) {
-				repository.Create (game);
-			} else {
-				repository.Modify (game);
-			}
+			m_unitOfwork.Commit ();
 		}
 
 		/// <summary>
 		/// Deletes the game.
 		/// </summary>
-		/// <param name="id">Identifier.</param>
-		public static void DeleteGame (long id)
+		/// <param name="key">The key.</param>
+		public void DeleteGame (long key)
 		{
-			var game = GetGameById (id);
+			var game = GetGameByKey (key);
 			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameDeletionSpecification ());
 
-			DependencyService.Create<IGameRepository> ().Delete (game);
+			m_repository.Remove (game);
+			m_unitOfwork.Commit ();
 		}
 		#endregion
 	}

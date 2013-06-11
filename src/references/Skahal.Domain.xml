@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skahal.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Skahal.Domain.Devices.Device">
+            <summary>
+            Represents a device (iPhone 4, Android, Mac OSX, etc).
+            </summary>
+        </member>
+        <member name="T:Skahal.Domain.People.Player">
+            <summary>
+            Represents a player.
+            </summary>
+        </member>
+        <member name="M:Skahal.Domain.People.Player.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Domain.People.Player" /> class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Domain.People.Player.#ctor(Skahal.Infrastructure.Framework.People.User)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Domain.People.Player" /> class.
+            </summary>
+            <param name="user">User.</param>
+        </member>
+        <member name="P:Skahal.Domain.People.Player.Devices">
+            <summary>
+            Gets the devices.
+            </summary>
+            <value>The devices.</value>
+        </member>
+        <member name="T:Skahal.Domain.People.PlayerService">
+            <summary>
+            Domain player service.
+            </summary>
+        </member>
+        <member name="M:Skahal.Domain.People.PlayerService.GetCurrentPlayer">
+            <summary>
+            Gets the current player.
+            </summary>
+            <returns>The current player.</returns>
+        </member>
+    </members>
+</doc>
