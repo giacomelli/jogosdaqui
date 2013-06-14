@@ -10,6 +10,7 @@ using Swagger.Net;
 using jogosdaqui.Domain.Games;
 using jogosdaqui.Infrastructure.Repositories;
 using jogosdaqui.Infrastructure.Repositories.Testing;
+using Skahal.Infrastructure.Framework.Repositories;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.DomainConfig), "PreStart")]
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.DomainConfig), "PostStart")]
@@ -36,6 +37,7 @@ namespace App_Start
 		public static void PostStart() 
 		{
 			DependencyService.Register<IGameRepository> (new TestingGameRepository());
+            DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
 		}
 	}
 }
