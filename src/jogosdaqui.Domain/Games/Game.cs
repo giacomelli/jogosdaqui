@@ -7,7 +7,7 @@ namespace jogosdaqui.Domain.Games
 	/// <summary>
 	/// Represents a game.
 	/// </summary>
-	public class Game : EntityBase, IAggregateRoot
+	public class Game : EntityBase<long>, IAggregateRoot<long>
 	{
 		#region Constructors
 		/// <summary>

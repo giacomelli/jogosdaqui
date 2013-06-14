@@ -9,7 +9,7 @@ namespace jogosdaqui.Domain.Games
 	/// <summary>
 	/// Defines a repository for Game entities.
 	/// </summary>
-	public interface IGameRepository : IRepository<Game>
+	public interface IGameRepository : IRepository<Game, long>
 	{
 	}
 }

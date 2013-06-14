@@ -1,0 +1,619 @@
+﻿<#@ template language="C#v3.5" #>
+		
+		
+<#@ template language="C#v3.5" #>
+<#@ assembly name="/Users/giacomelli/Dropbox/Skahal.MonoTouch/Core/bin/iPhoneSimulator/Debug/Skahal.MonoTouch.Core.dll" #>
+<#@ assembly name="/Users/giacomelli/Dropbox/jogosdaquiMobile/jogosdaqui.Domain/bin/Debug/jogosdaqui.Domain.dll" #>
+<#@ import namespace="jogosdaqui.Domain.Games" #>
+<#@ import namespace="jogosdaqui.Domain.Companies" #>
+<#@ import namespace="jogosdaqui.Domain.Categories" #>
+<#@ import namespace="jogosdaqui.Domain.Platforms" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Skahal.MonoTouch.Domain" #>
+   
+#region Usings  
+using System;
+using System.Collections.Generic;    
+using System.IO;   
+using System.Linq;    
+using jogosdaqui.Domain.Categories;  
+using jogosdaqui.Domain.Companies; 
+using jogosdaqui.Domain.Games; 
+using jogosdaqui.Domain.Platforms;   
+using MonoTouch.Foundation;  
+using Skahal.MonoTouch.Logging;  
+using Skahal.MonoTouch.Repository;
+using Skahal.MonoTouch.Threading;  
+using Skahal.MonoTouch.UI;  
+using Vici.CoolStorage;  
+#endregion      
+
+namespace jogosdaqui.Infrastructure.Repositories
+{ 
+<#     
+var modelsType = new Type[]     
+{   
+	typeof(Game),   
+	typeof(Company),
+	typeof(Category),
+	typeof(Platform)  
+};
+#>
+<#
+//////////////////////////////////////////// DATA CLASSES //////////////////////////////////////////// 
+#>
+	#region Data classes
+<# 
+foreach(var t in modelsType) 
+{ 
+	var modelName = t.Name;
+#> 
+	[Preserve(AllMembers = true)]
+	[MapTo("<#=modelName#>")]
+	public class <#=modelName#>Data : CSObject<<#=modelName#>Data, int>
+	{
+		#region Properties
+		public int <#=modelName#>ID { get { return (int)GetField("<#=modelName#>ID"); } }	
+<# 
+	var properties = t.GetProperties().Where(t1 => !t1.Name.Equals("Key")); 
+	
+	foreach(var p in properties)
+	{  
+		var propertyName = p.Name;	
+		var propertyType = p.PropertyType.ToString();	 
+		
+		if(p.PropertyType.IsGenericType) 
+		{
+			propertyType = p.PropertyType.GetGenericArguments()[0].Name;
+#>
+		[ManyToMany("<#=modelName#><#=propertyName#>", Pure = true)]
+		public CSList<<#=propertyType#>Data> <#=propertyName#> { get { return (CSList<<#=propertyType#>Data>)GetField("<#=propertyName#>"); } set { SetField("<#=propertyName#>", value); } }
+	
+<#
+		}
+		else
+		{
+#>
+		public <#=propertyType#> <#=propertyName#> { get { return (<#=propertyType#>)GetField("<#=propertyName#>"); } set { SetField("<#=propertyName#>", value); }}
+<#
+		}
+	}
+#>
+		#endregion
+	}
+<#
+}
+#> 
+	#endregion
+
+<#
+//////////////////////////////////////////// REPOSITORIES CLASSES //////////////////////////////////////////// 
+#>
+
+	#region Repositories classes
+<#
+foreach(var t in modelsType) 
+{  
+	var modelName = t.Name;
+	var implementsIRepository = Type.GetType(t.Namespace + ".I" + modelName + "Repository, jogosdaqui.Domain.dll") != null;
+	
+	if(implementsIRepository)
+	{
+#> 
+	public partial class <#=modelName#>Repository : RepositoryBase<<#=modelName#>>, I<#=modelName#>Repository
+	{
+		#region Fields
+		private static Dictionary<int, <#=modelName#>> s_modelCache = new Dictionary<int, <#=modelName#>>();
+		#endregion
+		
+		#region Constructors
+		static <#=modelName#>Repository()
+		{
+			//SmartThread.Start(delegate { new <#=modelName#>Repository().FindAll(); });
+		}
+		
+		[Preserve]
+		public <#=modelName#>Repository() : base(null) 
+		{
+		}
+		
+		[Preserve]
+		public <#=modelName#>Repository(IUnitOfWork unitOfWork) : base(unitOfWork)
+		{
+		} 
+		#endregion
+<#
+	}
+	else
+	{
+#> 
+	public class <#=modelName#>Repository
+	{
+<# 	
+	}
+#> 
+		#region Methods
+		
+		#region Mapping
+		public static <#=modelName#>Data MapToData(<#=modelName#> model)
+		{
+			var data = <#=modelName#>Data.ReadSafe(Convert.ToInt32(model.Key));
+			
+			if(data == null)
+			{
+				data = new <#=modelName#>Data();
+			} 
+		
+			Log.Debug("Mapping model <#=modelName#> {0} to data...", model.Name); 
+<# 
+	var properties = t.GetProperties().Where(t1 => !t1.Name.Equals("Key")); 
+	
+	foreach(var p in properties) 
+	{  
+		var propertyName = p.Name;	
+		var propertyType = p.PropertyType.ToString();	 
+		
+		if(p.PropertyType.IsGenericType) 
+		{
+			propertyType = p.PropertyType.GetGenericArguments()[0].Name;
+#> 
+			// <#=propertyName#>.
+			data.<#=propertyName#>.RemoveAll();
+			
+			foreach(var item in model.<#=propertyName#>)
+			{
+				data.<#=propertyName#>.Add(<#=propertyType#>Repository.MapToData(item));
+			}
+<#
+		}
+		else 
+		{
+#>
+			data.<#=propertyName#> = model.<#=propertyName#>;
+<#
+		}
+	}
+#>
+			
+			return data;
+		}
+		
+		public static <#=modelName#> MapToModel(<#=modelName#>Data data)
+		{
+			lock(typeof(<#=modelName#>Repository))
+			{
+			if(data == null)
+			{
+				return null;
+			}
+			 
+			if(s_modelCache.ContainsKey(data.<#=modelName#>ID))
+			{
+				return s_modelCache[data.<#=modelName#>ID];
+			}
+			
+			Log.Debug("Mapping data to model <#=modelName#> {0}...", data.Name); 
+			
+			var model = new <#=modelName#>(data.<#=modelName#>ID);
+			
+<# 
+		properties = t.GetProperties().Where(t1 => !t1.Name.Equals("Key")); 
+		
+		foreach(var p in properties)
+		{  
+			var propertyName = p.Name;	
+			var propertyType = p.PropertyType.ToString();	 
+			 
+			if(p.PropertyType.IsGenericType) 
+			{
+				propertyType = p.PropertyType.GetGenericArguments()[0].Name;
+#> 
+			// <#=propertyName#>.
+			foreach(var item in data.<#=propertyName#>)
+			{
+				model.<#=propertyName#>.Add(<#=propertyType#>Repository.MapToModel(item));	
+			}
+<#  
+			}
+			else 
+			{
+#>
+			model.<#=propertyName#> = data.<#=propertyName#>;
+<#
+			}
+		}
+#>
+ 
+			s_modelCache.Add(model.Key, model);
+			 
+			return model;
+			}
+		}
+		#endregion
+	<#
+	if(implementsIRepository)
+	{
+	#>
+	#region implemented abstract members of Skahal.MonoTouch.Repository.RepositoryBase[<#=modelName#>]
+	public override <#=modelName#> FindBy (object key)
+	{
+		return MapToModel(<#=modelName#>Data.ReadSafe(Convert.ToInt32(key)));
+	}
+
+	public override IList<<#=modelName#>> FindAll (int from, int length, string orderBy = null)
+	{
+		var models = new List<<#=modelName#>>(); 
+		
+		var datas = <#=modelName#>Data.OrderedList(String.IsNullOrEmpty(orderBy) ? "Name" : orderBy).Range(from, length);
+		
+		foreach(var d in datas)
+		{
+			models.Add(MapToModel(d));
+		}
+			
+		return models; 
+		
+	}
+
+	public override int CountAll ()
+	{
+		return <#=modelName#>Data.Count();
+	} 
+		
+<#
+	foreach(var otherType in modelsType.Where(mt => mt  != t)) 
+	{  
+		var otherTypeProperties = otherType.GetProperties().Where(t1 => t1.PropertyType.IsGenericType).Distinct(); 
+	
+		foreach(var p in otherTypeProperties)
+		{  
+			if(p.PropertyType.IsGenericType) 
+			{
+				var propertyName = otherType.Name;	 
+				var propertyType = p.PropertyType.GetGenericArguments()[0].Name;
+				var argumentName = propertyName.ToLowerInvariant();
+				
+				if(propertyType.Equals(t.Name)) 
+				{  
+#> 
+	public int CountAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>)
+	{ 
+		return <#=propertyName#>Data.Count(
+			"has(<#=p.Name#> where <#=propertyType#>ID = @<#=propertyType#>ID)",
+			"@<#=propertyType#>ID", <#=argumentName#>.Key);
+	}
+	
+	public IList<<#=propertyName#>> FindAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>)
+	{
+		var <#=argumentName#>s = <#=propertyName#>Data.OrderedList("Name", 
+			"has(<#=p.Name#> where <#=propertyType#>ID = @<#=propertyType#>ID)",
+			"@<#=propertyType#>ID", <#=argumentName#>.Key);
+		
+		var result = new List<<#=propertyName#>>();
+		
+		foreach(var g in <#=argumentName#>s)
+		{
+			result.Add(<#=propertyName#>Repository.MapToModel(g));	
+		}
+		
+		return result;
+	}
+	
+<#				}
+			}
+		}
+	}
+#>
+
+	protected override void PersistNewItem (<#=modelName#> item)
+	{	
+        MapToData(item).Save();
+	}
+	
+	protected override void PersistUpdatedItem (<#=modelName#> item)
+	{
+		MapToData(item).Save();
+	}
+	
+	protected override void PersistDeletedItem (<#=modelName#> item)
+	{
+		MapToData(item).Delete();
+	}
+	#endregion		
+	<#
+	}
+	#>
+		#endregion
+	}	
+<#
+}
+#> 
+	#endregion
+
+			
+<#
+//////////////////////////////////////////// DB CLASS //////////////////////////////////////////// 
+#>	
+	public static class DB
+	{	
+		#region Methods
+		public static void Initialize ()
+		{
+			var dbName = "/Users/giacomelli/Dropbox/JogosdaquiMobile/Jogosdaqui/Database/jogosdaqui.db";
+
+			if(!SHUIDevice.IsSimulator)
+			{
+				dbName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "jogosdaqui.db");
+				
+				if(!File.Exists(dbName))
+				{
+					var from =  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database/jogosdaqui.db");
+					File.Copy(from, dbName);
+				}
+			}
+			
+			CSConfig.SetDB(dbName, SqliteOption.CreateIfNotExists, () => {
+<#
+foreach(var t in modelsType) 
+{  
+	var modelName = t.Name;
+#> 
+				
+				#region <#=modelName#>
+				CSDatabase.ExecuteNonQuery(@"CREATE TABLE <#=modelName#>
+											(
+												<#=modelName#>ID INTEGER PRIMARY KEY AUTOINCREMENT,
+<# 
+	var properties = t.GetProperties().Where(t1 => !t1.Name.Equals("Key") && !t1.PropertyType.IsGenericType).ToList();
+	
+	for(int i = 0; i < properties.Count; i++)
+	{  
+		var p = properties[i];
+		var propertyName = p.Name;	
+		var propertyType = p.PropertyType.ToString();
+		
+		switch(propertyType)
+		{
+			case "System.String":
+				propertyType = "TEXT";
+				break;
+				
+			case "System.Int32":
+				propertyType = "INTEGER";
+				break;
+				
+			case "System.DateTime":
+				propertyType = "TEXT(30)"; 
+				break;
+		}	 
+		 
+#>
+										 		<#=propertyName#> <#=propertyType#><#=i + 1 == properties.Count ? ")\");" : ","#>
+<#
+	}
+#>
+				
+				CSDatabase.ExecuteNonQuery(@"CREATE INDEX <#=modelName#>IDIndex ON <#=modelName#>(<#=modelName#>ID);");
+				#endregion
+<# 
+	properties = t.GetProperties().Where(t1 => t1.PropertyType.IsGenericType).ToList();
+	
+	foreach(var p in properties)
+	{  
+		var propertyName = p.Name;					
+		var propertyType = p.PropertyType.GetGenericArguments()[0].Name;
+#>
+				
+				#region <#=modelName#><#=propertyName#>
+				CSDatabase.ExecuteNonQuery(@"CREATE TABLE <#=modelName#><#=propertyName#>
+											(
+												<#=modelName#>ID INTEGER,
+												<#=propertyType#>Id INTEGER,
+												FOREIGN KEY (<#=modelName#>Id) REFERENCES <#=modelName#>(<#=modelName#>ID) ON DELETE CASCADE,
+												FOREIGN KEY (<#=propertyType#>Id) REFERENCES <#=propertyType#>(<#=propertyType#>Id) ON DELETE CASCADE
+											)");
+				#endregion
+<# 
+	}
+}
+#>
+				
+				});
+				
+			Log.Debug("Database initialized: {0}", dbName);
+		}
+		#endregion
+	}
+}
+ 
+
+<#
+//////////////////////////////////////////// INTERFACE REPOSITORIES AND SERVICES CLASSES //////////////////////////////////////////// 
+#>
+
+	#region Services classes
+<#
+foreach(var t in modelsType) 
+{  
+	var modelName = t.Name;
+	var lowerModelName = modelName.ToLowerInvariant();
+	string modelPluralName;
+	
+	if(modelName.EndsWith("y"))
+	{
+		modelPluralName = modelName.Substring(0, modelName.Length - 1) + "ies";
+	}
+	else
+	{
+		modelPluralName = modelName + "s";
+	}
+	
+	var implementsIRepository = Type.GetType(t.Namespace + ".I" + modelName + "Repository, jogosdaqui.Domain.dll") != null;
+
+	if(implementsIRepository)
+	{ 
+#> 
+namespace jogosdaqui.Domain.<#=modelPluralName#>
+{
+	public partial interface I<#=modelName#>Repository : IRepository<<#=modelName#>>
+	{
+	<#
+	foreach(var otherType in modelsType.Where(mt => mt  != t)) 
+	{  
+		var otherTypeProperties = otherType.GetProperties().Where(t1 => t1.PropertyType.IsGenericType).Distinct(); 
+	
+		foreach(var p in otherTypeProperties)
+		{  
+			if(p.PropertyType.IsGenericType) 
+			{
+				var propertyName = otherType.Name;	 
+				var propertyType = p.PropertyType.GetGenericArguments()[0].Name;
+				var argumentName = modelName.ToLowerInvariant();
+				
+				if(propertyType.Equals(t.Name)) 
+				{  
+#> 
+		IList<<#=propertyName#>> FindAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>);
+		int CountAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>);
+	
+<#				}
+			}
+		}
+	}
+#>
+	}
+	
+	public static partial class <#=modelName#>Service
+	{
+		#region Fields	
+        private static I<#=modelName#>Repository s_repository;
+        private static IUnitOfWork s_unitOfWork; 
+		#endregion
+		  
+		#region Constructors 
+      
+		static <#=modelName#>Service()
+        {
+            s_unitOfWork = new UnitOfWork();
+            s_repository = RepositoryFactory.Create<I<#=modelName#>Repository>(s_unitOfWork); 
+            
+            Initialize();
+		}
+		 
+        #endregion
+		
+		#region Methods
+		
+		#region Initialize
+		static partial void Initialize(); 
+		#endregion
+		
+		#region Save/Remove
+		
+		public static void Save<#=modelName#>(<#=modelName#> <#=lowerModelName#>)
+		{ 
+			s_repository[<#=lowerModelName#>.Key] = <#=lowerModelName#>;
+			s_unitOfWork.Commit(); 
+		}
+		 
+		public static void Remove<#=modelName#>(<#=modelName#> <#=lowerModelName#>)
+		{
+			s_repository.Remove(<#=lowerModelName#>);
+			s_unitOfWork.Commit(); 
+		}
+		#endregion
+		
+		#region Gets 
+		public static IList<<#=modelName#>> GetAll<#=modelPluralName#>()
+		{
+			return Get<#=modelPluralName#>(1, int.MaxValue);
+		}
+		
+		public static IList<<#=modelName#>> Get<#=modelPluralName#>(int from, int length)
+		{
+			return s_repository.FindAll(from, length);  
+		}	
+		
+<# 
+	var properties = t.GetProperties().Where(t1 => !t1.Name.Equals("Key") && !t1.PropertyType.IsGenericType).ToList();
+	
+	for(int i = 0; i < properties.Count; i++)
+	{   
+		var p = properties[i];
+		var propertyName = p.Name;	
+#> 
+		public static IList<<#=modelName#>> Get<#=modelPluralName#>SortedBy<#=propertyName#>(int from, int length)
+		{
+			return s_repository.FindAll(from, length, "<#=propertyName#> ASC");  
+		} 
+		
+		public static IList<<#=modelName#>> Get<#=modelPluralName#>SortedBy<#=propertyName#>Descending(int from, int length)
+		{
+			return s_repository.FindAll(from, length, "<#=propertyName#>-");  
+		} 
+<#
+	}
+#>
+		
+		public static int CountAll<#=modelPluralName#>()
+		{
+			return s_repository.CountAll();
+		}
+<#
+	foreach(var otherType in modelsType.Where(mt => mt  != t)) 
+	{  
+		var otherTypeProperties = otherType.GetProperties().Where(t1 => !t1.Name.Equals("Key")); 
+	
+		foreach(var p in otherTypeProperties)
+		{  
+			if(p.PropertyType.IsGenericType) 
+			{
+				var propertyName = otherType.Name;	
+				var lowerPropertyName = propertyName.ToLowerInvariant(); 
+				var propertyType = p.PropertyType.GetGenericArguments()[0].Name;
+				var argumentName = propertyName.ToLowerInvariant();
+				
+				if(propertyType.Equals(t.Name))
+				{  
+#> 
+
+		private static Dictionary<int, IList<<#=propertyName#>>> s_<#=lowerPropertyName#>sCache = new Dictionary<int, IList<<#=propertyName#>>>();
+		
+		public static IList<<#=propertyName#>> GetAll<#=propertyName#>s(<#=propertyType#> <#=lowerModelName#>)
+		{
+			var key = <#=lowerModelName#>.Key; 
+			 
+			if(s_<#=lowerPropertyName#>sCache.ContainsKey(key))
+			{
+				return s_<#=lowerPropertyName#>sCache[key];
+			}
+   
+			var result =  s_repository.FindAll<#=propertyName#>s(<#=lowerModelName#>);
+			s_<#=lowerPropertyName#>sCache.Add(key, result);
+			 
+			return result;
+		}
+		
+		public static int CountAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>)
+		{
+			return s_repository.CountAll<#=propertyName#>s(<#=argumentName#>);
+		}
+	
+<#				}
+			}
+		}
+	}
+#>
+		#endregion
+		
+		#endregion
+	}
+}
+
+
+<#
+	}
+}
+#> 
+	#endregion

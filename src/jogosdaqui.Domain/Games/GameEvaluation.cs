@@ -7,14 +7,14 @@ namespace jogosdaqui.Domain.Games
 	/// <summary>
 	/// Game evaluation.
 	/// </summary>
-	public class GameEvaluation : EntityBase
+	public class GameEvaluation : EntityBase<long>
 	{
 		#region Properties
 		/// <summary>
 		/// Gets or sets the game identifier.
 		/// </summary>
 		/// <value>The game identifier.</value>
-		public int GameId { get; set; }
+		public long GameId { get; set; }
 
 		/// <summary>
 		/// Gets or sets the game version.

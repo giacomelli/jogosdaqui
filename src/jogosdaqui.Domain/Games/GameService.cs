@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HelperSharp;
-using Skahal.Infrastructure.Framework.Commons;
 using KissSpecifications;
-using jogosdaqui.Domain.Games.Specifications;
+using Skahal.Infrastructure.Framework.Commons;
 using Skahal.Infrastructure.Framework.Repositories;
+using jogosdaqui.Domain.Games.Specifications;
 
 namespace jogosdaqui.Domain.Games
 {
@@ -16,7 +16,7 @@ namespace jogosdaqui.Domain.Games
 	{	
 		#region Fields
 		private IGameRepository m_repository;
-		private IUnitOfWork m_unitOfwork;
+		private IUnitOfWork<long> m_unitOfwork;
 		#endregion
 
 		#region Constructors
@@ -24,7 +24,7 @@ namespace jogosdaqui.Domain.Games
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.GameService"/> class.
 		/// </summary>
 		public GameService() 
-			: this(DependencyService.Create<IGameRepository>(), DependencyService.Create<IUnitOfWork>())
+			: this(DependencyService.Create<IGameRepository>(), DependencyService.Create<IUnitOfWork<long>>())
 		{
 		}
 
@@ -33,7 +33,7 @@ namespace jogosdaqui.Domain.Games
 		/// </summary>
 		/// <param name="gameRepository">Game repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
-		public GameService(IGameRepository gameRepository, IUnitOfWork unitOfWork)
+		public GameService(IGameRepository gameRepository, IUnitOfWork<long> unitOfWork)
 		{
 			m_repository = gameRepository;
 			m_unitOfwork = unitOfWork;

@@ -17,7 +17,7 @@ namespace jogosdaqui.Domain.UnitTests
 	{
 		#region Fields
 		private IGameRepository m_repository;
-		private IUnitOfWork m_unitOfWork;
+		private IUnitOfWork<long> m_unitOfWork;
 		private GameService m_service;
 		#endregion
 
@@ -25,7 +25,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[SetUp]
 		public void InitializeTest()
 		{
-			m_unitOfWork = new MemoryUnitOfWork ();
+			m_unitOfWork = new MemoryUnitOfWork<long> ();
 			m_repository = new TestingGameRepository ();
 			m_repository.SetUnitOfWork(m_unitOfWork);
 			m_repository.Add (new Game(1));
@@ -84,7 +84,7 @@ namespace jogosdaqui.Domain.UnitTests
 			game.Name = "Created";
 
 			m_service.SaveGame (game);
-			Assert.AreNotEqual (0, game.Key);
+			Assert.AreNotEqual (0L, game.Key);
 			var actual = m_service.GetAllGames ();
 			Assert.AreEqual (4, actual.Count);
 

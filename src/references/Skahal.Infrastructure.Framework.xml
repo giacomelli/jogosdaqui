@@ -629,44 +629,44 @@
             Setup this instance.
             </summary>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Domain.IEntity">
+        <member name="T:Skahal.Infrastructure.Framework.Domain.IEntity`1">
             <summary>
             Defines a basic interface for a domain entity.
             </summary>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.Domain.IEntity.Key">
+        <member name="P:Skahal.Infrastructure.Framework.Domain.IEntity`1.Key">
             <summary>
             Gets the id.
             </summary>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Domain.IAggregateRoot">
+        <member name="T:Skahal.Infrastructure.Framework.Domain.IAggregateRoot`1">
             <summary>
             The markup interface for a aggregate root.
             </summary>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Domain.EntityBase">
+        <member name="T:Skahal.Infrastructure.Framework.Domain.EntityBase`1">
             <summary>
             A domain entity base class.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase.#ctor">
+        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase`1" /> class.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase.#ctor(System.Nullable{System.Int64})">
+        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.#ctor(`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase`1" /> class.
             </summary>
-            <param name="key">The key.</param>
+            <param name="key">Key.</param>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.Domain.EntityBase.Key">
+        <member name="P:Skahal.Infrastructure.Framework.Domain.EntityBase`1.Key">
             <summary>
             Gets the key.
             </summary>
             <value>The key.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase.Equals(System.Object)">
+        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.Equals(System.Object)">
             <summary>
             Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
             </summary>
@@ -675,7 +675,7 @@
                 <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
             </returns>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase.GetHashCode">
+        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.GetHashCode">
             <summary>
             Returns a hash code for this instance.
             </summary>
@@ -683,7 +683,7 @@
             A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
             </returns>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase.op_Equality(Skahal.Infrastructure.Framework.Domain.EntityBase,Skahal.Infrastructure.Framework.Domain.EntityBase)">
+        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.op_Equality(Skahal.Infrastructure.Framework.Domain.EntityBase{`0},Skahal.Infrastructure.Framework.Domain.EntityBase{`0})">
             <summary>
             Implements the operator ==.
             </summary>
@@ -693,7 +693,7 @@
             The result of the operator.
             </returns>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase.op_Inequality(Skahal.Infrastructure.Framework.Domain.EntityBase,Skahal.Infrastructure.Framework.Domain.EntityBase)">
+        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.op_Inequality(Skahal.Infrastructure.Framework.Domain.EntityBase{`0},Skahal.Infrastructure.Framework.Domain.EntityBase{`0})">
             <summary>
             Implements the operator !=.
             </summary>
@@ -984,13 +984,13 @@
             The entity will receive a new and unique key.
             </remarks></summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.People.User.#ctor(System.Int64)">
+        <member name="M:Skahal.Infrastructure.Framework.People.User.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.People.User" /> class.
             </summary>
             <param name="key">The entity key.</param>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.People.User.RemoteId">
+        <member name="P:Skahal.Infrastructure.Framework.People.User.RemoteKey">
             <summary>
             Gets or sets the remote id.
             </summary>
@@ -1243,38 +1243,39 @@
             <param name="message">Message.</param>
             <param name="args">Arguments.</param>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1">
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2">
             <summary>
             A basic repository on memory.
             <remarks>
             In most of cases will be used for tests purposes.
             </remarks></summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.#ctor">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.#ctor(System.Func{`0,`1})">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2" /> class.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.#ctor(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.#ctor(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1},System.Func{`0,`1})">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2" /> class.
             </summary>
+            <param name="createNewKey">Create new key.</param>
             <param name="unitOfWork">Unit of work.</param>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.Entities">
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.Entities">
             <summary>
             Gets the entities.
             </summary>
             <value>The entities.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.FindBy(System.Int64)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.FindBy(`1)">
             <summary>
             Finds the entity by the key.
             </summary>
             <returns>The found entity.</returns>
             <param name="key">Key.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
             <summary>
             Finds all entities that matches the filter.
             </summary>
@@ -1283,26 +1284,26 @@
             <param name="limit">Limit.</param>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.CountAll(System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.CountAll(System.Func{`0,System.Boolean})">
             <summary>
             Counts all entities that matches the filter.
             </summary>
             <returns>The number of the entities that matches the filter.</returns>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.PersistNewItem(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.PersistNewItem(`0)">
             <summary>
             Persists the new item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.PersistUpdatedItem(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.PersistUpdatedItem(`0)">
             <summary>
             Persists the updated item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`1.PersistDeletedItem(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.PersistDeletedItem(`0)">
             <summary>
             Persists the deleted item.
             </summary>
@@ -2575,91 +2576,91 @@
             Occurs when application has been exited.
             </summary>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork">
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork`1">
             <summary>
             Defines an interface for an unit of work.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork.RegisterAdded(Skahal.Infrastructure.Framework.Domain.IAggregateRoot,Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork`1.RegisterAdded(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
             Registers an entity to be added when commited.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork.RegisterChanged(Skahal.Infrastructure.Framework.Domain.IAggregateRoot,Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork`1.RegisterChanged(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
             Registers an entity to be changed when commited.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork.RegisterRemoved(Skahal.Infrastructure.Framework.Domain.IAggregateRoot,Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork`1.RegisterRemoved(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
             Registers an entity to be removed when commited.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork.Commit">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork`1.Commit">
             <summary>
             Commit the registered entities.
             </summary>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository">
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1">
             <summary>
             Defines an unit of work repository.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
             <summary>
             Persists the new item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
             <summary>
             Persists the updated item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
             <summary>
             Persists the deleted item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1">
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2">
             <summary>
             A base class for repositories.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.#ctor">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2" /> class.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.#ctor(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.#ctor(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2" /> class.
             </summary>
             <param name="unitOfWork">Unit of work.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.FindBy(System.Int64)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindBy(`1)">
             <summary>
             Finds an entity by the key.
             </summary>
             <returns>The entity.</returns>
             <param name="key">Key.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.FindAll(System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindAll(System.Func{`0,System.Boolean})">
             <summary>
             Finds all entities that matches the filter.
             </summary>
             <returns>The found entities.</returns>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
             <summary>
             Finds all entities that matches the filter.
             </summary>
@@ -2668,105 +2669,119 @@
             <param name="limit">Limit.</param>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.CountAll(System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindAll(System.Int32,System.Int32)">
+            <summary>
+            Finds all entities.
+            </summary>
+            <returns>The found entities.</returns>
+            <param name="offset">Offset.</param>
+            <param name="limit">Limit.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.CountAll(System.Func{`0,System.Boolean})">
             <summary>
             Counts all entities that matches the filter.
             </summary>
             <returns>The found entities.</returns>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.CountAll">
+            <summary>
+            Counts all entities.
+            </summary>
+            <returns>The number of the entities that matches the filter.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
             <summary>
             Sets the unit of work.
             </summary>
             <param name="unitOfWork">Unit of work.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.Add(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Add(`0)">
             <summary>
             Add the specified item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.Remove(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Remove(`0)">
             <summary>
             Remove the specified entity.
             </summary>
             <param name="item">The entity.</param>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.Item(System.Int64)">
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Item(`1)">
             <summary>
-            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1" /> with the specified key.
+            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2" /> with the specified key.
             </summary>
             <param name="key">Key.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
             <summary>
             Persists the new item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
             <summary>
             Persists the updated item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
             <summary>
             Persists the deleted item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.UnitOfWork">
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.UnitOfWork">
             <summary>
             Gets the unit of work.
             </summary>
             <value>The unit of work.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.PersistNewItem(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistNewItem(`0)">
             <summary>
             Persists the new item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.PersistUpdatedItem(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistUpdatedItem(`0)">
             <summary>
             Persists the updated item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`1.PersistDeletedItem(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistDeletedItem(`0)">
             <summary>
             Persists the deleted item.
             </summary>
             <param name="item">Item.</param>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.IRepository`1">
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.IRepository`2">
             <summary>
             Defines the interface of a repository entity.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
             <summary>
             Sets the unit of work.
             </summary>
             <param name="unitOfWork">Unit of work.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.FindBy(System.Int64)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindBy(`1)">
             <summary>
             Finds the entity by the key.
             </summary>
             <returns>The found entity.</returns>
             <param name="key">Key.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.FindAll(System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindAll(System.Func{`0,System.Boolean})">
             <summary>
             Finds all entities that matches the filter.
             </summary>
             <returns>The found entities.</returns>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
             <summary>
             Finds all entities that matches the filter.
             </summary>
@@ -2775,26 +2790,40 @@
             <param name="limit">Limit.</param>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.CountAll(System.Func{`0,System.Boolean})">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindAll(System.Int32,System.Int32)">
+            <summary>
+            Finds all entities.
+            </summary>
+            <returns>The found entities.</returns>
+            <param name="offset">Offset.</param>
+            <param name="limit">Limit.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.CountAll(System.Func{`0,System.Boolean})">
             <summary>
             Counts all entities that matches the filter.
             </summary>
             <returns>The number of the entities that matches the filter.</returns>
             <param name="filter">Filter.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Add(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.CountAll">
+            <summary>
+            Counts all entities
+            </summary>
+            <returns>The number of the entities that matches the filter.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Add(`0)">
             <summary>
             Add the specified entity.
             </summary>
             <param name="item">The entity.</param>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Item(System.Int64)">
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Item(`1)">
             <summary>
-            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.IRepository`1" /> with the specified key.
+            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.IRepository`2" /> with the specified key.
             </summary>
             <param name="key">Key.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`1.Remove(`0)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Remove(`0)">
             <summary>
             Remove the specified entity.
             </summary>
@@ -2884,72 +2913,6 @@
             </summary>
             <param name="message">Message.</param>
             <param name="innerException">Inner exception.</param>
-        </member>
-        <member name="T:Skahal.Infrastructure.Framework.Domain.EntityIdentityMap">
-            <summary>
-            Entity identity map.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityIdentityMap.Add``1(``0)">
-            <summary>
-            Add the specified entity.
-            </summary>
-            <param name="entity">Entity.</param>
-            <typeparam name="TEntity">The 1st type parameter.</typeparam>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.EntityIdentityMap.Get``1(System.Int32)">
-            <summary>
-            Get the entity with the specified key.
-            </summary>
-            <param name="entityKey">Entity key.</param>
-            <typeparam name="TEntity">The 1st type parameter.</typeparam>
-        </member>
-        <member name="T:Skahal.Infrastructure.Framework.Domain.KeyGenerating.EntityKeyGenerator">
-            <summary>
-            Entity key generator.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.KeyGenerating.EntityKeyGenerator.#ctor">
-            <summary>
-            Initializes the <see cref="T:Skahal.Infrastructure.Framework.Domain.KeyGenerating.EntityKeyGenerator" /> class.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.KeyGenerating.EntityKeyGenerator.Initialize(Skahal.Infrastructure.Framework.Domain.KeyGenerating.IEntityKeyGenerator)">
-            <summary>
-            Initialize the specified keyGenerator.
-            </summary>
-            <param name="keyGenerator">Key generator.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.KeyGenerating.EntityKeyGenerator.NextKey(System.Type)">
-            <summary>
-            Gets the next key.
-            </summary>
-            <returns>The key.</returns>
-            <param name="entityType">Entity type.</param>
-        </member>
-        <member name="T:Skahal.Infrastructure.Framework.Domain.KeyGenerating.IEntityKeyGenerator">
-            <summary>
-            Defines a interface for an entity key generator.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.KeyGenerating.IEntityKeyGenerator.NextKey(System.Type)">
-            <summary>
-            Gets the next key for entity type specified.
-            </summary>
-            <returns>The key.</returns>
-            <param name="entityType">Entity type.</param>
-        </member>
-        <member name="T:Skahal.Infrastructure.Framework.Domain.KeyGenerating.MemoryEntityKeyGenerator">
-            <summary>
-            An in-memory entity key generator.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Domain.KeyGenerating.MemoryEntityKeyGenerator.NextKey(System.Type)">
-            <summary>
-            Gets the next key for entity type specified.
-            </summary>
-            <returns>The key.</returns>
-            <param name="entityType">Entity type.</param>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Text.BindableTextKey">
             <summary>
@@ -3551,38 +3514,38 @@
             </summary>
             <value>The achievement manager.</value>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork">
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1">
             <summary>
             Defines an in memory unit of work.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork.#ctor">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1" /> class.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork.RegisterAdded(Skahal.Infrastructure.Framework.Domain.IAggregateRoot,Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1.RegisterAdded(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
             Registers an entity to be added when commited.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork.RegisterChanged(Skahal.Infrastructure.Framework.Domain.IAggregateRoot,Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1.RegisterChanged(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
             Registers an entity to be changed when commited.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork.RegisterRemoved(Skahal.Infrastructure.Framework.Domain.IAggregateRoot,Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository)">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1.RegisterRemoved(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
             Registers an entity to be removed when commited.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork.Commit">
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1.Commit">
             <summary>
             Commit the registered entities.
             </summary>
@@ -3683,6 +3646,38 @@
         <member name="T:Skahal.Infrastructure.Framework.Globalization.IGlobalizationLabelRepository">
             <summary>
             Defines a interface for globalization label repository.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.RepositoryExtensions">
+            <summary>
+            Repository extensions.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryExtensions.FindLast``2(Skahal.Infrastructure.Framework.Repositories.IRepository{``0,``1})">
+            <summary>
+            Finds the last entity.
+            </summary>
+            <returns>The last entity.</returns>
+            <param name="repository">Repository.</param>
+            <typeparam name="TEntity">The 1st type parameter.</typeparam>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryExtensions.FindLastKey``2(Skahal.Infrastructure.Framework.Repositories.IRepository{``0,``1})">
+            <summary>
+            Finds the last key.
+            </summary>
+            <returns>The last key.</returns>
+            <param name="repository">Repository.</param>
+            <typeparam name="TEntity">The 1st type parameter.</typeparam>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository">
+            <summary>
+            An in-memory globalization label repository.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository.#ctor">
+            <summary>
+            Initializes a new instance of the
+            <see cref="T:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository" /> class.
             </summary>
         </member>
     </members>
