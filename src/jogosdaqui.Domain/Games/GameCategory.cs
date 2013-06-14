@@ -3,7 +3,10 @@ using Skahal.Infrastructure.Framework.Domain;
 
 namespace jogosdaqui.Domain.Games
 {
-	public class GameCategory : EntityBase<long>
+	/// <summary>
+	/// Represents a game category.
+	/// </summary>
+	public class GameCategory : EntityBase<long>, IAggregateRoot<long>
 	{
 		#region Properties
 		/// <summary>

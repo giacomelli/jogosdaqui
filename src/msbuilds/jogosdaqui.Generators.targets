@@ -1,0 +1,13 @@
+ <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+ 
+ <Target Name="AfterBuild">
+   	<ItemGroup>
+    	<FilesToCopy Include="DomainGenerator.cs" />
+  	</ItemGroup>
+
+    <Copy
+        SourceFiles="@(FilesToCopy)"
+        DestinationFiles="..\jogosdaqui.Domain\Generated.cs"
+    />
+</Target>
+</Project>

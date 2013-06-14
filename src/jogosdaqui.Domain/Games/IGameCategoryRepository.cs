@@ -5,9 +5,10 @@ using jogosdaqui.Domain.Games;
 namespace jogosdaqui.Domain.Games
 {
 	/// <summary>
-	/// Defines an interface for game repository.
+	/// Defines an interface for game category repository.
 	/// </summary>
-	public partial interface IGameRepository : IRepository<Game, long>
+	public interface IGameCategoryRepository : IRepository<GameCategory, long>
 	{
 	}
 }
+

@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>jogosdaqui.Generators</RootNamespace>
     <AssemblyName>jogosdaqui.Generators</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,18 +29,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Skahal.Domain">
+      <HintPath>..\references\Skahal.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Skahal.Infrastructure.Framework">
+      <HintPath>..\references\Skahal.Infrastructure.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="HelperSharp">
+      <HintPath>..\packages\HelperSharp.0.0.2.7\lib\net35\HelperSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="KissSpecifications">
+      <HintPath>..\packages\KissSpecifications.1.0.0\lib\net40\KissSpecifications.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DomainGenerator.cs">
-      <DependentUpon>DomainGenerator.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="DomainGenerator.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DomainGenerator.cs</LastGenOutput>
     </None>
+    <None Include="packages.config" />
+    <None Include="DomainGenerator.cs">
+      <DependentUpon>DomainGenerator.tt</DependentUpon>
+    </None>
   </ItemGroup>
+  <Import Project="..\msbuilds\jogosdaqui.Generators.targets" />
 </Project>
