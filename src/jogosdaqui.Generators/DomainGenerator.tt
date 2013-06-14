@@ -1,12 +1,9 @@
-﻿<#@ template language="C#v4.5" #>
-		
-		
-<#@ template language="C#v3.5" #>
-<#@ assembly name="/Users/giacomelli/Dropbox/jogosdaqui/Plataforma/src/jogosdaqui.Domain/bin/Debug/jogosdaqui.Domain.dll" #>
-<#@ assembly name="/Users/giacomelli/Dropbox/jogosdaqui/Plataforma/src/references/Skahal.Infrastructure.Framework.dll" #>
-<#@ import namespace="jogosdaqui.Domain.Games" #>
-<#@ import namespace="System.Reflection" #> 
-<#@ import namespace="System.Linq" #>
+﻿<#@ template language="C#v3.5" #>
+<#@ assembly name="$(SolutionDir)\jogosdaqui.Domain\bin\Debug\jogosdaqui.Domain.dll" #>
+<#@ assembly name="$(SolutionDir)\references\Skahal.Infrastructure.Framework.dll" #>
+<#@ import namespace="jogosdaqui.Domain.Games" #> 
+<#@ import namespace="System.Reflection" #>  
+<#@ import namespace="System.Linq" #>  
 <#@ import namespace="Skahal.Infrastructure.Framework" #>
    
 #region Usings   

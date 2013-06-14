@@ -7,8 +7,7 @@ namespace jogosdaqui.Domain.Games
 	/// <summary>
 	/// Defines an interface for game category repository.
 	/// </summary>
-	public interface IGameCategoryRepository : IRepository<GameCategory, long>
+	public partial interface IGameCategoryRepository : IRepository<GameCategory, long>
 	{
 	}
 }
-
