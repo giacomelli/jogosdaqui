@@ -14,17 +14,23 @@ RunForEachModel((e) =>
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 {
 	/// <summary>
-	/// Testing <#=e.Name#> repository. 
+	/// Testing <#=e.Name#> repository.  
 	/// </summary>
 	public class Testing<#=e.Name#>Repository : MemoryRepository<<#=e.Name#>, long>, I<#=e.Name#>Repository
 	{
+		#region Fields
+		private static long s_lastKey; 
+		private static object s_lock = new Object();
+		#endregion
+		
 		#region Constructors
 		/// <summary>
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.Testing<#=e.Name#>Repository"/> class.
 		/// </summary>
-		public Testing<#=e.Name#>Repository() : base((g) => { return DateTime.Now.Ticks; })
+		public Testing<#=e.Name#>Repository() : base((g) => { lock(s_lock) { return ++s_lastKey; } })
 		{
+			s_lastKey = 0;
 		}
 		#endregion
 	}

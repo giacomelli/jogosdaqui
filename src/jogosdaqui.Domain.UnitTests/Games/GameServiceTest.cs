@@ -28,9 +28,9 @@ namespace jogosdaqui.Domain.UnitTests
 			m_unitOfWork = new MemoryUnitOfWork<long> ();
 			m_repository = new TestingGameRepository ();
 			m_repository.SetUnitOfWork(m_unitOfWork);
-			m_repository.Add (new Game(1));
-			m_repository.Add (new Game(2));
-			m_repository.Add (new Game(3));
+			m_repository.Add (new Game());
+			m_repository.Add (new Game());
+			m_repository.Add (new Game());
 			m_unitOfWork.Commit ();
 
 			m_service = new GameService (m_repository, m_unitOfWork);

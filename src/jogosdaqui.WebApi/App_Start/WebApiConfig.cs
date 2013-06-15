@@ -32,7 +32,10 @@ namespace App_Start
 		/// <returns>The start.</returns>
 		public static void PreStart() 
 		{
-
+			var config = GlobalConfiguration.Configuration;
+			RegisterFilters (config.Filters);
+			RegisterRoutes (config);
+			RegisterFormatters (config);
 		}
 
 		/// <summary>
@@ -41,10 +44,7 @@ namespace App_Start
 		/// <returns>The start.</returns>
 		public static void PostStart() 
 		{
-			var config = GlobalConfiguration.Configuration;
-			RegisterFilters (config.Filters);
-			RegisterRoutes (config);
-			RegisterFormatters (config);
+
 		}
 
 		/// <summary>

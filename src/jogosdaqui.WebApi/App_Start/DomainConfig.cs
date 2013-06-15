@@ -27,7 +27,9 @@ namespace App_Start
 		/// <returns>The start.</returns>
 		public static void PreStart() 
 		{
-
+			DependencyService.Register<IGameRepository> (new TestingGameRepository());
+			DependencyService.Register<IGameCategoryRepository> (new TestingGameCategoryRepository());
+			DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
 		}
 
 		/// <summary>
@@ -36,9 +38,7 @@ namespace App_Start
 		/// <returns>The start.</returns>
 		public static void PostStart() 
 		{
-			DependencyService.Register<IGameRepository> (new TestingGameRepository());
-			DependencyService.Register<IGameCategoryRepository> (new TestingGameCategoryRepository());
-            DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
+
 		}
 	}
 }

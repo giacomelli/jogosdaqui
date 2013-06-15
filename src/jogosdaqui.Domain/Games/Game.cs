@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Skahal.Infrastructure.Framework.Domain;
+using System.Diagnostics;
 
 namespace jogosdaqui.Domain.Games
 {
 	/// <summary>
 	/// Represents a game.
 	/// </summary>
+	[DebuggerDisplay("{Key}: {Name}")]
 	public class Game : EntityBase<long>, IAggregateRoot<long>
 	{
 		#region Constructors

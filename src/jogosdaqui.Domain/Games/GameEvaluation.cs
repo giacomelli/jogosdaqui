@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Skahal.Infrastructure.Framework.Domain;
+using System.Diagnostics;
 
 namespace jogosdaqui.Domain.Games
 {
 	/// <summary>
 	/// Game evaluation.
 	/// </summary>
+	[DebuggerDisplay("{Key}: {GameId}")]
 	public class GameEvaluation : EntityBase<long>
 	{
 		#region Properties

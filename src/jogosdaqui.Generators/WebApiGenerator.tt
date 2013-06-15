@@ -49,6 +49,8 @@ namespace jogosdaqui.WebApi.Controllers
         /// <summary>  
 		/// Get <#=e.Name#> by key.
 		/// </summary>  
+		/// <param name="key">The <#=e.Name#>'s key.</param>
+		/// <returns>The <#=e.Name#> with the specified key.</returns>
         public <#=e.Name#> Get(long key)
         {
 			return m_service.Get<#=e.Name#>ByKey (key);

@@ -47,7 +47,9 @@ namespace jogosdaqui.WebApi.Controllers
         
         /// <summary>  
 		/// Get Game by key.
-		/// </summary> 
+		/// </summary>  
+		/// <param name="key">The Game's key.</param>
+		/// <returns>The Game with the specified key.</returns>
         public Game Get(long key)
         {
 			return m_service.GetGameByKey (key);
@@ -121,7 +123,9 @@ namespace jogosdaqui.WebApi.Controllers
         
         /// <summary>  
 		/// Get GameCategory by key.
-		/// </summary> 
+		/// </summary>  
+		/// <param name="key">The GameCategory's key.</param>
+		/// <returns>The GameCategory with the specified key.</returns>
         public GameCategory Get(long key)
         {
 			return m_service.GetGameCategoryByKey (key);
