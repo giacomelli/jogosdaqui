@@ -45,6 +45,14 @@ namespace jogosdaqui.WebApi.Controllers
         {
 			return m_service.GetAll<#=e.PluralName#> ();
         }
+        
+        /// <summary>  
+		/// Get <#=e.Name#> by key.
+		/// </summary>  
+        public <#=e.Name#> Get(long key)
+        {
+			return m_service.Get<#=e.Name#>ByKey (key);
+        }
 
 		/// <summary>
 		/// Creates a new <#=e.Name#>.

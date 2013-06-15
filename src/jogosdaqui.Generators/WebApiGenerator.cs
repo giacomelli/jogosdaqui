@@ -44,6 +44,14 @@ namespace jogosdaqui.WebApi.Controllers
         {
 			return m_service.GetAllGames ();
         }
+        
+        /// <summary>  
+		/// Get Game by key.
+		/// </summary>  
+        public Game Get(long key)
+        {
+			return m_service.GetGameByKey (key);
+        }
 
 		/// <summary>
 		/// Creates a new Game.
@@ -109,6 +117,14 @@ namespace jogosdaqui.WebApi.Controllers
         public IEnumerable<GameCategory> Get()
         {
 			return m_service.GetAllGameCategories ();
+        }
+        
+        /// <summary>  
+		/// Get GameCategory by key.
+		/// </summary>  
+        public GameCategory Get(long key)
+        {
+			return m_service.GetGameCategoryByKey (key);
         }
 
 		/// <summary>
