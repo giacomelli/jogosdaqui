@@ -1,0 +1,27 @@
+﻿<#@ template language="C#v3.5" #>
+<#@ assembly name="$(SolutionDir)/jogosdaqui.Domain/bin/Debug/jogosdaqui.Domain.dll" #>
+<#@ assembly name="$(SolutionDir)/references/Skahal.Infrastructure.Framework.dll" #>
+<#@ import namespace="jogosdaqui.Domain.Games" #> 
+<#@ import namespace="System.Reflection" #>  
+<#@ import namespace="System.Linq" #>   
+<#@ import namespace="Skahal.Infrastructure.Framework" #>
+   
+#region Usings    
+using System;  
+using System.Collections.Generic;    
+using System.IO;       
+using System.Linq;   
+using jogosdaqui.Domain.Games; 
+using Skahal.Infrastructure.Framework.Commons;
+using Skahal.Infrastructure.Framework.Repositories;
+using HelperSharp; 
+using KissSpecifications; 
+#endregion        
+
+<#     
+var modelsType = new Type[]     
+{   
+	typeof(Game),
+	typeof(GameCategory)
+};
+#> 
