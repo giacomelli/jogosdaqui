@@ -2,25 +2,13 @@
   
    
    
-#region Usings    
-using System;  
-using System.Collections.Generic;    
-using System.IO;       
-using System.Linq;    
-using jogosdaqui.Domain.Games; 
-using Skahal.Infrastructure.Framework.Commons;
-using Skahal.Infrastructure.Framework.Repositories;
-using HelperSharp; 
-using KissSpecifications; 
-#endregion        
-    
 
    
 
 using System;
 using Skahal.Infrastructure.Framework.Repositories;
 using jogosdaqui.Domain.Games;
-	
+	 
 
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 {

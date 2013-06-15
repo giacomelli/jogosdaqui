@@ -1,3 +1,35 @@
-﻿<#@ template language="C#v3.5" #>
-		
-		
+﻿<#@ include file="Config.tt" #>   
+
+using System;
+using Skahal.Infrastructure.Framework.Repositories;
+using jogosdaqui.Domain.Games;
+	 
+<# 
+RunForEachModel((e) => 
+{
+	if(e.HasImplementedIRepository)     
+	{ 
+#>
+
+namespace jogosdaqui.Infrastructure.Repositories.Testing
+{
+	/// <summary>
+	/// Testing <#=e.Name#> repository. 
+	/// </summary>
+	public class Testing<#=e.Name#>Repository : MemoryRepository<<#=e.Name#>, long>, I<#=e.Name#>Repository
+	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the
+		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.Testing<#=e.Name#>Repository"/> class.
+		/// </summary>
+		public Testing<#=e.Name#>Repository() : base((g) => { return DateTime.Now.Ticks; })
+		{
+		}
+		#endregion
+	}
+}
+<#
+	}
+});
+#> 

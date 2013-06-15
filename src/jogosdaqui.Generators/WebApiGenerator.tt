@@ -1,3 +1,88 @@
-﻿<#@ template language="C#v3.5" #>
-		
-		
+﻿<#@ include file="Config.tt" #>   
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
+using AspNetWebApi.ApiGee.Filters;
+using jogosdaqui.Domain;
+using jogosdaqui.Domain.Games;
+	 
+<# 
+RunForEachModel((e) => 
+{
+	if(e.HasImplementedIRepository)     
+	{ 
+#>
+
+namespace jogosdaqui.WebApi.Controllers
+{
+	/// <summary>
+	/// <#=e.PluralName#>.
+	/// </summary>
+    public class <#=e.PluralName#>Controller : ApiController
+    {
+		#region Fields
+		private <#=e.Name#>Service m_service;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.WebApi.Controllers.<#=e.PluralName#>Controller"/> class.
+		/// </summary>
+		public <#=e.PluralName#>Controller()
+		{
+			m_service = new <#=e.Name#>Service ();
+		}
+		#endregion
+
+		/// <summary>
+		/// Get all <#=e.PluralName#>
+		/// </summary>
+        public IEnumerable<<#=e.Name#>> Get()
+        {
+			return m_service.GetAll<#=e.PluralName#> ();
+        }
+
+		/// <summary>
+		/// Creates a new <#=e.Name#>.
+		/// </summary>
+		/// <param name="<#=e.LowerName#>">The <#=e.Name#> to create.</param>
+		/// <returns>The created <#=e.Name#> with the key.</returns>
+		public <#=e.Name#> Post(<#=e.Name#> <#=e.LowerName#>)
+		{
+			m_service.Save<#=e.Name#> (<#=e.LowerName#>);
+
+			return <#=e.LowerName#>;
+		}
+
+		/// <summary>
+		/// Updates an existing <#=e.Name#>.
+		/// </summary>
+		/// <param name="key">The <#=e.Name#>'s key.</param>
+		/// <param name="<#=e.LowerName#>">The <#=e.Name#> with updated informations.</param>
+		public <#=e.Name#> Put(long key, <#=e.Name#> <#=e.LowerName#>)
+		{
+	        <#=e.LowerName#>.Key = key;
+			m_service.Save<#=e.Name#> (<#=e.LowerName#>);
+
+			return <#=e.LowerName#>;
+		}
+
+		/// <summary>
+		/// Deletes the <#=e.Name#> with the specified key.
+		/// </summary>
+		/// <param name="key">The key of the <#=e.Name#> to be deleted.</param>
+	    [SuccessHandlingFilter]
+        public void Delete(long key)
+		{
+			m_service.Delete<#=e.Name#> (key);
+		}
+    }
+}
+<#
+	}
+});
+#> 

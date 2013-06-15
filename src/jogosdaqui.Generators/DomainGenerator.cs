@@ -1,25 +1,23 @@
-﻿		
-		
- 
+﻿ 
+  
    
-#region Usings   
+   
+
+   
+  
+#region Usings    
 using System;  
 using System.Collections.Generic;    
-using System.IO;    
-using System.Linq;   
+using System.IO;       
+using System.Linq;    
 using jogosdaqui.Domain.Games; 
 using Skahal.Infrastructure.Framework.Commons;
 using Skahal.Infrastructure.Framework.Repositories;
-using HelperSharp;
-using KissSpecifications;
+using HelperSharp; 
+using KissSpecifications; 
 #endregion        
-
     
- 
- 
-
-	#region Services classes
- 
+   
 namespace jogosdaqui.Domain.Games
 {
 	public partial interface IGameRepository : IRepository<Game, long>
@@ -119,6 +117,106 @@ namespace jogosdaqui.Domain.Games
 		}
 		#endregion
 	}
-	
 }
-#endregion
+   
+namespace jogosdaqui.Domain.Games
+{
+	public partial interface IGameCategoryRepository : IRepository<GameCategory, long>
+	{
+		}
+
+	// <summary>
+	/// Domain layer gamecategory service.
+	/// </summary>
+	public partial class GameCategoryService
+	{ 
+		#region Fields	 
+        private IGameCategoryRepository m_repository;
+        private IUnitOfWork<long> m_unitOfWork; 
+		#endregion 
+		  
+		#region Constructors 
+      	/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.GameCategories. GameCategoryService"/> class.
+		/// </summary>
+		public  GameCategoryService() 
+			: this(DependencyService.Create<IGameCategoryRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		{
+		} 
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.GameCategories. GameCategoryService"/> class.
+		/// </summary>
+		/// <param name="gamecategoryRepository"> GameCategory repository.</param>
+		/// <param name="unitOfWork">Unit of work.</param>
+		public  GameCategoryService(IGameCategoryRepository gamecategoryRepository, IUnitOfWork<long> unitOfWork)
+		{
+			m_repository = gamecategoryRepository; 
+			m_unitOfWork = unitOfWork;
+			m_repository.SetUnitOfWork (m_unitOfWork);
+		}
+        #endregion
+		
+		#region Methods
+		
+		/// <summary>
+		/// Gets the gamecategory by key.
+		/// </summary>
+		/// <returns>The gamecategory by key.</returns>
+		/// <param name="key">The key.</param>
+		public GameCategory GetGameCategoryByKey(long key)
+		{
+			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+		}
+		
+		/// <summary>
+		/// Gets all GameCategories. 
+		/// </summary>
+		/// <returns>The all GameCategories.</returns>
+		public IList<GameCategory> GetAllGameCategories()
+		{
+			return m_repository.FindAll(g => true).ToList();
+		}
+		
+		/// <summary>
+		/// Counts all GameCategories.
+		/// </summary>
+		public long CountAllGameCategories() 
+		{ 
+			return m_repository.CountAll (g => true); 
+		}
+
+		/// <summary>
+		/// Saves the gamecategory.
+		/// </summary>
+		/// <param name="gamecategory">The gamecategory.</param>
+		public void SaveGameCategory(GameCategory gamecategory)
+		{
+			ExceptionHelper.ThrowIfNull ("gamecategory", gamecategory);
+
+			m_repository [gamecategory.Key] = gamecategory;
+
+			m_unitOfWork.Commit (); 
+		}
+
+		/// <summary>
+		/// Executes the deletion specification.
+		/// </summary>
+		partial void ExecuteDeletionSpecification(GameCategory gamecategory);
+		
+		/// <summary>  
+		/// Deletes the gamecategory.
+		/// </summary> 
+		/// <param name="key">The key.</param> 
+		public void DeleteGameCategory (long key)
+		{
+			var gamecategory = GetGameCategoryByKey (key);
+			ExecuteDeletionSpecification (gamecategory);
+
+			m_repository.Remove (gamecategory);
+			m_unitOfWork.Commit ();
+		}
+		#endregion
+	}
+}
+

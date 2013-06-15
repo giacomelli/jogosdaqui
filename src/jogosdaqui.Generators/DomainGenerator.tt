@@ -1,76 +1,42 @@
-﻿<#@ template language="C#v3.5" #>
-<#@ assembly name="$(SolutionDir)\jogosdaqui.Domain\bin\Debug\jogosdaqui.Domain.dll" #>
-<#@ assembly name="$(SolutionDir)\references\Skahal.Infrastructure.Framework.dll" #>
-<#@ import namespace="jogosdaqui.Domain.Games" #> 
-<#@ import namespace="System.Reflection" #>  
-<#@ import namespace="System.Linq" #>  
-<#@ import namespace="Skahal.Infrastructure.Framework" #>
-   
+﻿<#@ include file="Config.tt" #>   
+  
 #region Usings    
 using System;  
 using System.Collections.Generic;    
-using System.IO;     
-using System.Linq;   
+using System.IO;       
+using System.Linq;    
 using jogosdaqui.Domain.Games; 
 using Skahal.Infrastructure.Framework.Commons;
 using Skahal.Infrastructure.Framework.Repositories;
-using HelperSharp;
+using HelperSharp; 
 using KissSpecifications; 
 #endregion        
-
-<#     
-var modelsType = new Type[]     
-{   
-	typeof(Game),
-	typeof(GameCategory)
-};
-#>    
- 
- 
-<#
-//////////////////////////////////////////// INTERFACE REPOSITORIES AND SERVICES CLASSES //////////////////////////////////////////// 
-#>
-
-	#region Services classes
-<#
-foreach(var t in modelsType) 
-{  
-	var modelName = t.Name;
-	var lowerModelName = modelName.ToLowerInvariant();
-	string modelPluralName; 
-	  
-	if(modelName.EndsWith("y"))
-	{
-		modelPluralName = modelName.Substring(0, modelName.Length - 1) + "ies";
-	}   
-	else
-	{    
-		modelPluralName = modelName + "s"; 
-	}
-	
-	var implementsIRepository = Type.GetType(t.Namespace + ".I" + modelName + "Repository, jogosdaqui.Domain.dll") != null;
-
-	if(implementsIRepository)
-	{ 
-#> 
-namespace jogosdaqui.Domain.<#=modelPluralName#>
+    
+<# 
+RunForEachModel((e) => 
 {
-	public partial interface I<#=modelName#>Repository : IRepository<<#=modelName#>, long>
+	if(e.HasImplementedIRepository)    
+	{ 
+#>   
+namespace <#=e.Namespace#>
+{
+	public partial interface I<#=e.Name#>Repository : IRepository<<#=e.Name#>, long>
 	{
 	<#
-	foreach(var otherType in modelsType.Where(mt => mt  != t)) 
+	foreach(var otherType in modelsType.Where(mt => mt != e.Type)) 
 	{  
+	break;
 		var otherTypeProperties = otherType.GetProperties().Where(t1 => t1.PropertyType.IsGenericType).Distinct(); 
 	
 		foreach(var p in otherTypeProperties)
 		{  
 			if(p.PropertyType.IsGenericType) 
 			{
-				var propertyName = otherType.Name;	 
+				var propertyName = otherType.Name;	  
 				var propertyType = p.PropertyType.GetGenericArguments()[0].Name;
-				var argumentName = modelName.ToLowerInvariant();
+				var argumentName = e.Name.ToLowerInvariant();
 				
-				if(propertyType.Equals(t.Name)) 
+				if(propertyType.Equals(e.Type.Name)) 
 				{  
 #> 
 		IList<<#=propertyName#>> FindAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>);
@@ -84,32 +50,32 @@ namespace jogosdaqui.Domain.<#=modelPluralName#>
 	}
 
 	// <summary>
-	/// Domain layer <#=lowerModelName#> service.
+	/// Domain layer <#=e.LowerName#> service.
 	/// </summary>
-	public partial class <#=modelName#>Service
+	public partial class <#=e.Name#>Service
 	{ 
 		#region Fields	 
-        private I<#=modelName#>Repository m_repository;
+        private I<#=e.Name#>Repository m_repository;
         private IUnitOfWork<long> m_unitOfWork; 
 		#endregion 
 		  
 		#region Constructors 
       	/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.<#=modelPluralName#>. <#=modelName#>Service"/> class.
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.<#=e.PluralName#>. <#=e.Name#>Service"/> class.
 		/// </summary>
-		public  <#=modelName#>Service() 
-			: this(DependencyService.Create<I<#=modelName#>Repository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  <#=e.Name#>Service() 
+			: this(DependencyService.Create<I<#=e.Name#>Repository>(), DependencyService.Create<IUnitOfWork<long>>())
 		{
 		} 
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.<#=modelPluralName#>. <#=modelName#>Service"/> class.
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.<#=e.PluralName#>. <#=e.Name#>Service"/> class.
 		/// </summary>
-		/// <param name="<#=lowerModelName#>Repository"> <#=modelName#> repository.</param>
+		/// <param name="<#=e.LowerName#>Repository"> <#=e.Name#> repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
-		public  <#=modelName#>Service(I<#=modelName#>Repository <#=lowerModelName#>Repository, IUnitOfWork<long> unitOfWork)
+		public  <#=e.Name#>Service(I<#=e.Name#>Repository <#=e.LowerName#>Repository, IUnitOfWork<long> unitOfWork)
 		{
-			m_repository = <#=lowerModelName#>Repository; 
+			m_repository = <#=e.LowerName#>Repository; 
 			m_unitOfWork = unitOfWork;
 			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
@@ -118,41 +84,41 @@ namespace jogosdaqui.Domain.<#=modelPluralName#>
 		#region Methods
 		
 		/// <summary>
-		/// Gets the <#=lowerModelName#> by key.
+		/// Gets the <#=e.LowerName#> by key.
 		/// </summary>
-		/// <returns>The <#=lowerModelName#> by key.</returns>
+		/// <returns>The <#=e.LowerName#> by key.</returns>
 		/// <param name="key">The key.</param>
-		public <#=modelName#> Get<#=modelName#>ByKey(long key)
+		public <#=e.Name#> Get<#=e.Name#>ByKey(long key)
 		{
 			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
-		/// Gets all <#=modelPluralName#>. 
+		/// Gets all <#=e.PluralName#>. 
 		/// </summary>
-		/// <returns>The all <#=modelPluralName#>.</returns>
-		public IList<<#=modelName#>> GetAll<#=modelPluralName#>()
+		/// <returns>The all <#=e.PluralName#>.</returns>
+		public IList<<#=e.Name#>> GetAll<#=e.PluralName#>()
 		{
 			return m_repository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
-		/// Counts all <#=modelPluralName#>.
+		/// Counts all <#=e.PluralName#>.
 		/// </summary>
-		public long CountAll<#=modelPluralName#>() 
+		public long CountAll<#=e.PluralName#>() 
 		{ 
 			return m_repository.CountAll (g => true); 
 		}
 
 		/// <summary>
-		/// Saves the <#=lowerModelName#>.
+		/// Saves the <#=e.LowerName#>.
 		/// </summary>
-		/// <param name="<#=lowerModelName#>">The <#=lowerModelName#>.</param>
-		public void Save<#=modelName#>(<#=modelName#> <#=lowerModelName#>)
+		/// <param name="<#=e.LowerName#>">The <#=e.LowerName#>.</param>
+		public void Save<#=e.Name#>(<#=e.Name#> <#=e.LowerName#>)
 		{
-			ExceptionHelper.ThrowIfNull ("<#=lowerModelName#>", <#=lowerModelName#>);
+			ExceptionHelper.ThrowIfNull ("<#=e.LowerName#>", <#=e.LowerName#>);
 
-			m_repository [<#=lowerModelName#>.Key] = <#=lowerModelName#>;
+			m_repository [<#=e.LowerName#>.Key] = <#=e.LowerName#>;
 
 			m_unitOfWork.Commit (); 
 		}
@@ -160,26 +126,25 @@ namespace jogosdaqui.Domain.<#=modelPluralName#>
 		/// <summary>
 		/// Executes the deletion specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(<#=modelName#> <#=lowerModelName#>);
+		partial void ExecuteDeletionSpecification(<#=e.Name#> <#=e.LowerName#>);
 		
 		/// <summary>  
-		/// Deletes the <#=lowerModelName#>.
+		/// Deletes the <#=e.LowerName#>.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
-		public void Delete<#=modelName#> (long key)
+		public void Delete<#=e.Name#> (long key)
 		{
-			var <#=lowerModelName#> = Get<#=modelName#>ByKey (key);
-			ExecuteDeletionSpecification (<#=lowerModelName#>);
+			var <#=e.LowerName#> = Get<#=e.Name#>ByKey (key);
+			ExecuteDeletionSpecification (<#=e.LowerName#>);
 
-			m_repository.Remove (<#=lowerModelName#>);
+			m_repository.Remove (<#=e.LowerName#>);
 			m_unitOfWork.Commit ();
 		}
 		#endregion
 	}
-	
+}
 <#
 	}
-}
+});
 #>
-}
-#endregion
+

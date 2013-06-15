@@ -1,3 +1,51 @@
 ﻿<#@ template language="C#v3.5" #>
+<#@ assembly name="$(SolutionDir)/jogosdaqui.Domain/bin/Debug/jogosdaqui.Domain.dll" #>
+<#@ assembly name="$(SolutionDir)/references/Skahal.Infrastructure.Framework.dll" #>
+<#@ import namespace="jogosdaqui.Domain.Games" #> 
+<#@ import namespace="System.Reflection" #>  
+<#@ import namespace="System.Linq" #>   
+<#@ import namespace="Skahal.Infrastructure.Framework" #>
+   
+
+<#+
+class GenEntity
+{
+	public string Name;
+	public string LowerName;
+	public string Namespace;
+	public string PluralName;
+	public bool HasImplementedIRepository;
+	public Type Type;
+}
+
+Type[] modelsType = new Type[]     
+{   
+	typeof(Game),
+	typeof(GameCategory)
+};
+
+void RunForEachModel(Action<GenEntity> action)
+{
+	foreach(var t in modelsType) 
+	{  
+		var model = new GenEntity();
+		model.Type = t;		
+		model.Name = t.Name;  
+		model.LowerName = model.Name.ToLowerInvariant(); 
+		model.Namespace = t.Namespace;
+		  
+		if(model.Name.EndsWith("y"))
+		{
+			model.PluralName = model.Name.Substring(0, model.Name.Length - 1) + "ies";
+		}   
+		else 
+		{    
+			model.PluralName = model.Name + "s"; 
+		}
 		
-		
+		model.HasImplementedIRepository = Type.GetType(t.Namespace + ".I" + model.Name + "Repository, jogosdaqui.Domain.dll") != null;
+
+		action(model); 
+	}
+}
+#>

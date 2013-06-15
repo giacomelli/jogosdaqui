@@ -150,6 +150,7 @@
     <Folder Include="Content\" />
     <Folder Include="Scripts\" />
     <Folder Include="Images\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config">
@@ -280,13 +281,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Controllers\HomeController.cs" />
     <Compile Include="Areas\Docs\Models\LoginModel.cs" />
     <Compile Include="App_Start\DomainConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="Generated.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

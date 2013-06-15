@@ -37,6 +37,7 @@ namespace App_Start
 		public static void PostStart() 
 		{
 			DependencyService.Register<IGameRepository> (new TestingGameRepository());
+			DependencyService.Register<IGameCategoryRepository> (new TestingGameCategoryRepository());
             DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
 		}
 	}

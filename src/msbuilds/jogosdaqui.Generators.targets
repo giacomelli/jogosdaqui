@@ -2,12 +2,22 @@
  
  <Target Name="AfterBuild">
    	<ItemGroup>
-    	<FilesToCopy Include="DomainGenerator.cs" />
+    	<DomainFile Include="DomainGenerator.cs" />
+    	<RepositoriesFile Include="RepositoriesGenerator.cs" />
+    	<WebApiFile Include="WebApiGenerator.cs" />
   	</ItemGroup>
 
     <Copy
-        SourceFiles="@(FilesToCopy)"
+        SourceFiles="@(DomainFile)"
         DestinationFiles="..\jogosdaqui.Domain\Generated.cs"
     />
+    <Copy
+        SourceFiles="@(RepositoriesFile)"
+        DestinationFiles="..\jogosdaqui.Infrastructure.Repositories\Generated.cs"
+    />    
+     <Copy
+        SourceFiles="@(WebApiFile)"
+        DestinationFiles="..\jogosdaqui.WebApi\Generated.cs"
+    /> 
 </Target>
 </Project>
