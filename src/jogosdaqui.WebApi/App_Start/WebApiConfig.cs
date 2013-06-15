@@ -17,8 +17,7 @@ using jogosdaqui.Infrastructure.Repositories;
 using AspNetWebApi.ApiGee.Filters;
 using System.Web.Http.Filters;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.WebApiConfig), "PreStart")]
-[assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.WebApiConfig), "PostStart")]
+//[assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.WebApiConfig), "PostStart")]
 namespace App_Start 
 {
 	/// <summary>
@@ -27,24 +26,15 @@ namespace App_Start
 	public static class WebApiConfig 
 	{
 		/// <summary>
-		/// Executa antes do start real da app.
-		/// </summary>
-		/// <returns>The start.</returns>
-		public static void PreStart() 
-		{
-			var config = GlobalConfiguration.Configuration;
-			RegisterFilters (config.Filters);
-			RegisterRoutes (config);
-			RegisterFormatters (config);
-		}
-
-		/// <summary>
 		/// Executa após o start real dapp.
 		/// </summary>
 		/// <returns>The start.</returns>
 		public static void PostStart() 
 		{
-
+			var config = GlobalConfiguration.Configuration;
+			RegisterFilters (config.Filters);
+			RegisterRoutes (config);
+			RegisterFormatters (config);
 		}
 
 		/// <summary>

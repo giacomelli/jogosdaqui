@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Converters;
+using App_Start;
 
 namespace jogosdaqui.WebApi
 {
@@ -23,6 +24,7 @@ namespace jogosdaqui.WebApi
 		protected void Application_Start ()
 		{
 			AreaRegistration.RegisterAllAreas ();
+			WebApiConfig.PostStart ();
 		}
 	}
 }
