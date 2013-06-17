@@ -1,21 +1,22 @@
 ﻿ 
+ 
   
    
    
-
+  
    
-
-using System;
+ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Http;
+using System.Web.Http; 
 using System.Web.Mvc;
 using AspNetWebApi.ApiGee.Filters;
 using jogosdaqui.Domain;
 using jogosdaqui.Domain.Games;
-	 
-
+using jogosdaqui.Domain.Platforms;
+	       
+ 
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -91,7 +92,7 @@ namespace jogosdaqui.WebApi.Controllers
 		}
     }
 }
-
+ 
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -164,6 +165,82 @@ namespace jogosdaqui.WebApi.Controllers
         public void Delete(long key)
 		{
 			m_service.DeleteGameCategory (key);
+		}
+    }
+}
+ 
+namespace jogosdaqui.WebApi.Controllers
+{
+	/// <summary>
+	/// Platforms.
+	/// </summary>
+    public class PlatformsController : ApiController
+    {
+		#region Fields
+		private PlatformService m_service;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.WebApi.Controllers.PlatformsController"/> class.
+		/// </summary>
+		public PlatformsController()
+		{
+			m_service = new PlatformService ();
+		}
+		#endregion
+
+		/// <summary>
+		/// Get all Platforms
+		/// </summary>
+        public IEnumerable<Platform> Get()
+        {
+			return m_service.GetAllPlatforms ();
+        }
+        
+        /// <summary>  
+		/// Get Platform by key.
+		/// </summary>  
+		/// <param name="key">The Platform's key.</param>
+		/// <returns>The Platform with the specified key.</returns>
+        public Platform Get(long key)
+        {
+			return m_service.GetPlatformByKey (key);
+        }
+
+		/// <summary>
+		/// Creates a new Platform.
+		/// </summary>
+		/// <param name="platform">The Platform to create.</param>
+		/// <returns>The created Platform with the key.</returns>
+		public Platform Post(Platform platform)
+		{
+			m_service.SavePlatform (platform);
+
+			return platform;
+		}
+
+		/// <summary>
+		/// Updates an existing Platform.
+		/// </summary>
+		/// <param name="key">The Platform's key.</param>
+		/// <param name="platform">The Platform with updated informations.</param>
+		public Platform Put(long key, Platform platform)
+		{
+	        platform.Key = key;
+			m_service.SavePlatform (platform);
+
+			return platform;
+		}
+
+		/// <summary>
+		/// Deletes the Platform with the specified key.
+		/// </summary>
+		/// <param name="key">The key of the Platform to be deleted.</param>
+	    [SuccessHandlingFilter]
+        public void Delete(long key)
+		{
+			m_service.DeletePlatform (key);
 		}
     }
 }

@@ -3,16 +3,17 @@
 #region Usings    
 using System;  
 using System.Collections.Generic;    
-using System.IO;       
+using System.IO;        
 using System.Linq;    
 using jogosdaqui.Domain.Games; 
+using jogosdaqui.Domain.Platforms; 
 using Skahal.Infrastructure.Framework.Commons;
 using Skahal.Infrastructure.Framework.Repositories;
 using HelperSharp; 
 using KissSpecifications; 
 #endregion        
-    
-<# 
+       
+<#  
 RunForEachModel((e) => 
 {
 	if(e.HasImplementedIRepository)    

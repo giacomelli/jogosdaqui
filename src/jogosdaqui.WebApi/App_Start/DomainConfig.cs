@@ -11,6 +11,7 @@ using jogosdaqui.Domain.Games;
 using jogosdaqui.Infrastructure.Repositories;
 using jogosdaqui.Infrastructure.Repositories.Testing;
 using Skahal.Infrastructure.Framework.Repositories;
+using jogosdaqui.Domain.Platforms;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.DomainConfig), "PreStart")]
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.DomainConfig), "PostStart")]
@@ -29,6 +30,7 @@ namespace App_Start
 		{
 			DependencyService.Register<IGameRepository> (new TestingGameRepository());
 			DependencyService.Register<IGameCategoryRepository> (new TestingGameCategoryRepository());
+			DependencyService.Register<IPlatformRepository> (new TestingPlatformRepository());
 			DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
 		}
 

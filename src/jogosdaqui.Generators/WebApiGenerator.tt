@@ -1,22 +1,23 @@
 ﻿<#@ include file="Config.tt" #>   
-
+ <#@ assembly name="System.Core.dll" #>
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Http;
+using System.Web.Http; 
 using System.Web.Mvc;
 using AspNetWebApi.ApiGee.Filters;
 using jogosdaqui.Domain;
 using jogosdaqui.Domain.Games;
-	 
-<# 
+using jogosdaqui.Domain.Platforms;
+	       
+<#  
 RunForEachModel((e) => 
 {
 	if(e.HasImplementedIRepository)     
 	{ 
 #>
-
+ 
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>

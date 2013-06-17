@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Skahal.Infrastructure.Framework.Domain;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Platforms
 {
-	public class Platform
+	public class Platform : EntityBase<long>, IAggregateRoot<long>
 	{
 		#region Properties
 		public string Name { get; set; }

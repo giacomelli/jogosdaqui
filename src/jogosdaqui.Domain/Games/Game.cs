@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Skahal.Infrastructure.Framework.Domain;
 using System.Diagnostics;
+using jogosdaqui.Domain.Platforms;
 
 namespace jogosdaqui.Domain.Games
 {
