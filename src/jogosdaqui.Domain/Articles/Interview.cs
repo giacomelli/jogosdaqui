@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using jogosdaqui.Domain.Persons;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Articles
 {
-	public class InterviewArticle
+	public class Interview : ArticleBase
 	{
 		#region Properties
 		public IList<Person> InterviewedPersons { get; private set; }

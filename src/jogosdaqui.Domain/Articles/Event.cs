@@ -1,8 +1,8 @@
 using System;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Articles
 {
-	public class EventArticle : ArticleBase
+	public class Event : ArticleBase
 	{
 		#region Properties
 		public DateTime BeginDate { get; set; }

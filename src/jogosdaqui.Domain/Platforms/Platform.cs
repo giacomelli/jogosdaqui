@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Skahal.Infrastructure.Framework.Domain;
+using jogosdaqui.Domain.Companies;
 
 namespace jogosdaqui.Domain.Platforms
 {

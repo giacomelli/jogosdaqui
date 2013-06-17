@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Skahal.Infrastructure.Framework.Domain;
 using System.Diagnostics;
 using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Persons;
 
 namespace jogosdaqui.Domain.Games
 {
@@ -46,7 +48,7 @@ namespace jogosdaqui.Domain.Games
 		/// Gets the categories.
 		/// </summary>
 		/// <value>The categories.</value>
-		public IList<GameCategory> Categories { get; private set; } 
+		//public IList<GameCategory> Categories { get; private set; } 
 
 		/// <summary>
 		/// Gets the platforms.

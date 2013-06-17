@@ -2,14 +2,27 @@
 <#@ assembly name="System.Core.dll" #>
 <#@ assembly name="$(SolutionDir)/jogosdaqui.Domain/bin/Debug/jogosdaqui.Domain.dll" #>
 <#@ assembly name="$(SolutionDir)/references/Skahal.Infrastructure.Framework.dll" #>
+<#@ import namespace="jogosdaqui.Domain.Articles" #> 
 <#@ import namespace="jogosdaqui.Domain.Games" #> 
 <#@ import namespace="jogosdaqui.Domain.Platforms" #> 
+<#@ import namespace="jogosdaqui.Domain.Companies" #> 
+<#@ import namespace="jogosdaqui.Domain.Languages" #> 
+<#@ import namespace="jogosdaqui.Domain.Persons" #>  
+<#@ import namespace="jogosdaqui.Domain.Tags" #>  
 <#@ import namespace="System.Reflection" #>  
 <#@ import namespace="System.Linq" #>   
 <#@ import namespace="Skahal.Infrastructure.Framework" #>
    
+using jogosdaqui.Domain;   
+using jogosdaqui.Domain.Articles; 
+using jogosdaqui.Domain.Companies; 
+using jogosdaqui.Domain.Games; 
+using jogosdaqui.Domain.Languages; 
+using jogosdaqui.Domain.Persons; 
+using jogosdaqui.Domain.Platforms; 
+using jogosdaqui.Domain.Tags; 
   
-<#+
+<#+ 
 class GenEntity
 {
 	public string Name;
@@ -19,14 +32,23 @@ class GenEntity
 	public bool HasImplementedIRepository;
 	public Type Type;
 }
-
+  
 Type[] modelsType = new Type[]     
 {   
-	typeof(Game),
-	typeof(GameCategory),
-	typeof(Platform)
+	typeof(Game), 
+	typeof(Platform),
+	typeof(Company),
+	typeof(Language),
+	typeof(Person),	
+	typeof(Comment),
+	typeof(Interview),
+	typeof(News),	
+	typeof(Preview),
+	typeof(Review),
+	typeof(Tag)
+	
 };
-
+ 
 void RunForEachModel(Action<GenEntity> action)
 {
 	foreach(var t in modelsType) 
@@ -36,12 +58,13 @@ void RunForEachModel(Action<GenEntity> action)
 		model.Name = t.Name;  
 		model.LowerName = model.Name.ToLowerInvariant(); 
 		model.Namespace = t.Namespace;
+		model.PluralName = model.Name;
 		  
 		if(model.Name.EndsWith("y"))
 		{
 			model.PluralName = model.Name.Substring(0, model.Name.Length - 1) + "ies";
 		}   
-		else 
+		else if(!model.Name.EndsWith("s"))	
 		{    
 			model.PluralName = model.Name + "s"; 
 		}

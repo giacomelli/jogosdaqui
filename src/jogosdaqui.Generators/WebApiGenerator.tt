@@ -7,21 +7,18 @@ using System.Web;
 using System.Web.Http; 
 using System.Web.Mvc;
 using AspNetWebApi.ApiGee.Filters;
-using jogosdaqui.Domain;
-using jogosdaqui.Domain.Games;
-using jogosdaqui.Domain.Platforms;
-	       
+	          
 <#  
 RunForEachModel((e) => 
 {
 	if(e.HasImplementedIRepository)     
 	{ 
-#>
- 
+#> 
+     
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
-	/// <#=e.PluralName#>.
+	/// <#=e.PluralName#>. 
 	/// </summary>
     public class <#=e.PluralName#>Controller : ApiController
     {

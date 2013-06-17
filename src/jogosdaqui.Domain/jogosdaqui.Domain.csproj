@@ -41,31 +41,44 @@
     <Reference Include="KissSpecifications">
       <HintPath>..\packages\KissSpecifications.1.0.0\lib\net40\KissSpecifications.dll</HintPath>
     </Reference>
+    <Reference Include="Skahal.Domain">
+      <HintPath>..\references\Skahal.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Games\Game.cs" />
     <Compile Include="Games\GameService.cs" />
     <Compile Include="Articles\ArticleService.cs" />
-    <Compile Include="Games\GameCategory.cs" />
     <Compile Include="Languages\Language.cs" />
     <Compile Include="Platforms\Platform.cs" />
     <Compile Include="Articles\ArticleBase.cs" />
-    <Compile Include="Articles\PreviewArticle.cs" />
-    <Compile Include="Articles\ReviewArticle.cs" />
-    <Compile Include="Articles\NewsArticle.cs" />
-    <Compile Include="Articles\EventArticle.cs" />
-    <Compile Include="Articles\InterviewArticle.cs" />
-    <Compile Include="People\Person.cs" />
     <Compile Include="Companies\Company.cs" />
     <Compile Include="Games\GameEvaluation.cs" />
-    <Compile Include="Articles\NewsArticleSource.cs" />
     <Compile Include="Articles\Comment.cs" />
     <Compile Include="Games\Specifications\GameDeletionSpecification.cs" />
-    <Compile Include="Generated.cs" />
     <Compile Include="Games\IGameRepository.cs" />
-    <Compile Include="Games\IGameCategoryRepository.cs" />
     <Compile Include="Platforms\IPlatformRepository.cs" />
+    <Compile Include="Companies\ICompanyRepository.cs" />
+    <Compile Include="Persons\Person.cs" />
+    <Compile Include="Persons\IPersonRepository.cs" />
+    <Compile Include="Languages\ILanguageRepository.cs" />
+    <Compile Include="Articles\ICommentRepository.cs" />
+    <Compile Include="Articles\Event.cs" />
+    <Compile Include="Articles\IEventRepository.cs" />
+    <Compile Include="Articles\IInterviewRepository.cs" />
+    <Compile Include="Articles\IPreviewRepository.cs" />
+    <Compile Include="Articles\IReviewRepository.cs" />
+    <Compile Include="Articles\News.cs" />
+    <Compile Include="Articles\NewsSource.cs" />
+    <Compile Include="Articles\Preview.cs" />
+    <Compile Include="Articles\Review.cs" />
+    <Compile Include="Articles\INewsRepository.cs" />
+    <Compile Include="Articles\Interview.cs" />
+    <Compile Include="Generated.cs" />
+    <Compile Include="Tags\Tag.cs" />
+    <Compile Include="Tags\ITagRepository.cs" />
+    <Compile Include="Tags\AppliedTag.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -73,4 +86,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <ItemGroup>
+    <Folder Include="Tags\" />
+  </ItemGroup>
 </Project>

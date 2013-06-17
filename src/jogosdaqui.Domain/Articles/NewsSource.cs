@@ -1,8 +1,8 @@
 using System;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Articles
 {
-	public class NewsArticleSource
+	public class NewsSource
 	{
 		#region Properties
 		public string Title { get; set; }

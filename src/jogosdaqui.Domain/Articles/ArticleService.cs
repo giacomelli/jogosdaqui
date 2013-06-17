@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Articles
 {
-	public static class ArticleService
+	public partial class ArticleService
 	{
 		#region Methods
-		public static IList<ArticleBase> GetArticlesByGameId(int gameId)
+		public IList<ArticleBase> GetArticlesByGameId(int gameId)
 		{
 			throw new NotImplementedException();
 		}

@@ -1,8 +1,8 @@
 using System;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Articles
 {
-	public class ReviewArticle : ArticleBase
+	public class Review : ArticleBase
 	{
 		#region Properties
 		public int GameEvaluationId { get; set; }

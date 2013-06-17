@@ -1,8 +1,9 @@
 using System;
+using Skahal.Infrastructure.Framework.Domain;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Companies
 {
-	public abstract class Company
+	public class Company : EntityBase<long>, IAggregateRoot<long>
 	{
 		#region Properties
 		public string Name { get; set; }

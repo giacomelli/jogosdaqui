@@ -12,6 +12,11 @@ using jogosdaqui.Infrastructure.Repositories;
 using jogosdaqui.Infrastructure.Repositories.Testing;
 using Skahal.Infrastructure.Framework.Repositories;
 using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Persons;
+using jogosdaqui.Domain.Languages;
+using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Tags;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.DomainConfig), "PreStart")]
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.DomainConfig), "PostStart")]
@@ -28,9 +33,23 @@ namespace App_Start
 		/// <returns>The start.</returns>
 		public static void PreStart() 
 		{
+			DependencyService.Register<ICompanyRepository> (new TestingCompanyRepository());
 			DependencyService.Register<IGameRepository> (new TestingGameRepository());
-			DependencyService.Register<IGameCategoryRepository> (new TestingGameCategoryRepository());
-			DependencyService.Register<IPlatformRepository> (new TestingPlatformRepository());
+			DependencyService.Register<ILanguageRepository> (new TestingLanguageRepository());
+
+			DependencyService.Register<INewsRepository> (new TestingNewsRepository());
+			DependencyService.Register<IInterviewRepository> (new TestingInterviewRepository());
+			DependencyService.Register<IPreviewRepository> (new TestingPreviewRepository());
+			DependencyService.Register<ICommentRepository> (new TestingCommentRepository());
+			DependencyService.Register<IReviewRepository> (new TestingReviewRepository());
+		
+			DependencyService.Register<IPlatformRepository> (new TestingPlatformRepository());			
+			DependencyService.Register<IPersonRepository> (new TestingPersonRepository());
+
+			DependencyService.Register<ITagRepository> (new TestingTagRepository());
+
+
+
 			DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
 		}
 

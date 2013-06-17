@@ -2,18 +2,17 @@
 
 using System;
 using Skahal.Infrastructure.Framework.Repositories;
-using jogosdaqui.Domain.Games;
-using jogosdaqui.Domain.Platforms;
+
 	 
 <# 
 RunForEachModel((e) => 
-{
+{ 
 	if(e.HasImplementedIRepository)     
 	{  
-#>
- 
+#> 
+     
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{
+{ 
 	/// <summary>
 	/// Testing <#=e.Name#> repository.  
 	/// </summary>

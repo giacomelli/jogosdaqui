@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Persons;
+using Skahal.Infrastructure.Framework.Domain;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Articles
 {
 	#region Enums
 	public enum ArticleStatus
@@ -13,7 +15,7 @@ namespace jogosdaqui.Domain
 	}
 	#endregion
 
-	public class ArticleBase
+	public abstract class ArticleBase : EntityBase<long>, IAggregateRoot<long>
 	{
 		#region Properties
 		public string Title { get; set; }

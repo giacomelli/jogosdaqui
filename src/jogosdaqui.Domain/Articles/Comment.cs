@@ -1,15 +1,18 @@
 using System;
+using jogosdaqui.Domain.Persons;
+using Skahal.Infrastructure.Framework.Domain;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Articles
 {
-	public class Comment
+	public class Comment : EntityBase<long>, IAggregateRoot<long>
 	{
 		#region Properties
+		public long ReplyToCommentId { get; set; }
 		public string Title { get; set; }
 		public string Text { get; set; }
 		public DateTime CreationDate { get; set; }
 		public Person Author { get; set; }
-		public ArticleBase Article { get; set; }
+		public long ArticleKey { get; set; }
 		#endregion
 	}
 }
