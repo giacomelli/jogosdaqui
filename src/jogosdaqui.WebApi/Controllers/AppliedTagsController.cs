@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace jogosdaqui.WebApi.Controllers
 {
-    public partial class AppliedTagsController : ApiController
+    public partial class AppliedTagsController
     {
 		/// <summary>
 		/// Gets the applied tags for the entity with the specify name.
