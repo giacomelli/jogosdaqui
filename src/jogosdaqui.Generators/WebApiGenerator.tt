@@ -20,7 +20,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// <#=e.PluralName#>. 
 	/// </summary>
-    public class <#=e.PluralName#>Controller : ApiController
+    public partial class <#=e.PluralName#>Controller : ApiController
     {
 		#region Fields
 		private <#=e.Name#>Service m_service;

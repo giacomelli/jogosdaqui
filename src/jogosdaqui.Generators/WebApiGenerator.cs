@@ -33,7 +33,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Games. 
 	/// </summary>
-    public class GamesController : ApiController
+    public partial class GamesController : ApiController
     {
 		#region Fields
 		private GameService m_service;
@@ -110,7 +110,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Platforms. 
 	/// </summary>
-    public class PlatformsController : ApiController
+    public partial class PlatformsController : ApiController
     {
 		#region Fields
 		private PlatformService m_service;
@@ -187,7 +187,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Companies. 
 	/// </summary>
-    public class CompaniesController : ApiController
+    public partial class CompaniesController : ApiController
     {
 		#region Fields
 		private CompanyService m_service;
@@ -264,7 +264,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Languages. 
 	/// </summary>
-    public class LanguagesController : ApiController
+    public partial class LanguagesController : ApiController
     {
 		#region Fields
 		private LanguageService m_service;
@@ -341,7 +341,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Persons. 
 	/// </summary>
-    public class PersonsController : ApiController
+    public partial class PersonsController : ApiController
     {
 		#region Fields
 		private PersonService m_service;
@@ -418,7 +418,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Comments. 
 	/// </summary>
-    public class CommentsController : ApiController
+    public partial class CommentsController : ApiController
     {
 		#region Fields
 		private CommentService m_service;
@@ -495,7 +495,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Interviews. 
 	/// </summary>
-    public class InterviewsController : ApiController
+    public partial class InterviewsController : ApiController
     {
 		#region Fields
 		private InterviewService m_service;
@@ -572,7 +572,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// News. 
 	/// </summary>
-    public class NewsController : ApiController
+    public partial class NewsController : ApiController
     {
 		#region Fields
 		private NewsService m_service;
@@ -649,7 +649,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Previews. 
 	/// </summary>
-    public class PreviewsController : ApiController
+    public partial class PreviewsController : ApiController
     {
 		#region Fields
 		private PreviewService m_service;
@@ -726,7 +726,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Reviews. 
 	/// </summary>
-    public class ReviewsController : ApiController
+    public partial class ReviewsController : ApiController
     {
 		#region Fields
 		private ReviewService m_service;
@@ -803,7 +803,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// Tags. 
 	/// </summary>
-    public class TagsController : ApiController
+    public partial class TagsController : ApiController
     {
 		#region Fields
 		private TagService m_service;
@@ -880,7 +880,7 @@ namespace jogosdaqui.WebApi.Controllers
 	/// <summary>
 	/// AppliedTags. 
 	/// </summary>
-    public class AppliedTagsController : ApiController
+    public partial class AppliedTagsController : ApiController
     {
 		#region Fields
 		private AppliedTagService m_service;
