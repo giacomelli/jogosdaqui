@@ -25,6 +25,7 @@ namespace jogosdaqui.WebApi
 		{
 			AreaRegistration.RegisterAllAreas ();
 			WebApiConfig.PostStart ();
+			SwaggerConfig.PostStart ();
 		}
 	}
 }

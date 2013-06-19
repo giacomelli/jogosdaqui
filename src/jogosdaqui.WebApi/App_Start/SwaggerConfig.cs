@@ -8,7 +8,7 @@ using System.Web.Routing;
 using Swagger.Net;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.SwaggerConfig), "PreStart")]
-[assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.SwaggerConfig), "PostStart")]
+//[assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.SwaggerConfig), "PostStart")]
 namespace App_Start 
 {
 	/// <summary>

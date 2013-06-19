@@ -10,7 +10,7 @@ RunForEachModel((e) =>
 	if(e.HasImplementedIRepository)     
 	{  
 #> 
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>

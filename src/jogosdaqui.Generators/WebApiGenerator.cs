@@ -27,7 +27,7 @@ using System.Web.Mvc;
 using AspNetWebApi.ApiGee.Filters;
 	          
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -104,7 +104,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -181,7 +181,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -258,7 +258,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -335,7 +335,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -412,7 +412,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -489,7 +489,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -566,7 +566,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -643,7 +643,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -720,7 +720,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -797,7 +797,7 @@ namespace jogosdaqui.WebApi.Controllers
     }
 }
  
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
@@ -870,6 +870,83 @@ namespace jogosdaqui.WebApi.Controllers
         public void Delete(long key)
 		{
 			m_service.DeleteTag (key);
+		}
+    }
+}
+ 
+    
+namespace jogosdaqui.WebApi.Controllers
+{
+	/// <summary>
+	/// AppliedTags. 
+	/// </summary>
+    public class AppliedTagsController : ApiController
+    {
+		#region Fields
+		private AppliedTagService m_service;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.WebApi.Controllers.AppliedTagsController"/> class.
+		/// </summary>
+		public AppliedTagsController()
+		{
+			m_service = new AppliedTagService ();
+		}
+		#endregion
+
+		/// <summary>
+		/// Get all AppliedTags
+		/// </summary>
+        public IEnumerable<AppliedTag> Get()
+        {
+			return m_service.GetAllAppliedTags ();
+        }
+        
+        /// <summary>  
+		/// Get AppliedTag by key.
+		/// </summary>  
+		/// <param name="key">The AppliedTag's key.</param>
+		/// <returns>The AppliedTag with the specified key.</returns>
+        public AppliedTag Get(long key)
+        {
+			return m_service.GetAppliedTagByKey (key);
+        }
+
+		/// <summary>
+		/// Creates a new AppliedTag.
+		/// </summary>
+		/// <param name="appliedtag">The AppliedTag to create.</param>
+		/// <returns>The created AppliedTag with the key.</returns>
+		public AppliedTag Post(AppliedTag appliedtag)
+		{
+			m_service.SaveAppliedTag (appliedtag);
+
+			return appliedtag;
+		}
+
+		/// <summary>
+		/// Updates an existing AppliedTag.
+		/// </summary>
+		/// <param name="key">The AppliedTag's key.</param>
+		/// <param name="appliedtag">The AppliedTag with updated informations.</param>
+		public AppliedTag Put(long key, AppliedTag appliedtag)
+		{
+	        appliedtag.Key = key;
+			m_service.SaveAppliedTag (appliedtag);
+
+			return appliedtag;
+		}
+
+		/// <summary>
+		/// Deletes the AppliedTag with the specified key.
+		/// </summary>
+		/// <param name="key">The key of the AppliedTag to be deleted.</param>
+	    [SuccessHandlingFilter]
+        public void Delete(long key)
+		{
+			m_service.DeleteAppliedTag (key);
 		}
     }
 }

@@ -47,6 +47,7 @@ namespace App_Start
 			DependencyService.Register<IPersonRepository> (new TestingPersonRepository());
 
 			DependencyService.Register<ITagRepository> (new TestingTagRepository());
+			DependencyService.Register<IAppliedTagRepository> (new TestingAppliedTagRepository());
 
 
 

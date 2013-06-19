@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Skahal.Infrastructure.Framework.Domain;
 
-namespace jogosdaqui.Domain
+namespace jogosdaqui.Domain.Tags
 {
 	/// <summary>
 	/// Represents an tag applied to an entity.
@@ -13,8 +13,7 @@ namespace jogosdaqui.Domain
 		#region Properties
 		public long TagKey { get; set; }
 		public long EntityKey { get; set; }
-		public Type EntityType { get; set; }
+		public string EntityName { get; set; }
 		#endregion
 	}
 }
-

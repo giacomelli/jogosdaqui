@@ -32,7 +32,7 @@ using KissSpecifications;
          
      
 namespace jogosdaqui.Domain.Games
-{ 
+{  
 	public partial interface IGameRepository : IRepository<Game, long>
 	{
 		}  
@@ -133,7 +133,7 @@ namespace jogosdaqui.Domain.Games
 }
      
 namespace jogosdaqui.Domain.Platforms
-{ 
+{  
 	public partial interface IPlatformRepository : IRepository<Platform, long>
 	{
 		}  
@@ -234,7 +234,7 @@ namespace jogosdaqui.Domain.Platforms
 }
      
 namespace jogosdaqui.Domain.Companies
-{ 
+{  
 	public partial interface ICompanyRepository : IRepository<Company, long>
 	{
 		}  
@@ -335,7 +335,7 @@ namespace jogosdaqui.Domain.Companies
 }
      
 namespace jogosdaqui.Domain.Languages
-{ 
+{  
 	public partial interface ILanguageRepository : IRepository<Language, long>
 	{
 		}  
@@ -436,7 +436,7 @@ namespace jogosdaqui.Domain.Languages
 }
      
 namespace jogosdaqui.Domain.Persons
-{ 
+{  
 	public partial interface IPersonRepository : IRepository<Person, long>
 	{
 		}  
@@ -537,7 +537,7 @@ namespace jogosdaqui.Domain.Persons
 }
      
 namespace jogosdaqui.Domain.Articles
-{ 
+{  
 	public partial interface ICommentRepository : IRepository<Comment, long>
 	{
 		}  
@@ -638,7 +638,7 @@ namespace jogosdaqui.Domain.Articles
 }
      
 namespace jogosdaqui.Domain.Articles
-{ 
+{  
 	public partial interface IInterviewRepository : IRepository<Interview, long>
 	{
 		}  
@@ -739,7 +739,7 @@ namespace jogosdaqui.Domain.Articles
 }
      
 namespace jogosdaqui.Domain.Articles
-{ 
+{  
 	public partial interface INewsRepository : IRepository<News, long>
 	{
 		}  
@@ -840,7 +840,7 @@ namespace jogosdaqui.Domain.Articles
 }
      
 namespace jogosdaqui.Domain.Articles
-{ 
+{  
 	public partial interface IPreviewRepository : IRepository<Preview, long>
 	{
 		}  
@@ -941,7 +941,7 @@ namespace jogosdaqui.Domain.Articles
 }
      
 namespace jogosdaqui.Domain.Articles
-{ 
+{  
 	public partial interface IReviewRepository : IRepository<Review, long>
 	{
 		}  
@@ -1042,7 +1042,7 @@ namespace jogosdaqui.Domain.Articles
 }
      
 namespace jogosdaqui.Domain.Tags
-{ 
+{  
 	public partial interface ITagRepository : IRepository<Tag, long>
 	{
 		}  
@@ -1136,6 +1136,107 @@ namespace jogosdaqui.Domain.Tags
 			ExecuteDeletionSpecification (tag);
 
 			m_repository.Remove (tag);
+			m_unitOfWork.Commit ();
+		}
+		#endregion
+	}
+}
+     
+namespace jogosdaqui.Domain.Tags
+{  
+	public partial interface IAppliedTagRepository : IRepository<AppliedTag, long>
+	{
+		}  
+
+	// <summary>
+	/// Domain layer appliedtag service.
+	/// </summary>
+	public partial class AppliedTagService
+	{ 
+		#region Fields	 
+        private IAppliedTagRepository m_repository;
+        private IUnitOfWork<long> m_unitOfWork; 
+		#endregion 
+		  
+		#region Constructors 
+      	/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.AppliedTags. AppliedTagService"/> class.
+		/// </summary>
+		public  AppliedTagService() 
+			: this(DependencyService.Create<IAppliedTagRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		{
+		} 
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.AppliedTags. AppliedTagService"/> class.
+		/// </summary>
+		/// <param name="appliedtagRepository"> AppliedTag repository.</param>
+		/// <param name="unitOfWork">Unit of work.</param>
+		public  AppliedTagService(IAppliedTagRepository appliedtagRepository, IUnitOfWork<long> unitOfWork)
+		{
+			m_repository = appliedtagRepository; 
+			m_unitOfWork = unitOfWork;
+			m_repository.SetUnitOfWork (m_unitOfWork);
+		}
+        #endregion
+		
+		#region Methods
+		
+		/// <summary>
+		/// Gets the appliedtag by key.
+		/// </summary>
+		/// <returns>The appliedtag by key.</returns>
+		/// <param name="key">The key.</param>
+		public AppliedTag GetAppliedTagByKey(long key)
+		{
+			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+		}
+		
+		/// <summary>
+		/// Gets all AppliedTags. 
+		/// </summary>
+		/// <returns>The all AppliedTags.</returns>
+		public IList<AppliedTag> GetAllAppliedTags()
+		{
+			return m_repository.FindAll(g => true).ToList();
+		}
+		
+		/// <summary>
+		/// Counts all AppliedTags.
+		/// </summary>
+		public long CountAllAppliedTags() 
+		{ 
+			return m_repository.CountAll (g => true); 
+		}
+
+		/// <summary>
+		/// Saves the appliedtag.
+		/// </summary>
+		/// <param name="appliedtag">The appliedtag.</param>
+		public void SaveAppliedTag(AppliedTag appliedtag)
+		{
+			ExceptionHelper.ThrowIfNull ("appliedtag", appliedtag);
+
+			m_repository [appliedtag.Key] = appliedtag;
+
+			m_unitOfWork.Commit (); 
+		}
+
+		/// <summary>
+		/// Executes the deletion specification.
+		/// </summary>
+		partial void ExecuteDeletionSpecification(AppliedTag appliedtag);
+		
+		/// <summary>  
+		/// Deletes the appliedtag.
+		/// </summary> 
+		/// <param name="key">The key.</param> 
+		public void DeleteAppliedTag (long key)
+		{
+			var appliedtag = GetAppliedTagByKey (key);
+			ExecuteDeletionSpecification (appliedtag);
+
+			m_repository.Remove (appliedtag);
 			m_unitOfWork.Commit ();
 		}
 		#endregion

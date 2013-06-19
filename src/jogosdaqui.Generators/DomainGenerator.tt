@@ -11,14 +11,14 @@ using HelperSharp;
 using KissSpecifications; 
 #endregion          
          
-<#    
+<#     
 RunForEachModel((e) =>  
 { 
 	if(e.HasImplementedIRepository)    
 	{   
 #>     
 namespace <#=e.Namespace#>
-{ 
+{  
 	public partial interface I<#=e.Name#>Repository : IRepository<<#=e.Name#>, long>
 	{
 	<#

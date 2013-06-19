@@ -14,7 +14,7 @@ RunForEachModel((e) =>
 	if(e.HasImplementedIRepository)     
 	{ 
 #> 
-     
+    
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>

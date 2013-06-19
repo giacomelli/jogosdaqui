@@ -45,10 +45,11 @@ Type[] modelsType = new Type[]
 	typeof(News),	
 	typeof(Preview),
 	typeof(Review),
-	typeof(Tag)
+	typeof(Tag),
+	typeof(AppliedTag)
 	
 };
- 
+  
 void RunForEachModel(Action<GenEntity> action)
 {
 	foreach(var t in modelsType) 

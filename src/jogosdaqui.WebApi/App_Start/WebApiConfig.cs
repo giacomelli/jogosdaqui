@@ -50,9 +50,10 @@ namespace App_Start
 				routeTemplate: "{controller}/{id}",
 				defaults: new
 				{
-				id = RouteParameter.Optional,
-				action = RouteParameter.Optional
-			});
+					id = RouteParameter.Optional,
+					action = RouteParameter.Optional
+				}
+			);
 		}
 
 		/// <summary>
@@ -72,6 +73,8 @@ namespace App_Start
 
 			// Permite que as enumerações sejam serializadas como string.
 			json.SerializerSettings.Converters.Add(new StringEnumConverter());
+
+
 		}
 
 		/// <summary>

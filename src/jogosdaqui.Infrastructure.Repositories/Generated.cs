@@ -24,7 +24,7 @@ using Skahal.Infrastructure.Framework.Repositories;
 
 	 
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -50,7 +50,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -76,7 +76,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -102,7 +102,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -128,7 +128,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -154,7 +154,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -180,7 +180,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -206,7 +206,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -232,7 +232,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -258,7 +258,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -284,7 +284,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	}
 }
  
-     
+      
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 { 
 	/// <summary>
@@ -303,6 +303,32 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingTagRepository"/> class.
 		/// </summary>
 		public TestingTagRepository() : base((g) => { lock(s_lock) { return ++s_lastKey; } })
+		{
+			s_lastKey = 0;
+		}
+		#endregion
+	}
+}
+ 
+      
+namespace jogosdaqui.Infrastructure.Repositories.Testing
+{ 
+	/// <summary>
+	/// Testing AppliedTag repository.  
+	/// </summary>
+	public class TestingAppliedTagRepository : MemoryRepository<AppliedTag, long>, IAppliedTagRepository
+	{
+		#region Fields
+		private static long s_lastKey; 
+		private static object s_lock = new Object();
+		#endregion
+		
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the
+		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingAppliedTagRepository"/> class.
+		/// </summary>
+		public TestingAppliedTagRepository() : base((g) => { lock(s_lock) { return ++s_lastKey; } })
 		{
 			s_lastKey = 0;
 		}

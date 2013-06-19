@@ -60,6 +60,8 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Games\GameServiceTest.cs" />
+    <Compile Include="Tags\AppliedTagServiceTest.cs" />
+    <Compile Include="Stubs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -74,5 +76,8 @@
       <Project>{ABAB0F4F-01F6-4B1E-9B6E-D7D1986DAD68}</Project>
       <Name>jogosdaqui.Infrastructure.Repositories</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tags\" />
   </ItemGroup>
 </Project>
