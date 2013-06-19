@@ -77,6 +77,20 @@
     <None Include="WebApiGenerator.cs">
       <DependentUpon>WebApiGenerator.tt</DependentUpon>
     </None>
+    <None Include="DomainUnitTestsGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainUnitTestsGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainUnitTestsGenerator.cs">
+      <DependentUpon>DomainUnitTestsGenerator.tt</DependentUpon>
+    </None>
+    <None Include="HeaderGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HeaderGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="HeaderGenerator.cs">
+      <DependentUpon>HeaderGenerator.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="..\msbuilds\jogosdaqui.Generators.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

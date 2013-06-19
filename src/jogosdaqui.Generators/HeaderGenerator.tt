@@ -1,0 +1,14 @@
+﻿<#@ include file="Config.tt" #>   
+	
+<#
+var usings = new List<string>();		
+RunForEachModel((e) =>  
+{ 
+	if(!usings.Contains(e.Namespace))
+	{
+#>using <#=e.Namespace#>;
+<# 
+		usings.Add(e.Namespace);
+	}
+});
+#>

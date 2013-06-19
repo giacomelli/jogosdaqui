@@ -123,6 +123,12 @@ namespace jogosdaqui.Domain.Games
 		public void DeleteGame (long key)
 		{
 			var game = GetGameByKey (key);
+			
+			if(game == null)
+			{
+				throw new ArgumentException("Game with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (game);
 
 			m_repository.Remove (game);
@@ -224,6 +230,12 @@ namespace jogosdaqui.Domain.Platforms
 		public void DeletePlatform (long key)
 		{
 			var platform = GetPlatformByKey (key);
+			
+			if(platform == null)
+			{
+				throw new ArgumentException("Platform with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (platform);
 
 			m_repository.Remove (platform);
@@ -325,6 +337,12 @@ namespace jogosdaqui.Domain.Companies
 		public void DeleteCompany (long key)
 		{
 			var company = GetCompanyByKey (key);
+			
+			if(company == null)
+			{
+				throw new ArgumentException("Company with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (company);
 
 			m_repository.Remove (company);
@@ -426,6 +444,12 @@ namespace jogosdaqui.Domain.Languages
 		public void DeleteLanguage (long key)
 		{
 			var language = GetLanguageByKey (key);
+			
+			if(language == null)
+			{
+				throw new ArgumentException("Language with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (language);
 
 			m_repository.Remove (language);
@@ -527,6 +551,12 @@ namespace jogosdaqui.Domain.Persons
 		public void DeletePerson (long key)
 		{
 			var person = GetPersonByKey (key);
+			
+			if(person == null)
+			{
+				throw new ArgumentException("Person with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (person);
 
 			m_repository.Remove (person);
@@ -628,6 +658,12 @@ namespace jogosdaqui.Domain.Articles
 		public void DeleteComment (long key)
 		{
 			var comment = GetCommentByKey (key);
+			
+			if(comment == null)
+			{
+				throw new ArgumentException("Comment with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (comment);
 
 			m_repository.Remove (comment);
@@ -729,6 +765,12 @@ namespace jogosdaqui.Domain.Articles
 		public void DeleteInterview (long key)
 		{
 			var interview = GetInterviewByKey (key);
+			
+			if(interview == null)
+			{
+				throw new ArgumentException("Interview with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (interview);
 
 			m_repository.Remove (interview);
@@ -830,6 +872,12 @@ namespace jogosdaqui.Domain.Articles
 		public void DeleteNews (long key)
 		{
 			var news = GetNewsByKey (key);
+			
+			if(news == null)
+			{
+				throw new ArgumentException("News with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (news);
 
 			m_repository.Remove (news);
@@ -931,6 +979,12 @@ namespace jogosdaqui.Domain.Articles
 		public void DeletePreview (long key)
 		{
 			var preview = GetPreviewByKey (key);
+			
+			if(preview == null)
+			{
+				throw new ArgumentException("Preview with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (preview);
 
 			m_repository.Remove (preview);
@@ -1032,6 +1086,12 @@ namespace jogosdaqui.Domain.Articles
 		public void DeleteReview (long key)
 		{
 			var review = GetReviewByKey (key);
+			
+			if(review == null)
+			{
+				throw new ArgumentException("Review with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (review);
 
 			m_repository.Remove (review);
@@ -1133,6 +1193,12 @@ namespace jogosdaqui.Domain.Tags
 		public void DeleteTag (long key)
 		{
 			var tag = GetTagByKey (key);
+			
+			if(tag == null)
+			{
+				throw new ArgumentException("Tag with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (tag);
 
 			m_repository.Remove (tag);
@@ -1234,6 +1300,12 @@ namespace jogosdaqui.Domain.Tags
 		public void DeleteAppliedTag (long key)
 		{
 			var appliedtag = GetAppliedTagByKey (key);
+			
+			if(appliedtag == null)
+			{
+				throw new ArgumentException("AppliedTag with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (appliedtag);
 
 			m_repository.Remove (appliedtag);

@@ -11,17 +11,9 @@
 <#@ import namespace="jogosdaqui.Domain.Tags" #>  
 <#@ import namespace="System.Reflection" #>  
 <#@ import namespace="System.Linq" #>   
+<#@ import namespace="System.Collections.Generic" #>   
 <#@ import namespace="Skahal.Infrastructure.Framework" #>
    
-using jogosdaqui.Domain;   
-using jogosdaqui.Domain.Articles; 
-using jogosdaqui.Domain.Companies; 
-using jogosdaqui.Domain.Games; 
-using jogosdaqui.Domain.Languages; 
-using jogosdaqui.Domain.Persons; 
-using jogosdaqui.Domain.Platforms; 
-using jogosdaqui.Domain.Tags; 
-  
 <#+ 
 class GenEntity
 {
@@ -61,7 +53,7 @@ void RunForEachModel(Action<GenEntity> action)
 		model.Namespace = t.Namespace;
 		model.PluralName = model.Name;
 		  
-		if(model.Name.EndsWith("y"))
+		if(model.Name.EndsWith("y")) 
 		{
 			model.PluralName = model.Name.Substring(0, model.Name.Length - 1) + "ies";
 		}   

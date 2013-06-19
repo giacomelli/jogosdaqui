@@ -61,7 +61,7 @@
   <ItemGroup>
     <Compile Include="Games\GameServiceTest.cs" />
     <Compile Include="Tags\AppliedTagServiceTest.cs" />
-    <Compile Include="Stubs.cs" />
+    <Compile Include="Generated.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

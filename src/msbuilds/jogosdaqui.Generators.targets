@@ -3,6 +3,7 @@
  <Target Name="AfterBuild">
    	<ItemGroup>
     	<DomainFile Include="DomainGenerator.cs" />
+    	<DomainUnitTestsFile Include="DomainUnitTestsGenerator.cs" />
     	<RepositoriesFile Include="RepositoriesGenerator.cs" />
     	<WebApiFile Include="WebApiGenerator.cs" />
   	</ItemGroup>
@@ -11,6 +12,12 @@
         SourceFiles="@(DomainFile)"
         DestinationFiles="..\jogosdaqui.Domain\Generated.cs"
     />
+    
+    <Copy
+            SourceFiles="@(DomainUnitTestsFile)"
+            DestinationFiles="..\jogosdaqui.Domain.UnitTests\Generated.cs"
+    />
+    
     <Copy
         SourceFiles="@(RepositoriesFile)"
         DestinationFiles="..\jogosdaqui.Infrastructure.Repositories\Generated.cs"

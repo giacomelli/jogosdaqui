@@ -107,14 +107,6 @@ namespace jogosdaqui.Domain.UnitTests
 		}
 
 		[Test]
-		public void DeleteGame_NotExistingGame_Exception()
-		{
-			ExceptionAssert.IsThrowing (new SpecificationNotSatisfiedException("The game should exists to be deleted."), () => {
-				m_service.DeleteGame(4);
-			});
-		}
-
-		[Test]
 		public void DeleteGame_ExistingGame_Deleted()
 		{
 			m_service.DeleteGame (1);

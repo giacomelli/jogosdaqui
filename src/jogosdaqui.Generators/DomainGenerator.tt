@@ -15,7 +15,7 @@ using KissSpecifications;
 RunForEachModel((e) =>  
 { 
 	if(e.HasImplementedIRepository)    
-	{   
+	{    
 #>     
 namespace <#=e.Namespace#>
 {  
@@ -134,6 +134,12 @@ namespace <#=e.Namespace#>
 		public void Delete<#=e.Name#> (long key)
 		{
 			var <#=e.LowerName#> = Get<#=e.Name#>ByKey (key);
+			
+			if(<#=e.LowerName#> == null)
+			{
+				throw new ArgumentException("<#=e.Name#> with key '{0}' does not exists.".With(key));
+			}
+			
 			ExecuteDeletionSpecification (<#=e.LowerName#>);
 
 			m_repository.Remove (<#=e.LowerName#>);

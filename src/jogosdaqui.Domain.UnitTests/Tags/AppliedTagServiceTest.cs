@@ -3,32 +3,13 @@ using NUnit.Framework;
 using TestSharp;
 using jogosdaqui.Domain.Tags;
 
-namespace jogosdaqui.Domain.UnitTests.Tags
+namespace jogosdaqui.Domain.Tags.UnitTests
 {
 	[TestFixture()]
-	public class AppliedTagServiceTest
-	{
-		#region Fields
-		private AppliedTagService m_target;
-		#endregion
-
-		#region Initialize
-		[SetUp]
-		public void InitializeTest()
-		{
-			Stubs.Initialize ();
-			Stubs.AppliedTagRepository.Add (new AppliedTag() { EntityName = "A" });
-			Stubs.AppliedTagRepository.Add (new AppliedTag() { EntityName = "B" });
-			Stubs.AppliedTagRepository.Add (new AppliedTag() { EntityName = "C" });
-			Stubs.AppliedTagRepository.Add (new AppliedTag() { EntityName = "A" });
-			Stubs.UnitOfWork.Commit ();
-
-			m_target = new AppliedTagService ();
-
-		}
-		#endregion
-
+	public partial class AppliedTagServiceTest
+	{	
 		#region Tests
+
 		[Test]
 		public void GetAppliedTags_NullOrEmptyEntityName_Exception ()
 		{
@@ -61,21 +42,45 @@ namespace jogosdaqui.Domain.UnitTests.Tags
 			actual = m_target.GetAppliedTags ("D");
 			Assert.AreEqual (0, actual.Count);
 		}
-
+	
 		[Test]
-		public void CountAllAppliedTags_NoArguments_AllAppliedTagsCounted()
+		public void SaveAppliedTag_Null_Exception ()
 		{
-			var actual = m_target.CountAllAppliedTags ();
-			Assert.AreEqual (4, actual);
+			ExceptionAssert.IsThrowing (new ArgumentNullException("appliedTag"), () => {
+				m_target.SaveAppliedTag (null);
+			});
 		}
 
-//		[Test]
-//		public void DeleteAppliedTag_AppliedTagNotExistis_Exception()
-//		{
-//			ExceptionAssert.IsThrowing (new ArgumentException("AppliedTag with key '0' does not exists."), () => {
-//				m_target.DeleteAppliedTag(0);
-//			});
-//		}
+		[Test]
+		public void SaveAppliedTag_AppliedTagDoesNotExists_Created()
+		{
+			var appliedTag = new AppliedTag () { 
+				TagKey = 1,
+				EntityKey = 1,
+				EntityName = "Game"
+			};
+
+			m_target.SaveAppliedTag (appliedTag);
+
+			Assert.AreEqual(5, m_target.CountAllAppliedTags());
+			Assert.AreEqual ("Game", m_target.GetAppliedTagByKey (appliedTag.Key).EntityName);
+		}
+
+		[Test]
+		public void SaveAppliedTag_AppliedTagDoesExists_Updated()
+		{
+			var appliedTag = new AppliedTag () { 
+				Key = 1,
+				TagKey = 1,
+				EntityKey = 1,
+				EntityName = "Game"
+			};
+
+			m_target.SaveAppliedTag (appliedTag);
+
+			Assert.AreEqual(4, m_target.CountAllAppliedTags());
+			Assert.AreEqual ("Game", m_target.GetAppliedTagByKey (appliedTag.Key).EntityName);
+		}
 		#endregion
 	}
 }
