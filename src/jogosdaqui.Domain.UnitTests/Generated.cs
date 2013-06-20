@@ -114,7 +114,7 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Games.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class GameServiceTest
@@ -237,7 +237,7 @@ namespace jogosdaqui.Domain.Games.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Platforms.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class PlatformServiceTest
@@ -360,7 +360,7 @@ namespace jogosdaqui.Domain.Platforms.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Companies.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class CompanyServiceTest
@@ -483,7 +483,7 @@ namespace jogosdaqui.Domain.Companies.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Languages.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class LanguageServiceTest
@@ -606,7 +606,7 @@ namespace jogosdaqui.Domain.Languages.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Persons.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class PersonServiceTest
@@ -729,7 +729,7 @@ namespace jogosdaqui.Domain.Persons.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Articles.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class CommentServiceTest
@@ -852,7 +852,7 @@ namespace jogosdaqui.Domain.Articles.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Articles.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class InterviewServiceTest
@@ -975,7 +975,7 @@ namespace jogosdaqui.Domain.Articles.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Articles.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class NewsServiceTest
@@ -1098,7 +1098,7 @@ namespace jogosdaqui.Domain.Articles.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Articles.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class PreviewServiceTest
@@ -1221,7 +1221,7 @@ namespace jogosdaqui.Domain.Articles.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Articles.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class ReviewServiceTest
@@ -1344,7 +1344,7 @@ namespace jogosdaqui.Domain.Articles.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Tags.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class TagServiceTest
@@ -1467,7 +1467,7 @@ namespace jogosdaqui.Domain.Tags.UnitTests
      
 
 
-namespace jogosdaqui.Domain.Tags.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class AppliedTagServiceTest

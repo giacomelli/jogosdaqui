@@ -81,6 +81,7 @@
     <Compile Include="Tags\AppliedTag.cs" />
     <Compile Include="Tags\IAppliedTagRepository.cs" />
     <Compile Include="Tags\AppliedTagService.cs" />
+    <Compile Include="ServiceFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

@@ -20,5 +20,11 @@ namespace jogosdaqui.WebApi.Controllers
 			var service = new AppliedTagService ();
 			return service.GetAppliedTags (entityName);
         }
+
+		public IEnumerable<AppliedTag> GetByEntity(string entityName, long entityKey)
+		{
+			var service = new AppliedTagService ();
+			return service.GetAppliedTags (entityName);
+		} 
     }
 }

@@ -17,6 +17,23 @@ namespace jogosdaqui.Domain.Articles
 
 	public abstract class ArticleBase : EntityBase<long>, IAggregateRoot<long>
 	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Articles.ArticleBase"/> class.
+		/// </summary>
+		protected ArticleBase()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Articles.ArticleBase"/> class.
+		/// </summary>
+		/// <param name="key">Key.</param>
+		protected ArticleBase(long key) : base(key)
+		{
+		}
+		#endregion
+
 		#region Properties
 		public string Title { get; set; }
 		public DateTime CreationDate { get; set; }

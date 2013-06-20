@@ -59,7 +59,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="Games\GameServiceTest.cs" />
     <Compile Include="Tags\AppliedTagServiceTest.cs" />
     <Compile Include="Generated.cs" />
   </ItemGroup>
@@ -79,5 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tags\" />
+    <Folder Include="Games\" />
   </ItemGroup>
 </Project>

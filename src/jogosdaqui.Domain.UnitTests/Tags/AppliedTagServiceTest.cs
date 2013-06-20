@@ -2,21 +2,23 @@ using System;
 using NUnit.Framework;
 using TestSharp;
 using jogosdaqui.Domain.Tags;
+using jogosdaqui.Domain.UnitTests;
+using Skahal.Infrastructure.Framework.Domain;
+using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Articles;
 
-namespace jogosdaqui.Domain.Tags.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
-	[TestFixture()]
 	public partial class AppliedTagServiceTest
 	{	
 		#region Tests
-
 		[Test]
 		public void GetAppliedTags_NullOrEmptyEntityName_Exception ()
 		{
 			var target = new AppliedTagService ();
 
 			ExceptionAssert.IsThrowing(new ArgumentNullException("entityName"), () => {
-				target.GetAppliedTags(null);
+				target.GetAppliedTags((string)null);
 			});
 
 			ExceptionAssert.IsThrowing(new ArgumentNullException("entityName"), () => {
@@ -27,6 +29,12 @@ namespace jogosdaqui.Domain.Tags.UnitTests
 		[Test]
 		public void GetAppliedTags_EntityName_AppliedTags ()
 		{
+			var all = m_target.GetAllAppliedTags ();
+			all [0].EntityName = "A";
+			all [1].EntityName = "B";
+			all [2].EntityName = "C";
+			all [3].EntityName = "a";
+			
 			var actual = m_target.GetAppliedTags ("A");
 			Assert.AreEqual (2, actual.Count);
 
@@ -42,44 +50,97 @@ namespace jogosdaqui.Domain.Tags.UnitTests
 			actual = m_target.GetAppliedTags ("D");
 			Assert.AreEqual (0, actual.Count);
 		}
-	
+
 		[Test]
-		public void SaveAppliedTag_Null_Exception ()
+		public void GetAppliedTags_NullEntity_Exception ()
 		{
-			ExceptionAssert.IsThrowing (new ArgumentNullException("appliedTag"), () => {
-				m_target.SaveAppliedTag (null);
+			var target = new AppliedTagService ();
+
+			ExceptionAssert.IsThrowing(new ArgumentNullException("entity"), () => {
+				target.GetAppliedTags((IEntity<long>)null);
 			});
 		}
 
 		[Test]
-		public void SaveAppliedTag_AppliedTagDoesNotExists_Created()
+		public void GetAppliedTags_Entity_AppliedTags ()
 		{
-			var appliedTag = new AppliedTag () { 
-				TagKey = 1,
-				EntityKey = 1,
-				EntityName = "Game"
-			};
+			var all = m_target.GetAllAppliedTags ();
+			all [0].EntityName = "Game";
+			all [0].EntityKey = 1;
 
-			m_target.SaveAppliedTag (appliedTag);
+			all [1].EntityName = "Game";
+			all [1].EntityKey = 1;
 
-			Assert.AreEqual(5, m_target.CountAllAppliedTags());
-			Assert.AreEqual ("Game", m_target.GetAppliedTagByKey (appliedTag.Key).EntityName);
+			all [2].EntityName = "News";
+			all [2].EntityKey = 1;
+
+			all [3].EntityName = "Game";
+			all [3].EntityKey = 3;
+
+			var actual = m_target.GetAppliedTags (new Game(1));
+			Assert.AreEqual (2, actual.Count);
+
+			actual = m_target.GetAppliedTags (new Game(3));
+			Assert.AreEqual (1, actual.Count);
+
+			actual = m_target.GetAppliedTags (new News(1));
+			Assert.AreEqual (1, actual.Count);
+
+			actual = m_target.GetAppliedTags (new Review(1));
+			Assert.AreEqual (0, actual.Count);
 		}
 
 		[Test]
-		public void SaveAppliedTag_AppliedTagDoesExists_Updated()
+		public void GetAppliedTags_NullEntityNameAndKey_Exception ()
 		{
-			var appliedTag = new AppliedTag () { 
-				Key = 1,
-				TagKey = 1,
-				EntityKey = 1,
-				EntityName = "Game"
-			};
+			var target = new AppliedTagService ();
 
-			m_target.SaveAppliedTag (appliedTag);
+			ExceptionAssert.IsThrowing(new ArgumentNullException("entityName"), () => {
+				target.GetAppliedTags(null, 1);
+			});
 
-			Assert.AreEqual(4, m_target.CountAllAppliedTags());
-			Assert.AreEqual ("Game", m_target.GetAppliedTagByKey (appliedTag.Key).EntityName);
+			ExceptionAssert.IsThrowing(new ArgumentNullException("entityName"), () => {
+				target.GetAppliedTags("", 1);
+			});
+		}
+
+		[Test]
+		public void GetAppliedTags_DoesNotExistsEntityWithName_Exception ()
+		{
+			var target = new AppliedTagService ();
+
+			ExceptionAssert.IsThrowing(new ArgumentException ("There is no entity with the name 'Jogo'."), () => {
+				target.GetAppliedTags("Jogo", 1);
+			});
+		}
+
+		[Test]
+		public void GetAppliedTags_EntityNameAndKey_AppliedTags ()
+		{
+			var all = m_target.GetAllAppliedTags ();
+			all [0].EntityName = "Game";
+			all [0].EntityKey = 1;
+
+			all [1].EntityName = "Game";
+			all [1].EntityKey = 1;
+
+			all [2].EntityName = "News";
+			all [2].EntityKey = 1;
+
+			all [3].EntityName = "Game";
+			all [3].EntityKey = 3;
+
+			var actual = m_target.GetAppliedTags ("Game", 1);
+			Assert.AreEqual (2, actual.Count);
+
+			actual = m_target.GetAppliedTags ("Game", 3);
+			Assert.AreEqual (1, actual.Count);
+
+			actual = m_target.GetAppliedTags ("News", 1);
+			Assert.AreEqual (1, actual.Count);
+
+			actual = m_target.GetAppliedTags ("Review", 1);
+			Assert.AreEqual (0, actual.Count);
 		}
 		#endregion
 	}

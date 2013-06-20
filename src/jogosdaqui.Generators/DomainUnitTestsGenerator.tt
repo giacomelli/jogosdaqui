@@ -60,7 +60,7 @@ RunForEachModel((e) =>
 #>     
 
 
-namespace <#=e.Namespace#>.UnitTests
+namespace jogosdaqui.Domain.UnitTests
 {
 	[TestFixture()]
 	public partial class <#=e.Name#>ServiceTest

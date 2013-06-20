@@ -61,7 +61,7 @@ namespace jogosdaqui.Domain.Games
 		/// </summary>
 		/// <param name="gameRepository"> Game repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
-		public  GameService(IGameRepository gameRepository, IUnitOfWork<long> unitOfWork)
+		public GameService(IGameRepository gameRepository, IUnitOfWork<long> unitOfWork)
 		{
 			m_repository = gameRepository; 
 			m_unitOfWork = unitOfWork;
