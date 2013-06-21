@@ -10,6 +10,23 @@ namespace jogosdaqui.Domain.Tags
 	[DebuggerDisplay("{Key}: {Name}")]
 	public class Tag : EntityBase<long>, IAggregateRoot<long>
 	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Tags.Tag"/> class.
+		/// </summary>
+		public Tag()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Tags.Tag"/> class.
+		/// </summary>
+		/// <param name="key">Key.</param>
+		public Tag(long key) : base(key)
+		{
+		}
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets or sets the name.

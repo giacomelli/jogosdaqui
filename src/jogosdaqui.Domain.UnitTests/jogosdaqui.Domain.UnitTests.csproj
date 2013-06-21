@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Tags\AppliedTagServiceTest.cs" />
     <Compile Include="Generated.cs" />
+    <Compile Include="ServiceFacadeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

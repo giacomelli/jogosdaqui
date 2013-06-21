@@ -11,7 +11,7 @@ namespace jogosdaqui.WebApi.Controllers
     public partial class AppliedTagsController
     {
 		/// <summary>
-		/// Gets the applied tags for the entity with the specify name.
+		/// Gets the applied tags for the entity type with the specify name.
 		/// </summary>
 		/// <returns>The applied tags for the entity.</returns>
 		/// <param name="entityName">Entity name.</param>
@@ -21,6 +21,12 @@ namespace jogosdaqui.WebApi.Controllers
 			return service.GetAppliedTags (entityName);
         }
 
+		/// <summary>
+		/// Gets the applied tags by entity name and key.
+		/// </summary>
+		/// <returns>The by entity.</returns>
+		/// <param name="entityName">Entity name.</param>
+		/// <param name="entityKey">Entity key.</param>
 		public IEnumerable<AppliedTag> GetByEntity(string entityName, long entityKey)
 		{
 			var service = new AppliedTagService ();

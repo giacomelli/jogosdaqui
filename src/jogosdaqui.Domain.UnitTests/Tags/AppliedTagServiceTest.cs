@@ -1,11 +1,11 @@
 using System;
 using NUnit.Framework;
+using Skahal.Infrastructure.Framework.Domain;
 using TestSharp;
+using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Games;
 using jogosdaqui.Domain.Tags;
 using jogosdaqui.Domain.UnitTests;
-using Skahal.Infrastructure.Framework.Domain;
-using jogosdaqui.Domain.Games;
-using jogosdaqui.Domain.Articles;
 
 namespace jogosdaqui.Domain.UnitTests
 {
@@ -117,6 +117,12 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void GetAppliedTags_EntityNameAndKey_AppliedTags ()
 		{
+			Stubs.GameRepository.Add (new Game(1));
+			Stubs.GameRepository.Add (new Game(3));
+			Stubs.NewsRepository.Add (new News(1));
+			Stubs.ReviewRepository.Add (new Review(1));
+			Stubs.UnitOfWork.Commit ();
+
 			var all = m_target.GetAllAppliedTags ();
 			all [0].EntityName = "Game";
 			all [0].EntityKey = 1;
@@ -140,6 +146,9 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual (1, actual.Count);
 
 			actual = m_target.GetAppliedTags ("Review", 1);
+			Assert.AreEqual (0, actual.Count);
+
+			actual = m_target.GetAppliedTags ("Review", 2);
 			Assert.AreEqual (0, actual.Count);
 		}
 		#endregion

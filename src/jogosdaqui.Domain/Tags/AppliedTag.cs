@@ -14,6 +14,13 @@ namespace jogosdaqui.Domain.Tags
 		public long TagKey { get; set; }
 		public long EntityKey { get; set; }
 		public string EntityName { get; set; }
+
+		public IEntity<long> Entity
+		{
+			get {
+				return ServiceFacade.GetEntityByKey (EntityName, EntityKey);
+			}
+		}
 		#endregion
 	}
 }

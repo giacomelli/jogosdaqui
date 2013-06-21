@@ -52,22 +52,16 @@ namespace jogosdaqui.Domain.Tags
 		/// <param name="entityKey">Entity key.</param>
 		public IList<AppliedTag> GetAppliedTags(string entityName, long entityKey)
 		{
-			if(String.IsNullOrWhiteSpace(entityName))
-			{
-				throw new ArgumentNullException ("entityName");
+			IList<AppliedTag> result;
+			var entity = ServiceFacade.GetEntityByKey (entityName, entityKey);
+
+			if (entity == null) {
+				result = new List<AppliedTag> ();
+			} else {
+				result = GetAppliedTags (entity);
 			}
 
-			var assembly = typeof(AppliedTagService).Assembly;
-			var entityType = assembly.GetTypes ().FirstOrDefault (t => t.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
-
-			if (entityType == null) {
-				throw new ArgumentException ("There is no entity with the name '{0}'.".With(entityName));
-			}
-
-			var entity = (IEntity<long>)assembly.CreateInstance (entityType.FullName);
-			entity.Key = entityKey;
-
-			return GetAppliedTags(entity);
+			return result;
 		}
 	}
 }
