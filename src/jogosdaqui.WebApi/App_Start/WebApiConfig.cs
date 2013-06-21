@@ -18,6 +18,9 @@ using AspNetWebApi.ApiGee.Filters;
 using System.Web.Http.Filters;
 
 //[assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.WebApiConfig), "PostStart")]
+using Newtonsoft.Json;
+
+
 namespace App_Start 
 {
 	/// <summary>
@@ -64,6 +67,7 @@ namespace App_Start
 		{
 			var json = config.Formatters.JsonFormatter;
 			json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+			json.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
 
 			// A resposta será em JSON quando as chamadas tiverem a extensão .json.
 			json.AddUriPathExtensionMapping("json", "application/json");
@@ -73,8 +77,6 @@ namespace App_Start
 
 			// Permite que as enumerações sejam serializadas como string.
 			json.SerializerSettings.Converters.Add(new StringEnumConverter());
-
-
 		}
 
 		/// <summary>

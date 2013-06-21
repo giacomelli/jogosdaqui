@@ -30,7 +30,7 @@ namespace jogosdaqui.WebApi.Controllers
 		public IEnumerable<AppliedTag> GetByEntity(string entityName, long entityKey)
 		{
 			var service = new AppliedTagService ();
-			return service.GetAppliedTags (entityName);
+			return service.GetAppliedTags (entityName, entityKey);
 		} 
     }
 }
