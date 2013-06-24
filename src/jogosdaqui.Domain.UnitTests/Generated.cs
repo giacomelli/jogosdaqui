@@ -50,6 +50,8 @@ namespace jogosdaqui.Domain.UnitTests
  
 		public static ICommentRepository CommentRepository { get; set; } 
  
+		public static IEventRepository EventRepository { get; set; } 
+ 
 		public static IInterviewRepository InterviewRepository { get; set; } 
  
 		public static INewsRepository NewsRepository { get; set; } 
@@ -61,7 +63,7 @@ namespace jogosdaqui.Domain.UnitTests
 		public static ITagRepository TagRepository { get; set; } 
  
 		public static IAppliedTagRepository AppliedTagRepository { get; set; } 
-		
+		 
 		#endregion
 
 		#region Methods
@@ -86,6 +88,9 @@ namespace jogosdaqui.Domain.UnitTests
  
 			DependencyService.Register<ICommentRepository> (CommentRepository = new TestingCommentRepository());
 			CommentRepository.SetUnitOfWork (UnitOfWork);
+ 
+			DependencyService.Register<IEventRepository> (EventRepository = new TestingEventRepository());
+			EventRepository.SetUnitOfWork (UnitOfWork);
  
 			DependencyService.Register<IInterviewRepository> (InterviewRepository = new TestingInterviewRepository());
 			InterviewRepository.SetUnitOfWork (UnitOfWork);
@@ -204,8 +209,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveGame (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveGame_GameDoesNotExists_Created()
 		{
 			var game = new Game ();
@@ -215,12 +220,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllGames());
 			Assert.AreEqual (5, m_target.GetGameByKey (game.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveGame_GameDoesExists_Updated()
 		{
 			var game = new Game () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveGame (game);
@@ -228,6 +233,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllGames());
 			Assert.AreEqual (1, m_target.GetGameByKey (game.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -327,8 +333,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SavePlatform (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SavePlatform_PlatformDoesNotExists_Created()
 		{
 			var platform = new Platform ();
@@ -338,12 +344,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllPlatforms());
 			Assert.AreEqual (5, m_target.GetPlatformByKey (platform.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SavePlatform_PlatformDoesExists_Updated()
 		{
 			var platform = new Platform () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SavePlatform (platform);
@@ -351,6 +357,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllPlatforms());
 			Assert.AreEqual (1, m_target.GetPlatformByKey (platform.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -450,8 +457,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveCompany (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveCompany_CompanyDoesNotExists_Created()
 		{
 			var company = new Company ();
@@ -461,12 +468,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllCompanies());
 			Assert.AreEqual (5, m_target.GetCompanyByKey (company.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveCompany_CompanyDoesExists_Updated()
 		{
 			var company = new Company () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveCompany (company);
@@ -474,6 +481,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllCompanies());
 			Assert.AreEqual (1, m_target.GetCompanyByKey (company.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -573,8 +581,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveLanguage (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveLanguage_LanguageDoesNotExists_Created()
 		{
 			var language = new Language ();
@@ -584,12 +592,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllLanguages());
 			Assert.AreEqual (5, m_target.GetLanguageByKey (language.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveLanguage_LanguageDoesExists_Updated()
 		{
 			var language = new Language () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveLanguage (language);
@@ -597,6 +605,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllLanguages());
 			Assert.AreEqual (1, m_target.GetLanguageByKey (language.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -696,8 +705,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SavePerson (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SavePerson_PersonDoesNotExists_Created()
 		{
 			var person = new Person ();
@@ -707,12 +716,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllPersons());
 			Assert.AreEqual (5, m_target.GetPersonByKey (person.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SavePerson_PersonDoesExists_Updated()
 		{
 			var person = new Person () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SavePerson (person);
@@ -720,6 +729,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllPersons());
 			Assert.AreEqual (1, m_target.GetPersonByKey (person.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -819,8 +829,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveComment (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveComment_CommentDoesNotExists_Created()
 		{
 			var comment = new Comment ();
@@ -830,12 +840,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllComments());
 			Assert.AreEqual (5, m_target.GetCommentByKey (comment.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveComment_CommentDoesExists_Updated()
 		{
 			var comment = new Comment () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveComment (comment);
@@ -843,6 +853,131 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllComments());
 			Assert.AreEqual (1, m_target.GetCommentByKey (comment.Key).Key);
 		}
+ 
+		#endregion
+	}
+}
+
+
+
+     
+
+
+namespace jogosdaqui.Domain.UnitTests
+{
+	[TestFixture()]
+	public partial class EventServiceTest
+	{
+		#region Fields
+		private EventService m_target; 
+		#endregion
+ 
+		#region Initialize
+		[SetUp]
+		public void InitializeTest()
+		{
+			Stubs.Initialize ();
+			Stubs.EventRepository.Add (new Event());
+			Stubs.EventRepository.Add (new Event());
+			Stubs.EventRepository.Add (new Event());
+			Stubs.EventRepository.Add (new Event());
+			Stubs.UnitOfWork.Commit ();
+
+			m_target = new EventService ();
+
+		}
+		#endregion
+
+		#region Tests
+		[Test]
+		public void CountAllEvents_NoArguments_AllEventsCounted()
+		{
+			var actual = m_target.CountAllEvents ();
+			Assert.AreEqual (4, actual);
+		}
+
+		[Test]
+		public void DeleteEvent_EventNotExistis_Exception()
+		{
+			ExceptionAssert.IsThrowing (new ArgumentException("Event with key '0' does not exists."), () => {
+				m_target.DeleteEvent(0);
+			});
+		}
+   
+		[Test]
+		public void DeleteEvent_EventExistis_Exception()
+		{
+			Assert.AreEqual (4, m_target.CountAllEvents ());
+
+			m_target.DeleteEvent(1);
+			Assert.AreEqual (3, m_target.CountAllEvents ());
+
+			m_target.DeleteEvent(2);
+			Assert.AreEqual (2, m_target.CountAllEvents ());
+
+			m_target.DeleteEvent(3);
+			Assert.AreEqual (1, m_target.CountAllEvents ());
+
+			m_target.DeleteEvent(4);
+			Assert.AreEqual (0, m_target.CountAllEvents ());
+		}
+
+		[Test]
+		public void GetAllEvents_NoArgs_AllEvents ()
+		{
+			var actual = m_target.GetAllEvents();
+			Assert.AreEqual (4, actual.Count);
+		}
+
+		[Test]
+		public void GetEventByKey_KeyEventDoesNotExists_Null ()
+		{
+			var actual = m_target.GetEventByKey (0);
+			Assert.IsNull (actual);
+		}
+
+		[Test]
+		public void GetEventByKey_KeyEventExists_Event ()
+		{
+			var actual = m_target.GetEventByKey (2);
+			Assert.AreEqual (2, actual.Key);
+
+			actual = m_target.GetEventByKey (3);
+			Assert.AreEqual (3, actual.Key);
+		}	
+	
+		[Test]
+		public void SaveEvent_Null_Exception ()
+		{
+			ExceptionAssert.IsThrowing (new ArgumentNullException("event"), () => {
+				m_target.SaveEvent (null);
+			});
+		}
+ 
+		[Test]  
+		public void SaveEvent_EventDoesNotExists_Created()
+		{
+			var @event = new Event ();
+ 
+			m_target.SaveEvent (@event);
+
+			Assert.AreEqual(5, m_target.CountAllEvents());
+			Assert.AreEqual (5, m_target.GetEventByKey (@event.Key).Key);
+		}
+ 
+		[Test]
+		public void SaveEvent_EventDoesExists_Updated()
+		{
+			var @event = new Event () { 
+				Key = 1 
+			};
+
+			m_target.SaveEvent (@event);
+
+			Assert.AreEqual(4, m_target.CountAllEvents());
+			Assert.AreEqual (1, m_target.GetEventByKey (@event.Key).Key);
+		}
+ 
 		#endregion
 	}
 }
@@ -942,8 +1077,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveInterview (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveInterview_InterviewDoesNotExists_Created()
 		{
 			var interview = new Interview ();
@@ -953,12 +1088,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllInterviews());
 			Assert.AreEqual (5, m_target.GetInterviewByKey (interview.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveInterview_InterviewDoesExists_Updated()
 		{
 			var interview = new Interview () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveInterview (interview);
@@ -966,6 +1101,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllInterviews());
 			Assert.AreEqual (1, m_target.GetInterviewByKey (interview.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -1065,8 +1201,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveNews (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveNews_NewsDoesNotExists_Created()
 		{
 			var news = new News ();
@@ -1076,12 +1212,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllNews());
 			Assert.AreEqual (5, m_target.GetNewsByKey (news.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveNews_NewsDoesExists_Updated()
 		{
 			var news = new News () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveNews (news);
@@ -1089,6 +1225,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllNews());
 			Assert.AreEqual (1, m_target.GetNewsByKey (news.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -1188,8 +1325,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SavePreview (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SavePreview_PreviewDoesNotExists_Created()
 		{
 			var preview = new Preview ();
@@ -1199,12 +1336,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllPreviews());
 			Assert.AreEqual (5, m_target.GetPreviewByKey (preview.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SavePreview_PreviewDoesExists_Updated()
 		{
 			var preview = new Preview () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SavePreview (preview);
@@ -1212,6 +1349,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllPreviews());
 			Assert.AreEqual (1, m_target.GetPreviewByKey (preview.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -1311,8 +1449,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveReview (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveReview_ReviewDoesNotExists_Created()
 		{
 			var review = new Review ();
@@ -1322,12 +1460,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllReviews());
 			Assert.AreEqual (5, m_target.GetReviewByKey (review.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveReview_ReviewDoesExists_Updated()
 		{
 			var review = new Review () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveReview (review);
@@ -1335,6 +1473,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllReviews());
 			Assert.AreEqual (1, m_target.GetReviewByKey (review.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -1434,8 +1573,8 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveTag (null);
 			});
 		}
-
-		[Test]
+ 
+		[Test]  
 		public void SaveTag_TagDoesNotExists_Created()
 		{
 			var tag = new Tag ();
@@ -1445,12 +1584,12 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(5, m_target.CountAllTags());
 			Assert.AreEqual (5, m_target.GetTagByKey (tag.Key).Key);
 		}
-
+ 
 		[Test]
 		public void SaveTag_TagDoesExists_Updated()
 		{
 			var tag = new Tag () { 
-				Key = 1
+				Key = 1 
 			};
 
 			m_target.SaveTag (tag);
@@ -1458,6 +1597,7 @@ namespace jogosdaqui.Domain.UnitTests
 			Assert.AreEqual(4, m_target.CountAllTags());
 			Assert.AreEqual (1, m_target.GetTagByKey (tag.Key).Key);
 		}
+ 
 		#endregion
 	}
 }
@@ -1557,30 +1697,7 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveAppliedTag (null);
 			});
 		}
-
-		[Test]
-		public void SaveAppliedTag_AppliedTagDoesNotExists_Created()
-		{
-			var appliedtag = new AppliedTag ();
  
-			m_target.SaveAppliedTag (appliedtag);
-
-			Assert.AreEqual(5, m_target.CountAllAppliedTags());
-			Assert.AreEqual (5, m_target.GetAppliedTagByKey (appliedtag.Key).Key);
-		}
-
-		[Test]
-		public void SaveAppliedTag_AppliedTagDoesExists_Updated()
-		{
-			var appliedtag = new AppliedTag () { 
-				Key = 1
-			};
-
-			m_target.SaveAppliedTag (appliedtag);
-
-			Assert.AreEqual(4, m_target.CountAllAppliedTags());
-			Assert.AreEqual (1, m_target.GetAppliedTagByKey (appliedtag.Key).Key);
-		}
 		#endregion
 	}
 }

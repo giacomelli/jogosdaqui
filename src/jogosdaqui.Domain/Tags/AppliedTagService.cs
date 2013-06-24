@@ -1,14 +1,28 @@
 using System;
 using System.Collections.Generic;
-using Skahal.Infrastructure.Framework.Repositories;
 using System.Linq;
-using Skahal.Infrastructure.Framework.Domain;
 using HelperSharp;
+using Skahal.Infrastructure.Framework.Domain;
+using Skahal.Infrastructure.Framework.Repositories;
+using KissSpecifications;
+using jogosdaqui.Domain.Tags.Specifications;
 
 namespace jogosdaqui.Domain.Tags
 {
 	public partial class AppliedTagService
 	{
+		#region Methods
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		/// <param name="appliedtag">Appliedtag.</param>
+		partial void ExecuteSaveSpecification (AppliedTag appliedtag)
+		{
+			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy(
+				appliedtag,
+				new AppliedTagSaveSpecification());
+		}
+
 		/// <summary>
 		/// Gets the applied tags for the entity name specified.
 		/// </summary>
@@ -21,7 +35,7 @@ namespace jogosdaqui.Domain.Tags
 				throw new ArgumentNullException ("entityName");
 			}
 
-			return m_repository
+			return MainRepository
 					.FindAll ((a) => a.EntityName.Equals(entityName, StringComparison.OrdinalIgnoreCase))
 					.ToList ();
 		}
@@ -37,7 +51,7 @@ namespace jogosdaqui.Domain.Tags
 
 			var entityName = entity.GetType ().Name;
 
-			return m_repository
+			return MainRepository
 					.FindAll (
 						(a) => 	a.EntityName.Equals(entityName, StringComparison.OrdinalIgnoreCase)
 							&&	a.EntityKey.Equals(entity.Key))
@@ -53,7 +67,7 @@ namespace jogosdaqui.Domain.Tags
 		public IList<AppliedTag> GetAppliedTags(string entityName, long entityKey)
 		{
 			IList<AppliedTag> result;
-			var entity = ServiceFacade.GetEntityByKey (entityName, entityKey);
+			var entity = ServiceFacade.GetEntity (entityName, entityKey);
 
 			if (entity == null) {
 				result = new List<AppliedTag> ();
@@ -63,5 +77,6 @@ namespace jogosdaqui.Domain.Tags
 
 			return result;
 		}
+		#endregion
 	}
 }

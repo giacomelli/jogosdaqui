@@ -8,15 +8,7 @@
   
    
    
-using jogosdaqui.Domain;   
-using jogosdaqui.Domain.Articles; 
-using jogosdaqui.Domain.Companies; 
-using jogosdaqui.Domain.Games; 
-using jogosdaqui.Domain.Languages; 
-using jogosdaqui.Domain.Persons; 
-using jogosdaqui.Domain.Platforms; 
-using jogosdaqui.Domain.Tags; 
-  
+   
    
   
 #region Usings    
@@ -25,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;        
 using System.Linq;    
 using Skahal.Infrastructure.Framework.Commons; 
+using Skahal.Infrastructure.Framework.Domain;
 using Skahal.Infrastructure.Framework.Repositories;
 using HelperSharp; 
 using KissSpecifications; 
@@ -35,24 +28,18 @@ namespace jogosdaqui.Domain.Games
 {  
 	public partial interface IGameRepository : IRepository<Game, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer game service.
 	/// </summary>
-	public partial class GameService
+	public partial class GameService : ServiceBase<Game, long, IGameRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private IGameRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games. GameService"/> class.
 		/// </summary>
-		public  GameService() 
-			: this(DependencyService.Create<IGameRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  GameService()  
 		{
 		} 
 
@@ -62,10 +49,8 @@ namespace jogosdaqui.Domain.Games
 		/// <param name="gameRepository"> Game repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  GameService(IGameRepository gameRepository, IUnitOfWork<long> unitOfWork)
+		: base(gameRepository, unitOfWork)
 		{
-			m_repository = gameRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -78,7 +63,7 @@ namespace jogosdaqui.Domain.Games
 		/// <param name="key">The key.</param>
 		public Game GetGameByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -87,7 +72,7 @@ namespace jogosdaqui.Domain.Games
 		/// <returns>The all Games.</returns>
 		public IList<Game> GetAllGames()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -95,9 +80,14 @@ namespace jogosdaqui.Domain.Games
 		/// </summary>
 		public long CountAllGames() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Game game);
+		
 		/// <summary>
 		/// Saves the game.
 		/// </summary>
@@ -106,22 +96,23 @@ namespace jogosdaqui.Domain.Games
 		{
 			ExceptionHelper.ThrowIfNull ("game", game);
 
-			m_repository [game.Key] = game;
+			ExecuteSaveSpecification (game);
+			
+			MainRepository [game.Key] = game;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Game game);
-		
+		partial void ExecuteDeleteSpecification(long gameKey, Game game);
+		  
 		/// <summary>  
 		/// Deletes the game.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteGame (long key)
-		{
+		{ 
 			var game = GetGameByKey (key);
 			
 			if(game == null)
@@ -129,11 +120,54 @@ namespace jogosdaqui.Domain.Games
 				throw new ArgumentException("Game with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (game);
+			ExecuteDeleteSpecification (key, game);
 
-			m_repository.Remove (game);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (game); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Games.Specifications 
+{
+	/// <summary>
+	/// Game exists specification.
+	/// </summary>
+	public class GameExistsSpecification : SpecificationBase<Game>
+	{
+		#region Fields
+		private long m_gameKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.Specifications.GameExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="gameKey">Game key.</param>
+		public GameExistsSpecification(long gameKey)
+		{
+			m_gameKey = gameKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Game target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Game with key '{0}' does not exists.".With (m_gameKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -142,24 +176,18 @@ namespace jogosdaqui.Domain.Platforms
 {  
 	public partial interface IPlatformRepository : IRepository<Platform, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer platform service.
 	/// </summary>
-	public partial class PlatformService
+	public partial class PlatformService : ServiceBase<Platform, long, IPlatformRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private IPlatformRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Platforms. PlatformService"/> class.
 		/// </summary>
-		public  PlatformService() 
-			: this(DependencyService.Create<IPlatformRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  PlatformService()  
 		{
 		} 
 
@@ -169,10 +197,8 @@ namespace jogosdaqui.Domain.Platforms
 		/// <param name="platformRepository"> Platform repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  PlatformService(IPlatformRepository platformRepository, IUnitOfWork<long> unitOfWork)
+		: base(platformRepository, unitOfWork)
 		{
-			m_repository = platformRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -185,7 +211,7 @@ namespace jogosdaqui.Domain.Platforms
 		/// <param name="key">The key.</param>
 		public Platform GetPlatformByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -194,7 +220,7 @@ namespace jogosdaqui.Domain.Platforms
 		/// <returns>The all Platforms.</returns>
 		public IList<Platform> GetAllPlatforms()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -202,9 +228,14 @@ namespace jogosdaqui.Domain.Platforms
 		/// </summary>
 		public long CountAllPlatforms() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Platform platform);
+		
 		/// <summary>
 		/// Saves the platform.
 		/// </summary>
@@ -213,22 +244,23 @@ namespace jogosdaqui.Domain.Platforms
 		{
 			ExceptionHelper.ThrowIfNull ("platform", platform);
 
-			m_repository [platform.Key] = platform;
+			ExecuteSaveSpecification (platform);
+			
+			MainRepository [platform.Key] = platform;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Platform platform);
-		
+		partial void ExecuteDeleteSpecification(long platformKey, Platform platform);
+		  
 		/// <summary>  
 		/// Deletes the platform.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeletePlatform (long key)
-		{
+		{ 
 			var platform = GetPlatformByKey (key);
 			
 			if(platform == null)
@@ -236,11 +268,54 @@ namespace jogosdaqui.Domain.Platforms
 				throw new ArgumentException("Platform with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (platform);
+			ExecuteDeleteSpecification (key, platform);
 
-			m_repository.Remove (platform);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (platform); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Platforms.Specifications 
+{
+	/// <summary>
+	/// Platform exists specification.
+	/// </summary>
+	public class PlatformExistsSpecification : SpecificationBase<Platform>
+	{
+		#region Fields
+		private long m_platformKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Platforms.Specifications.PlatformExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="platformKey">Platform key.</param>
+		public PlatformExistsSpecification(long platformKey)
+		{
+			m_platformKey = platformKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Platform target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Platform with key '{0}' does not exists.".With (m_platformKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -249,24 +324,18 @@ namespace jogosdaqui.Domain.Companies
 {  
 	public partial interface ICompanyRepository : IRepository<Company, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer company service.
 	/// </summary>
-	public partial class CompanyService
+	public partial class CompanyService : ServiceBase<Company, long, ICompanyRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private ICompanyRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Companies. CompanyService"/> class.
 		/// </summary>
-		public  CompanyService() 
-			: this(DependencyService.Create<ICompanyRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  CompanyService()  
 		{
 		} 
 
@@ -276,10 +345,8 @@ namespace jogosdaqui.Domain.Companies
 		/// <param name="companyRepository"> Company repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  CompanyService(ICompanyRepository companyRepository, IUnitOfWork<long> unitOfWork)
+		: base(companyRepository, unitOfWork)
 		{
-			m_repository = companyRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -292,7 +359,7 @@ namespace jogosdaqui.Domain.Companies
 		/// <param name="key">The key.</param>
 		public Company GetCompanyByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -301,7 +368,7 @@ namespace jogosdaqui.Domain.Companies
 		/// <returns>The all Companies.</returns>
 		public IList<Company> GetAllCompanies()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -309,9 +376,14 @@ namespace jogosdaqui.Domain.Companies
 		/// </summary>
 		public long CountAllCompanies() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Company company);
+		
 		/// <summary>
 		/// Saves the company.
 		/// </summary>
@@ -320,22 +392,23 @@ namespace jogosdaqui.Domain.Companies
 		{
 			ExceptionHelper.ThrowIfNull ("company", company);
 
-			m_repository [company.Key] = company;
+			ExecuteSaveSpecification (company);
+			
+			MainRepository [company.Key] = company;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Company company);
-		
+		partial void ExecuteDeleteSpecification(long companyKey, Company company);
+		  
 		/// <summary>  
 		/// Deletes the company.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteCompany (long key)
-		{
+		{ 
 			var company = GetCompanyByKey (key);
 			
 			if(company == null)
@@ -343,11 +416,54 @@ namespace jogosdaqui.Domain.Companies
 				throw new ArgumentException("Company with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (company);
+			ExecuteDeleteSpecification (key, company);
 
-			m_repository.Remove (company);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (company); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Companies.Specifications 
+{
+	/// <summary>
+	/// Company exists specification.
+	/// </summary>
+	public class CompanyExistsSpecification : SpecificationBase<Company>
+	{
+		#region Fields
+		private long m_companyKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Companies.Specifications.CompanyExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="companyKey">Company key.</param>
+		public CompanyExistsSpecification(long companyKey)
+		{
+			m_companyKey = companyKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Company target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Company with key '{0}' does not exists.".With (m_companyKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -356,24 +472,18 @@ namespace jogosdaqui.Domain.Languages
 {  
 	public partial interface ILanguageRepository : IRepository<Language, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer language service.
 	/// </summary>
-	public partial class LanguageService
+	public partial class LanguageService : ServiceBase<Language, long, ILanguageRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private ILanguageRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Languages. LanguageService"/> class.
 		/// </summary>
-		public  LanguageService() 
-			: this(DependencyService.Create<ILanguageRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  LanguageService()  
 		{
 		} 
 
@@ -383,10 +493,8 @@ namespace jogosdaqui.Domain.Languages
 		/// <param name="languageRepository"> Language repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  LanguageService(ILanguageRepository languageRepository, IUnitOfWork<long> unitOfWork)
+		: base(languageRepository, unitOfWork)
 		{
-			m_repository = languageRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -399,7 +507,7 @@ namespace jogosdaqui.Domain.Languages
 		/// <param name="key">The key.</param>
 		public Language GetLanguageByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -408,7 +516,7 @@ namespace jogosdaqui.Domain.Languages
 		/// <returns>The all Languages.</returns>
 		public IList<Language> GetAllLanguages()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -416,9 +524,14 @@ namespace jogosdaqui.Domain.Languages
 		/// </summary>
 		public long CountAllLanguages() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Language language);
+		
 		/// <summary>
 		/// Saves the language.
 		/// </summary>
@@ -427,22 +540,23 @@ namespace jogosdaqui.Domain.Languages
 		{
 			ExceptionHelper.ThrowIfNull ("language", language);
 
-			m_repository [language.Key] = language;
+			ExecuteSaveSpecification (language);
+			
+			MainRepository [language.Key] = language;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Language language);
-		
+		partial void ExecuteDeleteSpecification(long languageKey, Language language);
+		  
 		/// <summary>  
 		/// Deletes the language.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteLanguage (long key)
-		{
+		{ 
 			var language = GetLanguageByKey (key);
 			
 			if(language == null)
@@ -450,11 +564,54 @@ namespace jogosdaqui.Domain.Languages
 				throw new ArgumentException("Language with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (language);
+			ExecuteDeleteSpecification (key, language);
 
-			m_repository.Remove (language);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (language); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Languages.Specifications 
+{
+	/// <summary>
+	/// Language exists specification.
+	/// </summary>
+	public class LanguageExistsSpecification : SpecificationBase<Language>
+	{
+		#region Fields
+		private long m_languageKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Languages.Specifications.LanguageExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="languageKey">Language key.</param>
+		public LanguageExistsSpecification(long languageKey)
+		{
+			m_languageKey = languageKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Language target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Language with key '{0}' does not exists.".With (m_languageKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -463,24 +620,18 @@ namespace jogosdaqui.Domain.Persons
 {  
 	public partial interface IPersonRepository : IRepository<Person, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer person service.
 	/// </summary>
-	public partial class PersonService
+	public partial class PersonService : ServiceBase<Person, long, IPersonRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private IPersonRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Persons. PersonService"/> class.
 		/// </summary>
-		public  PersonService() 
-			: this(DependencyService.Create<IPersonRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  PersonService()  
 		{
 		} 
 
@@ -490,10 +641,8 @@ namespace jogosdaqui.Domain.Persons
 		/// <param name="personRepository"> Person repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  PersonService(IPersonRepository personRepository, IUnitOfWork<long> unitOfWork)
+		: base(personRepository, unitOfWork)
 		{
-			m_repository = personRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -506,7 +655,7 @@ namespace jogosdaqui.Domain.Persons
 		/// <param name="key">The key.</param>
 		public Person GetPersonByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -515,7 +664,7 @@ namespace jogosdaqui.Domain.Persons
 		/// <returns>The all Persons.</returns>
 		public IList<Person> GetAllPersons()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -523,9 +672,14 @@ namespace jogosdaqui.Domain.Persons
 		/// </summary>
 		public long CountAllPersons() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Person person);
+		
 		/// <summary>
 		/// Saves the person.
 		/// </summary>
@@ -534,22 +688,23 @@ namespace jogosdaqui.Domain.Persons
 		{
 			ExceptionHelper.ThrowIfNull ("person", person);
 
-			m_repository [person.Key] = person;
+			ExecuteSaveSpecification (person);
+			
+			MainRepository [person.Key] = person;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Person person);
-		
+		partial void ExecuteDeleteSpecification(long personKey, Person person);
+		  
 		/// <summary>  
 		/// Deletes the person.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeletePerson (long key)
-		{
+		{ 
 			var person = GetPersonByKey (key);
 			
 			if(person == null)
@@ -557,11 +712,54 @@ namespace jogosdaqui.Domain.Persons
 				throw new ArgumentException("Person with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (person);
+			ExecuteDeleteSpecification (key, person);
 
-			m_repository.Remove (person);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (person); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Persons.Specifications 
+{
+	/// <summary>
+	/// Person exists specification.
+	/// </summary>
+	public class PersonExistsSpecification : SpecificationBase<Person>
+	{
+		#region Fields
+		private long m_personKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Persons.Specifications.PersonExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="personKey">Person key.</param>
+		public PersonExistsSpecification(long personKey)
+		{
+			m_personKey = personKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Person target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Person with key '{0}' does not exists.".With (m_personKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -570,24 +768,18 @@ namespace jogosdaqui.Domain.Articles
 {  
 	public partial interface ICommentRepository : IRepository<Comment, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer comment service.
 	/// </summary>
-	public partial class CommentService
+	public partial class CommentService : ServiceBase<Comment, long, ICommentRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private ICommentRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Comments. CommentService"/> class.
 		/// </summary>
-		public  CommentService() 
-			: this(DependencyService.Create<ICommentRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  CommentService()  
 		{
 		} 
 
@@ -597,10 +789,8 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="commentRepository"> Comment repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  CommentService(ICommentRepository commentRepository, IUnitOfWork<long> unitOfWork)
+		: base(commentRepository, unitOfWork)
 		{
-			m_repository = commentRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -613,7 +803,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="key">The key.</param>
 		public Comment GetCommentByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -622,7 +812,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <returns>The all Comments.</returns>
 		public IList<Comment> GetAllComments()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -630,9 +820,14 @@ namespace jogosdaqui.Domain.Articles
 		/// </summary>
 		public long CountAllComments() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Comment comment);
+		
 		/// <summary>
 		/// Saves the comment.
 		/// </summary>
@@ -641,22 +836,23 @@ namespace jogosdaqui.Domain.Articles
 		{
 			ExceptionHelper.ThrowIfNull ("comment", comment);
 
-			m_repository [comment.Key] = comment;
+			ExecuteSaveSpecification (comment);
+			
+			MainRepository [comment.Key] = comment;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Comment comment);
-		
+		partial void ExecuteDeleteSpecification(long commentKey, Comment comment);
+		  
 		/// <summary>  
 		/// Deletes the comment.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteComment (long key)
-		{
+		{ 
 			var comment = GetCommentByKey (key);
 			
 			if(comment == null)
@@ -664,11 +860,202 @@ namespace jogosdaqui.Domain.Articles
 				throw new ArgumentException("Comment with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (comment);
+			ExecuteDeleteSpecification (key, comment);
 
-			m_repository.Remove (comment);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (comment); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Articles.Specifications 
+{
+	/// <summary>
+	/// Comment exists specification.
+	/// </summary>
+	public class CommentExistsSpecification : SpecificationBase<Comment>
+	{
+		#region Fields
+		private long m_commentKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Comments.Specifications.CommentExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="commentKey">Comment key.</param>
+		public CommentExistsSpecification(long commentKey)
+		{
+			m_commentKey = commentKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Comment target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Comment with key '{0}' does not exists.".With (m_commentKey);
+				return false;
+			}
+
+			return true;
+		}
+
+		#endregion
+	}
+}
+     
+namespace jogosdaqui.Domain.Articles
+{  
+	public partial interface IEventRepository : IRepository<Event, long>
+	{
+		}   
+
+	// <summary>
+	/// Domain layer event service.
+	/// </summary>
+	public partial class EventService : ArticleServiceBase<Event, IEventRepository>
+	{ 
+		#region Constructors 
+      	/// <summary> 
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Events. EventService"/> class.
+		/// </summary>
+		public  EventService()  
+		{
+		} 
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Events. EventService"/> class.
+		/// </summary>
+		/// <param name="eventRepository"> Event repository.</param>
+		/// <param name="unitOfWork">Unit of work.</param>
+		public  EventService(IEventRepository eventRepository, IUnitOfWork<long> unitOfWork)
+		: base(eventRepository, unitOfWork)
+		{
+		}
+        #endregion
+		
+		#region Methods
+		
+		/// <summary>
+		/// Gets the event by key.
+		/// </summary>
+		/// <returns>The event by key.</returns>
+		/// <param name="key">The key.</param>
+		public Event GetEventByKey(long key)
+		{
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
+		}
+		
+		/// <summary>
+		/// Gets all Events. 
+		/// </summary>
+		/// <returns>The all Events.</returns>
+		public IList<Event> GetAllEvents()
+		{
+			return MainRepository.FindAll(g => true).ToList();
+		}
+		
+		/// <summary>
+		/// Counts all Events.
+		/// </summary>
+		public long CountAllEvents() 
+		{ 
+			return MainRepository.CountAll (g => true); 
+		}
+
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Event @event);
+		
+		/// <summary>
+		/// Saves the event.
+		/// </summary>
+		/// <param name="event">The event.</param>
+		public void SaveEvent(Event @event)
+		{
+			ExceptionHelper.ThrowIfNull ("event", @event);
+
+			ExecuteSaveSpecification (@event);
+			
+			MainRepository [@event.Key] = @event;
+			UnitOfWork.Commit (); 
+		} 
+
+		/// <summary> 
+		/// Executes the delete specification.
+		/// </summary>
+		partial void ExecuteDeleteSpecification(long eventKey, Event @event);
+		  
+		/// <summary>  
+		/// Deletes the event.
+		/// </summary> 
+		/// <param name="key">The key.</param> 
+		public void DeleteEvent (long key)
+		{ 
+			var @event = GetEventByKey (key);
+			
+			if(@event == null)
+			{
+				throw new ArgumentException("Event with key '{0}' does not exists.".With(key));
+			}
+			
+			ExecuteDeleteSpecification (key, @event);
+
+			MainRepository.Remove (@event); 
+			UnitOfWork.Commit ();
+		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Articles.Specifications 
+{
+	/// <summary>
+	/// Event exists specification.
+	/// </summary>
+	public class EventExistsSpecification : SpecificationBase<Event>
+	{
+		#region Fields
+		private long m_eventKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Events.Specifications.EventExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="eventKey">Event key.</param>
+		public EventExistsSpecification(long eventKey)
+		{
+			m_eventKey = eventKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Event target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Event with key '{0}' does not exists.".With (m_eventKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -677,24 +1064,18 @@ namespace jogosdaqui.Domain.Articles
 {  
 	public partial interface IInterviewRepository : IRepository<Interview, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer interview service.
 	/// </summary>
-	public partial class InterviewService
+	public partial class InterviewService : ArticleServiceBase<Interview, IInterviewRepository>
 	{ 
-		#region Fields	 
-        private IInterviewRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Interviews. InterviewService"/> class.
 		/// </summary>
-		public  InterviewService() 
-			: this(DependencyService.Create<IInterviewRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  InterviewService()  
 		{
 		} 
 
@@ -704,10 +1085,8 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="interviewRepository"> Interview repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  InterviewService(IInterviewRepository interviewRepository, IUnitOfWork<long> unitOfWork)
+		: base(interviewRepository, unitOfWork)
 		{
-			m_repository = interviewRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -720,7 +1099,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="key">The key.</param>
 		public Interview GetInterviewByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -729,7 +1108,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <returns>The all Interviews.</returns>
 		public IList<Interview> GetAllInterviews()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -737,9 +1116,14 @@ namespace jogosdaqui.Domain.Articles
 		/// </summary>
 		public long CountAllInterviews() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Interview interview);
+		
 		/// <summary>
 		/// Saves the interview.
 		/// </summary>
@@ -748,22 +1132,23 @@ namespace jogosdaqui.Domain.Articles
 		{
 			ExceptionHelper.ThrowIfNull ("interview", interview);
 
-			m_repository [interview.Key] = interview;
+			ExecuteSaveSpecification (interview);
+			
+			MainRepository [interview.Key] = interview;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Interview interview);
-		
+		partial void ExecuteDeleteSpecification(long interviewKey, Interview interview);
+		  
 		/// <summary>  
 		/// Deletes the interview.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteInterview (long key)
-		{
+		{ 
 			var interview = GetInterviewByKey (key);
 			
 			if(interview == null)
@@ -771,11 +1156,54 @@ namespace jogosdaqui.Domain.Articles
 				throw new ArgumentException("Interview with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (interview);
+			ExecuteDeleteSpecification (key, interview);
 
-			m_repository.Remove (interview);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (interview); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Articles.Specifications 
+{
+	/// <summary>
+	/// Interview exists specification.
+	/// </summary>
+	public class InterviewExistsSpecification : SpecificationBase<Interview>
+	{
+		#region Fields
+		private long m_interviewKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Interviews.Specifications.InterviewExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="interviewKey">Interview key.</param>
+		public InterviewExistsSpecification(long interviewKey)
+		{
+			m_interviewKey = interviewKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Interview target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Interview with key '{0}' does not exists.".With (m_interviewKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -784,24 +1212,18 @@ namespace jogosdaqui.Domain.Articles
 {  
 	public partial interface INewsRepository : IRepository<News, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer news service.
 	/// </summary>
-	public partial class NewsService
+	public partial class NewsService : ArticleServiceBase<News, INewsRepository>
 	{ 
-		#region Fields	 
-        private INewsRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.News. NewsService"/> class.
 		/// </summary>
-		public  NewsService() 
-			: this(DependencyService.Create<INewsRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  NewsService()  
 		{
 		} 
 
@@ -811,10 +1233,8 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="newsRepository"> News repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  NewsService(INewsRepository newsRepository, IUnitOfWork<long> unitOfWork)
+		: base(newsRepository, unitOfWork)
 		{
-			m_repository = newsRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -827,7 +1247,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="key">The key.</param>
 		public News GetNewsByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -836,7 +1256,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <returns>The all News.</returns>
 		public IList<News> GetAllNews()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -844,9 +1264,14 @@ namespace jogosdaqui.Domain.Articles
 		/// </summary>
 		public long CountAllNews() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(News news);
+		
 		/// <summary>
 		/// Saves the news.
 		/// </summary>
@@ -855,22 +1280,23 @@ namespace jogosdaqui.Domain.Articles
 		{
 			ExceptionHelper.ThrowIfNull ("news", news);
 
-			m_repository [news.Key] = news;
+			ExecuteSaveSpecification (news);
+			
+			MainRepository [news.Key] = news;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(News news);
-		
+		partial void ExecuteDeleteSpecification(long newsKey, News news);
+		  
 		/// <summary>  
 		/// Deletes the news.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteNews (long key)
-		{
+		{ 
 			var news = GetNewsByKey (key);
 			
 			if(news == null)
@@ -878,11 +1304,54 @@ namespace jogosdaqui.Domain.Articles
 				throw new ArgumentException("News with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (news);
+			ExecuteDeleteSpecification (key, news);
 
-			m_repository.Remove (news);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (news); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Articles.Specifications 
+{
+	/// <summary>
+	/// News exists specification.
+	/// </summary>
+	public class NewsExistsSpecification : SpecificationBase<News>
+	{
+		#region Fields
+		private long m_newsKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.News.Specifications.NewsExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="newsKey">News key.</param>
+		public NewsExistsSpecification(long newsKey)
+		{
+			m_newsKey = newsKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (News target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "News with key '{0}' does not exists.".With (m_newsKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -891,24 +1360,18 @@ namespace jogosdaqui.Domain.Articles
 {  
 	public partial interface IPreviewRepository : IRepository<Preview, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer preview service.
 	/// </summary>
-	public partial class PreviewService
+	public partial class PreviewService : ArticleServiceBase<Preview, IPreviewRepository>
 	{ 
-		#region Fields	 
-        private IPreviewRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Previews. PreviewService"/> class.
 		/// </summary>
-		public  PreviewService() 
-			: this(DependencyService.Create<IPreviewRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  PreviewService()  
 		{
 		} 
 
@@ -918,10 +1381,8 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="previewRepository"> Preview repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  PreviewService(IPreviewRepository previewRepository, IUnitOfWork<long> unitOfWork)
+		: base(previewRepository, unitOfWork)
 		{
-			m_repository = previewRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -934,7 +1395,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="key">The key.</param>
 		public Preview GetPreviewByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -943,7 +1404,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <returns>The all Previews.</returns>
 		public IList<Preview> GetAllPreviews()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -951,9 +1412,14 @@ namespace jogosdaqui.Domain.Articles
 		/// </summary>
 		public long CountAllPreviews() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Preview preview);
+		
 		/// <summary>
 		/// Saves the preview.
 		/// </summary>
@@ -962,22 +1428,23 @@ namespace jogosdaqui.Domain.Articles
 		{
 			ExceptionHelper.ThrowIfNull ("preview", preview);
 
-			m_repository [preview.Key] = preview;
+			ExecuteSaveSpecification (preview);
+			
+			MainRepository [preview.Key] = preview;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Preview preview);
-		
+		partial void ExecuteDeleteSpecification(long previewKey, Preview preview);
+		  
 		/// <summary>  
 		/// Deletes the preview.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeletePreview (long key)
-		{
+		{ 
 			var preview = GetPreviewByKey (key);
 			
 			if(preview == null)
@@ -985,11 +1452,54 @@ namespace jogosdaqui.Domain.Articles
 				throw new ArgumentException("Preview with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (preview);
+			ExecuteDeleteSpecification (key, preview);
 
-			m_repository.Remove (preview);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (preview); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Articles.Specifications 
+{
+	/// <summary>
+	/// Preview exists specification.
+	/// </summary>
+	public class PreviewExistsSpecification : SpecificationBase<Preview>
+	{
+		#region Fields
+		private long m_previewKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Previews.Specifications.PreviewExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="previewKey">Preview key.</param>
+		public PreviewExistsSpecification(long previewKey)
+		{
+			m_previewKey = previewKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Preview target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Preview with key '{0}' does not exists.".With (m_previewKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -998,24 +1508,18 @@ namespace jogosdaqui.Domain.Articles
 {  
 	public partial interface IReviewRepository : IRepository<Review, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer review service.
 	/// </summary>
-	public partial class ReviewService
+	public partial class ReviewService : ArticleServiceBase<Review, IReviewRepository>
 	{ 
-		#region Fields	 
-        private IReviewRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Reviews. ReviewService"/> class.
 		/// </summary>
-		public  ReviewService() 
-			: this(DependencyService.Create<IReviewRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  ReviewService()  
 		{
 		} 
 
@@ -1025,10 +1529,8 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="reviewRepository"> Review repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  ReviewService(IReviewRepository reviewRepository, IUnitOfWork<long> unitOfWork)
+		: base(reviewRepository, unitOfWork)
 		{
-			m_repository = reviewRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -1041,7 +1543,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <param name="key">The key.</param>
 		public Review GetReviewByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -1050,7 +1552,7 @@ namespace jogosdaqui.Domain.Articles
 		/// <returns>The all Reviews.</returns>
 		public IList<Review> GetAllReviews()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -1058,9 +1560,14 @@ namespace jogosdaqui.Domain.Articles
 		/// </summary>
 		public long CountAllReviews() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Review review);
+		
 		/// <summary>
 		/// Saves the review.
 		/// </summary>
@@ -1069,22 +1576,23 @@ namespace jogosdaqui.Domain.Articles
 		{
 			ExceptionHelper.ThrowIfNull ("review", review);
 
-			m_repository [review.Key] = review;
+			ExecuteSaveSpecification (review);
+			
+			MainRepository [review.Key] = review;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Review review);
-		
+		partial void ExecuteDeleteSpecification(long reviewKey, Review review);
+		  
 		/// <summary>  
 		/// Deletes the review.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteReview (long key)
-		{
+		{ 
 			var review = GetReviewByKey (key);
 			
 			if(review == null)
@@ -1092,11 +1600,54 @@ namespace jogosdaqui.Domain.Articles
 				throw new ArgumentException("Review with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (review);
+			ExecuteDeleteSpecification (key, review);
 
-			m_repository.Remove (review);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (review); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Articles.Specifications 
+{
+	/// <summary>
+	/// Review exists specification.
+	/// </summary>
+	public class ReviewExistsSpecification : SpecificationBase<Review>
+	{
+		#region Fields
+		private long m_reviewKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Reviews.Specifications.ReviewExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="reviewKey">Review key.</param>
+		public ReviewExistsSpecification(long reviewKey)
+		{
+			m_reviewKey = reviewKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Review target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Review with key '{0}' does not exists.".With (m_reviewKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -1105,24 +1656,18 @@ namespace jogosdaqui.Domain.Tags
 {  
 	public partial interface ITagRepository : IRepository<Tag, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer tag service.
 	/// </summary>
-	public partial class TagService
+	public partial class TagService : ServiceBase<Tag, long, ITagRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private ITagRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Tags. TagService"/> class.
 		/// </summary>
-		public  TagService() 
-			: this(DependencyService.Create<ITagRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  TagService()  
 		{
 		} 
 
@@ -1132,10 +1677,8 @@ namespace jogosdaqui.Domain.Tags
 		/// <param name="tagRepository"> Tag repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  TagService(ITagRepository tagRepository, IUnitOfWork<long> unitOfWork)
+		: base(tagRepository, unitOfWork)
 		{
-			m_repository = tagRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -1148,7 +1691,7 @@ namespace jogosdaqui.Domain.Tags
 		/// <param name="key">The key.</param>
 		public Tag GetTagByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -1157,7 +1700,7 @@ namespace jogosdaqui.Domain.Tags
 		/// <returns>The all Tags.</returns>
 		public IList<Tag> GetAllTags()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -1165,9 +1708,14 @@ namespace jogosdaqui.Domain.Tags
 		/// </summary>
 		public long CountAllTags() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Tag tag);
+		
 		/// <summary>
 		/// Saves the tag.
 		/// </summary>
@@ -1176,22 +1724,23 @@ namespace jogosdaqui.Domain.Tags
 		{
 			ExceptionHelper.ThrowIfNull ("tag", tag);
 
-			m_repository [tag.Key] = tag;
+			ExecuteSaveSpecification (tag);
+			
+			MainRepository [tag.Key] = tag;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(Tag tag);
-		
+		partial void ExecuteDeleteSpecification(long tagKey, Tag tag);
+		  
 		/// <summary>  
 		/// Deletes the tag.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteTag (long key)
-		{
+		{ 
 			var tag = GetTagByKey (key);
 			
 			if(tag == null)
@@ -1199,11 +1748,54 @@ namespace jogosdaqui.Domain.Tags
 				throw new ArgumentException("Tag with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (tag);
+			ExecuteDeleteSpecification (key, tag);
 
-			m_repository.Remove (tag);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (tag); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Tags.Specifications 
+{
+	/// <summary>
+	/// Tag exists specification.
+	/// </summary>
+	public class TagExistsSpecification : SpecificationBase<Tag>
+	{
+		#region Fields
+		private long m_tagKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Tags.Specifications.TagExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="tagKey">Tag key.</param>
+		public TagExistsSpecification(long tagKey)
+		{
+			m_tagKey = tagKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Tag target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "Tag with key '{0}' does not exists.".With (m_tagKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }
@@ -1212,24 +1804,18 @@ namespace jogosdaqui.Domain.Tags
 {  
 	public partial interface IAppliedTagRepository : IRepository<AppliedTag, long>
 	{
-		}  
+		}   
 
 	// <summary>
 	/// Domain layer appliedtag service.
 	/// </summary>
-	public partial class AppliedTagService
+	public partial class AppliedTagService : ServiceBase<AppliedTag, long, IAppliedTagRepository, IUnitOfWork<long>>
 	{ 
-		#region Fields	 
-        private IAppliedTagRepository m_repository;
-        private IUnitOfWork<long> m_unitOfWork; 
-		#endregion 
-		  
 		#region Constructors 
-      	/// <summary>
+      	/// <summary> 
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.AppliedTags. AppliedTagService"/> class.
 		/// </summary>
-		public  AppliedTagService() 
-			: this(DependencyService.Create<IAppliedTagRepository>(), DependencyService.Create<IUnitOfWork<long>>())
+		public  AppliedTagService()  
 		{
 		} 
 
@@ -1239,10 +1825,8 @@ namespace jogosdaqui.Domain.Tags
 		/// <param name="appliedtagRepository"> AppliedTag repository.</param>
 		/// <param name="unitOfWork">Unit of work.</param>
 		public  AppliedTagService(IAppliedTagRepository appliedtagRepository, IUnitOfWork<long> unitOfWork)
+		: base(appliedtagRepository, unitOfWork)
 		{
-			m_repository = appliedtagRepository; 
-			m_unitOfWork = unitOfWork;
-			m_repository.SetUnitOfWork (m_unitOfWork);
 		}
         #endregion
 		
@@ -1255,7 +1839,7 @@ namespace jogosdaqui.Domain.Tags
 		/// <param name="key">The key.</param>
 		public AppliedTag GetAppliedTagByKey(long key)
 		{
-			return m_repository.FindAll (g => g.Key == key).FirstOrDefault ();
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
 		
 		/// <summary>
@@ -1264,7 +1848,7 @@ namespace jogosdaqui.Domain.Tags
 		/// <returns>The all AppliedTags.</returns>
 		public IList<AppliedTag> GetAllAppliedTags()
 		{
-			return m_repository.FindAll(g => true).ToList();
+			return MainRepository.FindAll(g => true).ToList();
 		}
 		
 		/// <summary>
@@ -1272,9 +1856,14 @@ namespace jogosdaqui.Domain.Tags
 		/// </summary>
 		public long CountAllAppliedTags() 
 		{ 
-			return m_repository.CountAll (g => true); 
+			return MainRepository.CountAll (g => true); 
 		}
 
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(AppliedTag appliedtag);
+		
 		/// <summary>
 		/// Saves the appliedtag.
 		/// </summary>
@@ -1283,22 +1872,23 @@ namespace jogosdaqui.Domain.Tags
 		{
 			ExceptionHelper.ThrowIfNull ("appliedtag", appliedtag);
 
-			m_repository [appliedtag.Key] = appliedtag;
+			ExecuteSaveSpecification (appliedtag);
+			
+			MainRepository [appliedtag.Key] = appliedtag;
+			UnitOfWork.Commit (); 
+		} 
 
-			m_unitOfWork.Commit (); 
-		}
-
-		/// <summary>
-		/// Executes the deletion specification.
+		/// <summary> 
+		/// Executes the delete specification.
 		/// </summary>
-		partial void ExecuteDeletionSpecification(AppliedTag appliedtag);
-		
+		partial void ExecuteDeleteSpecification(long appliedtagKey, AppliedTag appliedtag);
+		  
 		/// <summary>  
 		/// Deletes the appliedtag.
 		/// </summary> 
 		/// <param name="key">The key.</param> 
 		public void DeleteAppliedTag (long key)
-		{
+		{ 
 			var appliedtag = GetAppliedTagByKey (key);
 			
 			if(appliedtag == null)
@@ -1306,11 +1896,54 @@ namespace jogosdaqui.Domain.Tags
 				throw new ArgumentException("AppliedTag with key '{0}' does not exists.".With(key));
 			}
 			
-			ExecuteDeletionSpecification (appliedtag);
+			ExecuteDeleteSpecification (key, appliedtag);
 
-			m_repository.Remove (appliedtag);
-			m_unitOfWork.Commit ();
+			MainRepository.Remove (appliedtag); 
+			UnitOfWork.Commit ();
 		}
+		#endregion
+	}
+}
+ 
+namespace jogosdaqui.Domain.Tags.Specifications 
+{
+	/// <summary>
+	/// AppliedTag exists specification.
+	/// </summary>
+	public class AppliedTagExistsSpecification : SpecificationBase<AppliedTag>
+	{
+		#region Fields
+		private long m_appliedtagKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.AppliedTags.Specifications.AppliedTagExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="appliedtagKey">AppliedTag key.</param>
+		public AppliedTagExistsSpecification(long appliedtagKey)
+		{
+			m_appliedtagKey = appliedtagKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (AppliedTag target)
+		{
+			if(target == null)
+			{
+				NotSatisfiedReason = "AppliedTag with key '{0}' does not exists.".With (m_appliedtagKey);
+				return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }

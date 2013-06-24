@@ -62,6 +62,8 @@
     <Compile Include="Tags\AppliedTagServiceTest.cs" />
     <Compile Include="Generated.cs" />
     <Compile Include="ServiceFacadeTest.cs" />
+    <Compile Include="Articles\ArticleServiceTest.cs" />
+    <Compile Include="Articles\EventServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -80,5 +82,7 @@
   <ItemGroup>
     <Folder Include="Tags\" />
     <Folder Include="Games\" />
+    <Folder Include="Articles\" />
+    <Folder Include="Articles\Specifications\" />
   </ItemGroup>
 </Project>

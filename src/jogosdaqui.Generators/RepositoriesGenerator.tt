@@ -1,11 +1,11 @@
-﻿<#@ include file="Config.tt" #>   
+﻿<#@ include file="HeaderGenerator.tt" #>   
 
 using System;
 using Skahal.Infrastructure.Framework.Repositories;
 
-	 
+	  
 <# 
-RunForEachModel((e) => 
+RunForEachModel((e) =>  
 { 
 	if(e.HasImplementedIRepository)     
 	{  
@@ -25,7 +25,7 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 		
 		#region Constructors
 		/// <summary>
-		/// Initializes a new instance of the
+		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.Testing<#=e.Name#>Repository"/> class.
 		/// </summary>
 		public Testing<#=e.Name#>Repository() : base((g) => { lock(s_lock) { return ++s_lastKey; } })

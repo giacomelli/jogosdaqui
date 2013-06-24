@@ -44,6 +44,7 @@
     <Reference Include="Skahal.Domain">
       <HintPath>..\references\Skahal.Domain.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,7 +57,6 @@
     <Compile Include="Companies\Company.cs" />
     <Compile Include="Games\GameEvaluation.cs" />
     <Compile Include="Articles\Comment.cs" />
-    <Compile Include="Games\Specifications\GameDeletionSpecification.cs" />
     <Compile Include="Games\IGameRepository.cs" />
     <Compile Include="Platforms\IPlatformRepository.cs" />
     <Compile Include="Companies\ICompanyRepository.cs" />
@@ -82,6 +82,14 @@
     <Compile Include="Tags\IAppliedTagRepository.cs" />
     <Compile Include="Tags\AppliedTagService.cs" />
     <Compile Include="ServiceFacade.cs" />
+    <Compile Include="Tags\Specifications\AppliedTagSaveSpecification.cs" />
+    <Compile Include="Articles\Specifications\ArticleExistsSpecification.cs" />
+    <Compile Include="Articles\EventService.cs" />
+    <Compile Include="Articles\ArticleServiceBase.cs" />
+    <Compile Include="Articles\InterviewService.cs" />
+    <Compile Include="Articles\NewsService.cs" />
+    <Compile Include="Articles\PreviewService.cs" />
+    <Compile Include="Articles\ReviewService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -91,5 +99,8 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <ItemGroup>
     <Folder Include="Tags\" />
+    <Folder Include="Tags\Specifications\" />
+    <Folder Include="Articles\Specifications\" />
+    <Folder Include="Games\Specifications\" />
   </ItemGroup>
 </Project>

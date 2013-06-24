@@ -54,11 +54,11 @@ namespace jogosdaqui.Domain.UnitTests
 		public void GetEntityByKey_NullEntityNameAndKey_Exception ()
 		{
 			ExceptionAssert.IsThrowing(new ArgumentNullException("entityName"), () => {
-				ServiceFacade.GetEntityByKey(null, 1);
+				ServiceFacade.GetEntity(null, 1);
 			});
 
 			ExceptionAssert.IsThrowing(new ArgumentNullException("entityName"), () => {
-				ServiceFacade.GetEntityByKey("", 1);
+				ServiceFacade.GetEntity("", 1);
 			});
 		}
 
@@ -66,7 +66,7 @@ namespace jogosdaqui.Domain.UnitTests
 		public void GetEntityByKey_DoesNotExistsEntityWithName_Exception ()
 		{
 			ExceptionAssert.IsThrowing(new ArgumentException ("There is no entity with the name 'Jogo'."), () => {
-				ServiceFacade.GetEntityByKey("Jogo", 1);
+				ServiceFacade.GetEntity("Jogo", 1);
 			});
 		}
 
@@ -77,16 +77,16 @@ namespace jogosdaqui.Domain.UnitTests
 			Stubs.TagRepository.Add (new Tag(1));
 			Stubs.UnitOfWork.Commit ();
 
-			var actual = ServiceFacade.GetEntityByKey ("Game", 1);
+			var actual = ServiceFacade.GetEntity ("Game", 1);
 			Assert.AreEqual (1, actual.Key);
 
-			actual = ServiceFacade.GetEntityByKey ("Tag", 1);
+			actual = ServiceFacade.GetEntity ("Tag", 1);
 			Assert.AreEqual (1, actual.Key);
 
-			actual = ServiceFacade.GetEntityByKey ("Tag", 2);
+			actual = ServiceFacade.GetEntity ("Tag", 2);
 			Assert.IsNull (actual);
 
-			actual = ServiceFacade.GetEntityByKey ("AppliedTag", 1);
+			actual = ServiceFacade.GetEntity ("AppliedTag", 1);
 			Assert.IsNull (actual);
 		}
 		#endregion

@@ -2,6 +2,9 @@ using System;
 
 namespace jogosdaqui.Domain.Articles
 {
+	/// <summary>
+	/// Represents a news.
+	/// </summary>
 	public class News : ArticleBase
 	{
 		#region Constructors
@@ -22,6 +25,10 @@ namespace jogosdaqui.Domain.Articles
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Gets or sets the source.
+		/// </summary>
+		/// <value>The source.</value>
 		public NewsSource Source { get; set; }
 		#endregion
 	}

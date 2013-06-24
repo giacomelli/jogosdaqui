@@ -3687,5 +3687,34 @@
             </summary>
             <value>The repository.</value>
         </member>
+        <member name="T:Skahal.Infrastructure.Framework.Domain.ServiceBase`4">
+            <summary>
+            A domain service base class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Domain.ServiceBase`4.#ctor">
+            <summary>
+            Initializes a new instance of the Skahal.Infrastructure.Framework.Domain.ServiceBase/&gt; class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Domain.ServiceBase`4.#ctor(`2,`3)">
+            <summary>
+            Initializes a new instance of the Skahal.Infrastructure.Framework.Domain.ServiceBase/&gt; class.
+            </summary>
+            <param name="eventRepository">Event repository.</param>
+            <param name="unitOfWork">Unit of work.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Domain.ServiceBase`4.MainRepository">
+            <summary>
+            Gets the main repository.
+            </summary>
+            <value>The main repository.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Domain.ServiceBase`4.UnitOfWork">
+            <summary>
+            Gets the unit of work.
+            </summary>
+            <value>The unit of work.</value>
+        </member>
     </members>
 </doc>

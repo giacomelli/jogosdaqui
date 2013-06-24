@@ -6,6 +6,7 @@ using jogosdaqui.Domain.Articles;
 using jogosdaqui.Domain.Games;
 using jogosdaqui.Domain.Tags;
 using jogosdaqui.Domain.UnitTests;
+using KissSpecifications;
 
 namespace jogosdaqui.Domain.UnitTests
 {
@@ -150,6 +151,55 @@ namespace jogosdaqui.Domain.UnitTests
 
 			actual = m_target.GetAppliedTags ("Review", 2);
 			Assert.AreEqual (0, actual.Count);
+		}
+
+		[Test]
+		public void Save_EntityDoesNotExists_Exception()
+		{
+			var appliedTag = new AppliedTag ();
+			appliedTag.EntityName = "Game";
+			appliedTag.EntityKey = 0;
+
+			var target = new AppliedTagService ();
+
+			ExceptionAssert.IsThrowing(new SpecificationNotSatisfiedException("There is no Entity 'Game' with key '0'."), () => {
+				target.SaveAppliedTag(appliedTag);
+			});
+		}
+
+		[Test]
+		public void SaveAppliedTag_AppliedTagDoesNotExists_Created()
+		{
+			Stubs.GameRepository.Add (new Game(1));
+			Stubs.UnitOfWork.Commit ();
+
+			var appliedtag = new AppliedTag ();
+			appliedtag.EntityName = "Game";
+			appliedtag.EntityKey = 1;
+
+			m_target.SaveAppliedTag (appliedtag);
+
+			Assert.AreEqual(5, m_target.CountAllAppliedTags());
+			Assert.AreEqual (5, m_target.GetAppliedTagByKey (appliedtag.Key).Key);
+		}
+
+		[Test]
+		public void SaveAppliedTag_AppliedTagDoesExists_Updated()
+		{
+			Stubs.GameRepository.Add (new Game(1));
+			Stubs.UnitOfWork.Commit ();
+
+			var appliedtag = new AppliedTag () { 
+				Key = 1
+			};
+
+			appliedtag.EntityName = "Game";
+			appliedtag.EntityKey = 1;
+
+			m_target.SaveAppliedTag (appliedtag);
+
+			Assert.AreEqual(4, m_target.CountAllAppliedTags());
+			Assert.AreEqual (1, m_target.GetAppliedTagByKey (appliedtag.Key).Key);
 		}
 		#endregion
 	}

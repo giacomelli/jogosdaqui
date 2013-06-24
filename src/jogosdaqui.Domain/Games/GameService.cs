@@ -12,9 +12,14 @@ namespace jogosdaqui.Domain.Games
 	public partial class GameService
 	{	
 		#region Methods
-		partial void ExecuteDeletionSpecification (Game game)
+		/// <summary>
+		/// Executes the delete specification.
+		/// </summary>
+		/// <param name="gameKey">Game key.</param>
+		/// <param name="game">Game.</param>
+		partial void ExecuteDeleteSpecification(long gameKey, Game game)
 		{
-			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameDeletionSpecification ());
+			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification (gameKey));
 		}
 		#endregion
 	}

@@ -1,5 +1,6 @@
 ﻿<#@ template language="C#v3.5" #>
 <#@ assembly name="System.Core.dll" #>
+<#@ assembly name="$(SolutionDir)/packages/HelperSharp.0.0.2.7/lib/net35/HelperSharp.dll" #>
 <#@ assembly name="$(SolutionDir)/jogosdaqui.Domain/bin/Debug/jogosdaqui.Domain.dll" #>
 <#@ assembly name="$(SolutionDir)/references/Skahal.Infrastructure.Framework.dll" #>
 <#@ import namespace="jogosdaqui.Domain.Articles" #> 
@@ -13,6 +14,7 @@
 <#@ import namespace="System.Linq" #>   
 <#@ import namespace="System.Collections.Generic" #>   
 <#@ import namespace="Skahal.Infrastructure.Framework" #>
+<#@ import namespace="HelperSharp" #>
    
 <#+ 
 class GenEntity
@@ -21,6 +23,8 @@ class GenEntity
 	public string LowerName;
 	public string Namespace;
 	public string PluralName;
+	public string ParameterName;
+	public string VariableName;
 	public bool HasImplementedIRepository;
 	public Type Type;
 }
@@ -33,6 +37,7 @@ Type[] modelsType = new Type[]
 	typeof(Language),
 	typeof(Person),	
 	typeof(Comment),
+	typeof(Event),
 	typeof(Interview),
 	typeof(News),	
 	typeof(Preview),
@@ -41,15 +46,23 @@ Type[] modelsType = new Type[]
 	typeof(AppliedTag)
 	
 };
-  
-void RunForEachModel(Action<GenEntity> action)
+
+string[] domainUnitTestsIgnoreMethods = new string[]
 {
-	foreach(var t in modelsType) 
+	"SaveAppliedTag_AppliedTagDoesNotExists_Created",
+	"SaveAppliedTag_AppliedTagDoesExists_Updated"
+};
+ 
+void RunForEachModel(Action<GenEntity> action)
+{ 
+	foreach(var t in modelsType)   
 	{  
-		var model = new GenEntity();
+		var model = new GenEntity(); 
 		model.Type = t;		
 		model.Name = t.Name;  
 		model.LowerName = model.Name.ToLowerInvariant(); 
+		model.ParameterName = GetParameterName(model.LowerName);
+		model.VariableName = model.ParameterName;
 		model.Namespace = t.Namespace;
 		model.PluralName = model.Name;
 		  
@@ -65,6 +78,34 @@ void RunForEachModel(Action<GenEntity> action)
 		model.HasImplementedIRepository = Type.GetType(t.Namespace + ".I" + model.Name + "Repository, jogosdaqui.Domain.dll") != null;
 
 		action(model); 
+	}
+}
+
+private string GetParameterName(string lowerName)
+{
+	if(lowerName.Equals("event"))
+	{
+		return "@event";
+	}
+	
+	return lowerName;
+}
+
+bool CanGenerateDomainUnitTestMethod(string methodName)
+{
+	return !domainUnitTestsIgnoreMethods.Contains(methodName);
+}
+
+string GetDomainServiceInheritance(GenEntity genEntity)
+{
+	if(genEntity.Namespace.Contains("Articles") 
+	&& !genEntity.Name.Equals("Comment")
+	&& !genEntity.Name.Equals("EventSource"))
+	{
+		return "ArticleServiceBase<{0}, I{0}Repository>".With(genEntity.Name);
+	}
+	else {
+		return "ServiceBase<{0}, long, I{0}Repository, IUnitOfWork<long>>".With(genEntity.Name);
 	}
 }
 #>

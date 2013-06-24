@@ -60,7 +60,7 @@ namespace jogosdaqui.Domain
 		/// <returns>The entity by key.</returns>
 		/// <param name="entityName">Entity name.</param>
 		/// <param name="entityKey">Entity key.</param>
-		public static IEntity<long> GetEntityByKey(string entityName, long entityKey)
+		public static IEntity<long> GetEntity(string entityName, long entityKey)
 		{
 			var transientEntity = CreateTransientEntity (entityName);
 			var service = CreateService (transientEntity);

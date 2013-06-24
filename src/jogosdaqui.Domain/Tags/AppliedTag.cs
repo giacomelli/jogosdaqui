@@ -18,7 +18,7 @@ namespace jogosdaqui.Domain.Tags
 		public IEntity<long> Entity
 		{
 			get {
-				return ServiceFacade.GetEntityByKey (EntityName, EntityKey);
+				return ServiceFacade.GetEntity (EntityName, EntityKey);
 			}
 		}
 		#endregion

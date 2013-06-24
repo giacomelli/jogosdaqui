@@ -27,7 +27,7 @@ RunForEachModel((e) =>
 <#
 	}
 });
-#>		
+#>		 
 		#endregion
 
 		#region Methods
@@ -150,30 +150,40 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.Save<#=e.Name#> (null);
 			});
 		}
-
-		[Test]
+<# 
+		if(CanGenerateDomainUnitTestMethod("Save{0}_{0}DoesNotExists_Created".With(e.Name)))
+		{   
+#> 
+		[Test]  
 		public void Save<#=e.Name#>_<#=e.Name#>DoesNotExists_Created()
 		{
-			var <#=e.LowerName#> = new <#=e.Name#> ();
+			var <#=e.VariableName#> = new <#=e.Name#> ();
  
-			m_target.Save<#=e.Name#> (<#=e.LowerName#>);
+			m_target.Save<#=e.Name#> (<#=e.VariableName#>);
 
 			Assert.AreEqual(5, m_target.CountAll<#=e.PluralName#>());
-			Assert.AreEqual (5, m_target.Get<#=e.Name#>ByKey (<#=e.LowerName#>.Key).Key);
+			Assert.AreEqual (5, m_target.Get<#=e.Name#>ByKey (<#=e.VariableName#>.Key).Key);
 		}
+<#		}
 
+		if(CanGenerateDomainUnitTestMethod("Save{0}_{0}DoesExists_Updated".With(e.Name)))
+		{   
+#> 
 		[Test]
 		public void Save<#=e.Name#>_<#=e.Name#>DoesExists_Updated()
 		{
-			var <#=e.LowerName#> = new <#=e.Name#> () { 
-				Key = 1
+			var <#=e.VariableName#> = new <#=e.Name#> () { 
+				Key = 1 
 			};
 
-			m_target.Save<#=e.Name#> (<#=e.LowerName#>);
+			m_target.Save<#=e.Name#> (<#=e.VariableName#>);
 
 			Assert.AreEqual(4, m_target.CountAll<#=e.PluralName#>());
-			Assert.AreEqual (1, m_target.Get<#=e.Name#>ByKey (<#=e.LowerName#>.Key).Key);
+			Assert.AreEqual (1, m_target.Get<#=e.Name#>ByKey (<#=e.VariableName#>.Key).Key);
 		}
+<# 
+		}  
+#> 
 		#endregion
 	}
 }

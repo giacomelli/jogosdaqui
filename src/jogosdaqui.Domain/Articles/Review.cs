@@ -2,6 +2,9 @@ using System;
 
 namespace jogosdaqui.Domain.Articles
 {
+	/// <summary>
+	/// Represents a review.
+	/// </summary>
 	public class Review : ArticleBase
 	{
 		#region Constructors
@@ -22,7 +25,16 @@ namespace jogosdaqui.Domain.Articles
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Gets or sets the game evaluation identifier.
+		/// </summary>
+		/// <value>The game evaluation identifier.</value>
 		public int GameEvaluationId { get; set; }
+
+		/// <summary>
+		/// Gets or sets the expected date release.
+		/// </summary>
+		/// <value>The expected date release.</value>
 		public DateTime? ExpectedDateRelease { get; set; }
 		#endregion
 	}
