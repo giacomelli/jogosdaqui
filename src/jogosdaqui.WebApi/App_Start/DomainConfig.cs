@@ -17,6 +17,7 @@ using jogosdaqui.Domain.Persons;
 using jogosdaqui.Domain.Languages;
 using jogosdaqui.Domain.Articles;
 using jogosdaqui.Domain.Tags;
+using jogosdaqui.Infrastructure.Repositories.MongoDB;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.DomainConfig), "PreStart")]
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.DomainConfig), "PostStart")]
@@ -46,7 +47,8 @@ namespace App_Start
 			DependencyService.Register<IPlatformRepository> (new TestingPlatformRepository());			
 			DependencyService.Register<IPersonRepository> (new TestingPersonRepository());
 
-			DependencyService.Register<ITagRepository> (new TestingTagRepository());
+			//DependencyService.Register<ITagRepository> (new TestingTagRepository());
+			DependencyService.Register<ITagRepository> (new MongoDBTagRepository());
 			DependencyService.Register<IAppliedTagRepository> (new TestingAppliedTagRepository());
 
 
