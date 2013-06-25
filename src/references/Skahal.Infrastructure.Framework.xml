@@ -12,7 +12,7 @@
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs.#ctor(Skahal.Infrastructure.Framework.Net.Messaging.DisconnectionReason)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.DisconnectedEventArgs"/> class.
             </summary>
             <param name="reason">Reason.</param>
         </member>
@@ -62,6 +62,23 @@
             Defines the interface for a basic messenger.
             </summary>
         </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Connect">
+            <summary>
+            Connect the messenger.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.SendMessage(System.String,System.String)">
+            <summary>
+            Sends the message.
+            </summary>
+            <param name="name">The message name.</param>
+            <param name="value">The message value.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Disconnect">
+            <summary>
+            Disconnect the messenger.
+            </summary>
+        </member>
         <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Connected">
             <summary>
             Occurs when connected.
@@ -92,25 +109,7 @@
             <summary>
             Gets or sets a value indicating whether this instance can receive messages.
             </summary>
-            <value>
-                <c>true</c> if this instance can receive messages; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Connect">
-            <summary>
-            Connect the messenger.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.SendMessage(System.String,System.String)">
-            <summary>
-            Sends the message.
-            </summary>
-            <param name="name">The message name.</param>
-            <param name="value">The message value.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.IMessenger.Disconnect">
-            <summary>
-            Disconnect the messenger.
-            </summary>
+            <value><c>true</c> if this instance can receive messages; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Net.Messaging.Message">
             <summary>
@@ -119,12 +118,12 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.Message.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.Message" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.Message"/> class.
             </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.Message.#ctor(System.String,System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.Message" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.Message"/> class.
             </summary>
             <param name="name">The message name.</param>
             <param name="value">The message value.</param>
@@ -186,43 +185,10 @@
             The messages received buffer.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Connected">
-            <summary>
-            Occurs when connected.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.MessageSent">
-            <summary>
-            Occurs when message was sent.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.MessageReceived">
-            <summary>
-            Occurs when message received.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Disconnected">
-            <summary>
-            Occurs when disconnected.
-            </summary>
-        </member>
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase"/> class.
             </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.State">
-            <summary>
-            Gets the state.
-            </summary>
-            <value>The state.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.CanReceiveMessages">
-            <summary>
-            Gets or sets a value indicating whether this instance can receive messages.
-            </summary>
-            <value>
-                <c>true</c> if this instance can receive messages; otherwise, <c>false</c>.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Connect">
             <summary>
@@ -268,7 +234,39 @@
             <summary>
             Raises the disconnected event.
             </summary>
-            <param name="e">The event argumetns</param>
+            <param name="e">The event argumetns</param>    
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Connected">
+            <summary>
+            Occurs when connected.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.MessageSent">
+            <summary>
+            Occurs when message was sent.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.MessageReceived">
+            <summary>
+            Occurs when message received.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.Disconnected">
+            <summary>
+            Occurs when disconnected.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.State">
+            <summary>
+            Gets the state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Net.Messaging.MessengerBase.CanReceiveMessages">
+            <summary>
+            Gets or sets a value indicating whether this instance can receive messages.
+            </summary>
+            <value><c>true</c> if this instance can receive messages; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Commons.EventHandlerExtensions">
             <summary>
@@ -279,10 +277,10 @@
             <summary>
             Raise event.
             </summary>
-            <param name="handler">
+            <param name='handler'>
             Handler.
             </param>
-            <param name="sender">
+            <param name='sender'>
             Sender.
             </param>
         </member>
@@ -290,16 +288,16 @@
             <summary>
             Raise the event.
             </summary>
-            <param name="handler">
+            <param name='handler'>
             Handler.
             </param>
-            <param name="sender">
+            <param name='sender'>
             Sender.
             </param>
-            <param name="e">
+            <param name='e'>
             E.
             </param>
-            <typeparam name="TEventArgs">
+            <typeparam name='TEventArgs'>
             The 1st type parameter.
             </typeparam>
         </member>
@@ -311,14 +309,14 @@
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs.#ctor(Skahal.Infrastructure.Framework.Net.Messaging.Message)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs"/> class.
             </summary>
             <param name="message">Message.</param>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.MessageEventArgs"/> class.
             </summary>
             <param name="name">Name.</param>
             <param name="value">Value.</param>
@@ -367,17 +365,55 @@
             A base ILogStrategy implementation.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.DebugWritten">
+        <member name="T:Skahal.Infrastructure.Framework.Logging.ILogStrategy">
+            <summary>
+            Defines a interface for log strategies.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteDebug(System.String,System.Object[])">
+            <summary>
+            Writes the debug log level message.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteWarning(System.String,System.Object[])">
+            <summary>
+            Writes the warning log level message.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteError(System.String,System.Object[])">
+            <summary>
+            Writes the error log level message.
+            </summary>
+            <param name='message'>
+            Message.
+            </param>
+            <param name='args'>
+            Arguments.
+            </param>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.DebugWritten">
             <summary>
             Occurs when a debug log is written.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.WarningWritten">
+        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WarningWritten">
             <summary>
             Occurs when a warning log is written.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.ErrorWritten">
+        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.ErrorWritten">
             <summary>
             Occurs when an error log is written.
             </summary>
@@ -423,58 +459,20 @@
             </summary>
             <param name="e">The arguments.</param>
         </member>
-        <member name="T:Skahal.Infrastructure.Framework.Logging.ILogStrategy">
-            <summary>
-            Defines a interface for log strategies.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.DebugWritten">
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.DebugWritten">
             <summary>
             Occurs when a debug log is written.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WarningWritten">
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.WarningWritten">
             <summary>
             Occurs when a warning log is written.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.ILogStrategy.ErrorWritten">
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogStrategyBase.ErrorWritten">
             <summary>
             Occurs when an error log is written.
             </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteDebug(System.String,System.Object[])">
-            <summary>
-            Writes the debug log level message.
-            </summary>
-            <param name="message">
-            Message.
-            </param>
-            <param name="args">
-            Arguments.
-            </param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteWarning(System.String,System.Object[])">
-            <summary>
-            Writes the warning log level message.
-            </summary>
-            <param name="message">
-            Message.
-            </param>
-            <param name="args">
-            Arguments.
-            </param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Logging.ILogStrategy.WriteError(System.String,System.Object[])">
-            <summary>
-            Writes the error log level message.
-            </summary>
-            <param name="message">
-            Message.
-            </param>
-            <param name="args">
-            Arguments.
-            </param>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs">
             <summary>
@@ -483,13 +481,13 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs"/> class.
             </summary>
             <param name="message">Message.</param>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs.#ctor(System.String,System.Object[])">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogWrittenEventArgs"/> class.
             </summary>
             <param name="message">Message.</param>
             <param name="args">Arguments.</param>
@@ -525,21 +523,6 @@
             A central point to organize logs.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.DebugWritten">
-            <summary>
-            Occurs when a debug log is written.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.WarningWritten">
-            <summary>
-            Occurs when a warning log is written.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.ErrorWritten">
-            <summary>
-            Occurs when a error log is written.
-            </summary>
-        </member>
         <member name="F:Skahal.Infrastructure.Framework.Logging.LogService.s_logStrategy">
             <summary>
             The log strategy.
@@ -566,10 +549,10 @@
             <summary>
             Write a debug log level.
             </summary>
-            <param name="message">
+            <param name='message'>
             Message.
             </param>
-            <param name="args">
+            <param name='args'>
             Arguments.
             </param>
         </member>
@@ -577,10 +560,10 @@
             <summary>
             Write a warning log level.
             </summary>
-            <param name="message">
+            <param name='message'>
             Message.
             </param>
-            <param name="args">
+            <param name='args'>
             Arguments.
             </param>
         </member>
@@ -588,12 +571,27 @@
             <summary>
             Write an error log level.
             </summary>
-            <param name="message">
+            <param name='message'>
             Message.
             </param>
-            <param name="args">
+            <param name='args'>
             Arguments.
             </param>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.DebugWritten">
+            <summary>
+            Occurs when a debug log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.WarningWritten">
+            <summary>
+            Occurs when a warning log is written.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Logging.LogService.ErrorWritten">
+            <summary>
+            Occurs when a error log is written.
+            </summary>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Configuration.BootstrapperBase">
             <summary>
@@ -651,28 +649,22 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase`1" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase`1"/> class.
             </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.#ctor(`0)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase`1" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.EntityBase`1"/> class.
             </summary>
             <param name="key">Key.</param>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.Domain.EntityBase`1.Key">
-            <summary>
-            Gets the key.
-            </summary>
-            <value>The key.</value>
-        </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.Equals(System.Object)">
             <summary>
-            Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
+            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
             </summary>
-            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
             <returns>
-                <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+              <c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.GetHashCode">
@@ -680,7 +672,7 @@
             Returns a hash code for this instance.
             </summary>
             <returns>
-            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
             </returns>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.EntityBase`1.op_Equality(Skahal.Infrastructure.Framework.Domain.EntityBase{`0},Skahal.Infrastructure.Framework.Domain.EntityBase{`0})">
@@ -703,16 +695,16 @@
             The result of the operator.
             </returns>
         </member>
+        <member name="P:Skahal.Infrastructure.Framework.Domain.EntityBase`1.Key">
+            <summary>
+            Gets the key.
+            </summary>
+            <value>The key.</value>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.Pooling.PoolService">
             <summary>
             Pool service.
             </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolService.PoolsCount">
-            <summary>
-            Gets the pools count.
-            </summary>
-            <value>The pools count.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolService.GetItem(System.String)">
             <summary>
@@ -740,7 +732,7 @@
             <summary>
             Releases all items in all pools that fit in release filter specified.
             </summary>
-            <param name="releaseFilter">
+            <param name='releaseFilter'>
             Release filter.
             </param>
         </member>
@@ -773,41 +765,16 @@
             <returns>The pool.</returns>
             <param name="poolName">Pool name.</param>
         </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolService.PoolsCount">
+            <summary>
+            Gets the pools count.
+            </summary>
+            <value>The pools count.</value>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.Pooling.IPool">
             <summary>
             Defines an interface for a pool.
             </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.Size">
-            <summary>
-            Gets or sets the size.
-            </summary>
-            <value>The size.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.IsFixedSize">
-            <summary>
-            Gets or sets a value indicating whether this instance is fixed size.
-            </summary>
-            <value>
-                <c>true</c> if this instance is fixed size; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.AutoDisableTime">
-            <summary>
-            Gets or sets the auto disable time.
-            </summary>
-            <value>The auto disable time.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.ItemsCount">
-            <summary>
-            Gets the items count.
-            </summary>
-            <value>The items count.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Pooling.IPool.CreateItems">
             <summary>
@@ -830,9 +797,39 @@
             <summary>
             Releases all items that fit in release filter specified.
             </summary>
-            <param name="releaseFilter">
+            <param name='releaseFilter'>
             Release filter.
             </param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.Size">
+            <summary>
+            Gets or sets the size.
+            </summary>
+            <value>The size.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.IsFixedSize">
+            <summary>
+            Gets or sets a value indicating whether this instance is fixed size.
+            </summary>
+            <value><c>true</c> if this instance is fixed size; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.AutoDisableTime">
+            <summary>
+            Gets or sets the auto disable time.
+            </summary>
+            <value>The auto disable time.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Pooling.IPool.ItemsCount">
+            <summary>
+            Gets the items count.
+            </summary>
+            <value>The items count.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Pooling.PoolBase">
             <summary>
@@ -841,9 +838,32 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Pooling.PoolBase" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Pooling.PoolBase"/> class.
             </summary>
             <param name="name">Name.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.CreateItems">
+            <summary>
+            Creates the items.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.GetItem">
+            <summary>
+            Gets the item.
+            </summary>
+            <returns>The item.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.ReleaseItem(System.Object)">
+            <summary>
+            Releases the item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.ReleaseAll(System.Func{System.Object,System.Boolean})">
+            <summary>
+            Releases all items that fit in release filter specified.
+            </summary>
+            <param name="releaseFilter">Release filter.</param>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.Pooling.PoolBase.Name">
             <summary>
@@ -876,37 +896,9 @@
             </summary>
             <value>The items count.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.CreateItems">
-            <summary>
-            Creates the items.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.GetItem">
-            <summary>
-            Gets the item.
-            </summary>
-            <returns>The item.</returns>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.ReleaseItem(System.Object)">
-            <summary>
-            Releases the item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Pooling.PoolBase.ReleaseAll(System.Func{System.Object,System.Boolean})">
-            <summary>
-            Releases all items that fit in release filter specified.
-            </summary>
-            <param name="releaseFilter">Release filter.</param>
-        </member>
         <member name="T:Skahal.Infrastructure.Framework.Globalization.GlobalizationService">
             <summary>
             Globalization service.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.Globalization.GlobalizationService.CultureChanged">
-            <summary>
-            Occurs when culture changed.
             </summary>
         </member>
         <member name="F:Skahal.Infrastructure.Framework.Globalization.GlobalizationService.PtBrCultureInfo">
@@ -918,12 +910,6 @@
             <summary>
             United States English culture information.
             </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Globalization.GlobalizationService.CurrentCulture">
-            <summary>
-            Gets the current culture.
-            </summary>
-            <value>The current culture.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Globalization.GlobalizationService.Initialize(Skahal.Infrastructure.Framework.Globalization.IGlobalizationLabelRepository)">
             <summary>
@@ -948,6 +934,17 @@
             Translate the specified english text to current culture.
             </summary>
             <param name="englishText">English text.</param>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.Globalization.GlobalizationService.CultureChanged">
+            <summary>
+            Occurs when culture changed.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Globalization.GlobalizationService.CurrentCulture">
+            <summary>
+            Gets the current culture.
+            </summary>
+            <value>The current culture.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.People.UserPreference">
             <summary>
@@ -979,34 +976,17 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.People.User.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.People.User" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.People.User"/> class.
             <remarks>
             The entity will receive a new and unique key.
-            </remarks></summary>
+            </remarks>
+            </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.People.User.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.People.User" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.People.User"/> class.
             </summary>
             <param name="key">The entity key.</param>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.People.User.RemoteKey">
-            <summary>
-            Gets or sets the remote id.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.People.User.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.People.User.Preferences">
-            <summary>
-            Gets the preferences.
-            </summary>
-            <value>The preferences.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.People.User.GetPreference(System.String)">
             <summary>
@@ -1028,7 +1008,7 @@
             </summary>
             <returns>The preference by name.</returns>
             <param name="name">Name.</param>
-            <param name="defaultValue">A default value in the case the preference does not exists.</param>
+            <param name="defaultValue">A default value in the case the preference does not exists.</param> 
         </member>
         <member name="M:Skahal.Infrastructure.Framework.People.User.GetPreferenceValue``1(System.String,``0)">
             <summary>
@@ -1036,24 +1016,40 @@
             </summary>
             <returns>The preference value.</returns>
             <param name="name">Name.</param>
-            <param name="defaultValue">A default value in the case the preference does not exists.</param>
+            <param name="defaultValue">A default value in the case the preference does not exists.</param> 
         </member>
         <member name="M:Skahal.Infrastructure.Framework.People.User.HasPreference(System.String)">
             <summary>
             Determines whether this instance has preference with the specified name.
             </summary>
-            <returns>
-                <c>true</c> if this instance has preference with the specified name; otherwise, <c>false</c>.</returns>
+            <returns><c>true</c> if this instance has preference with the specified name; otherwise, <c>false</c>.</returns>
             <param name="name">Name.</param>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.People.User.SetPreference(System.String,System.Object)">
             <summary>
             Sets the preference.
             </summary>
-            <returns>
-                <c>true</c>, if was set a new preference (there is no preference with the specified name before), <c>false</c> otherwise.</returns>
+            <returns><c>true</c>, if was set a new preference (there is no preference with the specified name before), <c>false</c> otherwise.</returns>
             <param name="name">Name.</param>
             <param name="value">Value.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.User.RemoteKey">
+            <summary>
+            Gets or sets the remote id.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.User.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.People.User.Preferences">
+            <summary>
+            Gets the preferences.
+            </summary>
+            <value>The preferences.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.People.UserService">
             <summary>
@@ -1111,7 +1107,7 @@
             </summary>
             <returns>The preference.</returns>
             <param name="name">Name.</param>
-            <param name="defaultValue">A default value in the case the preference does not exists.</param>
+            <param name="defaultValue">A default value in the case the preference does not exists.</param> 
         </member>
         <member name="M:Skahal.Infrastructure.Framework.People.UserService.GetPreferenceValue``1(System.String,``0)">
             <summary>
@@ -1119,12 +1115,64 @@
             </summary>
             <returns>The preference value.</returns>
             <param name="name">Name.</param>
-            <param name="defaultValue">A default value in the case the preference does not exists.</param>
+            <param name="defaultValue">A default value in the case the preference does not exists.</param> 
         </member>
         <member name="T:Skahal.Infrastructure.Framework.People.IUserRepository">
             <summary>
             Defines a interface for user repository.
             </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.IRepository`2">
+            <summary>
+            Defines the interface of a repository entity.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
+            <summary>
+            Sets the unit of work.
+            </summary>
+            <param name="unitOfWork">Unit of work.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindBy(`1)">
+            <summary>
+            Finds the entity by the key.
+            </summary>
+            <returns>The found entity.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
+            <summary>
+            Finds all entities that matches the filter.
+            </summary>
+            <returns>The found entities.</returns>
+            <param name="offset">Offset.</param>
+            <param name="limit">Limit.</param>
+            <param name="filter">Filter.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.CountAll(System.Func{`0,System.Boolean})">
+            <summary>
+            Counts all entities that matches the filter.
+            </summary>
+            <returns>The number of the entities that matches the filter.</returns>
+            <param name="filter">Filter.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Add(`0)">
+            <summary>
+            Add the specified entity.
+            </summary>
+            <param name="item">The entity.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Remove(`0)">
+            <summary>
+            Remove the specified entity.
+            </summary>
+            <param name="item">The entity.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Item(`1)">
+            <summary>
+            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.IRepository`2"/> with the specified key.
+            </summary>
+            <param name="key">Key.</param>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Logging.BufferLogStrategy">
             <summary>
@@ -1138,14 +1186,14 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Logging.LogMessage.#ctor(System.String,System.Object[])">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogMessage" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogMessage"/> class.
             </summary>
             <param name="message">Message.</param>
             <param name="arguments">Arguments.</param>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Logging.LogMessage.#ctor(Skahal.Infrastructure.Framework.Logging.LogLevel,System.String,System.Object[])">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogMessage" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.LogMessage"/> class.
             </summary>
             <param name="logLevel">Log level.</param>
             <param name="message">Message.</param>
@@ -1178,8 +1226,7 @@
             <summary>
             Determines whether is a valid tcp port number the specified portNumber.
             </summary>
-            <returns>
-                <c>true</c> if is a valid tcp port number the specified portNumber; otherwise, <c>false</c>.</returns>
+            <returns><c>true</c> if is a valid tcp port number the specified portNumber; otherwise, <c>false</c>.</returns>
             <param name="portNumber">Port number.</param>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.NetHelper.ThrowIfInvalidTcpPortNumber(System.Int32)">
@@ -1195,7 +1242,7 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs.#ctor(System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Net.Messaging.ConnectedEventArgs"/> class.
             </summary>
             <param name="connectionOrder">Connection order.</param>
         </member>
@@ -1212,15 +1259,9 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.#ctor(Skahal.Infrastructure.Framework.Logging.ILogStrategy)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy"/> class.
             </summary>
             <param name="underlyingLogStrategy">Underlying log strategy.</param>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.Filter">
-            <summary>
-            Gets or sets the filter for log messages.
-            </summary>
-            <value>The filter.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.WriteDebug(System.String,System.Object[])">
             <summary>
@@ -1243,30 +1284,159 @@
             <param name="message">Message.</param>
             <param name="args">Arguments.</param>
         </member>
+        <member name="P:Skahal.Infrastructure.Framework.Logging.FiltrableLogStrategy.Filter">
+            <summary>
+            Gets or sets the filter for log messages.
+            </summary>
+            <value>The filter.</value>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2">
             <summary>
             A basic repository on memory.
             <remarks>
             In most of cases will be used for tests purposes.
-            </remarks></summary>
+            </remarks>
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2">
+            <summary>
+            A base class for repositories.
+            </summary>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1">
+            <summary>
+            Defines an unit of work repository.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
+            <summary>
+            Persists the new item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
+            <summary>
+            Persists the updated item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
+            <summary>
+            Persists the deleted item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2"/> class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.#ctor(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2"/> class.
+            </summary>
+            <param name="unitOfWork">Unit of work.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindBy(`1)">
+            <summary>
+            Finds an entity by the key.
+            </summary>
+            <returns>The entity.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
+            <summary>
+            Finds all entities that matches the filter.
+            </summary>
+            <returns>The found entities.</returns>
+            <param name="offset">Offset.</param>
+            <param name="limit">Limit.</param>
+            <param name="filter">Filter.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.CountAll(System.Func{`0,System.Boolean})">
+            <summary>
+            Counts all entities that matches the filter.
+            </summary>
+            <returns>The found entities.</returns>
+            <param name="filter">Filter.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
+            <summary>
+            Sets the unit of work.
+            </summary>
+            <param name="unitOfWork">Unit of work.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Add(`0)">
+            <summary>
+            Add the specified item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Remove(`0)">
+            <summary>
+            Remove the specified entity.
+            </summary>
+            <param name="item">The entity.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
+            <summary>
+            Persists the new item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
+            <summary>
+            Persists the updated item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
+            <summary>
+            Persists the deleted item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistNewItem(`0)">
+            <summary>
+            Persists the new item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistUpdatedItem(`0)">
+            <summary>
+            Persists the updated item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistDeletedItem(`0)">
+            <summary>
+            Persists the deleted item.
+            </summary>
+            <param name="item">Item.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Item(`1)">
+            <summary>
+            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2"/> with the specified key.
+            </summary>
+            <param name="key">Key.</param>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.UnitOfWork">
+            <summary>
+            Gets the unit of work.
+            </summary>
+            <value>The unit of work.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.#ctor(System.Func{`0,`1})">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2"/> class.
             </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.#ctor(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1},System.Func{`0,`1})">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2"/> class.
             </summary>
             <param name="createNewKey">Create new key.</param>
             <param name="unitOfWork">Unit of work.</param>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.Entities">
-            <summary>
-            Gets the entities.
-            </summary>
-            <value>The entities.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.FindBy(`1)">
             <summary>
@@ -1309,6 +1479,12 @@
             </summary>
             <param name="item">Item.</param>
         </member>
+        <member name="P:Skahal.Infrastructure.Framework.Repositories.MemoryRepository`2.Entities">
+            <summary>
+            Gets the entities.
+            </summary>
+            <value>The entities.</value>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.Net.PostType">
             <summary>
             Determines what type of post to perform.
@@ -1332,6 +1508,11 @@
         <member name="T:Skahal.Infrastructure.Framework.Net.IPostSubmitter">
             <summary>
             Defines a interface for a post submitter.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Net.IPostSubmitter.Post">
+            <summary>
+            Performs the post.
             </summary>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.Net.IPostSubmitter.Url">
@@ -1383,11 +1564,6 @@
             <value>
             The timeout.
             </value>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Net.IPostSubmitter.Post">
-            <summary>
-            Performs the post.
-            </summary>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.IO.IOfxTransaction">
             <summary>
@@ -1463,7 +1639,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUnlockedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUnlockedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUnlockedEventArgs"/> class.
             </summary>
             <param name="achievement">Achievement.</param>
         </member>
@@ -1481,7 +1657,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatedEventArgs"/> class.
             </summary>
             <param name="achievement">Achievement.</param>
         </member>
@@ -1499,7 +1675,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatingEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatingEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatingEventArgs"/> class.
             </summary>
             <param name="achievement">Achievement.</param>
         </member>
@@ -1517,7 +1693,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatingFailedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatingFailedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementUpdatingFailedEventArgs"/> class.
             </summary>
             <param name="achievement">Achievement.</param>
         </member>
@@ -1535,7 +1711,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementsRefreshedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement[])">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementsRefreshedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.AchievementsRefreshedEventArgs"/> class.
             </summary>
             <param name="achievements">Achievements.</param>
         </member>
@@ -1553,7 +1729,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ActivityOpponentsRefreshedEventArgs.#ctor(System.Int32)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ActivityOpponentsRefreshedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ActivityOpponentsRefreshedEventArgs"/> class.
             </summary>
             <param name="activityOpponentsCount">Activity opponents count.</param>
         </member>
@@ -1566,6 +1742,24 @@
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager">
             <summary>
             Defines a interface for a SGN achievement manager.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager.UpdateAchievement(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement)">
+            <summary>
+            Updates the achievement.
+            </summary>
+            <param name='achievement'>
+            Achievement.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager.ResetAchievements">
+            <summary>
+            Resets the achievements.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager.RefreshAchievements">
+            <summary>
+            Refreshs the achievements.
             </summary>
         </member>
         <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager.AchievementUnlocked">
@@ -1598,26 +1792,8 @@
             Gets a value indicating whether achievements are supported.
             </summary>
             <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.
+            <c>true</c> if supported; otherwise, <c>false</c>.
             </value>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager.UpdateAchievement(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement)">
-            <summary>
-            Updates the achievement.
-            </summary>
-            <param name="achievement">
-            Achievement.
-            </param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager.ResetAchievements">
-            <summary>
-            Resets the achievements.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNAchievementManager.RefreshAchievements">
-            <summary>
-            Refreshs the achievements.
-            </summary>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNFactory">
             <summary>
@@ -1665,6 +1841,42 @@
             Defines a interface for a SGN leaderboard manager.
             </summary>
         </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNLeaderboardManager.UpdateLeaderboard(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard)">
+            <summary>
+            Updates the leaderboard.
+            </summary>
+            <param name='leaderboard'>
+            Leaderboard.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNLeaderboardManager.GetPlayerScore(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard,Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer,System.Action{System.Int32})">
+            <summary>
+            Gets the player score.
+            </summary>
+            <param name='leaderboard'>
+            Leaderboard.
+            </param>
+            <param name='player'>
+            Player.
+            </param>
+            <param name='scoreReceived'>
+            Score received.
+            </param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNLeaderboardManager.GetPlayerRank(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard,Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer,System.Action{System.Int32})">
+            <summary>
+            Gets the player rank.
+            </summary>
+            <param name='leaderboard'>
+            Leaderboard.
+            </param>
+            <param name='player'>
+            Player.
+            </param>
+            <param name='rankReceived'>
+            Rank received.
+            </param>
+        </member>
         <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNLeaderboardManager.LeaderboardUpdating">
             <summary>
             Occurs when leaderboard updating.
@@ -1685,89 +1897,13 @@
             Gets a value indicating whether leadearboards are supported.
             </summary>
             <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.
+            <c>true</c> if supported; otherwise, <c>false</c>.
             </value>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNLeaderboardManager.UpdateLeaderboard(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard)">
-            <summary>
-            Updates the leaderboard.
-            </summary>
-            <param name="leaderboard">
-            Leaderboard.
-            </param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNLeaderboardManager.GetPlayerScore(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard,Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer,System.Action{System.Int32})">
-            <summary>
-            Gets the player score.
-            </summary>
-            <param name="leaderboard">
-            Leaderboard.
-            </param>
-            <param name="player">
-            Player.
-            </param>
-            <param name="scoreReceived">
-            Score received.
-            </param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNLeaderboardManager.GetPlayerRank(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard,Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer,System.Action{System.Int32})">
-            <summary>
-            Gets the player rank.
-            </summary>
-            <param name="leaderboard">
-            Leaderboard.
-            </param>
-            <param name="player">
-            Player.
-            </param>
-            <param name="rankReceived">
-            Rank received.
-            </param>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager">
             <summary>
             Defines a interface for a multiplayer manager.
             </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.OpponentConnected">
-            <summary>
-            Occurs when opponent connected.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.OpponentDisconnected">
-            <summary>
-            Occurs when opponent disconnected.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.InviteReceived">
-            <summary>
-            Occurs when invite received.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.ActivityOpponentsRefreshed">
-            <summary>
-            Occurs when activity opponents refreshed.
-            </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.Supported">
-            <summary>
-            Gets a value indicating whethe multiplayer is supported.
-            </summary>
-            <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.IsHost">
-            <summary>
-            Gets a value indicating whether this instance is host.
-            </summary>
-            <value>
-                <c>true</c> if this instance is host; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.Opponents">
-            <summary>
-            Gets the opponents.
-            </summary>
-            <value>The opponents.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.Initialize">
             <summary>
@@ -1796,9 +1932,52 @@
             Refreshs the activity opponents.
             </summary>
         </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.OpponentConnected">
+            <summary>
+            Occurs when opponent connected.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.OpponentDisconnected">
+            <summary>
+            Occurs when opponent disconnected.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.InviteReceived">
+            <summary>
+            Occurs when invite received.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.ActivityOpponentsRefreshed">
+            <summary>
+            Occurs when activity opponents refreshed.
+            </summary>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.Supported">
+            <summary>
+            Gets a value indicating whethe multiplayer is supported.
+            </summary>
+            <value><c>true</c> if supported; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.IsHost">
+            <summary>
+            Gets a value indicating whether this instance is host.
+            </summary>
+            <value><c>true</c> if this instance is host; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNMultiplayerManager.Opponents">
+            <summary>
+            Gets the opponents.
+            </summary>
+            <value>The opponents.</value>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNPlayerManager">
             <summary>
             Defines a interface for a player manager.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNPlayerManager.Login">
+            <summary>
+            Log in the player.
             </summary>
         </member>
         <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNPlayerManager.LoggedIn">
@@ -1816,26 +1995,12 @@
             <summary>
             Gets a value indicating whether the player is logged.
             </summary>
-            <value>
-                <c>true</c> if this instance is logged; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNPlayerManager.Login">
-            <summary>
-            Log in the player.
-            </summary>
+            <value><c>true</c> if this instance is logged; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNUIManager">
             <summary>
             Defines a interface for am UI manager.
             </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNUIManager.AllowNotifications">
-            <summary>
-            Gets or sets a value indicating whether this
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNUIManager" /> allow notifications.
-            </summary>
-            <value>
-                <c>true</c> if allow notifications; otherwise, <c>false</c>.</value>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNUIManager.ShowLeaderboards">
             <summary>
@@ -1847,6 +2012,13 @@
             Shows the achievements.
             </summary>
         </member>
+        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNUIManager.AllowNotifications">
+            <summary>
+            Gets or sets a value indicating whether this
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNUIManager"/> allow notifications.
+            </summary>
+            <value><c>true</c> if allow notifications; otherwise, <c>false</c>.</value>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNVoiceChatManager">
             <summary>
             Defines a interface for a voice chat manager.
@@ -1856,15 +2028,13 @@
             <summary>
             Gets a value indicating whether voice chat is supported.
             </summary>
-            <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.</value>
+            <value><c>true</c> if supported; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.ISGNVoiceChatManager.Enabled">
             <summary>
             Gets or sets a value indicating whether voice chat is enabled.
             </summary>
-            <value>
-                <c>true</c> if enabled; otherwise, <c>false</c>.</value>
+            <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.InviteReceivedEventArgs">
             <summary>
@@ -1879,7 +2049,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatedEventArgs"/> class.
             </summary>
             <param name="leaderboard">Leaderboard.</param>
         </member>
@@ -1897,7 +2067,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatingEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatingEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatingEventArgs"/> class.
             </summary>
             <param name="leaderboard">Leaderboard.</param>
         </member>
@@ -1915,7 +2085,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatingFailedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatingFailedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.LeaderboardUpdatingFailedEventArgs"/> class.
             </summary>
             <param name="leaderboard">Leaderboard.</param>
         </member>
@@ -1933,7 +2103,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.OpponentConnectedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.OpponentConnectedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.OpponentConnectedEventArgs"/> class.
             </summary>
             <param name="opponent">Opponent.</param>
         </member>
@@ -1951,7 +2121,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.OpponentDisconnectedEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.OpponentDisconnectedEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.OpponentDisconnectedEventArgs"/> class.
             </summary>
             <param name="opponent">Opponent.</param>
         </member>
@@ -1969,7 +2139,7 @@
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.PlayerLoggedInEventArgs.#ctor(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer)">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.PlayerLoggedInEventArgs" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.PlayerLoggedInEventArgs"/> class.
             </summary>
             <param name="player">Player.</param>
         </member>
@@ -1986,9 +2156,29 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement"/> class.
             </summary>
             <param name="id">Identifier.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement"/>.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement"/>.</param>
+            <returns><c>true</c> if the specified <see cref="T:System.Object"/> is equal to the current
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.GetHashCode">
+            <summary>
+            Serves as a hash function for a <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement"/> object.
+            </summary>
+            <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement"/>.</returns>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.ID">
             <summary>
@@ -2008,27 +2198,6 @@
             </summary>
             <value>The percent.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement" />.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object" /> to compare with the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement" />.</param>
-            <returns>
-                <c>true</c> if the specified <see cref="T:System.Object" /> is equal to the current
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement" />; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.GetHashCode">
-            <summary>
-            Serves as a hash function for a <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement" /> object.
-            </summary>
-            <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement" />.
-            </summary>
-            <returns>A <see cref="T:System.String" /> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement" />.</returns>
-        </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard">
             <summary>
             SGN leaderboard.
@@ -2036,9 +2205,29 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard"/> class.
             </summary>
             <param name="id">Identifier.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard"/>.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard"/>.</param>
+            <returns><c>true</c> if the specified <see cref="T:System.Object"/> is equal to the current
+            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.GetHashCode">
+            <summary>
+            Serves as a hash function for a <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard"/> object.
+            </summary>
+            <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard"/>.</returns>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.ID">
             <summary>
@@ -2058,27 +2247,6 @@
             </summary>
             <value>The score.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard" />.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object" /> to compare with the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard" />.</param>
-            <returns>
-                <c>true</c> if the specified <see cref="T:System.Object" /> is equal to the current
-            <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard" />; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.GetHashCode">
-            <summary>
-            Serves as a hash function for a <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard" /> object.
-            </summary>
-            <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard" />.
-            </summary>
-            <returns>A <see cref="T:System.String" /> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard" />.</returns>
-        </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer">
             <summary>
             Defines a player.
@@ -2086,9 +2254,21 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer"/> class.
             </summary>
             <param name="id">Identifier.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer.GetHashCode">
+            <summary>
+            Serves as a hash function for a <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer"/> object.
+            </summary>
+            <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer"/>.</returns>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer.ID">
             <summary>
@@ -2102,21 +2282,9 @@
             </summary>
             <value>The name.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer.GetHashCode">
-            <summary>
-            Serves as a hash function for a <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer" /> object.
-            </summary>
-            <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer" />.
-            </summary>
-            <returns>A <see cref="T:System.String" /> that represents the current <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNPlayer" />.</returns>
-        </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNReliableDataManager">
             <summary>
-            A manager for SGN (Social Game Network) that keeps data reliable and
+            A manager for SGN (Social Game Network) that keeps data reliable and 
             guarantees that any local update will reach the SGN server.
             </summary>
         </member>
@@ -2128,40 +2296,6 @@
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager">
             <summary>
             A local SGN achievment manager.
-            </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.Supported">
-            <summary>
-            Gets a value indicating whether achievements are supported.
-            is supported.
-            </summary>
-            <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUnlocked">
-            <summary>
-            Occurs when achievement unlocked.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementsRefreshed">
-            <summary>
-            Occurs when achievements refreshed.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUpdating">
-            <summary>
-            Occurs when achievement updating.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUpdatingFailed">
-            <summary>
-            Occurs when achievement updating failed.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUpdated">
-            <summary>
-            Occurs when achievement updated.
             </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.UpdateAchievement(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNAchievement)">
@@ -2190,6 +2324,40 @@
             <exception cref="T:System.NotImplementedException">
             Is thrown when a requested operation is not implemented for a given type.
             </exception>
+        </member>
+        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.Supported">
+            <summary>
+            Gets a value indicating whether achievements are supported.
+            is supported.
+            </summary>
+            <value>
+            <c>true</c> if supported; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUnlocked">
+            <summary>
+            Occurs when achievement unlocked.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementsRefreshed">
+            <summary>
+            Occurs when achievements refreshed.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUpdating">
+            <summary>
+            Occurs when achievement updating.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUpdatingFailed">
+            <summary>
+            Occurs when achievement updating failed.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNAchievementManager.AchievementUpdated">
+            <summary>
+            Occurs when achievement updated.
+            </summary>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNFactory">
             <summary>
@@ -2249,29 +2417,6 @@
             A local SGN leaderboard manager.
             </summary>
         </member>
-        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.Supported">
-            <summary>
-            Gets a value indicating whether leadearboards are supported.
-            </summary>
-            <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.LeaderboardUpdating">
-            <summary>
-            Occurs when leaderboard updating.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.LeaderboardUpdatingFailed">
-            <summary>
-            Occurs when leaderboard updating failed.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.LeaderboardUpdated">
-            <summary>
-            Occurs when leaderboard updated.
-            </summary>
-        </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.UpdateLeaderboard(Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNLeaderboard)">
             <summary>
             Updates the leaderboard.
@@ -2317,38 +2462,32 @@
             Is thrown when a requested operation is not implemented for a given type.
             </exception>
         </member>
+        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.Supported">
+            <summary>
+            Gets a value indicating whether leadearboards are supported.
+            </summary>
+            <value>
+            <c>true</c> if supported; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.LeaderboardUpdating">
+            <summary>
+            Occurs when leaderboard updating.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.LeaderboardUpdatingFailed">
+            <summary>
+            Occurs when leaderboard updating failed.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNLeaderboardManager.LeaderboardUpdated">
+            <summary>
+            Occurs when leaderboard updated.
+            </summary>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager">
             <summary>
             A local SGN multiplayer manager.
-            </summary>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.Supported">
-            <summary>
-            Gets a value indicating whether multiplayer is supported.
-            is supported.
-            </summary>
-            <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.OpponentConnected">
-            <summary>
-            Occurs when opponent connected.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.OpponentDisconnected">
-            <summary>
-            Occurs when opponent disconnected.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.InviteReceived">
-            <summary>
-            Occurs when invite received.
-            </summary>
-        </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.ActivityOpponentsRefreshed">
-            <summary>
-            Occurs when activity opponents refreshed.
             </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.Initialize">
@@ -2397,12 +2536,41 @@
             Is thrown when a requested operation is not implemented for a given type.
             </exception>
         </member>
+        <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.Supported">
+            <summary>
+            Gets a value indicating whether multiplayer is supported.
+            is supported.
+            </summary>
+            <value>
+            <c>true</c> if supported; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.OpponentConnected">
+            <summary>
+            Occurs when opponent connected.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.OpponentDisconnected">
+            <summary>
+            Occurs when opponent disconnected.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.InviteReceived">
+            <summary>
+            Occurs when invite received.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.ActivityOpponentsRefreshed">
+            <summary>
+            Occurs when activity opponents refreshed.
+            </summary>
+        </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNMultiplayerManager.IsHost">
             <summary>
             Gets a value indicating whether this instance is host.
             </summary>
             <value>
-                <c>true</c> if this instance is host; otherwise, <c>false</c>.
+            <c>true</c> if this instance is host; otherwise, <c>false</c>.
             </value>
             <exception cref="T:System.NotImplementedException">
             Is thrown when a requested operation is not implemented for a given type.
@@ -2424,14 +2592,19 @@
             A local SGN player manager.
             </summary>
         </member>
-        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNPlayerManager.LoggedIn">
-            <summary>
-            Occurs when logged in.
-            </summary>
-        </member>
         <member name="F:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNPlayerManager.PlayerIdPrefsKey">
             <summary>
             Key used to reference player id on PlayerPrefs.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNPlayerManager.Login">
+            <summary>
+            Realizes the player 'login'.
+            </summary>
+        </member>
+        <member name="E:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNPlayerManager.LoggedIn">
+            <summary>
+            Occurs when logged in.
             </summary>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNPlayerManager.Player">
@@ -2447,7 +2620,7 @@
             Gets a value indicating whether the player is 'logged'.
             </summary>
             <value>
-                <c>true</c> if the player is logged; otherwise, <c>false</c>.
+            <c>true</c> if the player is logged; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNPlayerManager.PlayerId">
@@ -2457,11 +2630,6 @@
             <value>
             The player identifier.
             </value>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNPlayerManager.Login">
-            <summary>
-            Realizes the player 'login'.
-            </summary>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNUIManager">
             <summary>
@@ -2486,11 +2654,11 @@
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNUIManager.AllowNotifications">
             <summary>
-            Gets or sets a value indicating whether this <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNUIManager" />
+            Gets or sets a value indicating whether this <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNUIManager"/>
             allow notifications.
             </summary>
             <value>
-                <c>true</c> if allow notifications; otherwise, <c>false</c>.
+            <c>true</c> if allow notifications; otherwise, <c>false</c>.
             </value>
             <exception cref="T:System.NotImplementedException">
             Is thrown when a requested operation is not implemented for a given type.
@@ -2506,7 +2674,7 @@
             Gets a value indicating whether voice chat is supported.
             </summary>
             <value>
-                <c>true</c> if supported; otherwise, <c>false</c>.
+            <c>true</c> if supported; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.Local.SHLocalSGNVoiceChatManager.Enabled">
@@ -2514,7 +2682,7 @@
             Gets or sets a value indicating whether the voice chat is enabled.
             </summary>
             <value>
-                <c>true</c> if enabled; otherwise, <c>false</c>.
+            <c>true</c> if enabled; otherwise, <c>false</c>.
             </value>
             <exception cref="T:System.NotImplementedException">
             Is thrown when a requested operation is not implemented for a given type.
@@ -2524,6 +2692,12 @@
             <summary>
             Represents the application current running.
             </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.AppService.Initialize(Skahal.Infrastructure.Framework.Commons.IAppStrategy)">
+            <summary>
+            Initialize the service.
+            </summary>
+            <param name="strategy">Strategy.</param>
         </member>
         <member name="E:Skahal.Infrastructure.Framework.Commons.AppService.Started">
             <summary>
@@ -2544,12 +2718,6 @@
             <summary>
             Occurs when application has been exited.
             </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Commons.AppService.Initialize(Skahal.Infrastructure.Framework.Commons.IAppStrategy)">
-            <summary>
-            Initialize the service.
-            </summary>
-            <param name="strategy">Strategy.</param>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Commons.IAppStrategy">
             <summary>
@@ -2597,7 +2765,7 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWork`1.RegisterRemoved(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
-            Registers an entity to be removed when commited.
+             Registers an entity to be removed when commited.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
@@ -2606,186 +2774,6 @@
             <summary>
             Commit the registered entities.
             </summary>
-        </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1">
-            <summary>
-            Defines an unit of work repository.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
-            <summary>
-            Persists the new item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
-            <summary>
-            Persists the updated item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository`1.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0})">
-            <summary>
-            Persists the deleted item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2">
-            <summary>
-            A base class for repositories.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2" /> class.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.#ctor(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
-            <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2" /> class.
-            </summary>
-            <param name="unitOfWork">Unit of work.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindBy(`1)">
-            <summary>
-            Finds an entity by the key.
-            </summary>
-            <returns>The entity.</returns>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
-            <summary>
-            Finds all entities that matches the filter.
-            </summary>
-            <returns>The found entities.</returns>
-            <param name="offset">Offset.</param>
-            <param name="limit">Limit.</param>
-            <param name="filter">Filter.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.CountAll(System.Func{`0,System.Boolean})">
-            <summary>
-            Counts all entities that matches the filter.
-            </summary>
-            <returns>The found entities.</returns>
-            <param name="filter">Filter.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
-            <summary>
-            Sets the unit of work.
-            </summary>
-            <param name="unitOfWork">Unit of work.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Add(`0)">
-            <summary>
-            Add the specified item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Remove(`0)">
-            <summary>
-            Remove the specified entity.
-            </summary>
-            <param name="item">The entity.</param>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.Item(`1)">
-            <summary>
-            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2" /> with the specified key.
-            </summary>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistNewItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
-            <summary>
-            Persists the new item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistUpdatedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
-            <summary>
-            Persists the updated item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistDeletedItem(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`1})">
-            <summary>
-            Persists the deleted item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.UnitOfWork">
-            <summary>
-            Gets the unit of work.
-            </summary>
-            <value>The unit of work.</value>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistNewItem(`0)">
-            <summary>
-            Persists the new item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistUpdatedItem(`0)">
-            <summary>
-            Persists the updated item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryBase`2.PersistDeletedItem(`0)">
-            <summary>
-            Persists the deleted item.
-            </summary>
-            <param name="item">Item.</param>
-        </member>
-        <member name="T:Skahal.Infrastructure.Framework.Repositories.IRepository`2">
-            <summary>
-            Defines the interface of a repository entity.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.SetUnitOfWork(Skahal.Infrastructure.Framework.Repositories.IUnitOfWork{`1})">
-            <summary>
-            Sets the unit of work.
-            </summary>
-            <param name="unitOfWork">Unit of work.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindBy(`1)">
-            <summary>
-            Finds the entity by the key.
-            </summary>
-            <returns>The found entity.</returns>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.FindAll(System.Int32,System.Int32,System.Func{`0,System.Boolean})">
-            <summary>
-            Finds all entities that matches the filter.
-            </summary>
-            <returns>The found entities.</returns>
-            <param name="offset">Offset.</param>
-            <param name="limit">Limit.</param>
-            <param name="filter">Filter.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.CountAll(System.Func{`0,System.Boolean})">
-            <summary>
-            Counts all entities that matches the filter.
-            </summary>
-            <returns>The number of the entities that matches the filter.</returns>
-            <param name="filter">Filter.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Add(`0)">
-            <summary>
-            Add the specified entity.
-            </summary>
-            <param name="item">The entity.</param>
-        </member>
-        <member name="P:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Item(`1)">
-            <summary>
-            Gets or sets the <see cref="T:Skahal.Infrastructure.Framework.Repositories.IRepository`2" /> with the specified key.
-            </summary>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Repositories.IRepository`2.Remove(`0)">
-            <summary>
-            Remove the specified entity.
-            </summary>
-            <param name="item">The entity.</param>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Commons.IProgressIndicator">
             <summary>
@@ -2820,14 +2808,20 @@
             A basic progress indicator.
             </summary>
         </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.ProgressIndicator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Commons.ProgressIndicator"/> class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Commons.ProgressIndicator.OnProgressChanged(System.EventArgs)">
+            <summary>
+            Raises the progress changed event.
+            </summary>
+            <param name="args">Arguments.</param>
+        </member>
         <member name="E:Skahal.Infrastructure.Framework.Commons.ProgressIndicator.ProgressChanged">
             <summary>
             Occurs when progress changed.
-            </summary>
-        </member>
-        <member name="M:Skahal.Infrastructure.Framework.Commons.ProgressIndicator.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Commons.ProgressIndicator" /> class.
             </summary>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.Commons.ProgressIndicator.Title">
@@ -2848,12 +2842,6 @@
             </summary>
             <value>The progress.</value>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Commons.ProgressIndicator.OnProgressChanged(System.EventArgs)">
-            <summary>
-            Raises the progress changed event.
-            </summary>
-            <param name="args">Arguments.</param>
-        </member>
         <member name="T:Skahal.Infrastructure.Framework.Domain.DomainException">
             <summary>
             Represents an excetion occurent on domain layer.
@@ -2861,13 +2849,13 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.DomainException.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.DomainException" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.DomainException"/> class.
             </summary>
             <param name="message">Message.</param>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.DomainException.#ctor(System.String,System.Exception)">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.DomainException" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Domain.DomainException"/> class.
             </summary>
             <param name="message">Message.</param>
             <param name="innerException">Inner exception.</param>
@@ -2902,34 +2890,45 @@
             Armazena o nome da chave.
             <example>
             User.UserName.
-            </example></summary>
+            </example>
+            </summary>
         </member>
         <member name="F:Skahal.Infrastructure.Framework.Text.BindableTextKey.m_nameWithPrefixAndSuffix">
             <summary>
             Armazena o nome da chave com prefixo e sufixo.
             <example>
             {User.UserName}.
-            </example></summary>
+            </example>
+            </summary>
         </member>
         <member name="F:Skahal.Infrastructure.Framework.Text.BindableTextKey.m_objectName">
             <summary>
             O nome do objeto.
             <example>
             User.
-            </example></summary>
+            </example>
+            </summary>
         </member>
         <member name="F:Skahal.Infrastructure.Framework.Text.BindableTextKey.m_propertyName">
             <summary>
             O nome da propriedade (se existir).
             <example>
             UserName.
-            </example></summary>
+            </example>
+            </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Text.BindableTextKey.#ctor(System.String)">
             <summary>
-            Inicializa uma nova instância de <see cref="T:Skahal.Infrastructure.Framework.Text.BindableTextKey" />.
+            Inicializa uma nova instância de <see cref="T:Skahal.Infrastructure.Framework.Text.BindableTextKey"/>.
             </summary>
             <param name="nameWithPrefixAndSuffix">O nome da chave com prefixo e sufixo.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Text.BindableTextKey.HasEscape(System.String)">
+            <summary>
+            Verifica se o texto possui caracteres de escape para as chaves.
+            </summary>
+            <param name="text">O texto a ser verificado.</param>
+            <returns>Se possui caracter de escape para prefixo ou suffixo.</returns>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.Text.BindableTextKey.Name">
             <summary>
@@ -2951,15 +2950,8 @@
             Obtém o nome da propriedade na chave.
             </summary>
         </member>
-        <member name="M:Skahal.Infrastructure.Framework.Text.BindableTextKey.HasEscape(System.String)">
-            <summary>
-            Verifica se o texto possui caracteres de escape para as chaves.
-            </summary>
-            <param name="text">O texto a ser verificado.</param>
-            <returns>Se possui caracter de escape para prefixo ou suffixo.</returns>
-        </member>
         <member name="T:Skahal.Infrastructure.Framework.Text.DynamicTextBuilder">
-            <summary>
+            <summary> 
             Permite que sejam criados textos com chaves que serão posteriormente substituídas por valores de objetos e suas propriedades.
             <remarks>
             Faz a substituição de chaves pelos valores correspondentes dos objetos ou das propriedades desses objetos.
@@ -2967,15 +2959,16 @@
             Por exemplo, se adicionarmos um objeto bindable do tipo AdvancedMembershipUser, marcando-o com o nome "User", desta forma:
             <code>
             DynamicTextBuilder textBuilder = new DynamicTextBuilder();
-            textBuilder.AddBindable("User", user);
+            textBuilder.AddBindable("User", user); 
             </code>
             Poderemos então utilizar as propriedades da instancia de AdvancedMembershipUser para preencher o texto:
             <code>
             textBuilder.Append("Nome completo: {User.FullName}\nE-mail: {User.Email}");
             </code>
             Ao chamarmos o método ToString do DynamicTextBuilder receberemos o seguinte resultado como retorno:
-            Nome completo: Fulano da Beltrano\nE-mail: fulano@ciclano.com.br
-            </remarks></summary>
+            Nome completo: Fulano da Beltrano\nE-mail: fulano@ciclano.com.br     
+            </remarks>
+            </summary>
         </member>
         <member name="F:Skahal.Infrastructure.Framework.Text.DynamicTextBuilder.s_getBindableKeysRegex">
             <summary>
@@ -3007,7 +3000,8 @@
             </code>
             Poderemos utilizá-lo dentro do texto desta forma:
             "Nome do usuário: {User.FullName}, e-mail: {User.Email}.
-            </remarks></summary>
+            </remarks>
+            </summary>
             <param name="key">A chave que será utilizada para representar os objetos nas chaves de binding.</param>
             <param name="bindable">O objeto de binding.</param>
         </member>
@@ -3115,16 +3109,17 @@
             Capitalize the string.
             </summary>
             <param name="value">
-            The original string. <see cref="T:System.String" /></param>
+            The original string. <see cref="T:System.String"/>
+            </param>
             <returns>
-            The capitalized version of the string. <see cref="T:System.String" /></returns>
+            The capitalized version of the string. <see cref="T:System.String"/>
+            </returns>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Text.StringExtensions.ContainsIgnoreCase(System.String,System.String)">
             <summary>
             Check if string contains value ignoring the case.
             </summary>
-            <returns>
-                <c>true</c>, if ignore case was containsed, <c>false</c> otherwise.</returns>
+            <returns><c>true</c>, if ignore case was containsed, <c>false</c> otherwise.</returns>
             <param name="source">Source.</param>
             <param name="value">Value.</param>
         </member>
@@ -3146,13 +3141,12 @@
             </summary>
             <param name="format">The format.</param>
             <param name="args">The args.</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Text.StringHelper.FormatSingularOrPlural(System.Int32,System.String,System.String,System.Object[])">
             <summary>
             Executa um StringHelper.Format levando em conta o valor de counter,
-            se counter for maior que 1 então utilizará a string informada em formatPlural,
+            se counter for maior que 1 então utilizará a string informada em formatPlural, 
             caso contrário utilizará a string informada em formatSingular.
             </summary>
             <param name="counter">O contador para definir se será utilizado a string para singular ou plural.</param>
@@ -3176,8 +3170,7 @@
             <param name="source">The source.</param>
             <param name="index">The index.</param>
             <param name="replace">The replace.</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Text.StringHelper.ReplaceChar(System.String,System.Int32,System.String)">
             <summary>
@@ -3186,8 +3179,7 @@
             <param name="source">The source.</param>
             <param name="index">The index.</param>
             <param name="replace">The replace.</param>
-            <returns>
-            </returns>
+            <returns></returns>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Text.StringHelper.RemoveAfter(System.String,System.String)">
             <summary>
@@ -3199,7 +3191,7 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Text.StringHelper.RemoveAccents(System.String)">
             <summary>
-            Remove qualquer acento e cedilha da string.
+            Remove qualquer acento e cedilha da string. 
             </summary>
             <param name="source">String original.</param>
             <returns>String com os acentos e cedilhas removidos.</returns>
@@ -3340,14 +3332,15 @@
             Gets the similarity between two strings.
             <remarks>
             Identical strings have 1f similarity.
-            </remarks></summary>
+            </remarks>
+            </summary>
             <returns>
             The similarity.
             </returns>
-            <param name="string1">
+            <param name='string1'>
             String1.
             </param>
-            <param name="string2">
+            <param name='string2'>
             String2.
             </param>
         </member>
@@ -3404,8 +3397,7 @@
             <summary>
             Determines if is correct the specified text.
             </summary>
-            <returns>
-                <c>true</c> if is correct the specified text culture; otherwise, <c>false</c>.</returns>
+            <returns><c>true</c> if is correct the specified text culture; otherwise, <c>false</c>.</returns>
             <param name="text">Text.</param>
             <param name="culture">Culture.</param>
         </member>
@@ -3413,8 +3405,7 @@
             <summary>
             Determines if is correct the specified text.
             </summary>
-            <returns>
-                <c>true</c> if is correct the specified text; otherwise, <c>false</c>.</returns>
+            <returns><c>true</c> if is correct the specified text; otherwise, <c>false</c>.</returns>
             <param name="text">Text.</param>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNService">
@@ -3430,11 +3421,10 @@
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNService.Initialized">
             <summary>
-            Gets a value indicating whether this <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNService" />
+            Gets a value indicating whether this <see cref="T:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNService"/>
             is initialized.
             </summary>
-            <value>
-                <c>true</c> if initialized; otherwise, <c>false</c>.</value>
+            <value><c>true</c> if initialized; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:Skahal.Infrastructure.Framework.SocialGamingNetwork.SGNService.PlayerManager">
             <summary>
@@ -3479,7 +3469,7 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1" /> class.
+            Initializes a new instance of the <see cref="T:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1"/> class.
             </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Repositories.MemoryUnitOfWork`1.RegisterAdded(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
@@ -3598,7 +3588,8 @@
             Gets or sets the culture code.
             <remarks>
             ISO format: en-US, pt-BR, etc.
-            </remarks></summary>
+            </remarks>
+            </summary>
             <value>The culture code.</value>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Globalization.IGlobalizationLabelRepository">
@@ -3642,6 +3633,7 @@
             <returns>The last entity.</returns>
             <param name="repository">Repository.</param>
             <typeparam name="TEntity">The 1st type parameter.</typeparam>
+            <typeparam name="TKey">The 2st type parameter.</typeparam>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Repositories.RepositoryExtensions.FindLastKey``2(Skahal.Infrastructure.Framework.Repositories.IRepository{``0,``1})">
             <summary>
@@ -3650,6 +3642,7 @@
             <returns>The last key.</returns>
             <param name="repository">Repository.</param>
             <typeparam name="TEntity">The 1st type parameter.</typeparam>
+            <typeparam name="TKey">The 2st type parameter.</typeparam>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository">
             <summary>
@@ -3659,7 +3652,7 @@
         <member name="M:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository.#ctor">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository"/> class.
             </summary>
         </member>
         <member name="T:Skahal.Infrastructure.Framework.Repositories.EntityRepositoryPair`1">
@@ -3670,7 +3663,7 @@
         <member name="M:Skahal.Infrastructure.Framework.Repositories.EntityRepositoryPair`1.#ctor(Skahal.Infrastructure.Framework.Domain.IAggregateRoot{`0},Skahal.Infrastructure.Framework.Repositories.IUnitOfWorkRepository{`0})">
             <summary>
             Initializes a new instance of the
-            <see cref="T:Skahal.Infrastructure.Framework.Repositories.EntityRepositoryPair`1" /> class.
+            <see cref="T:Skahal.Infrastructure.Framework.Repositories.EntityRepositoryPair`1"/> class.
             </summary>
             <param name="entity">Entity.</param>
             <param name="repository">Repository.</param>
@@ -3694,12 +3687,12 @@
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.ServiceBase`4.#ctor">
             <summary>
-            Initializes a new instance of the Skahal.Infrastructure.Framework.Domain.ServiceBase/&gt; class.
+            Initializes a new instance of the Skahal.Infrastructure.Framework.Domain.ServiceBase/> class.
             </summary>
         </member>
         <member name="M:Skahal.Infrastructure.Framework.Domain.ServiceBase`4.#ctor(`2,`3)">
             <summary>
-            Initializes a new instance of the Skahal.Infrastructure.Framework.Domain.ServiceBase/&gt; class.
+            Initializes a new instance of the Skahal.Infrastructure.Framework.Domain.ServiceBase/> class.
             </summary>
             <param name="eventRepository">Event repository.</param>
             <param name="unitOfWork">Unit of work.</param>

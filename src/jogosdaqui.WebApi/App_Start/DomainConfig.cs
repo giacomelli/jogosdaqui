@@ -48,6 +48,7 @@ namespace App_Start
 			DependencyService.Register<IPersonRepository> (new TestingPersonRepository());
 
 			//DependencyService.Register<ITagRepository> (new TestingTagRepository());
+			MongoDBBootStrapper.Start ();
 			DependencyService.Register<ITagRepository> (new MongoDBTagRepository());
 			DependencyService.Register<IAppliedTagRepository> (new TestingAppliedTagRepository());
 
