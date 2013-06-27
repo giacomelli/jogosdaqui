@@ -52,6 +52,7 @@
     <Compile Include="Generated.cs" />
     <Compile Include="MongoDB\MongoDBTagRepository.cs" />
     <Compile Include="MongoDB\Mapping\MongoDBBootStrapper.cs" />
+    <Compile Include="MongoDB\MongoDBRepositoryBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
