@@ -37,14 +37,14 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="MongoDBIntIDGenerator">
+      <HintPath>..\references\MongoDBIntIDGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
       <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Driver.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDBIntIDGenerator">
-      <HintPath>..\references\MongoDBIntIDGenerator.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -54,19 +54,22 @@
     <Compile Include="MongoDB\Mapping\MongoDBBootStrapper.cs" />
     <Compile Include="MongoDB\MongoDBRepositoryBase.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\jogosdaqui.Domain\jogosdaqui.Domain.csproj">
       <Project>{8A1DEB6F-ABE3-4C9D-BEEB-5E47416FC91D}</Project>
       <Name>jogosdaqui.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  
+   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  
   <ItemGroup>
     <Folder Include="EntityFramework\" />
     <Folder Include="MongoDB\" />
     <Folder Include="MongoDB\Mapping\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-</Project>
+ </Project>
