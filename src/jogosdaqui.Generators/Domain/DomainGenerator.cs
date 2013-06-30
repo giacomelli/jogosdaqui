@@ -6,6 +6,7 @@
   
   
   
+  
    
    
    
@@ -19,12 +20,12 @@ using System.Linq;
 using Skahal.Infrastructure.Framework.Commons; 
 using Skahal.Infrastructure.Framework.Domain;
 using Skahal.Infrastructure.Framework.Repositories;
-using HelperSharp; 
+using HelperSharp;  
 using KissSpecifications; 
 #endregion          
          
      
-namespace jogosdaqui.Domain.Games
+namespace jogosdaqui.Domain.Games 
 {  
 	public partial interface IGameRepository : IRepository<Game, long>
 	{
@@ -149,7 +150,113 @@ namespace jogosdaqui.Domain.Games
 	}
 }
      
-namespace jogosdaqui.Domain.Platforms
+namespace jogosdaqui.Domain.Evaluations 
+{  
+	public partial interface IEvaluationRepository : IRepository<Evaluation, long>
+	{
+		}   
+
+	// <summary>
+	/// Domain layer evaluation service.
+	/// </summary>
+	public partial class EvaluationService : ServiceBase<Evaluation, long, IEvaluationRepository, IUnitOfWork<long>>
+	{ 
+		#region Constructors 
+      	/// <summary> 
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Evaluations. EvaluationService"/> class.
+		/// </summary>
+		public  EvaluationService()  
+		{
+		} 
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Evaluations. EvaluationService"/> class.
+		/// </summary>
+		/// <param name="evaluationRepository"> Evaluation repository.</param>
+		/// <param name="unitOfWork">Unit of work.</param>
+		public  EvaluationService(IEvaluationRepository evaluationRepository, IUnitOfWork<long> unitOfWork)
+		: base(evaluationRepository, unitOfWork)
+		{
+		}
+        #endregion
+		
+		#region Methods
+		
+		/// <summary>
+		/// Gets the evaluation by key.
+		/// </summary>
+		/// <returns>The evaluation.</returns>
+		/// <param name="key">The key.</param>
+		public Evaluation GetEvaluationByKey(long key)
+		{
+			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
+		}
+		
+				
+		/// <summary>
+		/// Gets all Evaluations. 
+		/// </summary>
+		/// <returns>The all Evaluations.</returns>
+		public IList<Evaluation> GetAllEvaluations()
+		{
+			return MainRepository.FindAll(g => true).ToList();
+		}
+		
+		/// <summary>
+		/// Counts all Evaluations.
+		/// </summary>
+		public long CountAllEvaluations() 
+		{ 
+			return MainRepository.CountAll (g => true); 
+		}
+
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		partial void ExecuteSaveSpecification(Evaluation evaluation);
+		
+		/// <summary>
+		/// Saves the evaluation.
+		/// </summary>
+		/// <param name="evaluation">The evaluation.</param>
+		public void SaveEvaluation(Evaluation evaluation)
+		{
+			ExceptionHelper.ThrowIfNull ("evaluation", evaluation);
+
+			ExecuteSaveSpecification (evaluation);
+			
+			MainRepository [evaluation.Key] = evaluation;
+			UnitOfWork.Commit (); 
+		} 
+
+		/// <summary> 
+		/// Executes the delete specification.
+		/// </summary>
+		partial void ExecuteDeleteSpecification(long evaluationKey, Evaluation evaluation);
+		  
+		/// <summary>  
+		/// Deletes the evaluation.
+		/// </summary> 
+		/// <param name="key">The key.</param> 
+		public void DeleteEvaluation (long key)
+		{ 
+			var evaluation = GetEvaluationByKey (key);
+			
+			if(evaluation == null)
+			{
+				throw new ArgumentException("Evaluation with key '{0}' does not exists.".With(key));
+			}
+			
+			ExecuteDeleteSpecification (key, evaluation);
+
+			MainRepository.Remove (evaluation); 
+			UnitOfWork.Commit ();
+		}
+		#endregion
+	}
+}
+     
+namespace jogosdaqui.Domain.Platforms 
 {  
 	public partial interface IPlatformRepository : IRepository<Platform, long>
 	{
@@ -274,7 +381,7 @@ namespace jogosdaqui.Domain.Platforms
 	}
 }
      
-namespace jogosdaqui.Domain.Companies
+namespace jogosdaqui.Domain.Companies 
 {  
 	public partial interface ICompanyRepository : IRepository<Company, long>
 	{
@@ -399,7 +506,7 @@ namespace jogosdaqui.Domain.Companies
 	}
 }
      
-namespace jogosdaqui.Domain.Languages
+namespace jogosdaqui.Domain.Languages 
 {  
 	public partial interface ILanguageRepository : IRepository<Language, long>
 	{
@@ -524,7 +631,7 @@ namespace jogosdaqui.Domain.Languages
 	}
 }
      
-namespace jogosdaqui.Domain.Persons
+namespace jogosdaqui.Domain.Persons 
 {  
 	public partial interface IPersonRepository : IRepository<Person, long>
 	{
@@ -649,7 +756,7 @@ namespace jogosdaqui.Domain.Persons
 	}
 }
      
-namespace jogosdaqui.Domain.Articles
+namespace jogosdaqui.Domain.Articles 
 {  
 	public partial interface ICommentRepository : IRepository<Comment, long>
 	{
@@ -755,7 +862,7 @@ namespace jogosdaqui.Domain.Articles
 	}
 }
      
-namespace jogosdaqui.Domain.Articles
+namespace jogosdaqui.Domain.Articles 
 {  
 	public partial interface IEventRepository : IRepository<Event, long>
 	{
@@ -861,7 +968,7 @@ namespace jogosdaqui.Domain.Articles
 	}
 }
      
-namespace jogosdaqui.Domain.Articles
+namespace jogosdaqui.Domain.Articles 
 {  
 	public partial interface IInterviewRepository : IRepository<Interview, long>
 	{
@@ -967,7 +1074,7 @@ namespace jogosdaqui.Domain.Articles
 	}
 }
      
-namespace jogosdaqui.Domain.Articles
+namespace jogosdaqui.Domain.Articles 
 {  
 	public partial interface INewsRepository : IRepository<News, long>
 	{
@@ -1073,7 +1180,7 @@ namespace jogosdaqui.Domain.Articles
 	}
 }
      
-namespace jogosdaqui.Domain.Articles
+namespace jogosdaqui.Domain.Articles 
 {  
 	public partial interface IPreviewRepository : IRepository<Preview, long>
 	{
@@ -1179,7 +1286,7 @@ namespace jogosdaqui.Domain.Articles
 	}
 }
      
-namespace jogosdaqui.Domain.Articles
+namespace jogosdaqui.Domain.Articles 
 {  
 	public partial interface IReviewRepository : IRepository<Review, long>
 	{
@@ -1285,7 +1392,7 @@ namespace jogosdaqui.Domain.Articles
 	}
 }
      
-namespace jogosdaqui.Domain.Tags
+namespace jogosdaqui.Domain.Tags 
 {  
 	public partial interface ITagRepository : IRepository<Tag, long>
 	{
@@ -1410,7 +1517,7 @@ namespace jogosdaqui.Domain.Tags
 	}
 }
      
-namespace jogosdaqui.Domain.Tags
+namespace jogosdaqui.Domain.Tags 
 {  
 	public partial interface IAppliedTagRepository : IRepository<AppliedTag, long>
 	{

@@ -6,6 +6,7 @@
   
   
   
+  
    
    
    
@@ -16,7 +17,7 @@ using System;
 using System.Collections.Generic;    
 using System.IO;        
 using System.Linq;    
-using Skahal.Infrastructure.Framework.Commons; 
+using Skahal.Infrastructure.Framework.Commons;  
 using Skahal.Infrastructure.Framework.Domain;
 using Skahal.Infrastructure.Framework.Repositories;
 using HelperSharp; 
@@ -25,9 +26,9 @@ using KissSpecifications;
          
      
 namespace jogosdaqui.Domain.Games.Specifications 
-{
+{ 
 	/// <summary>
-	/// Game exists specification.
+	/// Game exists specification. 
 	/// </summary>
 	public class GameExistsSpecification : SpecificationBase<Game>
 	{
@@ -94,10 +95,54 @@ namespace jogosdaqui.Domain.Games.Specifications
 	}
 	}
      
-namespace jogosdaqui.Domain.Platforms.Specifications 
-{
+namespace jogosdaqui.Domain.Evaluations.Specifications 
+{ 
 	/// <summary>
-	/// Platform exists specification.
+	/// Evaluation exists specification. 
+	/// </summary>
+	public class EvaluationExistsSpecification : SpecificationBase<Evaluation>
+	{
+		#region Fields
+		private long m_evaluationKey;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Evaluations.Specifications.EvaluationExistsSpecification"/> class.
+		/// </summary>
+		/// <param name="evaluationKey">Evaluation key.</param>
+		public EvaluationExistsSpecification(long evaluationKey)
+		{
+			m_evaluationKey = evaluationKey;
+		}
+		#endregion 
+  
+		#region implemented abstract members of SpecificationBase
+		/// <summary>
+		/// Determines whether the target object satisfiy the specification.
+		/// </summary>
+		/// <param name="target">The target object to be validated.</param>
+		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
+		public override bool IsSatisfiedBy (Evaluation target)
+		{
+			if(target == null || new EvaluationService().GetEvaluationByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Evaluation with key '{0}' does not exists.".With (m_evaluationKey);
+				return false;
+			}
+
+			return true;
+		}
+
+		#endregion
+	}
+	 
+	}
+     
+namespace jogosdaqui.Domain.Platforms.Specifications 
+{ 
+	/// <summary>
+	/// Platform exists specification. 
 	/// </summary>
 	public class PlatformExistsSpecification : SpecificationBase<Platform>
 	{
@@ -165,9 +210,9 @@ namespace jogosdaqui.Domain.Platforms.Specifications
 	}
      
 namespace jogosdaqui.Domain.Companies.Specifications 
-{
+{ 
 	/// <summary>
-	/// Company exists specification.
+	/// Company exists specification. 
 	/// </summary>
 	public class CompanyExistsSpecification : SpecificationBase<Company>
 	{
@@ -235,9 +280,9 @@ namespace jogosdaqui.Domain.Companies.Specifications
 	}
      
 namespace jogosdaqui.Domain.Languages.Specifications 
-{
+{ 
 	/// <summary>
-	/// Language exists specification.
+	/// Language exists specification. 
 	/// </summary>
 	public class LanguageExistsSpecification : SpecificationBase<Language>
 	{
@@ -305,9 +350,9 @@ namespace jogosdaqui.Domain.Languages.Specifications
 	}
      
 namespace jogosdaqui.Domain.Persons.Specifications 
-{
+{ 
 	/// <summary>
-	/// Person exists specification.
+	/// Person exists specification. 
 	/// </summary>
 	public class PersonExistsSpecification : SpecificationBase<Person>
 	{
@@ -375,9 +420,9 @@ namespace jogosdaqui.Domain.Persons.Specifications
 	}
      
 namespace jogosdaqui.Domain.Articles.Specifications 
-{
+{ 
 	/// <summary>
-	/// Comment exists specification.
+	/// Comment exists specification. 
 	/// </summary>
 	public class CommentExistsSpecification : SpecificationBase<Comment>
 	{
@@ -419,9 +464,9 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	}
      
 namespace jogosdaqui.Domain.Articles.Specifications 
-{
+{ 
 	/// <summary>
-	/// Event exists specification.
+	/// Event exists specification. 
 	/// </summary>
 	public class EventExistsSpecification : SpecificationBase<Event>
 	{
@@ -463,9 +508,9 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	}
      
 namespace jogosdaqui.Domain.Articles.Specifications 
-{
+{ 
 	/// <summary>
-	/// Interview exists specification.
+	/// Interview exists specification. 
 	/// </summary>
 	public class InterviewExistsSpecification : SpecificationBase<Interview>
 	{
@@ -507,9 +552,9 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	}
      
 namespace jogosdaqui.Domain.Articles.Specifications 
-{
+{ 
 	/// <summary>
-	/// News exists specification.
+	/// News exists specification. 
 	/// </summary>
 	public class NewsExistsSpecification : SpecificationBase<News>
 	{
@@ -551,9 +596,9 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	}
      
 namespace jogosdaqui.Domain.Articles.Specifications 
-{
+{ 
 	/// <summary>
-	/// Preview exists specification.
+	/// Preview exists specification. 
 	/// </summary>
 	public class PreviewExistsSpecification : SpecificationBase<Preview>
 	{
@@ -595,9 +640,9 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	}
      
 namespace jogosdaqui.Domain.Articles.Specifications 
-{
+{ 
 	/// <summary>
-	/// Review exists specification.
+	/// Review exists specification. 
 	/// </summary>
 	public class ReviewExistsSpecification : SpecificationBase<Review>
 	{
@@ -639,9 +684,9 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	}
      
 namespace jogosdaqui.Domain.Tags.Specifications 
-{
+{ 
 	/// <summary>
-	/// Tag exists specification.
+	/// Tag exists specification. 
 	/// </summary>
 	public class TagExistsSpecification : SpecificationBase<Tag>
 	{
@@ -709,9 +754,9 @@ namespace jogosdaqui.Domain.Tags.Specifications
 	}
      
 namespace jogosdaqui.Domain.Tags.Specifications 
-{
+{ 
 	/// <summary>
-	/// AppliedTag exists specification.
+	/// AppliedTag exists specification. 
 	/// </summary>
 	public class AppliedTagExistsSpecification : SpecificationBase<AppliedTag>
 	{

@@ -6,6 +6,7 @@
   
   
   
+  
    
    
    
@@ -13,6 +14,8 @@
 	
 using jogosdaqui.Domain.Games;
 using jogosdaqui.Domain.Games.Specifications;
+using jogosdaqui.Domain.Evaluations;
+using jogosdaqui.Domain.Evaluations.Specifications;
 using jogosdaqui.Domain.Platforms;
 using jogosdaqui.Domain.Platforms.Specifications;
 using jogosdaqui.Domain.Companies;
@@ -47,6 +50,8 @@ namespace jogosdaqui.Domain.UnitTests
  
 		public static IGameRepository GameRepository { get; set; } 
  
+		public static IEvaluationRepository EvaluationRepository { get; set; } 
+ 
 		public static IPlatformRepository PlatformRepository { get; set; } 
  
 		public static ICompanyRepository CompanyRepository { get; set; } 
@@ -80,6 +85,9 @@ namespace jogosdaqui.Domain.UnitTests
  
 			DependencyService.Register<IGameRepository> (GameRepository = new TestingGameRepository());
 			GameRepository.SetUnitOfWork (UnitOfWork);
+ 
+			DependencyService.Register<IEvaluationRepository> (EvaluationRepository = new TestingEvaluationRepository());
+			EvaluationRepository.SetUnitOfWork (UnitOfWork);
  
 			DependencyService.Register<IPlatformRepository> (PlatformRepository = new TestingPlatformRepository());
 			PlatformRepository.SetUnitOfWork (UnitOfWork);
@@ -228,6 +236,130 @@ namespace jogosdaqui.Domain.UnitTests
 
 			Assert.AreEqual(4, m_target.CountAllGames());
 			Assert.AreEqual (1, m_target.GetGameByKey (game.Key).Key);
+		}
+ 
+		#endregion
+	}
+}
+
+
+
+     
+
+
+namespace jogosdaqui.Domain.UnitTests
+{
+	[TestFixture()]
+	public partial class EvaluationServiceTest
+	{
+		#region Fields
+		private EvaluationService m_target; 
+		#endregion
+ 
+		#region Initialize
+		[SetUp]
+		public void InitializeTest()
+		{
+			Stubs.Initialize ();
+			Stubs.EvaluationRepository.Add (new Evaluation());
+			Stubs.EvaluationRepository.Add (new Evaluation());
+			Stubs.EvaluationRepository.Add (new Evaluation());
+			Stubs.EvaluationRepository.Add (new Evaluation());
+			Stubs.UnitOfWork.Commit ();
+
+			m_target = new EvaluationService ();
+
+		}
+		#endregion
+
+		#region Tests
+		[Test]
+		public void CountAllEvaluations_NoArguments_AllEvaluationsCounted()
+		{
+			var actual = m_target.CountAllEvaluations ();
+			Assert.AreEqual (4, actual);
+		}
+
+		[Test]
+		public void DeleteEvaluation_EvaluationNotExistis_Exception()
+		{
+			ExceptionAssert.IsThrowing (new ArgumentException("Evaluation with key '0' does not exists."), () => {
+				m_target.DeleteEvaluation(0);
+			});
+		}
+   
+		[Test]
+		public void DeleteEvaluation_EvaluationExistis_Exception()
+		{
+			Assert.AreEqual (4, m_target.CountAllEvaluations ());
+
+			m_target.DeleteEvaluation(1);
+			Assert.AreEqual (3, m_target.CountAllEvaluations ());
+
+			m_target.DeleteEvaluation(2);
+			Assert.AreEqual (2, m_target.CountAllEvaluations ());
+
+			m_target.DeleteEvaluation(3);
+			Assert.AreEqual (1, m_target.CountAllEvaluations ());
+
+			m_target.DeleteEvaluation(4);
+			Assert.AreEqual (0, m_target.CountAllEvaluations ());
+		}
+
+		[Test]
+		public void GetAllEvaluations_NoArgs_AllEvaluations ()
+		{
+			var actual = m_target.GetAllEvaluations();
+			Assert.AreEqual (4, actual.Count);
+		}
+
+		[Test]
+		public void GetEvaluationByKey_KeyEvaluationDoesNotExists_Null ()
+		{
+			var actual = m_target.GetEvaluationByKey (0);
+			Assert.IsNull (actual);
+		}
+
+		[Test]
+		public void GetEvaluationByKey_KeyEvaluationExists_Evaluation ()
+		{
+			var actual = m_target.GetEvaluationByKey (2);
+			Assert.AreEqual (2, actual.Key);
+
+			actual = m_target.GetEvaluationByKey (3);
+			Assert.AreEqual (3, actual.Key);
+		}	
+	 
+		[Test]
+		public void SaveEvaluation_Null_Exception ()
+		{
+			ExceptionAssert.IsThrowing (new ArgumentNullException("evaluation"), () => {
+				m_target.SaveEvaluation (null);
+			});
+		}
+ 
+		[Test]  
+		public void SaveEvaluation_EvaluationDoesNotExists_Created()
+		{
+			var evaluation = new Evaluation ();
+ 
+			m_target.SaveEvaluation (evaluation);
+
+			Assert.AreEqual(5, m_target.CountAllEvaluations());
+			Assert.AreEqual (5, m_target.GetEvaluationByKey (evaluation.Key).Key);
+		}
+ 
+		[Test]
+		public void SaveEvaluation_EvaluationDoesExists_Updated()
+		{
+			var evaluation = new Evaluation () { 
+				Key = 1 
+			};
+
+			m_target.SaveEvaluation (evaluation);
+
+			Assert.AreEqual(4, m_target.CountAllEvaluations());
+			Assert.AreEqual (1, m_target.GetEvaluationByKey (evaluation.Key).Key);
 		}
  
 		#endregion

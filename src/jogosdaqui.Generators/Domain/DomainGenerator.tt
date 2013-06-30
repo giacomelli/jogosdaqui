@@ -8,17 +8,17 @@ using System.Linq;
 using Skahal.Infrastructure.Framework.Commons; 
 using Skahal.Infrastructure.Framework.Domain;
 using Skahal.Infrastructure.Framework.Repositories;
-using HelperSharp; 
+using HelperSharp;  
 using KissSpecifications; 
 #endregion          
          
 <#     
 RunForEachModel((e) =>  
-{ 
-	if(e.HasImplementedIRepository)    
+{   
+	if(e.HasImplementedIRepository)     
 	{    
 #>     
-namespace <#=e.Namespace#>
+namespace <#=e.Namespace#> 
 {  
 	public partial interface I<#=e.Name#>Repository : IRepository<<#=e.Name#>, long>
 	{
@@ -42,9 +42,9 @@ namespace <#=e.Namespace#>
 		IList<<#=propertyName#>> FindAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>);
 		int CountAll<#=propertyName#>s(<#=propertyType#> <#=argumentName#>);
 	
-<#				}
-			}
-		} 
+<#				} 
+			}    
+		}   
 	}   
 #>
 	}   

@@ -22,9 +22,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class <#=e.PluralName#>Controller : ApiController
     {
-		#region Fields
+		#region Fields 
 		private <#=e.Name#>Service m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>

@@ -18,8 +18,8 @@ namespace jogosdaqui.Domain.UnitTests
 		public static IUnitOfWork<long> UnitOfWork { get; set; }
  
 <#      
-RunForEachModel((e) =>  
-{ 
+RunForEachModel((e) =>    
+{  
 	if(e.HasImplementedIRepository)    
 	{ 
 #> 

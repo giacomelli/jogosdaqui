@@ -6,18 +6,28 @@
   
   
   
+  
    
    
    
    
 	
 using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Games.Specifications;
+using jogosdaqui.Domain.Evaluations;
+using jogosdaqui.Domain.Evaluations.Specifications;
 using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Platforms.Specifications;
 using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Companies.Specifications;
 using jogosdaqui.Domain.Languages;
+using jogosdaqui.Domain.Languages.Specifications;
 using jogosdaqui.Domain.Persons;
+using jogosdaqui.Domain.Persons.Specifications;
 using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Articles.Specifications;
 using jogosdaqui.Domain.Tags;
+using jogosdaqui.Domain.Tags.Specifications;
    
 
 using System;
@@ -33,8 +43,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBGameRepository : MongoDBRepositoryBase<Game>,  IGameRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBGameRepository"/> class.
 		/// </summary>
@@ -49,12 +59,32 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
 	/// <summary>
+	/// MongoDB Evaluation repository.   
+	/// </summary>
+	public class MongoDBEvaluationRepository : MongoDBRepositoryBase<Evaluation>,  IEvaluationRepository
+	{
+		#region Constructors 
+		/// <summary> 
+		/// Initializes a new instance of the
+		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBEvaluationRepository"/> class.
+		/// </summary>
+		public MongoDBEvaluationRepository() : base("Evaluations")
+		{
+		}
+		#endregion
+	}
+}
+ 
+      
+namespace jogosdaqui.Infrastructure.Repositories.MongoDB
+{  
+	/// <summary>
 	/// MongoDB Platform repository.   
 	/// </summary>
 	public class MongoDBPlatformRepository : MongoDBRepositoryBase<Platform>,  IPlatformRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBPlatformRepository"/> class.
 		/// </summary>
@@ -73,8 +103,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBCompanyRepository : MongoDBRepositoryBase<Company>,  ICompanyRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBCompanyRepository"/> class.
 		/// </summary>
@@ -93,8 +123,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBLanguageRepository : MongoDBRepositoryBase<Language>,  ILanguageRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBLanguageRepository"/> class.
 		/// </summary>
@@ -113,8 +143,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBPersonRepository : MongoDBRepositoryBase<Person>,  IPersonRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBPersonRepository"/> class.
 		/// </summary>
@@ -133,8 +163,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBCommentRepository : MongoDBRepositoryBase<Comment>,  ICommentRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBCommentRepository"/> class.
 		/// </summary>
@@ -153,8 +183,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBEventRepository : MongoDBRepositoryBase<Event>,  IEventRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBEventRepository"/> class.
 		/// </summary>
@@ -173,8 +203,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBInterviewRepository : MongoDBRepositoryBase<Interview>,  IInterviewRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBInterviewRepository"/> class.
 		/// </summary>
@@ -193,8 +223,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBNewsRepository : MongoDBRepositoryBase<News>,  INewsRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBNewsRepository"/> class.
 		/// </summary>
@@ -213,8 +243,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBPreviewRepository : MongoDBRepositoryBase<Preview>,  IPreviewRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBPreviewRepository"/> class.
 		/// </summary>
@@ -233,8 +263,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBReviewRepository : MongoDBRepositoryBase<Review>,  IReviewRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBReviewRepository"/> class.
 		/// </summary>
@@ -253,8 +283,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBTagRepository : MongoDBRepositoryBase<Tag>,  ITagRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBTagRepository"/> class.
 		/// </summary>
@@ -273,8 +303,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDBAppliedTagRepository : MongoDBRepositoryBase<AppliedTag>,  IAppliedTagRepository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBAppliedTagRepository"/> class.
 		/// </summary>

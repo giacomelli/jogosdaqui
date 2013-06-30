@@ -18,12 +18,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class Testing<#=e.Name#>Repository : MemoryRepository<<#=e.Name#>, long>, I<#=e.Name#>Repository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.Testing<#=e.Name#>Repository"/> class.

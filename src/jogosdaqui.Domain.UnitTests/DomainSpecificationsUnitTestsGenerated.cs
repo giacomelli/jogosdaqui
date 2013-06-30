@@ -6,6 +6,7 @@
   
   
   
+  
    
    
    
@@ -13,6 +14,8 @@
 	
 using jogosdaqui.Domain.Games;
 using jogosdaqui.Domain.Games.Specifications;
+using jogosdaqui.Domain.Evaluations;
+using jogosdaqui.Domain.Evaluations.Specifications;
 using jogosdaqui.Domain.Platforms;
 using jogosdaqui.Domain.Platforms.Specifications;
 using jogosdaqui.Domain.Companies;
@@ -40,13 +43,13 @@ using jogosdaqui.Infrastructure.Repositories.Testing;
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class GameExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullGame_False()
 		{
 			var target = new GameExistsSpecification(1);
@@ -121,13 +124,55 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
+	public partial class EvaluationExistsSpecificationTest
+	{
+
+		#region Tests
+		[Test] 
+		public void IsSatisfiedBy_NullEvaluation_False()
+		{
+			var target = new EvaluationExistsSpecification(1);
+			
+			Assert.IsFalse(target.IsSatisfiedBy(null));
+		}
+		
+		[Test]
+		public void IsSatisfiedBy_NonExistsEvaluation_False()
+		{
+			var target = new EvaluationExistsSpecification(1); 
+			
+			Assert.IsFalse(target.IsSatisfiedBy(new Evaluation()));
+		}
+		
+		[Test]
+		public void IsSatisfiedBy_ExistsEvaluation_True()
+		{
+			Stubs.Initialize ();
+			Stubs.EvaluationRepository.Add (new Evaluation(1));
+			Stubs.UnitOfWork.Commit ();
+			
+			var target = new EvaluationExistsSpecification(1);
+			
+			Assert.IsTrue(target.IsSatisfiedBy(new Evaluation(1)));
+		}
+		#endregion
+	}
+	}
+
+
+
+     
+
+namespace jogosdaqui.Domain.UnitTests
+{ 
+	[TestFixture()] 
 	public partial class PlatformExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullPlatform_False()
 		{
 			var target = new PlatformExistsSpecification(1);
@@ -202,13 +247,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class CompanyExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullCompany_False()
 		{
 			var target = new CompanyExistsSpecification(1);
@@ -283,13 +328,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class LanguageExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullLanguage_False()
 		{
 			var target = new LanguageExistsSpecification(1);
@@ -364,13 +409,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class PersonExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullPerson_False()
 		{
 			var target = new PersonExistsSpecification(1);
@@ -445,13 +490,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class CommentExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullComment_False()
 		{
 			var target = new CommentExistsSpecification(1);
@@ -487,13 +532,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class EventExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullEvent_False()
 		{
 			var target = new EventExistsSpecification(1);
@@ -529,13 +574,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class InterviewExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullInterview_False()
 		{
 			var target = new InterviewExistsSpecification(1);
@@ -571,13 +616,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class NewsExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullNews_False()
 		{
 			var target = new NewsExistsSpecification(1);
@@ -613,13 +658,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class PreviewExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullPreview_False()
 		{
 			var target = new PreviewExistsSpecification(1);
@@ -655,13 +700,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class ReviewExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullReview_False()
 		{
 			var target = new ReviewExistsSpecification(1);
@@ -697,13 +742,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class TagExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullTag_False()
 		{
 			var target = new TagExistsSpecification(1);
@@ -778,13 +823,13 @@ namespace jogosdaqui.Domain.UnitTests
      
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class AppliedTagExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_NullAppliedTag_False()
 		{
 			var target = new AppliedTagExistsSpecification(1);

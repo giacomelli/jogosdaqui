@@ -55,7 +55,6 @@
     <Compile Include="Platforms\Platform.cs" />
     <Compile Include="Articles\ArticleBase.cs" />
     <Compile Include="Companies\Company.cs" />
-    <Compile Include="Games\GameEvaluation.cs" />
     <Compile Include="Articles\Comment.cs" />
     <Compile Include="Games\IGameRepository.cs" />
     <Compile Include="Platforms\IPlatformRepository.cs" />
@@ -92,6 +91,8 @@
     <Compile Include="Companies\CompanyService.cs" />
     <Compile Include="DomainGenerated.cs" />
     <Compile Include="DomainSpecificationsGenerated.cs" />
+    <Compile Include="Evaluations\Evaluation.cs" />
+    <Compile Include="Evaluations\IEvaluationRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -104,5 +105,6 @@
     <Folder Include="Articles\Specifications\" />
     <Folder Include="Games\Specifications\" />
     <Folder Include="Companies\Specifications\" />
+    <Folder Include="Evaluations\" />
   </ItemGroup>
 </Project>

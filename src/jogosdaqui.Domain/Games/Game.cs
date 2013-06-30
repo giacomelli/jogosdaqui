@@ -45,58 +45,52 @@ namespace jogosdaqui.Domain.Games
 		public DateTime? ReleaseDate { get; set; }
 
 		/// <summary>
-		/// Gets the categories.
+		/// Gets the platform ids
 		/// </summary>
-		/// <value>The categories.</value>
-		//public IList<GameCategory> Categories { get; private set; } 
+		/// <value>The platform ids.</value>
+		public IList<long> PlatformIds { get; private set; } 
 
 		/// <summary>
-		/// Gets the platforms.
-		/// </summary>
-		/// <value>The platforms.</value>
-		public IList<Platform> Platforms { get; private set; } 
-
-		/// <summary>
-		/// Gets the developers companies.
+		/// Gets the developer company ids.
 		/// </summary>
 		/// <value>The developers companies.</value>
-		public IList<Company> DevelopersCompanies { get; private set; } 
+		public IList<long> DeveloperCompanyIds { get; private set; } 
 
 		/// <summary>
-		/// Gets the publishers companies.
+		/// Gets the publisher company.
 		/// </summary>
-		/// <value>The publishers companies.</value>
-		public IList<Company> PublishersCompanies { get; private set; }
+		/// <value>The publisher company ids.</value>
+		public IList<long> PublisherCompanyIds { get; private set; }
 
 		/// <summary>
-		/// Gets the programmers.
+		/// Gets the programmer ids.
 		/// </summary>
-		/// <value>The programmers.</value>
-		public IList<Person> Programmers { get; private set; } 
+		/// <value>The programmer ids.</value>
+		public IList<long> ProgrammerIds { get; private set; } 
 
 		/// <summary>
-		/// Gets the game designers.
+		/// Gets the game designer ids.
 		/// </summary>
-		/// <value>The game designers.</value>
-		public IList<Person> GameDesigners { get; private set; } 
+		/// <value>The game designer ids.</value>
+		public IList<long> GameDesignerIds { get; private set; } 
 
 		/// <summary>
-		/// Gets the artists.
+		/// Gets the artist ids.
 		/// </summary>
 		/// <value>The artists.</value>
-		public IList<Person> Artists { get; private set; } 
+		public IList<long> ArtistIds { get; private set; } 
 
 		/// <summary>
-		/// Gets the directors.
+		/// Gets the director ids.
 		/// </summary>
-		/// <value>The directors.</value>
-		public IList<Person> Directors { get; private set; } 
+		/// <value>The director ids.</value>
+		public IList<long> DirectorIds { get; private set; } 
 
 		/// <summary>
-		/// Gets the producers.
+		/// Gets the producer ids.
 		/// </summary>
-		/// <value>The producers.</value>
-		public IList<Person> Producers { get; private set; } 
+		/// <value>The producer ids.</value>
+		public IList<long> ProducerIds { get; private set; } 
 		#endregion
 	}
 }

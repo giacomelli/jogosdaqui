@@ -3,14 +3,35 @@ using System.Collections.Generic;
 using Skahal.Infrastructure.Framework.Domain;
 using System.Diagnostics;
 
-namespace jogosdaqui.Domain.Games
+namespace jogosdaqui.Domain.Evaluations
 {
 	/// <summary>
 	/// Game evaluation.
 	/// </summary>
 	[DebuggerDisplay("{Key}: {GameId}")]
-	public class GameEvaluation : EntityBase<long>
+	public class Evaluation : EntityBase<long>, IAggregateRoot<long>
 	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.Evaluation"/> class.
+		/// </summary>
+		public Evaluation()
+		{
+			Pros = new List<string> ();
+			Cons = new List<string> ();
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.Evaluation"/> class.
+		/// </summary>
+		/// <param name="key">Key.</param>
+		public Evaluation(long key) : base(key)
+		{
+			Pros = new List<string> ();
+			Cons = new List<string> ();
+		}
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets or sets the game identifier.

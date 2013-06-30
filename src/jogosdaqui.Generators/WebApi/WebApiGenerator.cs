@@ -6,18 +6,28 @@
   
   
   
+  
    
    
    
    
 	
 using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Games.Specifications;
+using jogosdaqui.Domain.Evaluations;
+using jogosdaqui.Domain.Evaluations.Specifications;
 using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Platforms.Specifications;
 using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Companies.Specifications;
 using jogosdaqui.Domain.Languages;
+using jogosdaqui.Domain.Languages.Specifications;
 using jogosdaqui.Domain.Persons;
+using jogosdaqui.Domain.Persons.Specifications;
 using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Articles.Specifications;
 using jogosdaqui.Domain.Tags;
+using jogosdaqui.Domain.Tags.Specifications;
    
  using System;
 using System.Collections.Generic;
@@ -36,9 +46,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class GamesController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private GameService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -119,13 +129,91 @@ namespace jogosdaqui.WebApi.Controllers
 namespace jogosdaqui.WebApi.Controllers
 {
 	/// <summary>
+	/// Evaluations. 
+	/// </summary>
+    public partial class EvaluationsController : ApiController
+    {
+		#region Fields 
+		private EvaluationService m_service;
+		#endregion 
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.WebApi.Controllers.EvaluationsController"/> class.
+		/// </summary>
+		public EvaluationsController()
+		{
+			m_service = new EvaluationService ();
+		}
+		#endregion
+
+		/// <summary>
+		/// Get all Evaluations
+		/// </summary>
+        public IEnumerable<Evaluation> Get()
+        {
+			return m_service.GetAllEvaluations ();
+        }
+        
+        /// <summary>  
+		/// Get Evaluation by key.
+		/// </summary>  
+		/// <param name="key">The Evaluation's key.</param>
+		/// <returns>The Evaluation with the specified key.</returns>
+        public Evaluation Get(long key)
+        {
+			return m_service.GetEvaluationByKey (key);
+        }
+
+				
+		/// <summary>
+		/// Creates a new Evaluation.
+		/// </summary>
+		/// <param name="evaluation">The Evaluation to create.</param>
+		/// <returns>The created Evaluation with the key.</returns>
+		public Evaluation Post(Evaluation evaluation)
+		{
+			m_service.SaveEvaluation (evaluation);
+
+			return evaluation;
+		}
+
+		/// <summary>
+		/// Updates an existing Evaluation.
+		/// </summary>
+		/// <param name="key">The Evaluation's key.</param>
+		/// <param name="evaluation">The Evaluation with updated informations.</param>
+		public Evaluation Put(long key, Evaluation evaluation)
+		{
+	        evaluation.Key = key;
+			m_service.SaveEvaluation (evaluation);
+
+			return evaluation;
+		}
+
+		/// <summary>
+		/// Deletes the Evaluation with the specified key.
+		/// </summary>
+		/// <param name="key">The key of the Evaluation to be deleted.</param>
+	    [SuccessHandlingFilter]
+        public void Delete(long key)
+		{
+			m_service.DeleteEvaluation (key);
+		}
+    }
+}
+ 
+    
+namespace jogosdaqui.WebApi.Controllers
+{
+	/// <summary>
 	/// Platforms. 
 	/// </summary>
     public partial class PlatformsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private PlatformService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -210,9 +298,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class CompaniesController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private CompanyService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -297,9 +385,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class LanguagesController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private LanguageService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -384,9 +472,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class PersonsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private PersonService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -471,9 +559,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class CommentsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private CommentService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -549,9 +637,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class EventsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private EventService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -627,9 +715,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class InterviewsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private InterviewService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -705,9 +793,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class NewsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private NewsService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -783,9 +871,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class PreviewsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private PreviewService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -861,9 +949,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class ReviewsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private ReviewService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -939,9 +1027,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class TagsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private TagService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>
@@ -1026,9 +1114,9 @@ namespace jogosdaqui.WebApi.Controllers
 	/// </summary>
     public partial class AppliedTagsController : ApiController
     {
-		#region Fields
+		#region Fields 
 		private AppliedTagService m_service;
-		#endregion
+		#endregion 
 
 		#region Constructors
 		/// <summary>

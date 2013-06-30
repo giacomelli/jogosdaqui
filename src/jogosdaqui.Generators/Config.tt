@@ -10,6 +10,7 @@
 <#@ import namespace="jogosdaqui.Domain.Languages" #> 
 <#@ import namespace="jogosdaqui.Domain.Persons" #>  
 <#@ import namespace="jogosdaqui.Domain.Tags" #>  
+<#@ import namespace="jogosdaqui.Domain.Evaluations" #>  
 <#@ import namespace="System.Reflection" #>  
 <#@ import namespace="System.Linq" #>   
 <#@ import namespace="System.Collections.Generic" #>   
@@ -37,6 +38,7 @@ class GenEntity
 Type[] modelsType = new Type[]     
 {   
 	typeof(Game), 
+	typeof(Evaluation),
 	typeof(Platform),
 	typeof(Company),
 	typeof(Language),

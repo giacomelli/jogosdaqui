@@ -18,8 +18,8 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 	/// </summary>
 	public class MongoDB<#=e.Name#>Repository : MongoDBRepositoryBase<<#=e.Name#>>,  I<#=e.Name#>Repository
 	{
-		#region Constructors
-		/// <summary>
+		#region Constructors 
+		/// <summary> 
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDB<#=e.Name#>Repository"/> class.
 		/// </summary>

@@ -29,7 +29,7 @@ namespace jogosdaqui.Domain.Articles
 		/// Gets or sets the game evaluation identifier.
 		/// </summary>
 		/// <value>The game evaluation identifier.</value>
-		public int? GameEvaluationId { get; set; }
+		public int? EvaluationId { get; set; }
 
 		/// <summary>
 		/// Gets or sets the expected date release.

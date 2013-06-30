@@ -18,13 +18,13 @@ RunForEachModel((e) =>
 #>     
 
 namespace jogosdaqui.Domain.UnitTests
-{
-	[TestFixture()]
+{ 
+	[TestFixture()] 
 	public partial class <#=e.Name#>ExistsSpecificationTest
 	{
 
 		#region Tests
-		[Test]
+		[Test] 
 		public void IsSatisfiedBy_Null<#=e.Name#>_False()
 		{
 			var target = new <#=e.Name#>ExistsSpecification(1);

@@ -6,17 +6,18 @@ using System.Web.Http.Description;
 using System.Web.Http.Dispatcher;
 using System.Web.Routing;
 using Skahal.Infrastructure.Framework.Commons;
+using Skahal.Infrastructure.Framework.Repositories;
 using Swagger.Net;
+using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Evaluations;
 using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Languages;
+using jogosdaqui.Domain.Persons;
+using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Tags;
 using jogosdaqui.Infrastructure.Repositories;
 using jogosdaqui.Infrastructure.Repositories.MongoDB;
-using Skahal.Infrastructure.Framework.Repositories;
-using jogosdaqui.Domain.Platforms;
-using jogosdaqui.Domain.Companies;
-using jogosdaqui.Domain.Persons;
-using jogosdaqui.Domain.Languages;
-using jogosdaqui.Domain.Articles;
-using jogosdaqui.Domain.Tags;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.DomainConfig), "PreStart")]
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.DomainConfig), "PostStart")]
@@ -52,6 +53,9 @@ namespace App_Start
 
 			DependencyService.Register<ITagRepository> (() => { return new MongoDBTagRepository(); });
 			DependencyService.Register<IAppliedTagRepository> (() => { return new MongoDBAppliedTagRepository(); });
+
+			DependencyService.Register<IEvaluationRepository> (() => { return new MongoDBEvaluationRepository(); });
+
 
 			DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
 		}

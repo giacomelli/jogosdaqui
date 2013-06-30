@@ -6,18 +6,28 @@
   
   
   
+  
    
    
    
    
 	
 using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Games.Specifications;
+using jogosdaqui.Domain.Evaluations;
+using jogosdaqui.Domain.Evaluations.Specifications;
 using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Platforms.Specifications;
 using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Companies.Specifications;
 using jogosdaqui.Domain.Languages;
+using jogosdaqui.Domain.Languages.Specifications;
 using jogosdaqui.Domain.Persons;
+using jogosdaqui.Domain.Persons.Specifications;
 using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Articles.Specifications;
 using jogosdaqui.Domain.Tags;
+using jogosdaqui.Domain.Tags.Specifications;
    
 
 using System;
@@ -33,12 +43,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingGameRepository : MemoryRepository<Game, long>, IGameRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingGameRepository"/> class.
@@ -55,16 +65,42 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 {  
 	/// <summary> 
-	/// Testing Platform repository.  
+	/// Testing Evaluation repository.  
 	/// </summary>
-	public class TestingPlatformRepository : MemoryRepository<Platform, long>, IPlatformRepository
+	public class TestingEvaluationRepository : MemoryRepository<Evaluation, long>, IEvaluationRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
+		/// <summary>
+		/// Initializes a new instance of the 
+		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingEvaluationRepository"/> class.
+		/// </summary>
+		public TestingEvaluationRepository() : base((g) => { lock(s_lock) { return ++s_lastKey; } })
+		{
+			s_lastKey = 0;
+		}
+		#endregion
+	}
+}
+ 
+      
+namespace jogosdaqui.Infrastructure.Repositories.Testing
+{  
+	/// <summary> 
+	/// Testing Platform repository.  
+	/// </summary>
+	public class TestingPlatformRepository : MemoryRepository<Platform, long>, IPlatformRepository
+	{
+		#region Fields 
+		private static long s_lastKey; 
+		private static object s_lock = new Object();
+		#endregion
+		
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingPlatformRepository"/> class.
@@ -85,12 +121,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingCompanyRepository : MemoryRepository<Company, long>, ICompanyRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingCompanyRepository"/> class.
@@ -111,12 +147,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingLanguageRepository : MemoryRepository<Language, long>, ILanguageRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingLanguageRepository"/> class.
@@ -137,12 +173,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingPersonRepository : MemoryRepository<Person, long>, IPersonRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingPersonRepository"/> class.
@@ -163,12 +199,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingCommentRepository : MemoryRepository<Comment, long>, ICommentRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingCommentRepository"/> class.
@@ -189,12 +225,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingEventRepository : MemoryRepository<Event, long>, IEventRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingEventRepository"/> class.
@@ -215,12 +251,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingInterviewRepository : MemoryRepository<Interview, long>, IInterviewRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingInterviewRepository"/> class.
@@ -241,12 +277,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingNewsRepository : MemoryRepository<News, long>, INewsRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingNewsRepository"/> class.
@@ -267,12 +303,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingPreviewRepository : MemoryRepository<Preview, long>, IPreviewRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingPreviewRepository"/> class.
@@ -293,12 +329,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingReviewRepository : MemoryRepository<Review, long>, IReviewRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingReviewRepository"/> class.
@@ -319,12 +355,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingTagRepository : MemoryRepository<Tag, long>, ITagRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingTagRepository"/> class.
@@ -345,12 +381,12 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
 	/// </summary>
 	public class TestingAppliedTagRepository : MemoryRepository<AppliedTag, long>, IAppliedTagRepository
 	{
-		#region Fields
+		#region Fields 
 		private static long s_lastKey; 
 		private static object s_lock = new Object();
 		#endregion
 		
-		#region Constructors
+		#region Constructors 
 		/// <summary>
 		/// Initializes a new instance of the 
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.Testing.TestingAppliedTagRepository"/> class.
