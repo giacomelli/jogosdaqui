@@ -8,6 +8,23 @@ namespace jogosdaqui.Domain.Companies
 	/// </summary>
 	public class Company : EntityBase<long>, IAggregateRoot<long>
 	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Companies.Company"/> class.
+		/// </summary>
+		public Company()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Companies.Company"/> class.
+		/// </summary>
+		/// <param name="key">Key.</param>
+		public Company(long key) : base(key)
+		{
+		}
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets or sets the name.

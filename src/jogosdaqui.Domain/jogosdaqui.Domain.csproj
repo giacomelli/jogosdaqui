@@ -75,7 +75,6 @@
     <Compile Include="Articles\Review.cs" />
     <Compile Include="Articles\INewsRepository.cs" />
     <Compile Include="Articles\Interview.cs" />
-    <Compile Include="Generated.cs" />
     <Compile Include="Tags\Tag.cs" />
     <Compile Include="Tags\ITagRepository.cs" />
     <Compile Include="Tags\AppliedTag.cs" />
@@ -90,6 +89,9 @@
     <Compile Include="Articles\NewsService.cs" />
     <Compile Include="Articles\PreviewService.cs" />
     <Compile Include="Articles\ReviewService.cs" />
+    <Compile Include="Companies\CompanyService.cs" />
+    <Compile Include="DomainGenerated.cs" />
+    <Compile Include="DomainSpecificationsGenerated.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -101,5 +103,6 @@
     <Folder Include="Tags\Specifications\" />
     <Folder Include="Articles\Specifications\" />
     <Folder Include="Games\Specifications\" />
+    <Folder Include="Companies\Specifications\" />
   </ItemGroup>
 </Project>

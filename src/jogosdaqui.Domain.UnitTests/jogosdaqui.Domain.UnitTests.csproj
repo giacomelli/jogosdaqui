@@ -60,10 +60,13 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Tags\AppliedTagServiceTest.cs" />
-    <Compile Include="Generated.cs" />
     <Compile Include="ServiceFacadeTest.cs" />
     <Compile Include="Articles\ArticleServiceTest.cs" />
     <Compile Include="Articles\EventServiceTest.cs" />
+    <Compile Include="Companies\CompanyServiceTest.cs" />
+    <Compile Include="DomainSpecificationsUnitTestsGenerated.cs" />
+    <Compile Include="DomainUnitTestsGenerated.cs" />
+    <Compile Include="Games\GameServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -84,5 +87,6 @@
     <Folder Include="Games\" />
     <Folder Include="Articles\" />
     <Folder Include="Articles\Specifications\" />
+    <Folder Include="Companies\" />
   </ItemGroup>
 </Project>

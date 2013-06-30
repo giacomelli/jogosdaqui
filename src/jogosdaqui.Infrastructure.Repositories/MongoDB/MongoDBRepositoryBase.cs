@@ -24,14 +24,14 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDBRepositoryBase`1"/> class.
 		/// </summary>
-		public MongoDBRepositoryBase()
+		public MongoDBRepositoryBase(string collectionName)
 		{
 			var connectionstring = ConfigurationManager.AppSettings.Get("MONGOLAB_URI");
 			var url = new MongoUrl(connectionstring);
 			var client = new MongoClient(url);
 			var server = client.GetServer();
 			var database = server.GetDatabase(url.DatabaseName);
-			m_collection = database.GetCollection<TEntity>("Tags");
+			m_collection = database.GetCollection<TEntity>(collectionName);
 		}
 		#endregion
 

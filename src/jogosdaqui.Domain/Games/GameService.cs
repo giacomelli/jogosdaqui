@@ -21,6 +21,15 @@ namespace jogosdaqui.Domain.Games
 		{
 			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification (gameKey));
 		}
+
+		/// <summary>
+		/// Executes the save specification.
+		/// </summary>
+		/// <param name="game">Game.</param>
+		partial void ExecuteSaveSpecification (Game game)
+		{
+			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameUniqueNameSpecification ());
+		}
 		#endregion
 	}
 }

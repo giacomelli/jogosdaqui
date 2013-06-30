@@ -8,15 +8,16 @@
   
    
    
-using jogosdaqui.Domain;   
-using jogosdaqui.Domain.Articles; 
-using jogosdaqui.Domain.Companies; 
-using jogosdaqui.Domain.Games; 
-using jogosdaqui.Domain.Languages; 
-using jogosdaqui.Domain.Persons; 
-using jogosdaqui.Domain.Platforms; 
-using jogosdaqui.Domain.Tags; 
-  
+   
+   
+	
+using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Languages;
+using jogosdaqui.Domain.Persons;
+using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Tags;
    
  using System;
 using System.Collections.Generic;
@@ -67,6 +68,16 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetGameByKey (key);
         }
 
+				/// <summary> 
+		/// Gets the game by name.
+		/// </summary>
+		/// <returns>The game</returns>
+		/// <param name="name">The name.</param>
+		public Game GetGameByName(string name)
+		{
+			return m_service.GetGameByName (name);
+		}
+				
 		/// <summary>
 		/// Creates a new Game.
 		/// </summary>
@@ -144,6 +155,16 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetPlatformByKey (key);
         }
 
+				/// <summary> 
+		/// Gets the platform by name.
+		/// </summary>
+		/// <returns>The platform</returns>
+		/// <param name="name">The name.</param>
+		public Platform GetPlatformByName(string name)
+		{
+			return m_service.GetPlatformByName (name);
+		}
+				
 		/// <summary>
 		/// Creates a new Platform.
 		/// </summary>
@@ -221,6 +242,16 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetCompanyByKey (key);
         }
 
+				/// <summary> 
+		/// Gets the company by name.
+		/// </summary>
+		/// <returns>The company</returns>
+		/// <param name="name">The name.</param>
+		public Company GetCompanyByName(string name)
+		{
+			return m_service.GetCompanyByName (name);
+		}
+				
 		/// <summary>
 		/// Creates a new Company.
 		/// </summary>
@@ -298,6 +329,16 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetLanguageByKey (key);
         }
 
+				/// <summary> 
+		/// Gets the language by name.
+		/// </summary>
+		/// <returns>The language</returns>
+		/// <param name="name">The name.</param>
+		public Language GetLanguageByName(string name)
+		{
+			return m_service.GetLanguageByName (name);
+		}
+				
 		/// <summary>
 		/// Creates a new Language.
 		/// </summary>
@@ -375,6 +416,16 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetPersonByKey (key);
         }
 
+				/// <summary> 
+		/// Gets the person by name.
+		/// </summary>
+		/// <returns>The person</returns>
+		/// <param name="name">The name.</param>
+		public Person GetPersonByName(string name)
+		{
+			return m_service.GetPersonByName (name);
+		}
+				
 		/// <summary>
 		/// Creates a new Person.
 		/// </summary>
@@ -452,6 +503,7 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetCommentByKey (key);
         }
 
+				
 		/// <summary>
 		/// Creates a new Comment.
 		/// </summary>
@@ -485,6 +537,84 @@ namespace jogosdaqui.WebApi.Controllers
         public void Delete(long key)
 		{
 			m_service.DeleteComment (key);
+		}
+    }
+}
+ 
+    
+namespace jogosdaqui.WebApi.Controllers
+{
+	/// <summary>
+	/// Events. 
+	/// </summary>
+    public partial class EventsController : ApiController
+    {
+		#region Fields
+		private EventService m_service;
+		#endregion
+
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.WebApi.Controllers.EventsController"/> class.
+		/// </summary>
+		public EventsController()
+		{
+			m_service = new EventService ();
+		}
+		#endregion
+
+		/// <summary>
+		/// Get all Events
+		/// </summary>
+        public IEnumerable<Event> Get()
+        {
+			return m_service.GetAllEvents ();
+        }
+        
+        /// <summary>  
+		/// Get Event by key.
+		/// </summary>  
+		/// <param name="key">The Event's key.</param>
+		/// <returns>The Event with the specified key.</returns>
+        public Event Get(long key)
+        {
+			return m_service.GetEventByKey (key);
+        }
+
+				
+		/// <summary>
+		/// Creates a new Event.
+		/// </summary>
+		/// <param name="event">The Event to create.</param>
+		/// <returns>The created Event with the key.</returns>
+		public Event Post(Event @event)
+		{
+			m_service.SaveEvent (@event);
+
+			return @event;
+		}
+
+		/// <summary>
+		/// Updates an existing Event.
+		/// </summary>
+		/// <param name="key">The Event's key.</param>
+		/// <param name="event">The Event with updated informations.</param>
+		public Event Put(long key, Event @event)
+		{
+	        @event.Key = key;
+			m_service.SaveEvent (@event);
+
+			return @event;
+		}
+
+		/// <summary>
+		/// Deletes the Event with the specified key.
+		/// </summary>
+		/// <param name="key">The key of the Event to be deleted.</param>
+	    [SuccessHandlingFilter]
+        public void Delete(long key)
+		{
+			m_service.DeleteEvent (key);
 		}
     }
 }
@@ -529,6 +659,7 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetInterviewByKey (key);
         }
 
+				
 		/// <summary>
 		/// Creates a new Interview.
 		/// </summary>
@@ -606,6 +737,7 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetNewsByKey (key);
         }
 
+				
 		/// <summary>
 		/// Creates a new News.
 		/// </summary>
@@ -683,6 +815,7 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetPreviewByKey (key);
         }
 
+				
 		/// <summary>
 		/// Creates a new Preview.
 		/// </summary>
@@ -760,6 +893,7 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetReviewByKey (key);
         }
 
+				
 		/// <summary>
 		/// Creates a new Review.
 		/// </summary>
@@ -837,6 +971,16 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetTagByKey (key);
         }
 
+				/// <summary> 
+		/// Gets the tag by name.
+		/// </summary>
+		/// <returns>The tag</returns>
+		/// <param name="name">The name.</param>
+		public Tag GetTagByName(string name)
+		{
+			return m_service.GetTagByName (name);
+		}
+				
 		/// <summary>
 		/// Creates a new Tag.
 		/// </summary>
@@ -914,6 +1058,7 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.GetAppliedTagByKey (key);
         }
 
+				
 		/// <summary>
 		/// Creates a new AppliedTag.
 		/// </summary>

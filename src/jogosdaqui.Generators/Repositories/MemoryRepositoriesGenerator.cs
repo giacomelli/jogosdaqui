@@ -27,8 +27,8 @@ using Skahal.Infrastructure.Framework.Repositories;
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Game repository.  
 	/// </summary>
 	public class TestingGameRepository : MemoryRepository<Game, long>, IGameRepository
@@ -53,8 +53,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Platform repository.  
 	/// </summary>
 	public class TestingPlatformRepository : MemoryRepository<Platform, long>, IPlatformRepository
@@ -79,8 +79,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Company repository.  
 	/// </summary>
 	public class TestingCompanyRepository : MemoryRepository<Company, long>, ICompanyRepository
@@ -105,8 +105,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Language repository.  
 	/// </summary>
 	public class TestingLanguageRepository : MemoryRepository<Language, long>, ILanguageRepository
@@ -131,8 +131,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Person repository.  
 	/// </summary>
 	public class TestingPersonRepository : MemoryRepository<Person, long>, IPersonRepository
@@ -157,8 +157,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Comment repository.  
 	/// </summary>
 	public class TestingCommentRepository : MemoryRepository<Comment, long>, ICommentRepository
@@ -183,8 +183,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Event repository.  
 	/// </summary>
 	public class TestingEventRepository : MemoryRepository<Event, long>, IEventRepository
@@ -209,8 +209,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Interview repository.  
 	/// </summary>
 	public class TestingInterviewRepository : MemoryRepository<Interview, long>, IInterviewRepository
@@ -235,8 +235,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing News repository.  
 	/// </summary>
 	public class TestingNewsRepository : MemoryRepository<News, long>, INewsRepository
@@ -261,8 +261,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Preview repository.  
 	/// </summary>
 	public class TestingPreviewRepository : MemoryRepository<Preview, long>, IPreviewRepository
@@ -287,8 +287,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Review repository.  
 	/// </summary>
 	public class TestingReviewRepository : MemoryRepository<Review, long>, IReviewRepository
@@ -313,8 +313,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing Tag repository.  
 	/// </summary>
 	public class TestingTagRepository : MemoryRepository<Tag, long>, ITagRepository
@@ -339,8 +339,8 @@ namespace jogosdaqui.Infrastructure.Repositories.Testing
  
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
-{ 
-	/// <summary>
+{  
+	/// <summary> 
 	/// Testing AppliedTag repository.  
 	/// </summary>
 	public class TestingAppliedTagRepository : MemoryRepository<AppliedTag, long>, IAppliedTagRepository

@@ -1,4 +1,4 @@
-﻿<#@ include file="HeaderGenerator.tt" #>   
+﻿<#@ include file="../HeaderGenerator.tt" #>   
   
 #region Usings    
 using System;
@@ -7,7 +7,7 @@ using TestSharp;
 using jogosdaqui.Domain.UnitTests; 
 using Skahal.Infrastructure.Framework.Repositories; 
 using Skahal.Infrastructure.Framework.Commons;
-using jogosdaqui.Infrastructure.Repositories.Testing;
+using jogosdaqui.Infrastructure.Repositories.Testing; 
 #endregion      
  
 namespace jogosdaqui.Domain.UnitTests 
@@ -25,7 +25,7 @@ RunForEachModel((e) =>
 #> 
 		public static I<#=e.Name#>Repository <#=e.Name#>Repository { get; set; } 
 <#
-	}
+	} 
 });
 #>		 
 		#endregion
@@ -142,7 +142,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.Get<#=e.Name#>ByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void Save<#=e.Name#>_Null_Exception ()
 		{

@@ -9,6 +9,23 @@ namespace jogosdaqui.Domain.Articles
 	/// </summary>
 	public class Comment : EntityBase<long>, IAggregateRoot<long>
 	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Articles.Comment"/> class.
+		/// </summary>
+		public Comment()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Articles.Comment"/> class.
+		/// </summary>
+		/// <param name="key">Key.</param>
+		public Comment(long key) : base(key)
+		{
+		}
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets or sets the reply to comment identifier.

@@ -1,4 +1,4 @@
-﻿<#@ include file="Config.tt" #>   
+﻿<#@ include file="../Config.tt" #>   
   
 #region Usings    
 using System;  
@@ -78,12 +78,39 @@ namespace <#=e.Namespace#>
 		/// <summary>
 		/// Gets the <#=e.LowerName#> by key.
 		/// </summary>
-		/// <returns>The <#=e.LowerName#> by key.</returns>
+		/// <returns>The <#=e.LowerName#>.</returns>
 		/// <param name="key">The key.</param>
 		public <#=e.Name#> Get<#=e.Name#>ByKey(long key)
 		{
 			return MainRepository.FindAll (g => g.Key == key).FirstOrDefault ();
 		}
+		
+		<#
+		if(e.HasProperty("Name"))
+		{ 
+		#>
+		/// <summary>
+		/// Gets the <#=e.LowerName#> by name.
+		/// </summary>
+		/// <returns>The <#=e.LowerName#></returns>
+		/// <param name="name">The name.</param>
+		public <#=e.Name#> Get<#=e.Name#>ByName(string name)
+		{
+			Func<<#=e.Name#>, bool> filter; 
+			
+			if(String.IsNullOrWhiteSpace(name))
+			{
+				filter = (e) => String.IsNullOrWhiteSpace(e.Name);
+			}
+			else {
+				filter = (e) => !String.IsNullOrWhiteSpace(e.Name) && e.Name.Equals(name, StringComparison.OrdinalIgnoreCase);
+			}
+			
+			return MainRepository.FindAll (filter).FirstOrDefault ();
+		}
+		<#
+		}
+		#>
 		
 		/// <summary>
 		/// Gets all <#=e.PluralName#>. 
@@ -144,49 +171,6 @@ namespace <#=e.Namespace#>
 			MainRepository.Remove (<#=e.ParameterName#>); 
 			UnitOfWork.Commit ();
 		}
-		#endregion
-	}
-}
- 
-namespace <#=e.Namespace#>.Specifications 
-{
-	/// <summary>
-	/// <#=e.Name#> exists specification.
-	/// </summary>
-	public class <#=e.Name#>ExistsSpecification : SpecificationBase<<#=e.Name#>>
-	{
-		#region Fields
-		private long m_<#=e.LowerName#>Key;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.<#=e.PluralName#>.Specifications.<#=e.Name#>ExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="<#=e.LowerName#>Key"><#=e.Name#> key.</param>
-		public <#=e.Name#>ExistsSpecification(long <#=e.LowerName#>Key)
-		{
-			m_<#=e.LowerName#>Key = <#=e.LowerName#>Key;
-		}
-		#endregion 
-  
-		#region implemented abstract members of SpecificationBase
-		/// <summary>
-		/// Determines whether the target object satisfiy the specification.
-		/// </summary>
-		/// <param name="target">The target object to be validated.</param>
-		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
-		public override bool IsSatisfiedBy (<#=e.Name#> target)
-		{
-			if(target == null)
-			{
-				NotSatisfiedReason = "<#=e.Name#> with key '{0}' does not exists.".With (m_<#=e.LowerName#>Key);
-				return false;
-			}
-
-			return true;
-		}
-
 		#endregion
 	}
 }

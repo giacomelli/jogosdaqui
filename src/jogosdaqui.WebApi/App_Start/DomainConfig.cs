@@ -9,7 +9,7 @@ using Skahal.Infrastructure.Framework.Commons;
 using Swagger.Net;
 using jogosdaqui.Domain.Games;
 using jogosdaqui.Infrastructure.Repositories;
-using jogosdaqui.Infrastructure.Repositories.Testing;
+using jogosdaqui.Infrastructure.Repositories.MongoDB;
 using Skahal.Infrastructure.Framework.Repositories;
 using jogosdaqui.Domain.Platforms;
 using jogosdaqui.Domain.Companies;
@@ -17,7 +17,6 @@ using jogosdaqui.Domain.Persons;
 using jogosdaqui.Domain.Languages;
 using jogosdaqui.Domain.Articles;
 using jogosdaqui.Domain.Tags;
-using jogosdaqui.Infrastructure.Repositories.MongoDB;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(App_Start.DomainConfig), "PreStart")]
 [assembly: WebActivator.PostApplicationStartMethod(typeof(App_Start.DomainConfig), "PostStart")]
@@ -34,25 +33,25 @@ namespace App_Start
 		/// <returns>The start.</returns>
 		public static void PreStart() 
 		{
-			DependencyService.Register<ICompanyRepository> (new TestingCompanyRepository());
-			DependencyService.Register<IGameRepository> (new TestingGameRepository());
-			DependencyService.Register<ILanguageRepository> (new TestingLanguageRepository());
-
-			DependencyService.Register<INewsRepository> (new TestingNewsRepository());
-			DependencyService.Register<IInterviewRepository> (new TestingInterviewRepository());
-			DependencyService.Register<IPreviewRepository> (new TestingPreviewRepository());
-			DependencyService.Register<ICommentRepository> (new TestingCommentRepository());
-			DependencyService.Register<IReviewRepository> (new TestingReviewRepository());
-		
-			DependencyService.Register<IPlatformRepository> (new TestingPlatformRepository());			
-			DependencyService.Register<IPersonRepository> (new TestingPersonRepository());
-
-			//DependencyService.Register<ITagRepository> (new TestingTagRepository());
 			MongoDBBootStrapper.Start ();
-			DependencyService.Register<ITagRepository> (new MongoDBTagRepository());
-			DependencyService.Register<IAppliedTagRepository> (new TestingAppliedTagRepository());
+
+			DependencyService.Register<ICompanyRepository> (() => { return new MongoDBCompanyRepository(); });
+			DependencyService.Register<IGameRepository> (() => { return new MongoDBGameRepository(); });
+			DependencyService.Register<ILanguageRepository> (() => { return new MongoDBLanguageRepository(); });
+
+			DependencyService.Register<INewsRepository> (() => { return new MongoDBNewsRepository(); });
+			DependencyService.Register<IInterviewRepository> (() => { return new MongoDBInterviewRepository(); });
+			DependencyService.Register<IPreviewRepository> (() => { return new MongoDBPreviewRepository(); });
+			DependencyService.Register<ICommentRepository> (() => { return new MongoDBCommentRepository(); });
+			DependencyService.Register<IReviewRepository> (() => { return new MongoDBReviewRepository(); });
+			DependencyService.Register<IEventRepository> (() => { return new MongoDBEventRepository(); });
+		
+			DependencyService.Register<IPlatformRepository> (() => { return new MongoDBPlatformRepository(); });			
+			DependencyService.Register<IPersonRepository> (() => { return new MongoDBPersonRepository(); });
 
 
+			DependencyService.Register<ITagRepository> (() => { return new MongoDBTagRepository(); });
+			DependencyService.Register<IAppliedTagRepository> (() => { return new MongoDBAppliedTagRepository(); });
 
 			DependencyService.Register<IUnitOfWork<long>>(() => { return new MemoryUnitOfWork<long>(); });
 		}

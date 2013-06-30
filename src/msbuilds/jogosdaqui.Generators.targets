@@ -2,27 +2,48 @@
  
  <Target Name="AfterBuild">
    	<ItemGroup>
-    	<DomainFile Include="DomainGenerator.cs" />
-    	<DomainUnitTestsFile Include="DomainUnitTestsGenerator.cs" />
-    	<RepositoriesFile Include="RepositoriesGenerator.cs" />
-    	<WebApiFile Include="WebApiGenerator.cs" />
+    	<DomainFile Include="Domain\DomainGenerator.cs" />
+    	<DomainSpecificationsFile Include="Domain\DomainSpecificationsGenerator.cs" />
+    	<DomainUnitTestsFile Include="Domain\DomainUnitTestsGenerator.cs" />
+    	<DomainSpecificationsUnitTestsFile Include="Domain\DomainSpecificationsUnitTestsGenerator.cs" />
+    	
+    	<MemoryRepositoriesFile Include="Repositories\MemoryRepositoriesGenerator.cs" />
+    	<MongoDBRepositoriesFile Include="Repositories\MongoDBRepositoriesGenerator.cs" />
+    	
+    	<WebApiFile Include="WebApi\WebApiGenerator.cs" />
   	</ItemGroup>
 
     <Copy
         SourceFiles="@(DomainFile)"
-        DestinationFiles="..\jogosdaqui.Domain\Generated.cs"
+        DestinationFiles="..\jogosdaqui.Domain\DomainGenerated.cs"
+    />
+    
+    <Copy
+        SourceFiles="@(DomainSpecificationsFile)"
+        DestinationFiles="..\jogosdaqui.Domain\DomainSpecificationsGenerated.cs"
     />
     
     <Copy
             SourceFiles="@(DomainUnitTestsFile)"
-            DestinationFiles="..\jogosdaqui.Domain.UnitTests\Generated.cs"
+            DestinationFiles="..\jogosdaqui.Domain.UnitTests\DomainUnitTestsGenerated.cs"
     />
     
     <Copy
-        SourceFiles="@(RepositoriesFile)"
-        DestinationFiles="..\jogosdaqui.Infrastructure.Repositories\Generated.cs"
+            SourceFiles="@(DomainSpecificationsUnitTestsFile)"
+            DestinationFiles="..\jogosdaqui.Domain.UnitTests\DomainSpecificationsUnitTestsGenerated.cs"
+    />
+    
+    <Copy
+        SourceFiles="@(MemoryRepositoriesFile)"
+        DestinationFiles="..\jogosdaqui.Infrastructure.Repositories\MemoryRepositoriesGenerated.cs"
+    />  
+    
+    <Copy
+        SourceFiles="@(MongoDBRepositoriesFile)"
+        DestinationFiles="..\jogosdaqui.Infrastructure.Repositories\MongoRepositoriesGenerated.cs"
     />    
-     <Copy
+     
+    <Copy
         SourceFiles="@(WebApiFile)"
         DestinationFiles="..\jogosdaqui.WebApi\Generated.cs"
     /> 

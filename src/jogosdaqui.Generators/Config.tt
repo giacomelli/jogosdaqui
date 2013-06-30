@@ -27,6 +27,11 @@ class GenEntity
 	public string VariableName;
 	public bool HasImplementedIRepository;
 	public Type Type;
+	
+	public bool HasProperty(string name)
+	{
+		return Type.GetProperty(name) != null;
+	}
 }
   
 Type[] modelsType = new Type[]     
@@ -50,13 +55,15 @@ Type[] modelsType = new Type[]
 string[] domainUnitTestsIgnoreMethods = new string[]
 {
 	"SaveAppliedTag_AppliedTagDoesNotExists_Created",
-	"SaveAppliedTag_AppliedTagDoesExists_Updated"
+	"SaveAppliedTag_AppliedTagDoesExists_Updated",
+	"SaveCompany_CompanyDoesNotExists_Created",
+	"SaveGame_GameDoesNotExists_Created"
 };
  
 void RunForEachModel(Action<GenEntity> action)
 { 
 	foreach(var t in modelsType)   
-	{  
+	{   
 		var model = new GenEntity(); 
 		model.Type = t;		
 		model.Name = t.Name;  

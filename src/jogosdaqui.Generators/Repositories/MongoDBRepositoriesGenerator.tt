@@ -1,0 +1,35 @@
+﻿<#@ include file="../HeaderGenerator.tt" #>   
+
+using System;
+using Skahal.Infrastructure.Framework.Repositories;
+
+	  
+<# 
+RunForEachModel((e) =>  
+{ 
+	if(e.HasImplementedIRepository)     
+	{  
+#> 
+      
+namespace jogosdaqui.Infrastructure.Repositories.MongoDB
+{  
+	/// <summary>
+	/// MongoDB <#=e.Name#> repository.   
+	/// </summary>
+	public class MongoDB<#=e.Name#>Repository : MongoDBRepositoryBase<<#=e.Name#>>,  I<#=e.Name#>Repository
+	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the
+		/// <see cref="jogosdaqui.Infrastructure.Repositories.MongoDB.MongoDB<#=e.Name#>Repository"/> class.
+		/// </summary>
+		public MongoDB<#=e.Name#>Repository() : base("<#=e.PluralName#>")
+		{
+		}
+		#endregion
+	}
+}
+<#
+	}
+});
+#> 

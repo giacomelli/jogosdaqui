@@ -1,0 +1,104 @@
+﻿<#@ include file="../HeaderGenerator.tt" #>   
+  
+#region Usings    
+using System;
+using NUnit.Framework;
+using TestSharp; 
+using jogosdaqui.Domain.UnitTests; 
+using Skahal.Infrastructure.Framework.Repositories; 
+using Skahal.Infrastructure.Framework.Commons;
+using jogosdaqui.Infrastructure.Repositories.Testing; 
+#endregion      
+       
+<#      
+RunForEachModel((e) =>  
+{ 
+	if(e.HasImplementedIRepository)    
+	{    
+#>     
+
+namespace jogosdaqui.Domain.UnitTests
+{
+	[TestFixture()]
+	public partial class <#=e.Name#>ExistsSpecificationTest
+	{
+
+		#region Tests
+		[Test]
+		public void IsSatisfiedBy_Null<#=e.Name#>_False()
+		{
+			var target = new <#=e.Name#>ExistsSpecification(1);
+			
+			Assert.IsFalse(target.IsSatisfiedBy(null));
+		}
+		
+		[Test]
+		public void IsSatisfiedBy_NonExists<#=e.Name#>_False()
+		{
+			var target = new <#=e.Name#>ExistsSpecification(1); 
+			
+			Assert.IsFalse(target.IsSatisfiedBy(new <#=e.Name#>()));
+		}
+		
+		[Test]
+		public void IsSatisfiedBy_Exists<#=e.Name#>_True()
+		{
+			Stubs.Initialize ();
+			Stubs.<#=e.Name#>Repository.Add (new <#=e.Name#>(1));
+			Stubs.UnitOfWork.Commit ();
+			
+			var target = new <#=e.Name#>ExistsSpecification(1);
+			
+			Assert.IsTrue(target.IsSatisfiedBy(new <#=e.Name#>(1)));
+		}
+		#endregion
+	}
+	<#if(e.HasProperty("Name")) { #>
+	[TestFixture()]
+	public partial class <#=e.Name#>UniqueNameSpecificationTest
+	{
+
+		#region Tests
+		[Test]
+		public void IsSatisfiedBy_ThereIsAnother<#=e.Name#>WithSameName_False()
+		{
+			Stubs.Initialize ();
+			Stubs.<#=e.Name#>Repository.Add (new <#=e.Name#>(1) { Name = "Name" });
+			Stubs.UnitOfWork.Commit ();
+			var target = new <#=e.Name#>UniqueNameSpecification();
+			
+			Assert.IsFalse(target.IsSatisfiedBy(new <#=e.Name#>(2) { Name = "Name" }));
+		}
+		
+		[Test]
+		public void IsSatisfiedBy_TheSame<#=e.Name#>AlreadySavedWithSameName_True()
+		{
+			Stubs.Initialize ();
+			Stubs.<#=e.Name#>Repository.Add (new <#=e.Name#>(1) { Name = "Name" });
+			Stubs.UnitOfWork.Commit ();
+			var target = new <#=e.Name#>UniqueNameSpecification(); 
+			
+			Assert.IsTrue(target.IsSatisfiedBy(new <#=e.Name#>(1) { Name = "Name" })); 
+		}
+		
+		[Test]
+		public void IsSatisfiedBy_ThereIsNo<#=e.Name#>WithSameName_True()
+		{
+			Stubs.Initialize ();
+			Stubs.<#=e.Name#>Repository.Add (new <#=e.Name#>(1) { Name = "Name 1" });
+			Stubs.UnitOfWork.Commit ();
+			var target = new <#=e.Name#>UniqueNameSpecification();
+			
+			Assert.IsTrue(target.IsSatisfiedBy(new <#=e.Name#>(2) { Name = "Name" }));
+		}
+		#endregion
+	}
+	<#}#>
+}
+
+
+
+<#
+	}
+});
+#>	

@@ -12,12 +12,19 @@
    
 	
 using jogosdaqui.Domain.Games;
+using jogosdaqui.Domain.Games.Specifications;
 using jogosdaqui.Domain.Platforms;
+using jogosdaqui.Domain.Platforms.Specifications;
 using jogosdaqui.Domain.Companies;
+using jogosdaqui.Domain.Companies.Specifications;
 using jogosdaqui.Domain.Languages;
+using jogosdaqui.Domain.Languages.Specifications;
 using jogosdaqui.Domain.Persons;
+using jogosdaqui.Domain.Persons.Specifications;
 using jogosdaqui.Domain.Articles;
+using jogosdaqui.Domain.Articles.Specifications;
 using jogosdaqui.Domain.Tags;
+using jogosdaqui.Domain.Tags.Specifications;
    
   
 #region Usings    
@@ -27,7 +34,7 @@ using TestSharp;
 using jogosdaqui.Domain.UnitTests; 
 using Skahal.Infrastructure.Framework.Repositories; 
 using Skahal.Infrastructure.Framework.Commons;
-using jogosdaqui.Infrastructure.Repositories.Testing;
+using jogosdaqui.Infrastructure.Repositories.Testing; 
 #endregion      
  
 namespace jogosdaqui.Domain.UnitTests 
@@ -201,24 +208,13 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetGameByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveGame_Null_Exception ()
 		{
 			ExceptionAssert.IsThrowing (new ArgumentNullException("game"), () => {
 				m_target.SaveGame (null);
 			});
-		}
- 
-		[Test]  
-		public void SaveGame_GameDoesNotExists_Created()
-		{
-			var game = new Game ();
- 
-			m_target.SaveGame (game);
-
-			Assert.AreEqual(5, m_target.CountAllGames());
-			Assert.AreEqual (5, m_target.GetGameByKey (game.Key).Key);
 		}
  
 		[Test]
@@ -325,7 +321,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetPlatformByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SavePlatform_Null_Exception ()
 		{
@@ -449,24 +445,13 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetCompanyByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveCompany_Null_Exception ()
 		{
 			ExceptionAssert.IsThrowing (new ArgumentNullException("company"), () => {
 				m_target.SaveCompany (null);
 			});
-		}
- 
-		[Test]  
-		public void SaveCompany_CompanyDoesNotExists_Created()
-		{
-			var company = new Company ();
- 
-			m_target.SaveCompany (company);
-
-			Assert.AreEqual(5, m_target.CountAllCompanies());
-			Assert.AreEqual (5, m_target.GetCompanyByKey (company.Key).Key);
 		}
  
 		[Test]
@@ -573,7 +558,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetLanguageByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveLanguage_Null_Exception ()
 		{
@@ -697,7 +682,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetPersonByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SavePerson_Null_Exception ()
 		{
@@ -821,7 +806,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetCommentByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveComment_Null_Exception ()
 		{
@@ -945,7 +930,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetEventByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveEvent_Null_Exception ()
 		{
@@ -1069,7 +1054,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetInterviewByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveInterview_Null_Exception ()
 		{
@@ -1193,7 +1178,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetNewsByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveNews_Null_Exception ()
 		{
@@ -1317,7 +1302,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetPreviewByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SavePreview_Null_Exception ()
 		{
@@ -1441,7 +1426,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetReviewByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveReview_Null_Exception ()
 		{
@@ -1565,7 +1550,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetTagByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveTag_Null_Exception ()
 		{
@@ -1689,7 +1674,7 @@ namespace jogosdaqui.Domain.UnitTests
 			actual = m_target.GetAppliedTagByKey (3);
 			Assert.AreEqual (3, actual.Key);
 		}	
-	
+	 
 		[Test]
 		public void SaveAppliedTag_Null_Exception ()
 		{

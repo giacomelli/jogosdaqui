@@ -1,4 +1,4 @@
-﻿<#@ include file="Config.tt" #>   
+﻿<#@ include file="../HeaderGenerator.tt" #>   
  <#@ assembly name="System.Core.dll" #>
 using System;
 using System.Collections.Generic;
@@ -54,16 +54,33 @@ namespace jogosdaqui.WebApi.Controllers
 			return m_service.Get<#=e.Name#>ByKey (key);
         }
 
+		<#
+		if(e.HasProperty("Name"))
+		{ 
+		#>
+		/// <summary> 
+		/// Gets the <#=e.LowerName#> by name.
+		/// </summary>
+		/// <returns>The <#=e.LowerName#></returns>
+		/// <param name="name">The name.</param>
+		public <#=e.Name#> Get<#=e.Name#>ByName(string name)
+		{
+			return m_service.Get<#=e.Name#>ByName (name);
+		}
+		<#
+		}
+		#>
+		
 		/// <summary>
 		/// Creates a new <#=e.Name#>.
 		/// </summary>
 		/// <param name="<#=e.LowerName#>">The <#=e.Name#> to create.</param>
 		/// <returns>The created <#=e.Name#> with the key.</returns>
-		public <#=e.Name#> Post(<#=e.Name#> <#=e.LowerName#>)
+		public <#=e.Name#> Post(<#=e.Name#> <#=e.ParameterName#>)
 		{
-			m_service.Save<#=e.Name#> (<#=e.LowerName#>);
+			m_service.Save<#=e.Name#> (<#=e.ParameterName#>);
 
-			return <#=e.LowerName#>;
+			return <#=e.ParameterName#>;
 		}
 
 		/// <summary>
@@ -71,12 +88,12 @@ namespace jogosdaqui.WebApi.Controllers
 		/// </summary>
 		/// <param name="key">The <#=e.Name#>'s key.</param>
 		/// <param name="<#=e.LowerName#>">The <#=e.Name#> with updated informations.</param>
-		public <#=e.Name#> Put(long key, <#=e.Name#> <#=e.LowerName#>)
+		public <#=e.Name#> Put(long key, <#=e.Name#> <#=e.ParameterName#>)
 		{
-	        <#=e.LowerName#>.Key = key;
-			m_service.Save<#=e.Name#> (<#=e.LowerName#>);
+	        <#=e.ParameterName#>.Key = key;
+			m_service.Save<#=e.Name#> (<#=e.ParameterName#>);
 
-			return <#=e.LowerName#>;
+			return <#=e.ParameterName#>;
 		}
 
 		/// <summary>
