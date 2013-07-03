@@ -21,7 +21,7 @@ namespace jogosdaqui.Domain.Evaluations.Specifications
 			var game = new GameService ().GetGameByKey (target.GameKey);
 		
 			if (game == null) {
-				NotSatisfiedReason = "Evaluation should have a valid Game. The game with key '{0}' does not exists.".With(target.GameKey);
+				NotSatisfiedReason = "An evaluation should have a valid Game. The game with key '{0}' does not exists.".With(target.GameKey);
 				return false;
 			}
 		

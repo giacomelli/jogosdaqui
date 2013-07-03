@@ -3,14 +3,26 @@ using KissSpecifications;
 using jogosdaqui.Domain.Platforms;
 using HelperSharp;
 using System.Linq;
+using jogosdaqui.Domain.Commons.Specifications;
 
 namespace jogosdaqui.Domain.Games.Specifications
 {
 	/// <summary>
 	/// Game valid platforms specification.
 	/// </summary>
-	public class GameValidPlatformsSpecification : SpecificationBase<Game>
+	public class GameValidPlatformsSpecification : ValidEntitiesSpecificationBase<Game>
 	{
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the
+		/// <see cref="jogosdaqui.Domain.Games.Specifications.GameValidPlatformsSpecification"/> class.
+		/// </summary>
+		public GameValidPlatformsSpecification() : base("game", "platform")
+		{
+		}
+		#endregion
+	
+
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -26,20 +38,9 @@ namespace jogosdaqui.Domain.Games.Specifications
 				return false;
 			}
 
-			var firstDuplicatedKey = keys.GroupBy (k => k).Where (g => g.Count() > 1).Select (s => s.Key).FirstOrDefault ();
-
-			if (firstDuplicatedKey != 0) {
-				NotSatisfiedReason = "Game can't have duplicate platforms. The platform with key '{0}' appears more than one time.".With (firstDuplicatedKey);
+			if(!base.IsSatisfiedBy(target))
+			{
 				return false;
-			}
-
-			var platformService = new PlatformService ();
-
-			foreach (var key in keys) {
-				if (platformService.GetPlatformByKey (key) == null) {
-					NotSatisfiedReason = "Game should have a valid platform. The platform with key '{0}' does not exists.".With (key);
-					return false;
-				}		
 			}
 
 			return true;

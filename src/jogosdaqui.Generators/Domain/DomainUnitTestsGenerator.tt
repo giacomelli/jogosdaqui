@@ -19,7 +19,7 @@ namespace jogosdaqui.Domain.UnitTests
  
 <#      
 RunForEachModel((e) =>    
-{  
+{    
 	if(e.HasImplementedIRepository)    
 	{ 
 #> 

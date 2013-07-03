@@ -55,6 +55,8 @@
     </None>
     <None Include="Config.cs">
       <DependentUpon>Config.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="HeaderGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -62,6 +64,8 @@
     </None>
     <None Include="HeaderGenerator.cs">
       <DependentUpon>HeaderGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="Domain\DomainUnitTestsGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -69,6 +73,8 @@
     </None>
     <None Include="Domain\DomainUnitTestsGenerator.cs">
       <DependentUpon>DomainUnitTestsGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="Domain\DomainGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -76,6 +82,8 @@
     </None>
     <None Include="Domain\DomainGenerator.cs">
       <DependentUpon>DomainGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="WebApi\WebApiGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -83,6 +91,8 @@
     </None>
     <None Include="WebApi\WebApiGenerator.cs">
       <DependentUpon>WebApiGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="Repositories\MemoryRepositoriesGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -98,12 +108,18 @@
     </None>
     <None Include="Domain\DomainSpecificationsGenerator.cs">
       <DependentUpon>DomainSpecificationsGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="Repositories\MemoryRepositoriesGenerator.cs">
       <DependentUpon>MemoryRepositoriesGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="Repositories\MongoDBRepositoriesGenerator.cs">
       <DependentUpon>MongoDBRepositoriesGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
     <None Include="Domain\DomainSpecificationsUnitTestsGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -111,13 +127,14 @@
     </None>
     <None Include="Domain\DomainSpecificationsUnitTestsGenerator.cs">
       <DependentUpon>DomainSpecificationsUnitTestsGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </None>
   </ItemGroup>
   <Import Project="..\msbuilds\jogosdaqui.Generators.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Domain\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="WebApi\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
 </Project>

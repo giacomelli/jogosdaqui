@@ -17,7 +17,7 @@ namespace jogosdaqui.Domain.UnitTests
 				GameKey = 1
 			};
 
-			ExceptionAssert.IsThrowing(new SpecificationNotSatisfiedException("Evaluation should have a valid Game. The game with key '1' does not exists."), () => {
+			ExceptionAssert.IsThrowing(new SpecificationNotSatisfiedException("An evaluation should have a valid Game. The game with key '1' does not exists."), () => {
 				target.SaveEvaluation(evaluation);
 			});
 		}

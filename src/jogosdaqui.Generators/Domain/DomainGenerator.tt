@@ -15,7 +15,7 @@ using KissSpecifications;
 <#     
 RunForEachModel((e) =>  
 {   
-	if(e.HasImplementedIRepository)     
+	if(e.HasImplementedIRepository)       
 	{    
 #>     
 namespace <#=e.Namespace#> 

@@ -22,6 +22,7 @@ namespace jogosdaqui.Domain.UnitTests
 			});
 		}
 
+		#region PlatformKeys
 		[Test]
 		public void SaveGame_WithoutPlatform_Exception()
 		{
@@ -38,7 +39,7 @@ namespace jogosdaqui.Domain.UnitTests
 			game.PlatformKeys.Add(1);
 
 			ExceptionAssert.IsThrowing (
-				new SpecificationNotSatisfiedException ("Game should have a valid platform. The platform with key '1' does not exists."), () => {
+				new SpecificationNotSatisfiedException ("A game should have a valid platform. The platform with key '1' does not exists."), () => {
 				m_target.SaveGame (game);
 			});
 		}
@@ -54,31 +55,54 @@ namespace jogosdaqui.Domain.UnitTests
 			game.PlatformKeys.Add(3);
 
 			ExceptionAssert.IsThrowing (
-				new SpecificationNotSatisfiedException ("Game can't have duplicate platforms. The platform with key '1' appears more than one time."), () => {
+				new SpecificationNotSatisfiedException ("A game can't have duplicate platforms. The platform with key '1' appears more than one time."), () => {
 				m_target.SaveGame (game);
 			});
 		}
+		#endregion
 
+		#region DeveloperCompanyKeys
 		[Test]
 		public void SaveGame_WithoutDeveloperCompany_Exception()
 		{
+			var game = CreateValidGame (0);
+			game.DeveloperCompanyKeys.Clear ();
+
 			ExceptionAssert.IsThrowing (
 				new SpecificationNotSatisfiedException ("A game should have at least one developer company."), () => {
-				m_target.SaveGame (new Game () { Name = "Name" });
+				m_target.SaveGame (game);
 			});
 		}
 
 		[Test]
-		public void SaveGame_WithInvalidCompany_Exception()
+		public void SaveGame_WithInvalidDeveloperCompany_Exception()
 		{
-			var game = new Game () { Name = "Name" };
+			var game = CreateValidGame (0);
 			game.DeveloperCompanyKeys.Add(1);
 
 			ExceptionAssert.IsThrowing (
-				new SpecificationNotSatisfiedException ("Game should have a valid developer company. The developer company with key '1' does not exists."), () => {
+				new SpecificationNotSatisfiedException ("A game should have a valid developer company. The developer company with key '1' does not exists."), () => {
 				m_target.SaveGame (game);
 			});
 		}
+
+		[Test]
+		public void SaveGame_WithDuplicatedDeveloperCompany_Exception()
+		{
+			var game = new Game () { Name = "Name" };
+			game.DeveloperCompanyKeys.Add(1);
+			game.DeveloperCompanyKeys.Add(1);
+			game.DeveloperCompanyKeys.Add (2);
+			game.DeveloperCompanyKeys.Add(3);
+			game.DeveloperCompanyKeys.Add(3);
+
+			ExceptionAssert.IsThrowing (
+				new SpecificationNotSatisfiedException ("A game can't have duplicate developer companies. The developer company with key '1' appears more than one time."), () => {
+				m_target.SaveGame (game);
+			});
+		}
+		#endregion
+
 
 		[Test]  
 		public void SaveGame_GameDoesNotExists_Created()

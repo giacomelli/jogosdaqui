@@ -6,6 +6,7 @@
   
   
   
+  
    
    
    
@@ -13,6 +14,8 @@
 	
 using jogosdaqui.Domain.Games;
 using jogosdaqui.Domain.Games.Specifications;
+using jogosdaqui.Domain.Evaluations;
+using jogosdaqui.Domain.Evaluations.Specifications;
 using jogosdaqui.Domain.Platforms;
 using jogosdaqui.Domain.Platforms.Specifications;
 using jogosdaqui.Domain.Companies;

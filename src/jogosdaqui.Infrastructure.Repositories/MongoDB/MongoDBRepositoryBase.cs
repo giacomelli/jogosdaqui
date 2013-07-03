@@ -30,7 +30,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 			var url = new MongoUrl(connectionstring);
 			var client = new MongoClient(url);
 			var server = client.GetServer();
-			var database = server.GetDatabase(url.DatabaseName);
+			var database = server.GetDatabase(String.IsNullOrWhiteSpace(url.DatabaseName) ? "test" : url.DatabaseName);
 			m_collection = database.GetCollection<TEntity>(collectionName);
 		}
 		#endregion

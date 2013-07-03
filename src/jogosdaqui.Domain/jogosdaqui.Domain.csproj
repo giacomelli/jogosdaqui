@@ -45,6 +45,7 @@
       <HintPath>..\references\Skahal.Domain.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Evaluations\Specifications\EvaluationValidProsAndConsSpecification.cs" />
     <Compile Include="Games\Specifications\GameValidPlatformsSpecification.cs" />
     <Compile Include="Evaluations\Specifications\EvaluationValidGameSpecification.cs" />
+    <Compile Include="Commons\Specifications\ValidEntitiesSpecificationBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -111,5 +113,7 @@
     <Folder Include="Companies\Specifications\" />
     <Folder Include="Evaluations\" />
     <Folder Include="Evaluations\Specifications\" />
+    <Folder Include="Commons\" />
+    <Folder Include="Commons\Specifications\" />
   </ItemGroup>
 </Project>
