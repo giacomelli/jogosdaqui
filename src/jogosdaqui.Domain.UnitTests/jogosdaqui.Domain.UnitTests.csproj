@@ -67,6 +67,7 @@
     <Compile Include="DomainSpecificationsUnitTestsGenerated.cs" />
     <Compile Include="DomainUnitTestsGenerated.cs" />
     <Compile Include="Games\GameServiceTest.cs" />
+    <Compile Include="Evaluations\EvaluationServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -88,5 +89,6 @@
     <Folder Include="Articles\" />
     <Folder Include="Articles\Specifications\" />
     <Folder Include="Companies\" />
+    <Folder Include="Evaluations\" />
   </ItemGroup>
 </Project>

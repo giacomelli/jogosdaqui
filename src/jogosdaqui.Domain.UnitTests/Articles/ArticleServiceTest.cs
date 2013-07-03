@@ -24,7 +24,7 @@ namespace jogosdaqui.Domain.UnitTests
 		{
 			var target = new ArticleService ();
 
-			ExceptionAssert.IsThrowing(new SpecificationNotSatisfiedException("Game with key '0' does not exists."), () => {
+			ExceptionAssert.IsThrowing(new SpecificationNotSatisfiedException("Game can't be null."), () => {
 				target.GetArticlesByGameKey(0);
 			});
 		}

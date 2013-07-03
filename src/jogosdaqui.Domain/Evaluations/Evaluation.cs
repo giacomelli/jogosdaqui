@@ -37,7 +37,7 @@ namespace jogosdaqui.Domain.Evaluations
 		/// Gets or sets the game identifier.
 		/// </summary>
 		/// <value>The game identifier.</value>
-		public long GameId { get; set; }
+		public long GameKey { get; set; }
 
 		/// <summary>
 		/// Gets or sets the game version.

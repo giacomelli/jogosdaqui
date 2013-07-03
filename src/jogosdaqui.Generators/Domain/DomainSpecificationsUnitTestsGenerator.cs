@@ -52,7 +52,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullGame_False()
 		{
-			var target = new GameExistsSpecification(1);
+			var target = new GameExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -60,7 +60,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsGame_False()
 		{
-			var target = new GameExistsSpecification(1); 
+			var target = new GameExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Game()));
 		}
@@ -69,10 +69,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsGame_True()
 		{
 			Stubs.Initialize ();
-			Stubs.GameRepository.Add (new Game(1));
+			Stubs.GameRepository.Add (new Game());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new GameExistsSpecification(1);
+			var target = new GameExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Game(1)));
 		}
@@ -133,7 +133,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullEvaluation_False()
 		{
-			var target = new EvaluationExistsSpecification(1);
+			var target = new EvaluationExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -141,7 +141,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsEvaluation_False()
 		{
-			var target = new EvaluationExistsSpecification(1); 
+			var target = new EvaluationExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Evaluation()));
 		}
@@ -150,10 +150,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsEvaluation_True()
 		{
 			Stubs.Initialize ();
-			Stubs.EvaluationRepository.Add (new Evaluation(1));
+			Stubs.EvaluationRepository.Add (new Evaluation());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new EvaluationExistsSpecification(1);
+			var target = new EvaluationExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Evaluation(1)));
 		}
@@ -175,7 +175,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullPlatform_False()
 		{
-			var target = new PlatformExistsSpecification(1);
+			var target = new PlatformExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -183,7 +183,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsPlatform_False()
 		{
-			var target = new PlatformExistsSpecification(1); 
+			var target = new PlatformExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Platform()));
 		}
@@ -192,10 +192,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsPlatform_True()
 		{
 			Stubs.Initialize ();
-			Stubs.PlatformRepository.Add (new Platform(1));
+			Stubs.PlatformRepository.Add (new Platform());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new PlatformExistsSpecification(1);
+			var target = new PlatformExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Platform(1)));
 		}
@@ -256,7 +256,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullCompany_False()
 		{
-			var target = new CompanyExistsSpecification(1);
+			var target = new CompanyExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -264,7 +264,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsCompany_False()
 		{
-			var target = new CompanyExistsSpecification(1); 
+			var target = new CompanyExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Company()));
 		}
@@ -273,10 +273,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsCompany_True()
 		{
 			Stubs.Initialize ();
-			Stubs.CompanyRepository.Add (new Company(1));
+			Stubs.CompanyRepository.Add (new Company());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new CompanyExistsSpecification(1);
+			var target = new CompanyExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Company(1)));
 		}
@@ -337,7 +337,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullLanguage_False()
 		{
-			var target = new LanguageExistsSpecification(1);
+			var target = new LanguageExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -345,7 +345,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsLanguage_False()
 		{
-			var target = new LanguageExistsSpecification(1); 
+			var target = new LanguageExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Language()));
 		}
@@ -354,10 +354,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsLanguage_True()
 		{
 			Stubs.Initialize ();
-			Stubs.LanguageRepository.Add (new Language(1));
+			Stubs.LanguageRepository.Add (new Language());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new LanguageExistsSpecification(1);
+			var target = new LanguageExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Language(1)));
 		}
@@ -418,7 +418,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullPerson_False()
 		{
-			var target = new PersonExistsSpecification(1);
+			var target = new PersonExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -426,7 +426,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsPerson_False()
 		{
-			var target = new PersonExistsSpecification(1); 
+			var target = new PersonExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Person()));
 		}
@@ -435,10 +435,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsPerson_True()
 		{
 			Stubs.Initialize ();
-			Stubs.PersonRepository.Add (new Person(1));
+			Stubs.PersonRepository.Add (new Person());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new PersonExistsSpecification(1);
+			var target = new PersonExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Person(1)));
 		}
@@ -499,7 +499,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullComment_False()
 		{
-			var target = new CommentExistsSpecification(1);
+			var target = new CommentExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -507,7 +507,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsComment_False()
 		{
-			var target = new CommentExistsSpecification(1); 
+			var target = new CommentExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Comment()));
 		}
@@ -516,10 +516,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsComment_True()
 		{
 			Stubs.Initialize ();
-			Stubs.CommentRepository.Add (new Comment(1));
+			Stubs.CommentRepository.Add (new Comment());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new CommentExistsSpecification(1);
+			var target = new CommentExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Comment(1)));
 		}
@@ -541,7 +541,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullEvent_False()
 		{
-			var target = new EventExistsSpecification(1);
+			var target = new EventExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -549,7 +549,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsEvent_False()
 		{
-			var target = new EventExistsSpecification(1); 
+			var target = new EventExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Event()));
 		}
@@ -558,10 +558,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsEvent_True()
 		{
 			Stubs.Initialize ();
-			Stubs.EventRepository.Add (new Event(1));
+			Stubs.EventRepository.Add (new Event());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new EventExistsSpecification(1);
+			var target = new EventExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Event(1)));
 		}
@@ -583,7 +583,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullInterview_False()
 		{
-			var target = new InterviewExistsSpecification(1);
+			var target = new InterviewExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -591,7 +591,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsInterview_False()
 		{
-			var target = new InterviewExistsSpecification(1); 
+			var target = new InterviewExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Interview()));
 		}
@@ -600,10 +600,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsInterview_True()
 		{
 			Stubs.Initialize ();
-			Stubs.InterviewRepository.Add (new Interview(1));
+			Stubs.InterviewRepository.Add (new Interview());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new InterviewExistsSpecification(1);
+			var target = new InterviewExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Interview(1)));
 		}
@@ -625,7 +625,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullNews_False()
 		{
-			var target = new NewsExistsSpecification(1);
+			var target = new NewsExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -633,7 +633,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsNews_False()
 		{
-			var target = new NewsExistsSpecification(1); 
+			var target = new NewsExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new News()));
 		}
@@ -642,10 +642,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsNews_True()
 		{
 			Stubs.Initialize ();
-			Stubs.NewsRepository.Add (new News(1));
+			Stubs.NewsRepository.Add (new News());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new NewsExistsSpecification(1);
+			var target = new NewsExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new News(1)));
 		}
@@ -667,7 +667,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullPreview_False()
 		{
-			var target = new PreviewExistsSpecification(1);
+			var target = new PreviewExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -675,7 +675,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsPreview_False()
 		{
-			var target = new PreviewExistsSpecification(1); 
+			var target = new PreviewExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Preview()));
 		}
@@ -684,10 +684,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsPreview_True()
 		{
 			Stubs.Initialize ();
-			Stubs.PreviewRepository.Add (new Preview(1));
+			Stubs.PreviewRepository.Add (new Preview());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new PreviewExistsSpecification(1);
+			var target = new PreviewExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Preview(1)));
 		}
@@ -709,7 +709,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullReview_False()
 		{
-			var target = new ReviewExistsSpecification(1);
+			var target = new ReviewExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -717,7 +717,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsReview_False()
 		{
-			var target = new ReviewExistsSpecification(1); 
+			var target = new ReviewExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Review()));
 		}
@@ -726,10 +726,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsReview_True()
 		{
 			Stubs.Initialize ();
-			Stubs.ReviewRepository.Add (new Review(1));
+			Stubs.ReviewRepository.Add (new Review());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new ReviewExistsSpecification(1);
+			var target = new ReviewExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Review(1)));
 		}
@@ -751,7 +751,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullTag_False()
 		{
-			var target = new TagExistsSpecification(1);
+			var target = new TagExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -759,7 +759,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsTag_False()
 		{
-			var target = new TagExistsSpecification(1); 
+			var target = new TagExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new Tag()));
 		}
@@ -768,10 +768,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsTag_True()
 		{
 			Stubs.Initialize ();
-			Stubs.TagRepository.Add (new Tag(1));
+			Stubs.TagRepository.Add (new Tag());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new TagExistsSpecification(1);
+			var target = new TagExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new Tag(1)));
 		}
@@ -832,7 +832,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_NullAppliedTag_False()
 		{
-			var target = new AppliedTagExistsSpecification(1);
+			var target = new AppliedTagExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -840,7 +840,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExistsAppliedTag_False()
 		{
-			var target = new AppliedTagExistsSpecification(1); 
+			var target = new AppliedTagExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new AppliedTag()));
 		}
@@ -849,10 +849,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_ExistsAppliedTag_True()
 		{
 			Stubs.Initialize ();
-			Stubs.AppliedTagRepository.Add (new AppliedTag(1));
+			Stubs.AppliedTagRepository.Add (new AppliedTag());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new AppliedTagExistsSpecification(1);
+			var target = new AppliedTagExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new AppliedTag(1)));
 		}

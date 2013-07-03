@@ -59,7 +59,9 @@ string[] domainUnitTestsIgnoreMethods = new string[]
 	"SaveAppliedTag_AppliedTagDoesNotExists_Created",
 	"SaveAppliedTag_AppliedTagDoesExists_Updated",
 	"SaveCompany_CompanyDoesNotExists_Created",
-	"SaveGame_GameDoesNotExists_Created"
+	"SaveGame_GameDoesNotExists_Created",
+	"SaveEvaluation_EvaluationDoesNotExists_Created",
+	"SaveEvaluation_EvaluationDoesExists_Updated"
 };
  
 void RunForEachModel(Action<GenEntity> action)

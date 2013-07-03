@@ -17,7 +17,7 @@ namespace jogosdaqui.Domain.Articles
 			var gameService = new GameService ();
 			var game = gameService.GetGameByKey (gameKey);
 
-			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification (gameKey));
+			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification ());
 
 			var eventService = new EventService ();
 			var interviewService = new InterviewService ();

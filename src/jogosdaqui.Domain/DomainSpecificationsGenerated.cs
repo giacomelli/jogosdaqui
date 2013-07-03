@@ -32,21 +32,6 @@ namespace jogosdaqui.Domain.Games.Specifications
 	/// </summary>
 	public class GameExistsSpecification : SpecificationBase<Game>
 	{
-		#region Fields
-		private long m_gameKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.Specifications.GameExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="gameKey">Game key.</param>
-		public GameExistsSpecification(long gameKey)
-		{
-			m_gameKey = gameKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -55,12 +40,17 @@ namespace jogosdaqui.Domain.Games.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Game target)
 		{
-			if(target == null || new GameService().GetGameByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Game with key '{0}' does not exists.".With (m_gameKey);
+				NotSatisfiedReason = "Game can't be null.";
 				return false;
 			}
-
+			else if(new GameService().GetGameByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Game with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -102,21 +92,6 @@ namespace jogosdaqui.Domain.Evaluations.Specifications
 	/// </summary>
 	public class EvaluationExistsSpecification : SpecificationBase<Evaluation>
 	{
-		#region Fields
-		private long m_evaluationKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Evaluations.Specifications.EvaluationExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="evaluationKey">Evaluation key.</param>
-		public EvaluationExistsSpecification(long evaluationKey)
-		{
-			m_evaluationKey = evaluationKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -125,12 +100,17 @@ namespace jogosdaqui.Domain.Evaluations.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Evaluation target)
 		{
-			if(target == null || new EvaluationService().GetEvaluationByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Evaluation with key '{0}' does not exists.".With (m_evaluationKey);
+				NotSatisfiedReason = "Evaluation can't be null.";
 				return false;
 			}
-
+			else if(new EvaluationService().GetEvaluationByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Evaluation with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -146,21 +126,6 @@ namespace jogosdaqui.Domain.Platforms.Specifications
 	/// </summary>
 	public class PlatformExistsSpecification : SpecificationBase<Platform>
 	{
-		#region Fields
-		private long m_platformKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Platforms.Specifications.PlatformExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="platformKey">Platform key.</param>
-		public PlatformExistsSpecification(long platformKey)
-		{
-			m_platformKey = platformKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -169,12 +134,17 @@ namespace jogosdaqui.Domain.Platforms.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Platform target)
 		{
-			if(target == null || new PlatformService().GetPlatformByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Platform with key '{0}' does not exists.".With (m_platformKey);
+				NotSatisfiedReason = "Platform can't be null.";
 				return false;
 			}
-
+			else if(new PlatformService().GetPlatformByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Platform with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -216,21 +186,6 @@ namespace jogosdaqui.Domain.Companies.Specifications
 	/// </summary>
 	public class CompanyExistsSpecification : SpecificationBase<Company>
 	{
-		#region Fields
-		private long m_companyKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Companies.Specifications.CompanyExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="companyKey">Company key.</param>
-		public CompanyExistsSpecification(long companyKey)
-		{
-			m_companyKey = companyKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -239,12 +194,17 @@ namespace jogosdaqui.Domain.Companies.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Company target)
 		{
-			if(target == null || new CompanyService().GetCompanyByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Company with key '{0}' does not exists.".With (m_companyKey);
+				NotSatisfiedReason = "Company can't be null.";
 				return false;
 			}
-
+			else if(new CompanyService().GetCompanyByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Company with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -286,21 +246,6 @@ namespace jogosdaqui.Domain.Languages.Specifications
 	/// </summary>
 	public class LanguageExistsSpecification : SpecificationBase<Language>
 	{
-		#region Fields
-		private long m_languageKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Languages.Specifications.LanguageExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="languageKey">Language key.</param>
-		public LanguageExistsSpecification(long languageKey)
-		{
-			m_languageKey = languageKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -309,12 +254,17 @@ namespace jogosdaqui.Domain.Languages.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Language target)
 		{
-			if(target == null || new LanguageService().GetLanguageByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Language with key '{0}' does not exists.".With (m_languageKey);
+				NotSatisfiedReason = "Language can't be null.";
 				return false;
 			}
-
+			else if(new LanguageService().GetLanguageByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Language with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -356,21 +306,6 @@ namespace jogosdaqui.Domain.Persons.Specifications
 	/// </summary>
 	public class PersonExistsSpecification : SpecificationBase<Person>
 	{
-		#region Fields
-		private long m_personKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Persons.Specifications.PersonExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="personKey">Person key.</param>
-		public PersonExistsSpecification(long personKey)
-		{
-			m_personKey = personKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -379,12 +314,17 @@ namespace jogosdaqui.Domain.Persons.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Person target)
 		{
-			if(target == null || new PersonService().GetPersonByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Person with key '{0}' does not exists.".With (m_personKey);
+				NotSatisfiedReason = "Person can't be null.";
 				return false;
 			}
-
+			else if(new PersonService().GetPersonByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Person with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -426,21 +366,6 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	/// </summary>
 	public class CommentExistsSpecification : SpecificationBase<Comment>
 	{
-		#region Fields
-		private long m_commentKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Comments.Specifications.CommentExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="commentKey">Comment key.</param>
-		public CommentExistsSpecification(long commentKey)
-		{
-			m_commentKey = commentKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -449,12 +374,17 @@ namespace jogosdaqui.Domain.Articles.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Comment target)
 		{
-			if(target == null || new CommentService().GetCommentByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Comment with key '{0}' does not exists.".With (m_commentKey);
+				NotSatisfiedReason = "Comment can't be null.";
 				return false;
 			}
-
+			else if(new CommentService().GetCommentByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Comment with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -470,21 +400,6 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	/// </summary>
 	public class EventExistsSpecification : SpecificationBase<Event>
 	{
-		#region Fields
-		private long m_eventKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Events.Specifications.EventExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="eventKey">Event key.</param>
-		public EventExistsSpecification(long eventKey)
-		{
-			m_eventKey = eventKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -493,12 +408,17 @@ namespace jogosdaqui.Domain.Articles.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Event target)
 		{
-			if(target == null || new EventService().GetEventByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Event with key '{0}' does not exists.".With (m_eventKey);
+				NotSatisfiedReason = "Event can't be null.";
 				return false;
 			}
-
+			else if(new EventService().GetEventByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Event with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -514,21 +434,6 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	/// </summary>
 	public class InterviewExistsSpecification : SpecificationBase<Interview>
 	{
-		#region Fields
-		private long m_interviewKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Interviews.Specifications.InterviewExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="interviewKey">Interview key.</param>
-		public InterviewExistsSpecification(long interviewKey)
-		{
-			m_interviewKey = interviewKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -537,12 +442,17 @@ namespace jogosdaqui.Domain.Articles.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Interview target)
 		{
-			if(target == null || new InterviewService().GetInterviewByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Interview with key '{0}' does not exists.".With (m_interviewKey);
+				NotSatisfiedReason = "Interview can't be null.";
 				return false;
 			}
-
+			else if(new InterviewService().GetInterviewByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Interview with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -558,21 +468,6 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	/// </summary>
 	public class NewsExistsSpecification : SpecificationBase<News>
 	{
-		#region Fields
-		private long m_newsKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.News.Specifications.NewsExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="newsKey">News key.</param>
-		public NewsExistsSpecification(long newsKey)
-		{
-			m_newsKey = newsKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -581,12 +476,17 @@ namespace jogosdaqui.Domain.Articles.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (News target)
 		{
-			if(target == null || new NewsService().GetNewsByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "News with key '{0}' does not exists.".With (m_newsKey);
+				NotSatisfiedReason = "News can't be null.";
 				return false;
 			}
-
+			else if(new NewsService().GetNewsByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "News with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -602,21 +502,6 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	/// </summary>
 	public class PreviewExistsSpecification : SpecificationBase<Preview>
 	{
-		#region Fields
-		private long m_previewKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Previews.Specifications.PreviewExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="previewKey">Preview key.</param>
-		public PreviewExistsSpecification(long previewKey)
-		{
-			m_previewKey = previewKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -625,12 +510,17 @@ namespace jogosdaqui.Domain.Articles.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Preview target)
 		{
-			if(target == null || new PreviewService().GetPreviewByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Preview with key '{0}' does not exists.".With (m_previewKey);
+				NotSatisfiedReason = "Preview can't be null.";
 				return false;
 			}
-
+			else if(new PreviewService().GetPreviewByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Preview with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -646,21 +536,6 @@ namespace jogosdaqui.Domain.Articles.Specifications
 	/// </summary>
 	public class ReviewExistsSpecification : SpecificationBase<Review>
 	{
-		#region Fields
-		private long m_reviewKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Reviews.Specifications.ReviewExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="reviewKey">Review key.</param>
-		public ReviewExistsSpecification(long reviewKey)
-		{
-			m_reviewKey = reviewKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -669,12 +544,17 @@ namespace jogosdaqui.Domain.Articles.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Review target)
 		{
-			if(target == null || new ReviewService().GetReviewByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Review with key '{0}' does not exists.".With (m_reviewKey);
+				NotSatisfiedReason = "Review can't be null.";
 				return false;
 			}
-
+			else if(new ReviewService().GetReviewByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Review with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -690,21 +570,6 @@ namespace jogosdaqui.Domain.Tags.Specifications
 	/// </summary>
 	public class TagExistsSpecification : SpecificationBase<Tag>
 	{
-		#region Fields
-		private long m_tagKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Tags.Specifications.TagExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="tagKey">Tag key.</param>
-		public TagExistsSpecification(long tagKey)
-		{
-			m_tagKey = tagKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -713,12 +578,17 @@ namespace jogosdaqui.Domain.Tags.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (Tag target)
 		{
-			if(target == null || new TagService().GetTagByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "Tag with key '{0}' does not exists.".With (m_tagKey);
+				NotSatisfiedReason = "Tag can't be null.";
 				return false;
 			}
-
+			else if(new TagService().GetTagByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "Tag with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 
@@ -760,21 +630,6 @@ namespace jogosdaqui.Domain.Tags.Specifications
 	/// </summary>
 	public class AppliedTagExistsSpecification : SpecificationBase<AppliedTag>
 	{
-		#region Fields
-		private long m_appliedtagKey;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.AppliedTags.Specifications.AppliedTagExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="appliedtagKey">AppliedTag key.</param>
-		public AppliedTagExistsSpecification(long appliedtagKey)
-		{
-			m_appliedtagKey = appliedtagKey;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -783,12 +638,17 @@ namespace jogosdaqui.Domain.Tags.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (AppliedTag target)
 		{
-			if(target == null || new AppliedTagService().GetAppliedTagByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "AppliedTag with key '{0}' does not exists.".With (m_appliedtagKey);
+				NotSatisfiedReason = "AppliedTag can't be null.";
 				return false;
 			}
-
+			else if(new AppliedTagService().GetAppliedTagByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "AppliedTag with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 

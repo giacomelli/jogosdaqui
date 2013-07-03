@@ -25,21 +25,6 @@ namespace <#=e.Namespace#>.Specifications
 	/// </summary>
 	public class <#=e.Name#>ExistsSpecification : SpecificationBase<<#=e.Name#>>
 	{
-		#region Fields
-		private long m_<#=e.LowerName#>Key;
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.<#=e.PluralName#>.Specifications.<#=e.Name#>ExistsSpecification"/> class.
-		/// </summary>
-		/// <param name="<#=e.LowerName#>Key"><#=e.Name#> key.</param>
-		public <#=e.Name#>ExistsSpecification(long <#=e.LowerName#>Key)
-		{
-			m_<#=e.LowerName#>Key = <#=e.LowerName#>Key;
-		}
-		#endregion 
-  
 		#region implemented abstract members of SpecificationBase
 		/// <summary>
 		/// Determines whether the target object satisfiy the specification.
@@ -48,12 +33,17 @@ namespace <#=e.Namespace#>.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (<#=e.Name#> target)
 		{
-			if(target == null || new <#=e.Name#>Service().Get<#=e.Name#>ByKey(target.Key) == null)
+			if(target == null)
 			{
-				NotSatisfiedReason = "<#=e.Name#> with key '{0}' does not exists.".With (m_<#=e.LowerName#>Key);
+				NotSatisfiedReason = "<#=e.Name#> can't be null.";
 				return false;
 			}
-
+			else if(new <#=e.Name#>Service().Get<#=e.Name#>ByKey(target.Key) == null)
+			{
+				NotSatisfiedReason = "<#=e.Name#> with key '{0}' does not exists.".With (target.Key);
+				return false;
+			}
+			
 			return true;
 		}
 

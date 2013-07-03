@@ -93,6 +93,10 @@
     <Compile Include="DomainSpecificationsGenerated.cs" />
     <Compile Include="Evaluations\Evaluation.cs" />
     <Compile Include="Evaluations\IEvaluationRepository.cs" />
+    <Compile Include="Evaluations\EvaluationService.cs" />
+    <Compile Include="Evaluations\Specifications\EvaluationValidProsAndConsSpecification.cs" />
+    <Compile Include="Games\Specifications\GameValidPlatformsSpecification.cs" />
+    <Compile Include="Evaluations\Specifications\EvaluationValidGameSpecification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -106,5 +110,6 @@
     <Folder Include="Games\Specifications\" />
     <Folder Include="Companies\Specifications\" />
     <Folder Include="Evaluations\" />
+    <Folder Include="Evaluations\Specifications\" />
   </ItemGroup>
 </Project>

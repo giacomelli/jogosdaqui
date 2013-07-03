@@ -19,7 +19,7 @@ namespace jogosdaqui.Domain.Games
 		/// <param name="game">Game.</param>
 		partial void ExecuteDeleteSpecification(long gameKey, Game game)
 		{
-			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification (gameKey));
+			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification ());
 		}
 
 		/// <summary>
@@ -28,7 +28,10 @@ namespace jogosdaqui.Domain.Games
 		/// <param name="game">Game.</param>
 		partial void ExecuteSaveSpecification (Game game)
 		{
-			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameUniqueNameSpecification ());
+			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (
+				game,                                             
+				new GameUniqueNameSpecification (),
+				new GameValidPlatformsSpecification());
 		}
 		#endregion
 	}

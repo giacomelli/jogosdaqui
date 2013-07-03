@@ -76,7 +76,7 @@ namespace jogosdaqui.Domain.UnitTests
  
 		public static IAppliedTagRepository AppliedTagRepository { get; set; } 
 		 
-		#endregion
+		#endregion 
 
 		#region Methods
 		public static void Initialize ()
@@ -225,18 +225,7 @@ namespace jogosdaqui.Domain.UnitTests
 			});
 		}
  
-		[Test]
-		public void SaveGame_GameDoesExists_Updated()
-		{
-			var game = new Game () { 
-				Key = 1 
-			};
 
-			m_target.SaveGame (game);
-
-			Assert.AreEqual(4, m_target.CountAllGames());
-			Assert.AreEqual (1, m_target.GetGameByKey (game.Key).Key);
-		}
  
 		#endregion
 	}
@@ -336,30 +325,6 @@ namespace jogosdaqui.Domain.UnitTests
 			ExceptionAssert.IsThrowing (new ArgumentNullException("evaluation"), () => {
 				m_target.SaveEvaluation (null);
 			});
-		}
- 
-		[Test]  
-		public void SaveEvaluation_EvaluationDoesNotExists_Created()
-		{
-			var evaluation = new Evaluation ();
- 
-			m_target.SaveEvaluation (evaluation);
-
-			Assert.AreEqual(5, m_target.CountAllEvaluations());
-			Assert.AreEqual (5, m_target.GetEvaluationByKey (evaluation.Key).Key);
-		}
- 
-		[Test]
-		public void SaveEvaluation_EvaluationDoesExists_Updated()
-		{
-			var evaluation = new Evaluation () { 
-				Key = 1 
-			};
-
-			m_target.SaveEvaluation (evaluation);
-
-			Assert.AreEqual(4, m_target.CountAllEvaluations());
-			Assert.AreEqual (1, m_target.GetEvaluationByKey (evaluation.Key).Key);
 		}
  
 		#endregion

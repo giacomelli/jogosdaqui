@@ -16,7 +16,7 @@ namespace jogosdaqui.Domain.UnitTests
 		{
 			var target = new EventService ();
 
-			ExceptionAssert.IsThrowing(new SpecificationNotSatisfiedException("Game with key '0' does not exists."), () => {
+			ExceptionAssert.IsThrowing(new SpecificationNotSatisfiedException("Game can't be null."), () => {
 				target.GetEventsByGameKey(0);
 			});
 		}

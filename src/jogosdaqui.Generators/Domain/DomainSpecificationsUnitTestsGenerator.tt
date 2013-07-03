@@ -27,7 +27,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test] 
 		public void IsSatisfiedBy_Null<#=e.Name#>_False()
 		{
-			var target = new <#=e.Name#>ExistsSpecification(1);
+			var target = new <#=e.Name#>ExistsSpecification();
 			
 			Assert.IsFalse(target.IsSatisfiedBy(null));
 		}
@@ -35,7 +35,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void IsSatisfiedBy_NonExists<#=e.Name#>_False()
 		{
-			var target = new <#=e.Name#>ExistsSpecification(1); 
+			var target = new <#=e.Name#>ExistsSpecification(); 
 			
 			Assert.IsFalse(target.IsSatisfiedBy(new <#=e.Name#>()));
 		}
@@ -44,10 +44,10 @@ namespace jogosdaqui.Domain.UnitTests
 		public void IsSatisfiedBy_Exists<#=e.Name#>_True()
 		{
 			Stubs.Initialize ();
-			Stubs.<#=e.Name#>Repository.Add (new <#=e.Name#>(1));
+			Stubs.<#=e.Name#>Repository.Add (new <#=e.Name#>());
 			Stubs.UnitOfWork.Commit ();
 			
-			var target = new <#=e.Name#>ExistsSpecification(1);
+			var target = new <#=e.Name#>ExistsSpecification();
 			
 			Assert.IsTrue(target.IsSatisfiedBy(new <#=e.Name#>(1)));
 		}

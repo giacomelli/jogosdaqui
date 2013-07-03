@@ -18,7 +18,7 @@ namespace jogosdaqui.Domain.Games
 		/// <summary>
 		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.Games.Game"/> class.
 		/// </summary>
-		public Game()
+		public Game() : this(0)
 		{
 		}
 
@@ -28,6 +28,14 @@ namespace jogosdaqui.Domain.Games
 		/// <param name="key">Key.</param>
 		public Game(long key) : base(key)
 		{
+			PlatformKeys = new List<long> ();
+			DeveloperCompanyKeys = new List<long> ();
+			PublisherCompanyKeys = new List<long> ();
+			ProgrammerKeys = new List<long> ();
+			GameDesignerKeys = new List<long> ();
+			ArtistKeys = new List<long> ();
+			DirectorKeys = new List<long> ();
+			ProducerKeys = new List<long> ();
 		}
 		#endregion
 
@@ -45,52 +53,52 @@ namespace jogosdaqui.Domain.Games
 		public DateTime? ReleaseDate { get; set; }
 
 		/// <summary>
-		/// Gets the platform ids
+		/// Gets the platform keys
 		/// </summary>
-		/// <value>The platform ids.</value>
-		public IList<long> PlatformIds { get; private set; } 
+		/// <value>The platform keys.</value>
+		public IList<long> PlatformKeys { get; private set; } 
 
 		/// <summary>
-		/// Gets the developer company ids.
+		/// Gets the developer company keys.
 		/// </summary>
 		/// <value>The developers companies.</value>
-		public IList<long> DeveloperCompanyIds { get; private set; } 
+		public IList<long> DeveloperCompanyKeys { get; private set; } 
 
 		/// <summary>
 		/// Gets the publisher company.
 		/// </summary>
-		/// <value>The publisher company ids.</value>
-		public IList<long> PublisherCompanyIds { get; private set; }
+		/// <value>The publisher company keys.</value>
+		public IList<long> PublisherCompanyKeys { get; private set; }
 
 		/// <summary>
-		/// Gets the programmer ids.
+		/// Gets the programmer keys.
 		/// </summary>
-		/// <value>The programmer ids.</value>
-		public IList<long> ProgrammerIds { get; private set; } 
+		/// <value>The programmer keys.</value>
+		public IList<long> ProgrammerKeys { get; private set; } 
 
 		/// <summary>
-		/// Gets the game designer ids.
+		/// Gets the game designer keys.
 		/// </summary>
-		/// <value>The game designer ids.</value>
-		public IList<long> GameDesignerIds { get; private set; } 
+		/// <value>The game designer keys.</value>
+		public IList<long> GameDesignerKeys { get; private set; } 
 
 		/// <summary>
-		/// Gets the artist ids.
+		/// Gets the artist keys.
 		/// </summary>
 		/// <value>The artists.</value>
-		public IList<long> ArtistIds { get; private set; } 
+		public IList<long> ArtistKeys { get; private set; } 
 
 		/// <summary>
-		/// Gets the director ids.
+		/// Gets the director keys.
 		/// </summary>
-		/// <value>The director ids.</value>
-		public IList<long> DirectorIds { get; private set; } 
+		/// <value>The director keys.</value>
+		public IList<long> DirectorKeys { get; private set; } 
 
 		/// <summary>
-		/// Gets the producer ids.
+		/// Gets the producer keys.
 		/// </summary>
-		/// <value>The producer ids.</value>
-		public IList<long> ProducerIds { get; private set; } 
+		/// <value>The producer keys.</value>
+		public IList<long> ProducerKeys { get; private set; } 
 		#endregion
 	}
 }

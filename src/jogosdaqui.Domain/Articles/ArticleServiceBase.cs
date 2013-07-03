@@ -42,7 +42,7 @@ namespace jogosdaqui.Domain.Articles
 			var gameService = new GameService ();
 			var game = gameService.GetGameByKey (gameKey);
 
-			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification (gameKey));
+			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (game, new GameExistsSpecification ());
 
 			return MainRepository.FindAll (e => e.GamesRelated.Contains(game)).ToList();
 		}
