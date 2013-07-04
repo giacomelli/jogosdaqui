@@ -3606,6 +3606,14 @@
             Defines a interface for globalization label repository.
             </summary>
         </member>
+        <member name="M:Skahal.Infrastructure.Framework.Globalization.IGlobalizationLabelRepository.LoadCultureLabels(System.String)">
+            <summary>
+            Loads the culture labels.
+            </summary>
+            <returns>
+                <c>true</c>, if culture labels was loaded, <c>false</c> otherwise, already loaded.</returns>
+            <param name="cultureName">Culture name.</param>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.Repositories.RepositoryExtensions">
             <summary>
             Repository extensions.
@@ -3664,6 +3672,14 @@
             <see cref="T:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository" /> class.
             </summary>
         </member>
+        <member name="M:Skahal.Infrastructure.Framework.Globalization.MemoryGlobalizationLabelRepository.LoadCultureLabels(System.String)">
+            <summary>
+            Loads the culture labels.
+            </summary>
+            <returns>
+                <c>true</c>, if culture labels was loaded, <c>false</c> otherwise, already loaded.</returns>
+            <param name="cultureName">Culture name.</param>
+        </member>
         <member name="T:Skahal.Infrastructure.Framework.Repositories.EntityRepositoryPair`1">
             <summary>
             Entity repository pair.
@@ -3717,6 +3733,32 @@
             Gets the unit of work.
             </summary>
             <value>The unit of work.</value>
+        </member>
+        <member name="T:Skahal.Infrastructure.Framework.Globalization.TextGlobalizationLabelRepositoryBase">
+            <summary>
+            Text globalization label repository base class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Globalization.TextGlobalizationLabelRepositoryBase.#ctor">
+            <summary>
+            Initializes a new instance of the
+            <see cref="T:Skahal.Infrastructure.Framework.Globalization.TextGlobalizationLabelRepositoryBase" /> class.
+            </summary>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Globalization.TextGlobalizationLabelRepositoryBase.LoadCultureLabels(System.String)">
+            <summary>
+            Loads the culture labels.
+            </summary>
+            <returns>true</returns>
+            <c>false</c>
+            <param name="cultureName">Culture name.</param>
+        </member>
+        <member name="M:Skahal.Infrastructure.Framework.Globalization.TextGlobalizationLabelRepositoryBase.GetCultureText(System.String)">
+            <summary>
+            Gets the culture text.
+            </summary>
+            <returns>The culture text.</returns>
+            <param name="cultureName">Culture name.</param>
         </member>
     </members>
 </doc>

@@ -40,7 +40,7 @@ using AspNetWebApi.ApiGee.Filters;
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Games. 
 	/// </summary>
@@ -127,7 +127,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Evaluations. 
 	/// </summary>
@@ -205,7 +205,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Platforms. 
 	/// </summary>
@@ -292,7 +292,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Companies. 
 	/// </summary>
@@ -379,7 +379,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Languages. 
 	/// </summary>
@@ -466,7 +466,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Persons. 
 	/// </summary>
@@ -553,7 +553,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Comments. 
 	/// </summary>
@@ -631,7 +631,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Events. 
 	/// </summary>
@@ -709,7 +709,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Interviews. 
 	/// </summary>
@@ -787,7 +787,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// News. 
 	/// </summary>
@@ -865,7 +865,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Previews. 
 	/// </summary>
@@ -943,7 +943,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Reviews. 
 	/// </summary>
@@ -1021,7 +1021,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// Tags. 
 	/// </summary>
@@ -1108,7 +1108,7 @@ namespace jogosdaqui.WebApi.Controllers
  
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// AppliedTags. 
 	/// </summary>

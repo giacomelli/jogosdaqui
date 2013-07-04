@@ -53,7 +53,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = jogosdaqui.WebApi\jogosdaqui.WebApi.csproj
+		StartupItem = jogosdaqui.Domain.UnitTests\jogosdaqui.Domain.UnitTests.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,7 +31,8 @@ namespace jogosdaqui.Domain.Games
 			SpecificationService.ThrowIfAnySpecificationIsNotSatisfiedBy (
 				game,                                             
 				new GameUniqueNameSpecification (),
-				new GameValidPlatformsSpecification());
+				new GameValidPlatformsSpecification(),
+				new GameValidDeveloperCompaniesSpecification());
 		}
 		#endregion
 	}

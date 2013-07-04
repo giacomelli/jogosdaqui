@@ -5,29 +5,31 @@ using System.Collections.Generic;
 using HelperSharp;
 using System.Linq;
 using System.Reflection;
+using Skahal.Infrastructure.Framework.Globalization;
 
 namespace jogosdaqui.Domain.Commons.Specifications
 {
 	/// <summary>
 	/// Valid entities specification base.
 	/// </summary>
-	public abstract class ValidEntitiesSpecificationBase<TEntity> : SpecificationBase<TEntity> where TEntity : IEntity<long>
+	public abstract class ValidChildEntitiyKeysSpecificationBase<TEntity, TChildEntity> : SpecificationBase<TEntity> 
+		where TEntity : IEntity<long>
+		where TChildEntity : IEntity<long>
 	{
 		#region Fields
 		private string m_parentEntityName;
 		private string m_entityName;
+		private string m_entityFriendlyName;
+		private string m_entityFriendlyPluralName;
 		#endregion
 
 		#region Constructors
-		/// <summary>
-		/// Initializes a new instance of the <see cref="jogosdaqui.Domain.ValidEntitiesSpecificationBase`1"/> class.
-		/// </summary>
-		/// <param name="parentEntityName">Parent entity name.</param>
-		/// <param name="m_entityName">M_entity name.</param>
-		protected ValidEntitiesSpecificationBase(string parentEntityName, string entityName)
+		protected ValidChildEntitiyKeysSpecificationBase(string entityFriendlyName, string entityFriendlyPluralName)
 		{
-			m_parentEntityName = parentEntityName;
-			m_entityName = entityName;
+			m_parentEntityName = typeof(TEntity).Name.Translate();
+			m_entityName = typeof(TChildEntity).Name.Translate();
+			m_entityFriendlyName = entityFriendlyName;
+			m_entityFriendlyPluralName = entityFriendlyPluralName;
 		}
 		#endregion
 	
@@ -39,9 +41,9 @@ namespace jogosdaqui.Domain.Commons.Specifications
 		/// <returns><c>true</c> if this instance is satisfied by the specified target; otherwise, <c>false</c>.</returns>
 		public override bool IsSatisfiedBy (TEntity target)
 		{
-			var keysPropertyName = m_entityName + "Keys";
+			var keysPropertyName = m_entityFriendlyName.Replace(" ", "") + "Keys";
 			var targetType = target.GetType ();
-			var keysProperty = targetType.GetProperty(keysPropertyName);
+			var keysProperty = targetType.GetProperty(keysPropertyName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
 
 			if (keysProperty == null) {
 				throw new InvalidOperationException("Property '{0}' not found on type '{1}'.".With(keysPropertyName, targetType.Name)); 
@@ -51,8 +53,8 @@ namespace jogosdaqui.Domain.Commons.Specifications
 			var firstDuplicatedKey = keys.GroupBy (k => k).Where (g => g.Count() > 1).Select (s => s.Key).FirstOrDefault ();
 
 			if (firstDuplicatedKey != 0) {
-				NotSatisfiedReason = "A {0} can't have duplicate {1}s. The {1} with key '{2}' appears more than one time."
-					.With (m_parentEntityName, m_entityName, firstDuplicatedKey);
+				NotSatisfiedReason = "A {0} can't have duplicate {1}. The {2} with key '{3}' appears more than one time."
+					.With (m_parentEntityName, m_entityFriendlyPluralName, m_entityFriendlyName, firstDuplicatedKey);
 
 				return false;
 			}
@@ -60,7 +62,7 @@ namespace jogosdaqui.Domain.Commons.Specifications
 			foreach (var key in keys) {
 				if (ServiceFacade.GetEntity(m_entityName, key) == null) {
 					NotSatisfiedReason = "A {0} should have a valid {1}. The {1} with key '{2}' does not exists."
-						.With (m_parentEntityName, m_entityName, firstDuplicatedKey);
+						.With (m_parentEntityName, m_entityFriendlyName, key);
 
 					return false;
 				}		

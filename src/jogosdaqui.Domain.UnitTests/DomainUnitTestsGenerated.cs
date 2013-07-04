@@ -39,7 +39,7 @@ using Skahal.Infrastructure.Framework.Repositories;
 using Skahal.Infrastructure.Framework.Commons;
 using jogosdaqui.Infrastructure.Repositories.Testing; 
 #endregion      
- 
+  
 namespace jogosdaqui.Domain.UnitTests 
 { 
 	public static class Stubs
@@ -224,8 +224,6 @@ namespace jogosdaqui.Domain.UnitTests
 				m_target.SaveGame (null);
 			});
 		}
- 
-
  
 		#endregion
 	}

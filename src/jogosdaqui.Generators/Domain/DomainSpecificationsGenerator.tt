@@ -13,15 +13,15 @@ using KissSpecifications;
 #endregion          
          
 <#      
-RunForEachModel((e) =>  
+RunForEachModel((e) =>   
 { 
-	if(e.HasImplementedIRepository)    
+	if(e.HasImplementedIRepository)     
 	{     
 #>     
 namespace <#=e.Namespace#>.Specifications 
 { 
-	/// <summary>
-	/// <#=e.Name#> exists specification. 
+	/// <summary> 
+	/// <#=e.Name#> exists specification.  
 	/// </summary>
 	public class <#=e.Name#>ExistsSpecification : SpecificationBase<<#=e.Name#>>
 	{

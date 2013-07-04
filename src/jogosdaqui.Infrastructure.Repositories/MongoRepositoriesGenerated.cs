@@ -38,7 +38,7 @@ using Skahal.Infrastructure.Framework.Repositories;
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Game repository.   
 	/// </summary>
 	public class MongoDBGameRepository : MongoDBRepositoryBase<Game>,  IGameRepository
@@ -58,7 +58,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Evaluation repository.   
 	/// </summary>
 	public class MongoDBEvaluationRepository : MongoDBRepositoryBase<Evaluation>,  IEvaluationRepository
@@ -78,7 +78,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Platform repository.   
 	/// </summary>
 	public class MongoDBPlatformRepository : MongoDBRepositoryBase<Platform>,  IPlatformRepository
@@ -98,7 +98,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Company repository.   
 	/// </summary>
 	public class MongoDBCompanyRepository : MongoDBRepositoryBase<Company>,  ICompanyRepository
@@ -118,7 +118,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Language repository.   
 	/// </summary>
 	public class MongoDBLanguageRepository : MongoDBRepositoryBase<Language>,  ILanguageRepository
@@ -138,7 +138,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Person repository.   
 	/// </summary>
 	public class MongoDBPersonRepository : MongoDBRepositoryBase<Person>,  IPersonRepository
@@ -158,7 +158,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Comment repository.   
 	/// </summary>
 	public class MongoDBCommentRepository : MongoDBRepositoryBase<Comment>,  ICommentRepository
@@ -178,7 +178,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Event repository.   
 	/// </summary>
 	public class MongoDBEventRepository : MongoDBRepositoryBase<Event>,  IEventRepository
@@ -198,7 +198,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Interview repository.   
 	/// </summary>
 	public class MongoDBInterviewRepository : MongoDBRepositoryBase<Interview>,  IInterviewRepository
@@ -218,7 +218,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB News repository.   
 	/// </summary>
 	public class MongoDBNewsRepository : MongoDBRepositoryBase<News>,  INewsRepository
@@ -238,7 +238,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Preview repository.   
 	/// </summary>
 	public class MongoDBPreviewRepository : MongoDBRepositoryBase<Preview>,  IPreviewRepository
@@ -258,7 +258,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Review repository.   
 	/// </summary>
 	public class MongoDBReviewRepository : MongoDBRepositoryBase<Review>,  IReviewRepository
@@ -278,7 +278,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB Tag repository.   
 	/// </summary>
 	public class MongoDBTagRepository : MongoDBRepositoryBase<Tag>,  ITagRepository
@@ -298,7 +298,7 @@ namespace jogosdaqui.Infrastructure.Repositories.MongoDB
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB AppliedTag repository.   
 	/// </summary>
 	public class MongoDBAppliedTagRepository : MongoDBRepositoryBase<AppliedTag>,  IAppliedTagRepository

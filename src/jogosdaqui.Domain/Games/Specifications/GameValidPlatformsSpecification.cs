@@ -10,14 +10,14 @@ namespace jogosdaqui.Domain.Games.Specifications
 	/// <summary>
 	/// Game valid platforms specification.
 	/// </summary>
-	public class GameValidPlatformsSpecification : ValidEntitiesSpecificationBase<Game>
+	public class GameValidPlatformsSpecification : ValidChildEntitiyKeysSpecificationBase<Game, Platform>
 	{
 		#region Constructors
 		/// <summary>
 		/// Initializes a new instance of the
 		/// <see cref="jogosdaqui.Domain.Games.Specifications.GameValidPlatformsSpecification"/> class.
 		/// </summary>
-		public GameValidPlatformsSpecification() : base("game", "platform")
+		public GameValidPlatformsSpecification() : base("platform", "platforms")
 		{
 		}
 		#endregion

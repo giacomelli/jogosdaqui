@@ -13,7 +13,7 @@ RunForEachModel((e) =>
       
 namespace jogosdaqui.Infrastructure.Repositories.Testing
 {  
-	/// <summary> 
+	/// <summary>  
 	/// Testing <#=e.Name#> repository.  
 	/// </summary>
 	public class Testing<#=e.Name#>Repository : MemoryRepository<<#=e.Name#>, long>, I<#=e.Name#>Repository

@@ -39,7 +39,7 @@ using Skahal.Infrastructure.Framework.Repositories;
 using Skahal.Infrastructure.Framework.Commons;
 using jogosdaqui.Infrastructure.Repositories.Testing; 
 #endregion      
-       
+        
      
 
 namespace jogosdaqui.Domain.UnitTests

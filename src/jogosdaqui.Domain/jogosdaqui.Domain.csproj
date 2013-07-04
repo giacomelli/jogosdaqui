@@ -98,7 +98,8 @@
     <Compile Include="Evaluations\Specifications\EvaluationValidProsAndConsSpecification.cs" />
     <Compile Include="Games\Specifications\GameValidPlatformsSpecification.cs" />
     <Compile Include="Evaluations\Specifications\EvaluationValidGameSpecification.cs" />
-    <Compile Include="Commons\Specifications\ValidEntitiesSpecificationBase.cs" />
+    <Compile Include="Games\Specifications\GameValidDeveloperCompaniesSpecification.cs" />
+    <Compile Include="Commons\Specifications\ValidChildEntitiyKeysSpecificationBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

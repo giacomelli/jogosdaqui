@@ -16,7 +16,7 @@ RunForEachModel((e) =>
 #> 
     
 namespace jogosdaqui.WebApi.Controllers
-{
+{ 
 	/// <summary>
 	/// <#=e.PluralName#>. 
 	/// </summary>

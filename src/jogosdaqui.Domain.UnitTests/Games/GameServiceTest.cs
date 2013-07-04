@@ -63,18 +63,6 @@ namespace jogosdaqui.Domain.UnitTests
 
 		#region DeveloperCompanyKeys
 		[Test]
-		public void SaveGame_WithoutDeveloperCompany_Exception()
-		{
-			var game = CreateValidGame (0);
-			game.DeveloperCompanyKeys.Clear ();
-
-			ExceptionAssert.IsThrowing (
-				new SpecificationNotSatisfiedException ("A game should have at least one developer company."), () => {
-				m_target.SaveGame (game);
-			});
-		}
-
-		[Test]
 		public void SaveGame_WithInvalidDeveloperCompany_Exception()
 		{
 			var game = CreateValidGame (0);
@@ -89,7 +77,7 @@ namespace jogosdaqui.Domain.UnitTests
 		[Test]
 		public void SaveGame_WithDuplicatedDeveloperCompany_Exception()
 		{
-			var game = new Game () { Name = "Name" };
+			var game = CreateValidGame (0);
 			game.DeveloperCompanyKeys.Add(1);
 			game.DeveloperCompanyKeys.Add(1);
 			game.DeveloperCompanyKeys.Add (2);

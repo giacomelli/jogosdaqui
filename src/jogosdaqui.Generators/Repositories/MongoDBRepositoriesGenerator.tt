@@ -13,7 +13,7 @@ RunForEachModel((e) =>
       
 namespace jogosdaqui.Infrastructure.Repositories.MongoDB
 {  
-	/// <summary>
+	/// <summary> 
 	/// MongoDB <#=e.Name#> repository.   
 	/// </summary>
 	public class MongoDB<#=e.Name#>Repository : MongoDBRepositoryBase<<#=e.Name#>>,  I<#=e.Name#>Repository

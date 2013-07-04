@@ -13,9 +13,9 @@ using KissSpecifications;
 #endregion          
          
 <#     
-RunForEachModel((e) =>  
+RunForEachModel((e) =>   
 {   
-	if(e.HasImplementedIRepository)       
+	if(e.HasImplementedIRepository)        
 	{    
 #>     
 namespace <#=e.Namespace#> 

@@ -3,6 +3,7 @@ using System.Linq;
 using HelperSharp;
 using Skahal.Infrastructure.Framework.Domain;
 using jogosdaqui.Domain.Games;
+using System.Reflection;
 
 namespace jogosdaqui.Domain
 {
@@ -67,7 +68,9 @@ namespace jogosdaqui.Domain
 			var serviceType = service.GetType ();
 			var getByKeyMethodName = "Get{0}ByKey".With (entityName);
 
-			var entity = serviceType.GetMethod (getByKeyMethodName).Invoke (service, new object[] { entityKey });
+			var method = serviceType.GetMethod (getByKeyMethodName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+			var entity = method.Invoke (service, new object[] { entityKey });
 
 			return (IEntity<long>) entity;
 		}
